@@ -1,0 +1,1203 @@
+﻿[
+  {
+    "Index": 0,
+    "TestEmailAddress": "first.last@iana.org",
+    "ExpectedResult": 19,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 1,
+    "TestEmailAddress": "1234567890123456789012345678901234567890123456789012345678901234@iana.org",
+    "ExpectedResult": 73,
+    "ExpectedEmailAddress": "1234567890123456789012345678901234567890123456789012345678901234@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 2,
+    "TestEmailAddress": "\"first\\\"last\"@iana.org",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "\"first\\\"last\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 3,
+    "TestEmailAddress": "first(12345678901234567890123456789012345678901234567890).last@(1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890)iana.org",
+    "ExpectedResult": 323,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Comment: Too long with comments, not too long without",
+    "ExpectedException": null
+  },
+  {
+    "Index": 4,
+    "TestEmailAddress": "\"first@last\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"first@last\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 5,
+    "TestEmailAddress": "\"first\\\\last\"@iana.org",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "\"first\\\\last\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 6,
+    "TestEmailAddress": "x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x2",
+    "ExpectedResult": 254,
+    "ExpectedEmailAddress": "x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x2",
+    "Comment": "Comment: Total length reduced to 254 characters so it's still valid",
+    "ExpectedException": null
+  },
+  {
+    "Index": 7,
+    "TestEmailAddress": "1234567890123456789012345678901234567890123456789012345678@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.123456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "ExpectedResult": 251,
+    "ExpectedEmailAddress": "1234567890123456789012345678901234567890123456789012345678@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.123456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "Comment": "Comment: Total length reduced to 254 characters so it's still valid",
+    "ExpectedException": null
+  },
+  {
+    "Index": 8,
+    "TestEmailAddress": "first.last@[12.34.56.78]",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "first.last@[12.34.56.78]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 9,
+    "TestEmailAddress": "first.last@[IPv6:::12.34.56.78]",
+    "ExpectedResult": 31,
+    "ExpectedEmailAddress": "first.last@[IPv6:::12.34.56.78]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 10,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333::4444:12.34.56.78]",
+    "ExpectedResult": 50,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333::4444:c22:384e]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 11,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:12.34.56.78]",
+    "ExpectedResult": 59,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:c22:384e]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 12,
+    "TestEmailAddress": "first.last@[IPv6:::1111:2222:3333:4444:5555:6666]",
+    "ExpectedResult": 49,
+    "ExpectedEmailAddress": "first.last@[IPv6:::1111:2222:3333:4444:5555:6666]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 13,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333::4444:5555:6666]",
+    "ExpectedResult": 48,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333::4444:5555:6666]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 14,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666::]",
+    "ExpectedResult": 49,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666::]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 15,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:8888]",
+    "ExpectedResult": 57,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:8888]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 16,
+    "TestEmailAddress": "first.last@x23456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "ExpectedResult": 83,
+    "ExpectedEmailAddress": "first.last@x23456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 17,
+    "TestEmailAddress": "first.last@3com.com",
+    "ExpectedResult": 19,
+    "ExpectedEmailAddress": "first.last@3com.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 18,
+    "TestEmailAddress": "first.last@123.iana.org",
+    "ExpectedResult": 23,
+    "ExpectedEmailAddress": "first.last@123.iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 19,
+    "TestEmailAddress": "\"first\\last\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"first\\last\"@iana.org",
+    "Comment": "Comment: Any character can be escaped in a quoted string",
+    "ExpectedException": null
+  },
+  {
+    "Index": 20,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333::4444:5555:12.34.56.78]",
+    "ExpectedResult": 55,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333:0:4444:5555:c22:384e]",
+    "Comment": "Comment: RFC 4291 disagrees with RFC 5321 but is cited by it",
+    "ExpectedException": null
+  },
+  {
+    "Index": 21,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333::4444:5555:6666:7777]",
+    "ExpectedResult": 53,
+    "ExpectedEmailAddress": "first.last@[IPv6:1111:2222:3333:0:4444:5555:6666:7777]",
+    "Comment": "Comment: RFC 4291 disagrees with RFC 5321 but is cited by it",
+    "ExpectedException": null
+  },
+  {
+    "Index": 22,
+    "TestEmailAddress": "first.last@example.123",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "first.last@example.123",
+    "Comment": "Comment: TLD can't be all digits",
+    "ExpectedException": null
+  },
+  {
+    "Index": 23,
+    "TestEmailAddress": "first.last@com",
+    "ExpectedResult": 14,
+    "ExpectedEmailAddress": "first.last@com",
+    "Comment": "Comment: Mail host must be second- or lower level",
+    "ExpectedException": null
+  },
+  {
+    "Index": 24,
+    "TestEmailAddress": "\"Abc\\@def\"@iana.org",
+    "ExpectedResult": 19,
+    "ExpectedEmailAddress": "\"Abc\\@def\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 25,
+    "TestEmailAddress": "\"Fred\\ Bloggs\"@iana.org",
+    "ExpectedResult": 23,
+    "ExpectedEmailAddress": "\"Fred\\ Bloggs\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 26,
+    "TestEmailAddress": "\"Joe.\\\\Blow\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"Joe.\\\\Blow\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 27,
+    "TestEmailAddress": "\"Abc@def\"@iana.org",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "\"Abc@def\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 28,
+    "TestEmailAddress": "\"Fred Bloggs\"@iana.org",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "\"Fred Bloggs\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 29,
+    "TestEmailAddress": "user+mailbox@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "user+mailbox@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 30,
+    "TestEmailAddress": "customer/department=shipping@iana.org",
+    "ExpectedResult": 37,
+    "ExpectedEmailAddress": "customer/department=shipping@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 31,
+    "TestEmailAddress": "$A12345@iana.org",
+    "ExpectedResult": 16,
+    "ExpectedEmailAddress": "$A12345@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 32,
+    "TestEmailAddress": "!def!xyz%abc@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "!def!xyz%abc@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 33,
+    "TestEmailAddress": "_somename@iana.org",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "_somename@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 34,
+    "TestEmailAddress": "dclo@us.ibm.com",
+    "ExpectedResult": 15,
+    "ExpectedEmailAddress": "dclo@us.ibm.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 35,
+    "TestEmailAddress": "peter.piper@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "peter.piper@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 36,
+    "TestEmailAddress": "\"Doug \\\"Ace\\\" L.\"@iana.org",
+    "ExpectedResult": 26,
+    "ExpectedEmailAddress": "\"Doug \\\"Ace\\\" L.\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 37,
+    "TestEmailAddress": "test@iana.org",
+    "ExpectedResult": 13,
+    "ExpectedEmailAddress": "test@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 38,
+    "TestEmailAddress": "TEST@iana.org",
+    "ExpectedResult": 13,
+    "ExpectedEmailAddress": "TEST@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 39,
+    "TestEmailAddress": "1234567890@iana.org",
+    "ExpectedResult": 19,
+    "ExpectedEmailAddress": "1234567890@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 40,
+    "TestEmailAddress": "test+test@iana.org",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "test+test@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 41,
+    "TestEmailAddress": "test-test@iana.org",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "test-test@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 42,
+    "TestEmailAddress": "t*est@iana.org",
+    "ExpectedResult": 14,
+    "ExpectedEmailAddress": "t*est@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 43,
+    "TestEmailAddress": "+1~1+@iana.org",
+    "ExpectedResult": 14,
+    "ExpectedEmailAddress": "+1~1+@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 44,
+    "TestEmailAddress": "{_test_}@iana.org",
+    "ExpectedResult": 17,
+    "ExpectedEmailAddress": "{_test_}@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 45,
+    "TestEmailAddress": "\"[[ test ]]\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"[[ test ]]\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 46,
+    "TestEmailAddress": "test.test@iana.org",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "test.test@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 47,
+    "TestEmailAddress": "\"test.test\"@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "\"test.test\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 48,
+    "TestEmailAddress": "test.\"test\"@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "test.\"test\"@iana.org",
+    "Comment": "Comment: Obsolete form, but documented in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 49,
+    "TestEmailAddress": "\"test@test\"@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "\"test@test\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 50,
+    "TestEmailAddress": "test@123.123.123.x123",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "test@123.123.123.x123",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 51,
+    "TestEmailAddress": "test@[123.123.123.123]",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "test@[123.123.123.123]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 52,
+    "TestEmailAddress": "test@example.iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "test@example.iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 53,
+    "TestEmailAddress": "test@example.example.iana.org",
+    "ExpectedResult": 29,
+    "ExpectedEmailAddress": "test@example.example.iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 54,
+    "TestEmailAddress": "\"test\\test\"@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "\"test\\test\"@iana.org",
+    "Comment": "Comment: Any character can be escaped in a quoted string",
+    "ExpectedException": null
+  },
+  {
+    "Index": 55,
+    "TestEmailAddress": "test@example",
+    "ExpectedResult": 12,
+    "ExpectedEmailAddress": "test@example",
+    "Comment": "Comment: Dave Child says so",
+    "ExpectedException": null
+  },
+  {
+    "Index": 56,
+    "TestEmailAddress": "\"test\\\\blah\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"test\\\\blah\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 57,
+    "TestEmailAddress": "\"test\\blah\"@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "\"test\\blah\"@iana.org",
+    "Comment": "Comment: Any character can be escaped in a quoted string",
+    "ExpectedException": null
+  },
+  {
+    "Index": 58,
+    "TestEmailAddress": "\"test\\\rblah\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"test\\\rblah\"@iana.org",
+    "Comment": "Comment: Quoted string specifically excludes carriage returns unless escaped",
+    "ExpectedException": null
+  },
+  {
+    "Index": 59,
+    "TestEmailAddress": "\"test\\\"blah\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"test\\\"blah\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 60,
+    "TestEmailAddress": "customer/department@iana.org",
+    "ExpectedResult": 28,
+    "ExpectedEmailAddress": "customer/department@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 61,
+    "TestEmailAddress": "_Yosemite.Sam@iana.org",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "_Yosemite.Sam@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 62,
+    "TestEmailAddress": "~@iana.org",
+    "ExpectedResult": 10,
+    "ExpectedEmailAddress": "~@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 63,
+    "TestEmailAddress": "\"Austin@Powers\"@iana.org",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "\"Austin@Powers\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 64,
+    "TestEmailAddress": "Ima.Fool@iana.org",
+    "ExpectedResult": 17,
+    "ExpectedEmailAddress": "Ima.Fool@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 65,
+    "TestEmailAddress": "\"Ima.Fool\"@iana.org",
+    "ExpectedResult": 19,
+    "ExpectedEmailAddress": "\"Ima.Fool\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 66,
+    "TestEmailAddress": "\"Ima Fool\"@iana.org",
+    "ExpectedResult": 19,
+    "ExpectedEmailAddress": "\"Ima Fool\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 67,
+    "TestEmailAddress": "\"first\".\"last\"@iana.org",
+    "ExpectedResult": 23,
+    "ExpectedEmailAddress": "\"first\".\"last\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 68,
+    "TestEmailAddress": "\"first\".middle.\"last\"@iana.org",
+    "ExpectedResult": 30,
+    "ExpectedEmailAddress": "\"first\".middle.\"last\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 69,
+    "TestEmailAddress": "\"first\".last@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "\"first\".last@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 70,
+    "TestEmailAddress": "first.\"last\"@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "first.\"last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 71,
+    "TestEmailAddress": "\"first\".\"middle\".\"last\"@iana.org",
+    "ExpectedResult": 32,
+    "ExpectedEmailAddress": "\"first\".\"middle\".\"last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 72,
+    "TestEmailAddress": "\"first.middle\".\"last\"@iana.org",
+    "ExpectedResult": 30,
+    "ExpectedEmailAddress": "\"first.middle\".\"last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 73,
+    "TestEmailAddress": "\"first.middle.last\"@iana.org",
+    "ExpectedResult": 28,
+    "ExpectedEmailAddress": "\"first.middle.last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 74,
+    "TestEmailAddress": "\"first..last\"@iana.org",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "\"first..last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 75,
+    "TestEmailAddress": "\"first\\\\\\\"last\"@iana.org",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "\"first\\\\\\\"last\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 76,
+    "TestEmailAddress": "first.\"mid\\dle\".\"last\"@iana.org",
+    "ExpectedResult": 31,
+    "ExpectedEmailAddress": "first.\"mid\\dle\".\"last\"@iana.org",
+    "Comment": "Comment: Backslash can escape anything but must escape something",
+    "ExpectedException": null
+  },
+  {
+    "Index": 77,
+    "TestEmailAddress": "Test.\r\n Folding.\r\n Whitespace@IANA.org",
+    "ExpectedResult": 38,
+    "ExpectedEmailAddress": "Test.Folding.Whitespace@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  // todo remove
+  //{
+  //  "Index": 78,
+  //  "TestEmailAddress": "\"test\r\n blah\"@iana.org",
+  //  "ExpectedResult": 22,
+  //  "ExpectedEmailAddress": "\"test\r\n blah\"@iana.org",
+  //  "Comment": "Comment: This is a valid quoted string with folding white space",
+  //  "ExpectedException": null
+  //},
+  {
+    "Index": 79,
+    "TestEmailAddress": "(foo)cal(bar)@(baz)iamcal.com(quux)",
+    "ExpectedResult": 35,
+    "ExpectedEmailAddress": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments",
+    "ExpectedException": null
+  },
+  {
+    "Index": 80,
+    "TestEmailAddress": "cal@iamcal(woo).(yay)com",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments",
+    "ExpectedException": null
+  },
+  {
+    "Index": 81,
+    "TestEmailAddress": "\"foo\"(yay)@(hoopla)[1.2.3.4]",
+    "ExpectedResult": 28,
+    "ExpectedEmailAddress": "\"foo\"@[1.2.3.4]",
+    "Comment": "Comment: Address literal can't be commented (RFC 5321)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 82,
+    "TestEmailAddress": "cal(woo(yay)hoopla)@iamcal.com",
+    "ExpectedResult": 30,
+    "ExpectedEmailAddress": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments",
+    "ExpectedException": null
+  },
+  {
+    "Index": 83,
+    "TestEmailAddress": "cal(foo\\@bar)@iamcal.com",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments",
+    "ExpectedException": null
+  },
+  {
+    "Index": 84,
+    "TestEmailAddress": "cal(foo\\)bar)@iamcal.com",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments and an escaped parenthesis",
+    "ExpectedException": null
+  },
+  {
+    "Index": 85,
+    "TestEmailAddress": "first().last@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Comment: A valid address containing an empty comment",
+    "ExpectedException": null
+  },
+  {
+    "Index": 86,
+    "TestEmailAddress": "first.(\r\n middle\r\n )last@iana.org",
+    "ExpectedResult": 33,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Comment: Comment with folding white space",
+    "ExpectedException": null
+  },
+  {
+    "Index": 87,
+    "TestEmailAddress": "first(Welcome to\r\n the (\"wonderful\" (!)) world\r\n of email)@iana.org",
+    "ExpectedResult": 67,
+    "ExpectedEmailAddress": "first@iana.org",
+    "Comment": "Comment: Silly example from my blog post",
+    "ExpectedException": null
+  },
+  {
+    "Index": 88,
+    "TestEmailAddress": "pete(his account)@silly.test(his host)",
+    "ExpectedResult": 38,
+    "ExpectedEmailAddress": "pete@silly.test",
+    "Comment": "Comment: Canonical example from RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 89,
+    "TestEmailAddress": "c@(Chris's host.)public.example",
+    "ExpectedResult": 31,
+    "ExpectedEmailAddress": "c@public.example",
+    "Comment": "Comment: Canonical example from RFC 5322",
+    "ExpectedException": null
+  },
+  {
+    "Index": 90,
+    "TestEmailAddress": "first(abc.def).last@iana.org",
+    "ExpectedResult": 28,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Comment: Comment can contain a dot",
+    "ExpectedException": null
+  },
+  {
+    "Index": 91,
+    "TestEmailAddress": "first(a\"bc.def).last@iana.org",
+    "ExpectedResult": 29,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Comment: Comment can contain double quote",
+    "ExpectedException": null
+  },
+  {
+    "Index": 92,
+    "TestEmailAddress": "first.(\")middle.last(\")@iana.org",
+    "ExpectedResult": 32,
+    "ExpectedEmailAddress": "first.middle.last@iana.org",
+    "Comment": "Comment: Comment can contain a quote",
+    "ExpectedException": null
+  },
+  {
+    "Index": 93,
+    "TestEmailAddress": "first(abc\\(def)@iana.org",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "first@iana.org",
+    "Comment": "Comment: Comment can contain quoted-pair",
+    "ExpectedException": null
+  },
+  {
+    "Index": 94,
+    "TestEmailAddress": "first.last@x(1234567890123456789012345678901234567890123456789012345678901234567890).com",
+    "ExpectedResult": 88,
+    "ExpectedEmailAddress": "first.last@x.com",
+    "Comment": "Comment: Label is longer than 63 octets, but not with comment removed",
+    "ExpectedException": null
+  },
+  {
+    "Index": 95,
+    "TestEmailAddress": "a(a(b(c)d(e(f))g)h(i)j)@iana.org",
+    "ExpectedResult": 32,
+    "ExpectedEmailAddress": "a@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 96,
+    "TestEmailAddress": "name.lastname@domain.com",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "name.lastname@domain.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 97,
+    "TestEmailAddress": "a@b",
+    "ExpectedResult": 3,
+    "ExpectedEmailAddress": "a@b",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 98,
+    "TestEmailAddress": "a@bar.com",
+    "ExpectedResult": 9,
+    "ExpectedEmailAddress": "a@bar.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 99,
+    "TestEmailAddress": "aaa@[123.123.123.123]",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "aaa@[123.123.123.123]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 100,
+    "TestEmailAddress": "a@bar",
+    "ExpectedResult": 5,
+    "ExpectedEmailAddress": "a@bar",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 101,
+    "TestEmailAddress": "a-b@bar.com",
+    "ExpectedResult": 11,
+    "ExpectedEmailAddress": "a-b@bar.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 102,
+    "TestEmailAddress": "+@b.c",
+    "ExpectedResult": 5,
+    "ExpectedEmailAddress": "+@b.c",
+    "Comment": "Comment: TLDs can be any length",
+    "ExpectedException": null
+  },
+  {
+    "Index": 103,
+    "TestEmailAddress": "+@b.com",
+    "ExpectedResult": 7,
+    "ExpectedEmailAddress": "+@b.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 104,
+    "TestEmailAddress": "a@b.co-foo.uk",
+    "ExpectedResult": 13,
+    "ExpectedEmailAddress": "a@b.co-foo.uk",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 105,
+    "TestEmailAddress": "\"hello my name is\"@stutter.com",
+    "ExpectedResult": 30,
+    "ExpectedEmailAddress": "\"hello my name is\"@stutter.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 106,
+    "TestEmailAddress": "\"Test \\\"Fail\\\" Ing\"@iana.org",
+    "ExpectedResult": 28,
+    "ExpectedEmailAddress": "\"Test \\\"Fail\\\" Ing\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 107,
+    "TestEmailAddress": "valid@about.museum",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "valid@about.museum",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 108,
+    "TestEmailAddress": "shaitan@my-domain.thisisminekthx",
+    "ExpectedResult": 32,
+    "ExpectedEmailAddress": "shaitan@my-domain.thisisminekthx",
+    "Comment": "Comment: Disagree with Paul Gregg here",
+    "ExpectedException": null
+  },
+  {
+    "Index": 109,
+    "TestEmailAddress": "\"Joe\\\\Blow\"@iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "\"Joe\\\\Blow\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 110,
+    "TestEmailAddress": "HM2Kinsists@(that comments are allowed)this.is.ok",
+    "ExpectedResult": 49,
+    "ExpectedEmailAddress": "HM2Kinsists@this.is.ok",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 111,
+    "TestEmailAddress": "user%uucp!path@berkeley.edu",
+    "ExpectedResult": 27,
+    "ExpectedEmailAddress": "user%uucp!path@berkeley.edu",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 112,
+    "TestEmailAddress": "\"first(last)\"@iana.org",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "\"first(last)\"@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 113,
+    "TestEmailAddress": " \r\n (\r\n x \r\n ) \r\n first\r\n ( \r\n x\r\n ) \r\n .\r\n ( \r\n x) \r\n last \r\n (  x \r\n ) \r\n @iana.org",
+    "ExpectedResult": 85,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 114,
+    "TestEmailAddress": "first.last @iana.org",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Comment: FWS is allowed after local part (this is similar to #152 but is the test proposed by John Kloor)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 115,
+    "TestEmailAddress": "test. \r\n \r\n obs@syntax.com",
+    "ExpectedResult": 26,
+    "ExpectedEmailAddress": "test.obs@syntax.com",
+    "Comment": "Comment: obs-fws allows multiple lines (test 2: space before break)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 116,
+    "TestEmailAddress": "\"Unicode NULL \\␀\"@char.com",
+    "ExpectedResult": 26,
+    "ExpectedEmailAddress": "\"Unicode NULL \\␀\"@char.com",
+    "Comment": "Comment: Can have escaped Unicode Character 'NULL' (U+0000)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 117,
+    "TestEmailAddress": "cdburgess+!#$%&'*-/=?+_{}|~test@gmail.com",
+    "ExpectedResult": 41,
+    "ExpectedEmailAddress": "cdburgess+!#$%&'*-/=?+_{}|~test@gmail.com",
+    "Comment": "Comment: Example given in comments",
+    "ExpectedException": null
+  },
+  {
+    "Index": 118,
+    "TestEmailAddress": "first.last@[IPv6:::a2:a3:a4:b1:b2:b3:b4]",
+    "ExpectedResult": 40,
+    "ExpectedEmailAddress": "first.last@[IPv6:0:a2:a3:a4:b1:b2:b3:b4]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 119,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3::]",
+    "ExpectedResult": 40,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3:0]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 120,
+    "TestEmailAddress": "first.last@[IPv6:::]",
+    "ExpectedResult": 20,
+    "ExpectedEmailAddress": "first.last@[IPv6:::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 121,
+    "TestEmailAddress": "first.last@[IPv6:::b4]",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "first.last@[IPv6:::b4]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 122,
+    "TestEmailAddress": "first.last@[IPv6:::b3:b4]",
+    "ExpectedResult": 25,
+    "ExpectedEmailAddress": "first.last@[IPv6:::0.179.0.180]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 123,
+    "TestEmailAddress": "first.last@[IPv6:a1::b4]",
+    "ExpectedResult": 24,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1::b4]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 124,
+    "TestEmailAddress": "first.last@[IPv6:a1::]",
+    "ExpectedResult": 22,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 125,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2::]",
+    "ExpectedResult": 25,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1:a2::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 126,
+    "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:cdef::]",
+    "ExpectedResult": 39,
+    "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 127,
+    "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:CDEF::]",
+    "ExpectedResult": 39,
+    "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 128,
+    "TestEmailAddress": "first.last@[IPv6:::a3:a4:b1:ffff:11.22.33.44]",
+    "ExpectedResult": 45,
+    "ExpectedEmailAddress": "first.last@[IPv6:::a3:a4:b1:ffff:b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 129,
+    "TestEmailAddress": "first.last@[IPv6:::a2:a3:a4:b1:ffff:11.22.33.44]",
+    "ExpectedResult": 48,
+    "ExpectedEmailAddress": "first.last@[IPv6:0:a2:a3:a4:b1:ffff:b16:212c]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 130,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4::11.22.33.44]",
+    "ExpectedResult": 42,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1:a2:a3:a4::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 131,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1::11.22.33.44]",
+    "ExpectedResult": 45,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:0:b16:212c]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 132,
+    "TestEmailAddress": "first.last@[IPv6:a1::11.22.33.44]",
+    "ExpectedResult": 33,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 133,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2::11.22.33.44]",
+    "ExpectedResult": 36,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1:a2::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 134,
+    "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:cdef::11.22.33.44]",
+    "ExpectedResult": 50,
+    "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 135,
+    "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:CDEF::11.22.33.44]",
+    "ExpectedResult": 50,
+    "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 136,
+    "TestEmailAddress": "first.last@[IPv6:a1::b2:11.22.33.44]",
+    "ExpectedResult": 36,
+    "ExpectedEmailAddress": "first.last@[IPv6:a1::b2:b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": null
+  },
+  {
+    "Index": 137,
+    "TestEmailAddress": "test@test.com",
+    "ExpectedResult": 13,
+    "ExpectedEmailAddress": "test@test.com",
+    "Comment": "Comment: test.com has an A-record but not an MX-record",
+    "ExpectedException": null
+  },
+  {
+    "Index": 138,
+    "TestEmailAddress": "test@xn--80aa3aw5b",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "test@xn--80aa3aw5b",
+    "Comment": "Comment: Address is at an Internationalized Domain Name (Punycode)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 139,
+    "TestEmailAddress": "test@Bücher.ch",
+    "ExpectedResult": 14,
+    "ExpectedEmailAddress": "test@xn--bcher-kva.ch",
+    "Comment": "Comment: Address is at an Internationalized Domain Name (UTF-8)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 140,
+    "TestEmailAddress": "john.doe@[IPv6:::]",
+    "ExpectedResult": 18,
+    "ExpectedEmailAddress": "john.doe@[IPv6:::]",
+    "Comment": "Comment: Address is at an Internationalized Domain Name (UTF-8)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 141,
+    "TestEmailAddress": "ABC@Foo.com",
+    "ExpectedResult": 11,
+    "ExpectedEmailAddress": "ABC@foo.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 142,
+    "TestEmailAddress": "ABc@[1.1.1.1](comment1)",
+    "ExpectedResult": 23,
+    "ExpectedEmailAddress": "ABc@[1.1.1.1]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 143,
+    "TestEmailAddress": "abC@(comment1)[1.1.1.1]",
+    "ExpectedResult": 23,
+    "ExpectedEmailAddress": "abC@[1.1.1.1]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 144,
+    "TestEmailAddress": "aBc@(comment1)[1.1.1.1](comment2)",
+    "ExpectedResult": 33,
+    "ExpectedEmailAddress": "aBc@[1.1.1.1]",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 145,
+    "TestEmailAddress": "!@M.NET",
+    "ExpectedResult": 7,
+    "ExpectedEmailAddress": "!@m.net",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 146,
+    "TestEmailAddress": "\"John..Doe\"@example.com",
+    "ExpectedResult": 23,
+    "ExpectedEmailAddress": "\"John..Doe\"@example.com",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 147,
+    "TestEmailAddress": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~@M.NET",
+    "ExpectedResult": 45,
+    "ExpectedEmailAddress": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~@m.net",
+    "Comment": "",
+    "ExpectedException": null
+  },
+  {
+    "Index": 148,
+    "TestEmailAddress": "{@🐆:32@}@m.net",
+    "ExpectedResult": 70,
+    "ExpectedEmailAddress": "{@🐆:32@}@m.net",
+    "Comment": "NB: this is a replacement (see code)",
+    "ExpectedException": null
+  },
+  {
+    "Index": 149,
+    "TestEmailAddress": "  first.last@iana.org",
+    "ExpectedResult": 21,
+    "ExpectedEmailAddress": "first.last@iana.org",
+    "Comment": "Leading spaces",
+    "ExpectedException": null
+  }
+]

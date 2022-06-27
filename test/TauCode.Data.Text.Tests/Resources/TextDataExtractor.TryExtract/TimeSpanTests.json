@@ -1,0 +1,30 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedTimeSpan": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 1,
+    "ExpectedTimeSpan": "00:00:00",
+    "Comment": ""
+  },
+  {
+    "TestInput": "0;",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 1,
+    "ExpectedTimeSpan": "00:00:00",
+    "Comment": ""
+  },
+  {
+    "TestInput": "1.02:00:0]",
+    "TestTerminatingChars": "[]",
+    "ExpectedResult": 9,
+    "ExpectedTimeSpan": "1.02:00:00",
+    "Comment": ""
+  }
+]

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\emojis.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\emojis.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TauCode.Extensions" Version="1.3.8-alpha.1.2022-06-24.17-12" />
+  </ItemGroup>
+
+</Project>

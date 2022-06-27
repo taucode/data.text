@@ -1,0 +1,37 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedUri": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": " ",
+    "TestTerminatingChars": " ",
+    "ExpectedResult": 0,
+    "ExpectedUri": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "https://tau.me",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 14,
+    "ExpectedUri": "https://tau.me",
+    "Comment": ""
+  },
+  {
+    "TestInput": "https://tau.me/good day/",
+    "TestTerminatingChars": " ",
+    "ExpectedResult": 19,
+    "ExpectedUri": "https://tau.me/good",
+    "Comment": ""
+  },
+  {
+    "TestInput": "https://tau.me/good day/",
+    "TestTerminatingChars": "",
+    "ExpectedResult": 0,
+    "ExpectedUri": null,
+    "Comment": ""
+  }
+]

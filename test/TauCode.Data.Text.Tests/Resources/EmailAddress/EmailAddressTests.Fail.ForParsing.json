@@ -1,0 +1,1894 @@
+﻿[
+  {
+    "Index": 0,
+    "TestEmailAddress": "",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Empty input.",
+      "Index": null
+    }
+  },
+  {
+    "Index": 1,
+    "TestEmailAddress": "\n",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 2,
+    "TestEmailAddress": "test11@123.123.123.123",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Top Level Domain won't be all-numeric (see RFC 3696 Section 2). I disagree with Dave Child on this one.",
+    "ExpectedException": {
+      "Message": "IPv4 address must be enclosed in '[' and ']'.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 3,
+    "TestEmailAddress": "foobarush@192.168.0.1",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: ip need to be []",
+    "ExpectedException": {
+      "Message": "IPv4 address must be enclosed in '[' and ']'.",
+      "Index": 10
+    }
+  },
+  {
+    "Index": 4,
+    "TestEmailAddress": "first.last@sub.do,com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Mistyped comma instead of dot (replaces old #3 which was the same as #57)",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 5,
+    "TestEmailAddress": "first\\@last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Escaping can only happen within a quoted string",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 6,
+    "TestEmailAddress": "123456789012345678901234567890123456789012345678901234567890@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.12345.iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Entire address is longer than 254 characters",
+    "ExpectedException": {
+      "Message": "Email address is too long.",
+      "Index": 255
+    }
+  },
+  {
+    "Index": 7,
+    "TestEmailAddress": "first.last",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: No @",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 10
+    }
+  },
+  {
+    "Index": 8,
+    "TestEmailAddress": "12345678901234567890123456789012345678901234567890123456789012345@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part more than 64 characters",
+    "ExpectedException": {
+      "Message": "Local part is too long.",
+      "Index": 65
+    }
+  },
+  {
+    "Index": 9,
+    "TestEmailAddress": ".first.last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part starts with a dot",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 10,
+    "TestEmailAddress": "first.last.@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part ends with a dot",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 11,
+    "TestEmailAddress": "first..last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part has consecutive dots",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 6
+    }
+  },
+  {
+    "Index": 12,
+    "TestEmailAddress": "\"first\"last\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part contains unescaped excluded characters",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 13,
+    "TestEmailAddress": "\"\"\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part contains unescaped excluded characters",
+    "ExpectedException": {
+      "Message": "Empty quoted string.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 14,
+    "TestEmailAddress": "\"\\\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part cannot end with a backslash",
+    "ExpectedException": {
+      "Message": "Unclosed quoted string.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 15,
+    "TestEmailAddress": "\"\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part is effectively empty",
+    "ExpectedException": {
+      "Message": "Empty quoted string.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 16,
+    "TestEmailAddress": "first\\\\@last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Local part contains unescaped excluded characters",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 17,
+    "TestEmailAddress": "first.last@",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: No domain",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 18,
+    "TestEmailAddress": "x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Domain exceeds 255 chars",
+    "ExpectedException": {
+      "Message": "Host name is too long.",
+      "Index": 255
+    }
+  },
+  {
+    "Index": 19,
+    "TestEmailAddress": "first.last@[.12.34.56.78]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Only char that can precede IPv4 address is ':'",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 20,
+    "TestEmailAddress": "first.last@[12.34.56.789]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Can't be interpreted as IPv4 so IPv6 tag is missing",
+    "ExpectedException": {
+      "Message": "Invalid IPv4 address.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 21,
+    "TestEmailAddress": "first.last@[::12.34.56.78]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 tag is missing",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 22,
+    "TestEmailAddress": "first.last@[IPv5:::12.34.56.78]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 tag is wrong",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 23,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:12.34.56.78]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Not enough IPv6 groups",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 24,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:12.34.56.78]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Too many IPv6 groups (6 max)",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 25,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Not enough IPv6 groups",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 26,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:8888:9999]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Too many IPv6 groups (8 max)",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 27,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222::3333::4444:5555:6666]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Too many '::' (can be none or one)",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 28,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:333x::4444:5555]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: x is not valid in an IPv6 address",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 30
+    }
+  },
+  {
+    "Index": 29,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:33333::4444:5555]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: 33333 is not a valid group in an IPv6 address",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 30,
+    "TestEmailAddress": "first.last@-xample.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Label can't begin with a hyphen",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 31,
+    "TestEmailAddress": "first.last@exampl-.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Label can't end with a hyphen",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 18
+    }
+  },
+  {
+    "Index": 32,
+    "TestEmailAddress": "first.last@x234567890123456789012345678901234567890123456789012345678901234.iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Label can't be longer than 63 octets",
+    "ExpectedException": {
+      "Message": "Domain label is too long.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 33,
+    "TestEmailAddress": "abc\\@def@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: This example from RFC 3696 was corrected in an erratum",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 34,
+    "TestEmailAddress": "abc\\\\@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: This example from RFC 3696 was corrected in an erratum",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 35,
+    "TestEmailAddress": "Doug\\ \\\"Ace\\\"\\ Lovell@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Escaping can only happen in a quoted string",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 36,
+    "TestEmailAddress": "abc@def@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 37,
+    "TestEmailAddress": "abc\\\\@def@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 38,
+    "TestEmailAddress": "abc\\@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 39,
+    "TestEmailAddress": "@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: No local part",
+    "ExpectedException": {
+      "Message": "Empty local part.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 40,
+    "TestEmailAddress": "doug@",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 41,
+    "TestEmailAddress": "\"qu@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unclosed quoted string.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 42,
+    "TestEmailAddress": "ote\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unclosed quoted string.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 43,
+    "TestEmailAddress": ".dot@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 44,
+    "TestEmailAddress": "dot.@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 45,
+    "TestEmailAddress": "two..dot@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 46,
+    "TestEmailAddress": "\"Doug \"Ace\" L.\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 47,
+    "TestEmailAddress": "Doug\\ \\\"Ace\\\"\\ L\\.@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 48,
+    "TestEmailAddress": "hello world@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 49,
+    "TestEmailAddress": "gatsby@f.sc.ot.t.f.i.tzg.era.l.d.",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Doug Lovell says this should fail",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 50,
+    "TestEmailAddress": "test.iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 51,
+    "TestEmailAddress": "test.@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 52,
+    "TestEmailAddress": "test..test@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 53,
+    "TestEmailAddress": ".test@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 54,
+    "TestEmailAddress": "test@test@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 9
+    }
+  },
+  {
+    "Index": 55,
+    "TestEmailAddress": "test@@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 56,
+    "TestEmailAddress": "-- test --@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: No spaces allowed in local part",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 57,
+    "TestEmailAddress": "[test]@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Square brackets only allowed within quotes",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 58,
+    "TestEmailAddress": "\"test\"test\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Quotes cannot be nested",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 6
+    }
+  },
+  {
+    "Index": 59,
+    "TestEmailAddress": "()[]\\;:,><@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Disallowed Characters",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 60,
+    "TestEmailAddress": "test@.",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Dave Child says so",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 61,
+    "TestEmailAddress": "test@example.",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Dave Child says so",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 62,
+    "TestEmailAddress": "test@.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Dave Child says so",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 63,
+    "TestEmailAddress": "test@123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: 255 characters is maximum length for domain. This is 256.",
+    "ExpectedException": {
+      "Message": "Domain label is too long.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 64,
+    "TestEmailAddress": "test@[123.123.123.123",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Dave Child says so",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 21
+    }
+  },
+  {
+    "Index": 65,
+    "TestEmailAddress": "test@123.123.123.123]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Dave Child says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 20
+    }
+  },
+  {
+    "Index": 66,
+    "TestEmailAddress": "NotAnEmail",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 10
+    }
+  },
+  {
+    "Index": 67,
+    "TestEmailAddress": "@NotAnEmail",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Empty local part.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 68,
+    "TestEmailAddress": "\"test\rblah\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Quoted string specifically excludes carriage returns",
+    "ExpectedException": {
+      "Message": "Unescaped special character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 69,
+    "TestEmailAddress": "\"test\"blah\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 6
+    }
+  },
+  {
+    "Index": 70,
+    "TestEmailAddress": ".wooly@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 71,
+    "TestEmailAddress": "wo..oly@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 72,
+    "TestEmailAddress": "pootietang.@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 73,
+    "TestEmailAddress": ".@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 74,
+    "TestEmailAddress": "Ima Fool@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Phil Haack says so",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 75,
+    "TestEmailAddress": "phil.h\\@\\@ck@haacked.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Escaping can only happen in a quoted string",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 6
+    }
+  },
+  {
+    "Index": 76,
+    "TestEmailAddress": "\"first\\\\\"last\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Contains an unescaped quote",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 9
+    }
+  },
+  {
+    "Index": 77,
+    "TestEmailAddress": "foo@[\\1.2.3.4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: RFC 5321 specifies the syntax for address-literal and does not allow escaping",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 78,
+    "TestEmailAddress": "first.\"\".last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Contains a zero-length element",
+    "ExpectedException": {
+      "Message": "Empty quoted string.",
+      "Index": 6
+    }
+  },
+  {
+    "Index": 79,
+    "TestEmailAddress": "first\\last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Unquoted string must be an atom",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 80,
+    "TestEmailAddress": "Abc\\@def@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Was incorrectly given as a valid address in the original RFC 3696",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 81,
+    "TestEmailAddress": "Fred\\ Bloggs@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Was incorrectly given as a valid address in the original RFC 3696",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 82,
+    "TestEmailAddress": "Joe.\\\\Blow@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Was incorrectly given as a valid address in the original RFC 3696",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 83,
+    "TestEmailAddress": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:12.34.567.89]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv4 part contains an invalid octet",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 84,
+    "TestEmailAddress": "\"test\r\n blah\"@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Folding white space can't appear within a quoted pair",
+    "ExpectedException": {
+      "Message": "Unescaped special character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 85,
+    "TestEmailAddress": "{^c\\@**Dog^}@cartoon.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: This is a throwaway example from Doug Lovell's article. Actually it's not a valid address.",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    }
+  },
+  {
+    "Index": 86,
+    "TestEmailAddress": "cal(foo(bar)@iamcal.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Unclosed parenthesis in comment",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 23
+    }
+  },
+  {
+    "Index": 87,
+    "TestEmailAddress": "cal(foo).bar)@iamcal.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Too many closing parentheses",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 88,
+    "TestEmailAddress": "cal(foo\\)@iamcal.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Backslash at end of comment has nothing to escape",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 20
+    }
+  },
+  {
+    "Index": 89,
+    "TestEmailAddress": "jdoe@machine(comment).  example",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Canonical example from RFC 5322",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 22
+    }
+  },
+  {
+    "Index": 90,
+    "TestEmailAddress": "1234   @   local(blah)  .machine .example",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Canonical example from RFC 5322",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 91,
+    "TestEmailAddress": "first(middle)last@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Can't have a comment or white space except at an element boundary",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 92,
+    "TestEmailAddress": "first(abc(\"def\".ghi).mno)middle(abc(\"def\".ghi).mno).last@(abc(\"def\".ghi).mno)example(abc(\"def\".ghi).mno).(abc(\"def\".ghi).mno)com(abc(\"def\".ghi).mno)",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Can't have comments or white space except at an element boundary",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 25
+    }
+  },
+  {
+    "Index": 93,
+    "TestEmailAddress": "a(a(b(c)d(e(f))g)(h(i)j)@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Braces are not properly matched",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 33
+    }
+  },
+  {
+    "Index": 94,
+    "TestEmailAddress": ".@",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 95,
+    "TestEmailAddress": "@bar.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Empty local part.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 96,
+    "TestEmailAddress": "@@bar.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Empty local part.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 97,
+    "TestEmailAddress": "aaa.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 98,
+    "TestEmailAddress": "aaa@.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 99,
+    "TestEmailAddress": "aaa@.123",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 100,
+    "TestEmailAddress": "aaa@[123.123.123.123]a",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: extra data outside ip",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 21
+    }
+  },
+  {
+    "Index": 101,
+    "TestEmailAddress": "aaa@[123.123.123.333]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: not a valid IP",
+    "ExpectedException": {
+      "Message": "Invalid IPv4 address.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 102,
+    "TestEmailAddress": "a@bar.com.",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 103,
+    "TestEmailAddress": "a@-b.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 104,
+    "TestEmailAddress": "a@b-.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 105,
+    "TestEmailAddress": "-@..com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 106,
+    "TestEmailAddress": "-@a..com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 107,
+    "TestEmailAddress": "invalid@about.museum-",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 21
+    }
+  },
+  {
+    "Index": 108,
+    "TestEmailAddress": "test@...........com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: ......",
+    "ExpectedException": {
+      "Message": "Invalid domain.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 109,
+    "TestEmailAddress": "Invalid \\\n Folding \\\n Whitespace@iana.org",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: This isn't FWS so Dominic Sayers says it's invalid",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 110,
+    "TestEmailAddress": "test.\r\n\r\n obs@syntax.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: obs-fws must have at least one WSP per line",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 111,
+    "TestEmailAddress": "\"Unicode NULL ␀\"@char.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Cannot have unescaped Unicode Character 'NULL' (U+0000)",
+    "ExpectedException": {
+      "Message": "Unescaped special character.",
+      "Index": 14
+    }
+  },
+  {
+    "Index": 112,
+    "TestEmailAddress": "UnicodeNULL\\␀@char.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Escaped Unicode Character 'NULL' (U+0000) must be in quoted string",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 113,
+    "TestEmailAddress": "first.last@[IPv6::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 114,
+    "TestEmailAddress": "first.last@[IPv6::::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 115,
+    "TestEmailAddress": "first.last@[IPv6::b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 116,
+    "TestEmailAddress": "first.last@[IPv6::::b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 117,
+    "TestEmailAddress": "first.last@[IPv6::b3:b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 118,
+    "TestEmailAddress": "first.last@[IPv6::::b3:b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 119,
+    "TestEmailAddress": "first.last@[IPv6:a1:::b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 120,
+    "TestEmailAddress": "first.last@[IPv6:a1:]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 121,
+    "TestEmailAddress": "first.last@[IPv6:a1:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 122,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 123,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 124,
+    "TestEmailAddress": "first.last@[IPv6::11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 125,
+    "TestEmailAddress": "first.last@[IPv6::::11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 126,
+    "TestEmailAddress": "first.last@[IPv6:a1:11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 127,
+    "TestEmailAddress": "first.last@[IPv6:a1:::11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 128,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:::11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 129,
+    "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:cdef::11.22.33.xx]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 47
+    }
+  },
+  {
+    "Index": 130,
+    "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:CDEFF::11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 131,
+    "TestEmailAddress": "first.last@[IPv6:a1::a4:b1::b4:11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 132,
+    "TestEmailAddress": "first.last@[IPv6:a1::11.22.33]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 133,
+    "TestEmailAddress": "first.last@[IPv6:a1::11.22.33.44.55]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 134,
+    "TestEmailAddress": "first.last@[IPv6:a1::b211.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 135,
+    "TestEmailAddress": "first.last@[IPv6:a1::b2::11.22.33.44]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 136,
+    "TestEmailAddress": "first.last@[IPv6:a1::b3:]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 137,
+    "TestEmailAddress": "first.last@[IPv6::a2::b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 138,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3:]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 139,
+    "TestEmailAddress": "first.last@[IPv6::a2:a3:a4:b1:b2:b3:b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 140,
+    "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4::b1:b2:b3:b4]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 141,
+    "TestEmailAddress": "test@example.com\n",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: Address has a newline at the end",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 16
+    }
+  },
+  {
+    "Index": 142,
+    "TestEmailAddress": "123456789.(comment:10)123456789.(comment:20)123456789.(comment:30)123456789.(comment:40)123456789.(comment:50)123456789.(comment:60)12345(comment:5)@example.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "[ak] total local part exceeds 64 chars. Tag: 044523bc-6c75-4ef4-bac0-51ec9628fc0a",
+    "ExpectedException": {
+      "Message": "Local part is too long.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 143,
+    "TestEmailAddress": "abc@[IPv6:::](comment).foo.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Comment: [ak] two hosts separated by comment",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 22
+    }
+  },
+  {
+    "Index": 144,
+    "TestEmailAddress": "joe@[1.1.1.1][2.2.2.2]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "[ak] total local part exceeds 64 chars. Tag: 044523bc-6c75-4ef4-bac0-51ec9628fc0a",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 145,
+    "TestEmailAddress": "abc@foo.(comment)[IPv6:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 145,
+    "TestEmailAddress": "abc@foo(comment).[IPv6:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 17
+    }
+  },
+  {
+    "Index": 146,
+    "TestEmailAddress": "abc@(comment)[IPv6:::](comment).com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 31
+    }
+  },
+  {
+    "Index": 147,
+    "TestEmailAddress": "abc@foo.com(comment)[IPv6:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 20
+    }
+  },
+  {
+    "Index": 148,
+    "TestEmailAddress": "abc@foo.com[IPv6:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 149,
+    "TestEmailAddress": "abc@[IPv6:::]foo.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 150,
+    "TestEmailAddress": "abc@[IPv6:::](comment1)[1.1.1.1]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 23
+    }
+  },
+  {
+    "Index": 151,
+    "TestEmailAddress": "abc@[1.1.1.1](comment1)[IPv6:::]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 23
+    }
+  },
+  {
+    "Index": 152,
+    "TestEmailAddress": "abc@[1.1.1.1](comment1)[2.2.2.2]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 23
+    }
+  },
+  {
+    "Index": 153,
+    "TestEmailAddress": "abc@[1.2.3.4][5.6.7.8]",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 154,
+    "TestEmailAddress": "joe@0000:1111:2222:3333:4444:5555:6666:7777",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 8
+    }
+  },
+  {
+    "Index": 155,
+    "TestEmailAddress": "John..Doe@example.com",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    }
+  },
+  {
+    "Index": 156,
+    "TestEmailAddress": "abc@[1.1.1.1",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 157,
+    "TestEmailAddress": "abc@[1.1.1.1}",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 12
+    }
+  },
+  {
+    "Index": 158,
+    "TestEmailAddress": "abc@[IPv6:::1",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 159,
+    "TestEmailAddress": "abc@[IPv6:::1}",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 13
+    }
+  },
+  {
+    "Index": 160,
+    "TestEmailAddress": "joe(bad comment\u0011)@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Low ascii in comment",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 15
+    }
+  },
+  {
+    "Index": 161,
+    "TestEmailAddress": "joe(bad comment\\\u0011)@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Escaped low ascii in comment",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 16
+    }
+  },
+  {
+    "Index": 162,
+    "TestEmailAddress": "joe\"bad string: \n here\"@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unescaped special character.",
+      "Index": 16
+    }
+  },
+  {
+    "Index": 163,
+    "TestEmailAddress": "joe(bad comment\\\u0002)@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Escaped low ascii in comment (another example)",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 16
+    }
+  },
+  {
+    "Index": 164,
+    "TestEmailAddress": "joe(bad comment\u0002)@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Un-escaped low ascii in comment",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 15
+    }
+  },
+  {
+    "Index": 165,
+    "TestEmailAddress": "joe.\"bad quoted string\\\u0002\"@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Escaped low ascii in quoted string",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 23
+    }
+  },
+  {
+    "Index": 166,
+    "TestEmailAddress": "joe.\"bad quoted string\u0002\"@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Un-escaped low ascii in quoted string",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 22
+    }
+  },
+  {
+    "Index": 167,
+    "TestEmailAddress": "joe.\u0002biden@m.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "low ascii in local part",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 168,
+    "TestEmailAddress": "joe.biden@m\u0002.net",
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "low ascii in host",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 11
+    }
+  },
+  {
+    "Index": 169,
+    "TestEmailAddress": "joe@{@abcd.:50@}coma", // will be abcd.abcd.abcd....abcd.coma, total length 254 (250 + "coma".Length)
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Domain is too long (254 chars)",
+    "ExpectedException": {
+      "Message": "Host name is too long.",
+      "Index": 257
+    }
+  },
+  {
+    "Index": 170,
+    "TestEmailAddress": "j@{@abcd.:50@}com", // will be abcd.abcd.abcd....abcd.com, total length 253 (250 + "com".Length)
+    "ExpectedResult": null,
+    "ExpectedEmailAddress": null,
+    "Comment": "Domain is 253 which is ok, but total email address length is 255 which is not acceptable (254 is max)",
+    "ExpectedException": {
+      "Message": "Email address is too long.",
+      "Index": 255
+    }
+  }
+]

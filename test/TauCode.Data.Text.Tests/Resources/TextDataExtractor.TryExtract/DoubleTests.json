@@ -1,0 +1,86 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedDouble": 0,
+    "Comment": "Empty input is not a valid Int32."
+  },
+  {
+    "TestInput": "1",
+    "TestTerminatingChars": "1",
+    "ExpectedResult": 1,
+    "ExpectedDouble": 1,
+    "Comment": "Empty input is not a valid Int32."
+  },
+  {
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 1,
+    "ExpectedDouble": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "00",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedDouble": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "01;",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 2,
+    "ExpectedDouble": 1,
+    "Comment": ""
+  },
+  {
+    "TestInput": "-01/",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 3,
+    "ExpectedDouble": -1,
+    "Comment": ""
+  },
+  {
+    "TestInput": " 1",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedDouble": 0,
+    "Comment": "Leading space is not allowed."
+  },
+  {
+    "TestInput": "123;",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 3,
+    "ExpectedDouble": 123,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123;",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedDouble": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123 ",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 0,
+    "ExpectedDouble": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "-12345",
+    "TestTerminatingChars": "-+1234567890",
+    "ExpectedResult": 6,
+    "ExpectedDouble": -12345,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123.6",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 5,
+    "ExpectedDouble": 123.6,
+    "Comment": ""
+  }
+]

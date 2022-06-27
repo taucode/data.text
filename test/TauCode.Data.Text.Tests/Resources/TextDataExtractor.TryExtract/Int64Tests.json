@@ -1,0 +1,121 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt64": 0,
+    "Comment": "Empty input is not a valid Int32."
+  },
+  {
+    "TestInput": "1",
+    "TestTerminatingChars": "1",
+    "ExpectedResult": 1,
+    "ExpectedInt64": 1,
+    "Comment": "Empty input is not a valid Int32."
+  },
+  {
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 1,
+    "ExpectedInt64": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "00",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedInt64": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "01;",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 2,
+    "ExpectedInt64": 1,
+    "Comment": ""
+  },
+  {
+    "TestInput": "-01/",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 3,
+    "ExpectedInt64": -1,
+    "Comment": ""
+  },
+  {
+    "TestInput": " 1",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt64": 0,
+    "Comment": "Leading space is not allowed."
+  },
+  {
+    "TestInput": "-00001-",
+    "TestTerminatingChars": "+-;/",
+    "ExpectedResult": 6,
+    "ExpectedInt64": -1,
+    "Comment": ""
+  },
+  {
+    "TestInput": "9223372036854775807",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 19,
+    "ExpectedInt64": 9223372036854775807,
+    "Comment": "long.MaxValue"
+  },
+  {
+    "TestInput": "-9223372036854775808\t",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 20,
+    "ExpectedInt64": -9223372036854775808,
+    "Comment": "long.MinValue"
+  },
+  {
+    "TestInput": "123;",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 3,
+    "ExpectedInt64": 123,
+    "Comment": ""
+  },
+  {
+    "TestInput": "-642-",
+    "TestTerminatingChars": "+/-",
+    "ExpectedResult": 4,
+    "ExpectedInt64": -642,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123;",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt64": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123 ",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 0,
+    "ExpectedInt64": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "9223372036854775808",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt64": 0,
+    "Comment": "long.MaxValue + 1 will fail"
+  },
+  {
+    "TestInput": "-9223372036854775809",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt64": 0,
+    "Comment": "long.MinValue - 1 will fail"
+  },
+  {
+    "TestInput": "-12345",
+    "TestTerminatingChars": "-+1234567890",
+    "ExpectedResult": 6,
+    "ExpectedInt64": -12345,
+    "Comment": ""
+  }
+]

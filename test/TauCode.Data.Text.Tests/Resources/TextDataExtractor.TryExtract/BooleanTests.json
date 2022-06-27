@@ -1,0 +1,37 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedBoolean": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedBoolean": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "true;",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 4,
+    "ExpectedBoolean": true,
+    "Comment": ""
+  },
+  {
+    "TestInput": "falsetrue",
+    "TestTerminatingChars": "t",
+    "ExpectedResult": 5,
+    "ExpectedBoolean": false,
+    "Comment": "Weird but works. 't' is not a good choice of terminating char of course."
+  },
+  {
+    "TestInput": "true",
+    "TestTerminatingChars": "e",
+    "ExpectedResult": 4,
+    "ExpectedBoolean": true,
+    "Comment": "Sick example: extraction will ignore the fact that 'e' is a termination char."
+  }
+]

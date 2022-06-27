@@ -1,0 +1,30 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedDateTimeOffset": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "2022-06-23",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 10,
+    "ExpectedDateTimeOffset": "2022-06-23",
+    "Comment": ""
+  },
+  {
+    "TestInput": "2022-06-23Z;",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 11,
+    "ExpectedDateTimeOffset": "2022-06-23Z",
+    "Comment": ""
+  },
+  {
+    "TestInput": "2022-06-23T10:20:30Z]",
+    "TestTerminatingChars": "[]",
+    "ExpectedResult": 20,
+    "ExpectedDateTimeOffset": "2022-06-23T10:20:30Z",
+    "Comment": ""
+  }
+]
