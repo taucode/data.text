@@ -1,6 +1,6 @@
 ﻿[
-  // single-quoted & standard errors
   {
+    "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -12,6 +12,7 @@
     "Comment": ""
   },
   {
+    "Index": 1,
     "TestInput": "''",
     "TestTerminatingChars": null,
     "ExpectedResult": 2,
@@ -20,6 +21,7 @@
     "Comment": ""
   },
   {
+    "Index": 2,
     "TestInput": "abc",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -31,6 +33,7 @@
     "Comment": ""
   },
   {
+    "Index": 3,
     "TestInput": "' ';",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -42,6 +45,7 @@
     "Comment": ""
   },
   {
+    "Index": 4,
     "TestInput": "' ';",
     "TestTerminatingChars": ";",
     "ExpectedResult": 3,
@@ -50,6 +54,7 @@
     "Comment": ""
   },
   {
+    "Index": 5,
     "TestInput": "'abc\\ud83e\\udd23'/",
     "TestTerminatingChars": "/",
     "ExpectedResult": 17,
@@ -58,6 +63,7 @@
     "Comment": ""
   },
   {
+    "Index": 6,
     "TestInput": "'abc\"ku\"'*",
     "TestTerminatingChars": "*",
     "ExpectedResult": 9,
@@ -66,6 +72,7 @@
     "Comment": ""
   },
   {
+    "Index": 7,
     "TestInput": "'abc\\\"ku\\\"'",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -77,6 +84,7 @@
     "Comment": "Double quote mustn't be escaped in single quote string."
   },
   {
+    "Index": 8,
     "TestInput": "'abc\\'ku\\''*",
     "TestTerminatingChars": "*",
     "ExpectedResult": 11,
@@ -85,6 +93,7 @@
     "Comment": ""
   },
   {
+    "Index": 9,
     "TestInput": "'abc'ku''",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -95,9 +104,8 @@
     },
     "Comment": ""
   },
-
-  // double-quoted
   {
+    "Index": 10,
     "TestInput": "\"\"",
     "TestTerminatingChars": null,
     "ExpectedResult": 2,
@@ -106,6 +114,7 @@
     "Comment": ""
   },
   {
+    "Index": 11,
     "TestInput": "\" \";",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -117,6 +126,7 @@
     "Comment": ""
   },
   {
+    "Index": 12,
     "TestInput": "\" \";",
     "TestTerminatingChars": ";",
     "ExpectedResult": 3,
@@ -125,6 +135,7 @@
     "Comment": ""
   },
   {
+    "Index": 13,
     "TestInput": "\"abc\\ud83e\\udd23\"/",
     "TestTerminatingChars": "/",
     "ExpectedResult": 17,
@@ -133,6 +144,7 @@
     "Comment": ""
   },
   {
+    "Index": 14,
     "TestInput": "\"abc'ku'\"*",
     "TestTerminatingChars": "*",
     "ExpectedResult": 9,
@@ -141,6 +153,7 @@
     "Comment": ""
   },
   {
+    "Index": 15,
     "TestInput": "\"abc\\'ku\\'\"'",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -152,6 +165,7 @@
     "Comment": "Single quote mustn't be escaped in double quote string."
   },
   {
+    "Index": 16,
     "TestInput": "\"abc\\\"ku\\\"\"*",
     "TestTerminatingChars": "*",
     "ExpectedResult": 11,
@@ -160,6 +174,7 @@
     "Comment": ""
   },
   {
+    "Index": 17,
     "TestInput": "\"abc\"ku\"\"",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,

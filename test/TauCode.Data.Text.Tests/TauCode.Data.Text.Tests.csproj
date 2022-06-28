@@ -21,6 +21,8 @@
     <None Remove="Resources\TextDataExtractor.TryExtract\Int32Tests.json" />
     <None Remove="Resources\TextDataExtractor.TryExtract\Int64Tests.json" />
     <None Remove="Resources\TextDataExtractor.TryExtract\JsonStringTests.json" />
+    <None Remove="Resources\TextDataExtractor.TryExtract\KeyTests.json" />
+    <None Remove="Resources\TextDataExtractor.TryExtract\TermTests.json" />
     <None Remove="Resources\TextDataExtractor.TryExtract\TimeSpanTests.json" />
     <None Remove="Resources\TextDataExtractor.TryExtract\UriTests.json" />
   </ItemGroup>
@@ -37,6 +39,8 @@
     <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\DateTimeOffsetTests.json" />
     <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\DecimalTests.json" />
     <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\DoubleTests.json" />
+    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\TermTests.json" />
+    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\KeyTests.json" />
     <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\FilePathTests.json" />
     <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\Int32Tests.json" />
     <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\Int64Tests.json" />
