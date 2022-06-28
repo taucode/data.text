@@ -1,0 +1,3734 @@
+﻿[
+  {
+    "Index": 0,
+    "TestHostName": "",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "empty string",
+    "ExpectedException": {
+      "Message": "Empty input.",
+      "Index": null
+    }
+  },
+  {
+    "Index": 1,
+    "TestHostName": "2001:DB8:0:0:8:800:200C:417A:221",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "unicast, full",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 2,
+    "TestHostName": "FF01::101::2",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "multicast, compressed",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 3,
+    "TestHostName": "02001:0000:1234:0000:0000:C1C0:ABCD:0876",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "extra 0 not allowed!",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 4,
+    "TestHostName": "2001:0000:1234:0000:00001:C1C0:ABCD:0876",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "extra 0 not allowed!",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 5,
+    "TestHostName": "2001:0000:1234:0000:0000:C1C0:ABCD:0876  0",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "junk after valid address",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 39
+    }
+  },
+  {
+    "Index": 6,
+    "TestHostName": "2001:0000:1234: 0000:0000:C1C0:ABCD:0876",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "internal space",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 15
+    }
+  },
+  {
+    "Index": 7,
+    "TestHostName": "3ffe:0b00:0000:0001:0000:0000:000a",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "seven segments",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 8,
+    "TestHostName": "FF02:0000:0000:0000:0000:0000:0000:0000:0001",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "nine segments",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 9,
+    "TestHostName": "3ffe:b00::1::a",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "double \"::\"",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 10,
+    "TestHostName": "::1111:2222:3333:4444:5555:6666::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "double \"::\"",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 11,
+    "TestHostName": "1:2:3::4:5::7:8",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "Double \"::\"",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 12,
+    "TestHostName": "12345::6:7:8",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 13,
+    "TestHostName": "1::5:400.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 14,
+    "TestHostName": "1::5:260.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 15,
+    "TestHostName": "1::5:256.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 16,
+    "TestHostName": "1::5:1.256.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 17,
+    "TestHostName": "1::5:1.2.256.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 18,
+    "TestHostName": "1::5:1.2.3.256",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 19,
+    "TestHostName": "1::5:300.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 20,
+    "TestHostName": "1::5:1.300.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 21,
+    "TestHostName": "1::5:1.2.300.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 22,
+    "TestHostName": "1::5:1.2.3.300",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 23,
+    "TestHostName": "1::5:900.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 24,
+    "TestHostName": "1::5:1.900.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 25,
+    "TestHostName": "1::5:1.2.900.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 26,
+    "TestHostName": "1::5:1.2.3.900",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 27,
+    "TestHostName": "1::5:300.300.300.300",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 28,
+    "TestHostName": "1::5:3000.30.30.30",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 29,
+    "TestHostName": "1::400.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 30,
+    "TestHostName": "1::260.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 31,
+    "TestHostName": "1::256.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 32,
+    "TestHostName": "1::1.256.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 33,
+    "TestHostName": "1::1.2.256.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 34,
+    "TestHostName": "1::1.2.3.256",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 35,
+    "TestHostName": "1::300.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 36,
+    "TestHostName": "1::1.300.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 37,
+    "TestHostName": "1::1.2.300.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 38,
+    "TestHostName": "1::1.2.3.300",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 39,
+    "TestHostName": "1::900.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 40,
+    "TestHostName": "1::1.900.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 41,
+    "TestHostName": "1::1.2.900.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 42,
+    "TestHostName": "1::1.2.3.900",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 43,
+    "TestHostName": "1::300.300.300.300",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 44,
+    "TestHostName": "1::3000.30.30.30",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 45,
+    "TestHostName": "::400.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 46,
+    "TestHostName": "::260.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 47,
+    "TestHostName": "::256.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 48,
+    "TestHostName": "::1.256.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 49,
+    "TestHostName": "::1.2.256.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 50,
+    "TestHostName": "::1.2.3.256",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 51,
+    "TestHostName": "::300.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 52,
+    "TestHostName": "::1.300.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 53,
+    "TestHostName": "::1.2.300.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 54,
+    "TestHostName": "::1.2.3.300",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 55,
+    "TestHostName": "::900.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 56,
+    "TestHostName": "::1.900.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 57,
+    "TestHostName": "::1.2.900.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 58,
+    "TestHostName": "::1.2.3.900",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 59,
+    "TestHostName": "::300.300.300.300",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 60,
+    "TestHostName": "::3000.30.30.30",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 61,
+    "TestHostName": "2001:1:1:1:1:1:255Z255X255Y255",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "garbage instead of \".\" in IPv4",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 18
+    }
+  },
+  {
+    "Index": 62,
+    "TestHostName": "::ffff:192x168.1.26",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "ditto",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 10
+    }
+  },
+  {
+    "Index": 63,
+    "TestHostName": "::ffff:2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 64,
+    "TestHostName": "::ffff:257.1.2.3",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 65,
+    "TestHostName": "1.2.3.4:1111:2222:3333:4444::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "Aeron",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 66,
+    "TestHostName": "1.2.3.4:1111:2222:3333::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 67,
+    "TestHostName": "1.2.3.4:1111:2222::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 68,
+    "TestHostName": "1.2.3.4:1111::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 69,
+    "TestHostName": "1.2.3.4::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 70,
+    "TestHostName": "1.2.3.4::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 7
+    }
+  },
+  {
+    "Index": 71,
+    "TestHostName": "XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 72,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:00.00.00.00",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 73,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:000.000.000.000",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 74,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:256.256.256.256",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 75,
+    "TestHostName": ":",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 76,
+    "TestHostName": "1111:2222:3333:4444::5555:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 77,
+    "TestHostName": "1111:2222:3333::5555:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 78,
+    "TestHostName": "1111:2222::5555:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 79,
+    "TestHostName": "1111::5555:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 80,
+    "TestHostName": "::5555:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 81,
+    "TestHostName": ":::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 82,
+    "TestHostName": "1111:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 83,
+    "TestHostName": ":",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 84,
+    "TestHostName": ":1111:2222:3333:4444::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 85,
+    "TestHostName": ":1111:2222:3333::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 86,
+    "TestHostName": ":1111:2222::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 87,
+    "TestHostName": ":1111::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 88,
+    "TestHostName": ":::5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 89,
+    "TestHostName": ":::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 90,
+    "TestHostName": "123",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid host name.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 91,
+    "TestHostName": "2001::FFD3::57ab",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 92,
+    "TestHostName": "2001:db8:85a3::8a2e:37023:7334",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 93,
+    "TestHostName": "2001:db8:85a3::8a2e:370k:7334",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 23
+    }
+  },
+  {
+    "Index": 94,
+    "TestHostName": "1:2:3:4:5:6:7:8:9",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 95,
+    "TestHostName": "1::2::3",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 96,
+    "TestHostName": "1:::3:4:5",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 97,
+    "TestHostName": "1:2:3::4:5:6:7:8:9",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 98,
+    "TestHostName": "XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 99,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:8888:9999",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 100,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:8888::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 101,
+    "TestHostName": "::2222:3333:4444:5555:6666:7777:8888:9999",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 102,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 103,
+    "TestHostName": "1111:2222:3333:4444:5555:6666",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 104,
+    "TestHostName": "1111:2222:3333:4444:5555",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 105,
+    "TestHostName": "1111:2222:3333:4444",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 106,
+    "TestHostName": "1111:2222:3333",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 107,
+    "TestHostName": "1111:2222",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 108,
+    "TestHostName": "1111",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid host name.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 109,
+    "TestHostName": "11112222:3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 110,
+    "TestHostName": "1111:22223333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 111,
+    "TestHostName": "1111:2222:33334444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 112,
+    "TestHostName": "1111:2222:3333:44445555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 113,
+    "TestHostName": "1111:2222:3333:4444:55556666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 114,
+    "TestHostName": "1111:2222:3333:4444:5555:66667777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 115,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:77778888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 116,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 117,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 118,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 119,
+    "TestHostName": "1111:2222:3333:4444:5555:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 120,
+    "TestHostName": "1111:2222:3333:4444:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 121,
+    "TestHostName": "1111:2222:3333:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 122,
+    "TestHostName": "1111:2222:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 123,
+    "TestHostName": "1111:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 124,
+    "TestHostName": ":",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 125,
+    "TestHostName": ":8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 126,
+    "TestHostName": ":7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 127,
+    "TestHostName": ":6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 128,
+    "TestHostName": ":5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 129,
+    "TestHostName": ":4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 130,
+    "TestHostName": ":3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 131,
+    "TestHostName": ":2222:3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 132,
+    "TestHostName": ":1111:2222:3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 133,
+    "TestHostName": ":::2222:3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 134,
+    "TestHostName": "1111:::3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 135,
+    "TestHostName": "1111:2222:::4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 136,
+    "TestHostName": "1111:2222:3333:::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 137,
+    "TestHostName": "1111:2222:3333:4444:::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 138,
+    "TestHostName": "1111:2222:3333:4444:5555:::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 139,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 140,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 141,
+    "TestHostName": "::2222::4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 142,
+    "TestHostName": "::2222:3333::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 143,
+    "TestHostName": "::2222:3333:4444::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 144,
+    "TestHostName": "::2222:3333:4444:5555::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 145,
+    "TestHostName": "::2222:3333:4444:5555:7777::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 146,
+    "TestHostName": "::2222:3333:4444:5555:7777:8888::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 147,
+    "TestHostName": "1111::3333::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 148,
+    "TestHostName": "1111::3333:4444::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 149,
+    "TestHostName": "1111::3333:4444:5555::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 150,
+    "TestHostName": "1111::3333:4444:5555:6666::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 151,
+    "TestHostName": "1111::3333:4444:5555:6666:7777::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 152,
+    "TestHostName": "1111:2222::4444::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 153,
+    "TestHostName": "1111:2222::4444:5555::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 154,
+    "TestHostName": "1111:2222::4444:5555:6666::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 155,
+    "TestHostName": "1111:2222::4444:5555:6666:7777::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 156,
+    "TestHostName": "1111:2222:3333::5555::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 157,
+    "TestHostName": "1111:2222:3333::5555:6666::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 158,
+    "TestHostName": "1111:2222:3333::5555:6666:7777::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 159,
+    "TestHostName": "1111:2222:3333:4444::6666::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 160,
+    "TestHostName": "1111:2222:3333:4444::6666:7777::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 161,
+    "TestHostName": "1111:2222:3333:4444:5555::7777::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 162,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:8888:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 163,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 164,
+    "TestHostName": "1111:2222:3333:4444:5555:6666::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 165,
+    "TestHostName": "::2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 166,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:1.2.3.4.5",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 167,
+    "TestHostName": "1111:2222:3333:4444:5555:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 168,
+    "TestHostName": "1111:2222:3333:4444:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 169,
+    "TestHostName": "1111:2222:3333:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 170,
+    "TestHostName": "1111:2222:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 171,
+    "TestHostName": "1111:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 172,
+    "TestHostName": "11112222:3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 173,
+    "TestHostName": "1111:22223333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 174,
+    "TestHostName": "1111:2222:33334444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 175,
+    "TestHostName": "1111:2222:3333:44445555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 176,
+    "TestHostName": "1111:2222:3333:4444:55556666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 177,
+    "TestHostName": "1111:2222:3333:4444:5555:66661.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 178,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:255255.255.255",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 179,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:255.255255.255",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 180,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:255.255.255255",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 181,
+    "TestHostName": ":1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 182,
+    "TestHostName": ":6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 183,
+    "TestHostName": ":5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 184,
+    "TestHostName": ":4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 185,
+    "TestHostName": ":3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 186,
+    "TestHostName": ":2222:3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 187,
+    "TestHostName": ":1111:2222:3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 188,
+    "TestHostName": ":::2222:3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 189,
+    "TestHostName": "1111:::3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 190,
+    "TestHostName": "1111:2222:::4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 191,
+    "TestHostName": "1111:2222:3333:::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 192,
+    "TestHostName": "1111:2222:3333:4444:::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 193,
+    "TestHostName": "1111:2222:3333:4444:5555:::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 194,
+    "TestHostName": "::2222::4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 195,
+    "TestHostName": "::2222:3333::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 196,
+    "TestHostName": "::2222:3333:4444::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 197,
+    "TestHostName": "::2222:3333:4444:5555::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 198,
+    "TestHostName": "1111::3333::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 199,
+    "TestHostName": "1111::3333:4444::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 200,
+    "TestHostName": "1111::3333:4444:5555::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 201,
+    "TestHostName": "1111:2222::4444::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 202,
+    "TestHostName": "1111:2222::4444:5555::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 203,
+    "TestHostName": "1111:2222:3333::5555::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 204,
+    "TestHostName": "::.",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 205,
+    "TestHostName": "::..",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 206,
+    "TestHostName": "::...",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 207,
+    "TestHostName": "::1...",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 4
+    }
+  },
+  {
+    "Index": 208,
+    "TestHostName": "::1.2..",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 6
+    }
+  },
+  {
+    "Index": 209,
+    "TestHostName": "::1.2.3.",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected end.",
+      "Index": 8
+    }
+  },
+  {
+    "Index": 210,
+    "TestHostName": "::.2..",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 211,
+    "TestHostName": "::.2.3.",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 212,
+    "TestHostName": "::.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 213,
+    "TestHostName": "::..3.",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 214,
+    "TestHostName": "::..3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 215,
+    "TestHostName": "::...4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 2
+    }
+  },
+  {
+    "Index": 216,
+    "TestHostName": ":1111:2222:3333:4444:5555:6666:7777::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 217,
+    "TestHostName": ":1111:2222:3333:4444:5555:6666::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 218,
+    "TestHostName": ":1111:2222:3333:4444:5555::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 219,
+    "TestHostName": ":1111:2222:3333:4444::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 220,
+    "TestHostName": ":1111:2222:3333::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 221,
+    "TestHostName": ":1111:2222::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 222,
+    "TestHostName": ":1111::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 223,
+    "TestHostName": ":::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 224,
+    "TestHostName": ":1111:2222:3333:4444:5555:6666::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 225,
+    "TestHostName": ":1111:2222:3333:4444:5555::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 226,
+    "TestHostName": ":1111:2222:3333:4444::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 227,
+    "TestHostName": ":1111:2222:3333::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 228,
+    "TestHostName": ":1111:2222::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 229,
+    "TestHostName": ":1111::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 230,
+    "TestHostName": ":::8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 231,
+    "TestHostName": ":1111:2222:3333:4444:5555::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 232,
+    "TestHostName": ":1111:2222:3333:4444::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 233,
+    "TestHostName": ":1111:2222:3333::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 234,
+    "TestHostName": ":1111:2222::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 235,
+    "TestHostName": ":1111::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 236,
+    "TestHostName": ":::7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 237,
+    "TestHostName": ":1111:2222:3333:4444::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 238,
+    "TestHostName": ":1111:2222:3333::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 239,
+    "TestHostName": ":1111:2222::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 240,
+    "TestHostName": ":1111::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 241,
+    "TestHostName": ":::6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 242,
+    "TestHostName": ":1111:2222:3333::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 243,
+    "TestHostName": ":1111:2222::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 244,
+    "TestHostName": ":1111::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 245,
+    "TestHostName": ":::5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 246,
+    "TestHostName": ":1111:2222::4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 247,
+    "TestHostName": ":1111::4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 248,
+    "TestHostName": ":::4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 249,
+    "TestHostName": ":1111::3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 250,
+    "TestHostName": ":::3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 251,
+    "TestHostName": ":::2222:3333:4444:5555:6666:7777:8888",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 252,
+    "TestHostName": ":1111:2222:3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 253,
+    "TestHostName": ":1111:2222:3333:4444:5555::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 254,
+    "TestHostName": ":1111:2222:3333:4444::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 255,
+    "TestHostName": ":1111:2222:3333::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 256,
+    "TestHostName": ":1111:2222::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 257,
+    "TestHostName": ":1111::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 258,
+    "TestHostName": ":::1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 259,
+    "TestHostName": ":1111:2222:3333:4444::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 260,
+    "TestHostName": ":1111:2222:3333::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 261,
+    "TestHostName": ":1111:2222::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 262,
+    "TestHostName": ":1111::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 263,
+    "TestHostName": ":::6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 264,
+    "TestHostName": ":1111:2222:3333::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 265,
+    "TestHostName": ":1111:2222::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 266,
+    "TestHostName": ":1111::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 267,
+    "TestHostName": ":::5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 268,
+    "TestHostName": ":1111:2222::4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 269,
+    "TestHostName": ":1111::4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 270,
+    "TestHostName": ":::4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 271,
+    "TestHostName": ":1111::3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 272,
+    "TestHostName": ":::2222:3333:4444:5555:6666:1.2.3.4",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 273,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:7777:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 274,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 275,
+    "TestHostName": "1111:2222:3333:4444:5555:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 276,
+    "TestHostName": "1111:2222:3333:4444:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 277,
+    "TestHostName": "1111:2222:3333:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 278,
+    "TestHostName": "1111:2222:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 279,
+    "TestHostName": "1111:::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 280,
+    "TestHostName": ":::",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 281,
+    "TestHostName": "1111:2222:3333:4444:5555:6666::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 282,
+    "TestHostName": "1111:2222:3333:4444:5555::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 283,
+    "TestHostName": "1111:2222:3333:4444::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 284,
+    "TestHostName": "1111:2222:3333::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 285,
+    "TestHostName": "1111:2222::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 286,
+    "TestHostName": "1111::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 287,
+    "TestHostName": "::8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 288,
+    "TestHostName": "1111:2222:3333:4444:5555::7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 289,
+    "TestHostName": "1111:2222:3333:4444::7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 290,
+    "TestHostName": "1111:2222:3333::7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 291,
+    "TestHostName": "1111:2222::7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 292,
+    "TestHostName": "1111::7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 293,
+    "TestHostName": "::7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 294,
+    "TestHostName": "1111:2222:3333:4444::6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 295,
+    "TestHostName": "1111:2222:3333::6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 296,
+    "TestHostName": "1111:2222::6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 297,
+    "TestHostName": "1111::6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 298,
+    "TestHostName": "::6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 299,
+    "TestHostName": "1111:2222:3333::5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 300,
+    "TestHostName": "1111:2222::5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 301,
+    "TestHostName": "1111::5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 302,
+    "TestHostName": "::5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 303,
+    "TestHostName": "1111:2222::4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 304,
+    "TestHostName": "1111::4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 305,
+    "TestHostName": "::4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 306,
+    "TestHostName": "1111::3333:4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 307,
+    "TestHostName": "::3333:4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 308,
+    "TestHostName": "::2222:3333:4444:5555:6666:7777:8888:",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 309,
+    "TestHostName": "':10.0.0.1",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    }
+  },
+  {
+    "Index": 310,
+    "TestHostName": "1111:2222:3333:4444:5555:6666:256.256.256.2561",
+    "ExpectedResult": 0,
+    "ExpectedHostName": null,
+    "ExpectedHostNameKind": null,
+    "Comment": "",
+    "ExpectedException": {
+      "Message": "Invalid IPv6 address specification.",
+      "Index": 0
+    }
+  }
+]

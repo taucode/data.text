@@ -1,0 +1,173 @@
+﻿[
+  // single-quoted & standard errors
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Empty input.",
+      "Index": null
+    },
+    "Comment": ""
+  },
+  {
+    "TestInput": "''",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedJsonString": "",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "abc",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 0
+    },
+    "Comment": ""
+  },
+  {
+    "TestInput": "' ';",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    },
+    "Comment": ""
+  },
+  {
+    "TestInput": "' ';",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 3,
+    "ExpectedJsonString": " ",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "'abc\\ud83e\\udd23'/",
+    "TestTerminatingChars": "/",
+    "ExpectedResult": 17,
+    "ExpectedJsonString": "abc🤣",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "'abc\"ku\"'*",
+    "TestTerminatingChars": "*",
+    "ExpectedResult": 9,
+    "ExpectedJsonString": "abc\"ku\"",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "'abc\\\"ku\\\"'",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Bad escape.",
+      "Index": 4
+    },
+    "Comment": "Double quote mustn't be escaped in single quote string."
+  },
+  {
+    "TestInput": "'abc\\'ku\\''*",
+    "TestTerminatingChars": "*",
+    "ExpectedResult": 11,
+    "ExpectedJsonString": "abc'ku'",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "'abc'ku''",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    },
+    "Comment": ""
+  },
+
+  // double-quoted
+  {
+    "TestInput": "\"\"",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedJsonString": "",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "\" \";",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 3
+    },
+    "Comment": ""
+  },
+  {
+    "TestInput": "\" \";",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 3,
+    "ExpectedJsonString": " ",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "\"abc\\ud83e\\udd23\"/",
+    "TestTerminatingChars": "/",
+    "ExpectedResult": 17,
+    "ExpectedJsonString": "abc🤣",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "\"abc'ku'\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedResult": 9,
+    "ExpectedJsonString": "abc'ku'",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "\"abc\\'ku\\'\"'",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Bad escape.",
+      "Index": 4
+    },
+    "Comment": "Single quote mustn't be escaped in double quote string."
+  },
+  {
+    "TestInput": "\"abc\\\"ku\\\"\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedResult": 11,
+    "ExpectedJsonString": "abc\"ku\"",
+    "ExpectedException": null,
+    "Comment": ""
+  },
+  {
+    "TestInput": "\"abc\"ku\"\"",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedJsonString": null,
+    "ExpectedException": {
+      "Message": "Unexpected character.",
+      "Index": 5
+    },
+    "Comment": ""
+  }
+]

@@ -1,0 +1,121 @@
+﻿[
+  {
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt32": 0,
+    "Comment": "Empty input is not a valid Int32."
+  },
+  {
+    "TestInput": "1",
+    "TestTerminatingChars": "1",
+    "ExpectedResult": 1,
+    "ExpectedInt32": 1,
+    "Comment": "Empty input is not a valid Int32."
+  },
+  {
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 1,
+    "ExpectedInt32": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "00",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedInt32": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "01;",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 2,
+    "ExpectedInt32": 1,
+    "Comment": ""
+  },
+  {
+    "TestInput": "-01/",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 3,
+    "ExpectedInt32": -1,
+    "Comment": ""
+  },
+  {
+    "TestInput": " 1",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt32": 0,
+    "Comment": "Leading space is not allowed."
+  },
+  {
+    "TestInput": "-00001-",
+    "TestTerminatingChars": "+-;/",
+    "ExpectedResult": 6,
+    "ExpectedInt32": -1,
+    "Comment": ""
+  },
+  {
+    "TestInput": "2147483647",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 10,
+    "ExpectedInt32": 2147483647,
+    "Comment": "int.MaxValue"
+  },
+  {
+    "TestInput": "-2147483648\t",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 11,
+    "ExpectedInt32": -2147483648,
+    "Comment": "int.MinValue"
+  },
+  {
+    "TestInput": "123;",
+    "TestTerminatingChars": ";/",
+    "ExpectedResult": 3,
+    "ExpectedInt32": 123,
+    "Comment": ""
+  },
+  {
+    "TestInput": "-642-",
+    "TestTerminatingChars": "+/-",
+    "ExpectedResult": 4,
+    "ExpectedInt32": -642,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123;",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt32": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "123 ",
+    "TestTerminatingChars": ";",
+    "ExpectedResult": 0,
+    "ExpectedInt32": 0,
+    "Comment": ""
+  },
+  {
+    "TestInput": "2147483648",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt32": 0,
+    "Comment": "int.MaxValue + 1 will fail"
+  },
+  {
+    "TestInput": "-2147483649",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedInt32": 0,
+    "Comment": "int.MinValue - 1 will fail"
+  },
+  {
+    "TestInput": "-12345",
+    "TestTerminatingChars": "-+1234567890",
+    "ExpectedResult": 6,
+    "ExpectedInt32": -12345,
+    "Comment": ""
+  }
+]
