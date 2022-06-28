@@ -91,6 +91,7 @@ namespace TauCode.Data.Text
                 ExtractionErrorTag.InputTooLong => "Input is too long.",
                 ExtractionErrorTag.UnexpectedChar => "Unexpected character.",
                 ExtractionErrorTag.UnexpectedEnd => "Unexpected end.",
+                ExtractionErrorTag.BadEscape => "Bad escape.",
                 ExtractionErrorTag.InternalError => "Internal error.",
 
                 // HostName

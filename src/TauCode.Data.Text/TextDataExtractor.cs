@@ -723,11 +723,36 @@ namespace TauCode.Data.Text
 
                 if (c == delimiter)
                 {
-                    pos++;
-                    break;
+                    if (pos == input.Length - 1)
+                    {
+                        pos++;
+                        break;
+                    }
+                    else
+                    {
+                        if (terminatingPredicate(input, pos + 1))
+                        {
+                            pos++;
+                            break;
+                        }
+                        else
+                        {
+                            exception = default;
+
+                            if (returnException)
+                            {
+                                exception = Helper.CreateException(ExtractionErrorTag.UnexpectedChar, pos + 1);
+                            }
+
+                            v = default;
+                            return 0;
+                        }
+                    }
                 }
                 else if (c == '\\')
                 {
+                    #region escaping
+
                     if (pos + 1 == input.Length)
                     {
                         exception = default;
@@ -819,6 +844,9 @@ namespace TauCode.Data.Text
                             return 0;
                         }
                     }
+
+
+                    #endregion
                 }
                 else
                 {
@@ -835,7 +863,7 @@ namespace TauCode.Data.Text
             return pos;
         }
 
-        public static int TryExtractCliKey(
+        public static int TryExtractKey(
             ReadOnlySpan<char> input,
             out string v,
             TerminatingDelegate terminatingPredicate = null)
@@ -843,7 +871,7 @@ namespace TauCode.Data.Text
             throw new NotImplementedException();
         }
 
-        public static int TryExtractCliWord(
+        public static int TryExtractTerm(
             ReadOnlySpan<char> input,
             out string v,
             TerminatingDelegate terminatingPredicate = null)

@@ -11,7 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{FDDDBAE4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{410888CE-C995-4451-B03D-B02DAE3AA7D4}"
 	ProjectSection(SolutionItems) = preProject
+		misc\all-emojis.json = misc\all-emojis.json
 		misc\changelog.txt = misc\changelog.txt
+		misc\emojis.txt = misc\emojis.txt
+		misc\IPv6-invalid.pl = misc\IPv6-invalid.pl
+		misc\IPv6-valid.pl = misc\IPv6-valid.pl
 		misc\todo.txt = misc\todo.txt
 	EndProjectSection
 EndProject

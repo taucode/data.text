@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using NUnit.Framework;
 using TauCode.Data.Text.Tests.Dto.TextDataExtractor.TryExtract;
 using TauCode.Extensions;
 
@@ -22,7 +20,7 @@ public class TextDataExtractorTests
         // Arrange
         var input = testDto.TestInput;
         TerminatingDelegate terminatingPredicate =
-            testDto.TestTerminatingChars != null ? 
+            testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
                 null;
@@ -442,7 +440,6 @@ public class TextDataExtractorTests
                 null;
 
         // Act
-
         var consumed = TextDataExtractor.TryExtractJsonString(
             input,
             out var v,
@@ -454,13 +451,22 @@ public class TextDataExtractorTests
         if (testDto.ExpectedResult == 0)
         {
             Assert.That(consumed, Is.Zero);
-            Assert.That(v, Is.EqualTo(default(string)));
-            
+            Assert.That(v, Is.Null);
+
+            Assert.That(testDto.ExpectedJsonString, Is.Null);
+            Assert.That(testDto.ExpectedException, Is.Not.Null);
+
+            Assert.That(exception, Is.Not.Null);
+
+            Assert.That(exception.Message, Is.EqualTo(testDto.ExpectedException.Message));
+            Assert.That(exception.Index, Is.EqualTo(testDto.ExpectedException.Index));
         }
         else
         {
             Assert.That(consumed, Is.EqualTo(testDto.ExpectedResult));
             Assert.That(v, Is.EqualTo(testDto.ExpectedJsonString));
+            Assert.That(testDto.ExpectedException, Is.Null);
+            Assert.That(exception, Is.Null);
         }
     }
 
