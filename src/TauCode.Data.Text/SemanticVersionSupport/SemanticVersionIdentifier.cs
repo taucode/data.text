@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace TauCode.Data.Text.SemanticVersionSupport
 {
-    // todo: rename to identifier
     internal readonly struct SemanticVersionIdentifier : IComparable<SemanticVersionIdentifier>
     {
         internal SemanticVersionIdentifier(string value)

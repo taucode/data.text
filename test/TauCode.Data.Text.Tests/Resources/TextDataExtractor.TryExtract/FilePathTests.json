@@ -1,5 +1,6 @@
 ﻿[
   {
+    "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -7,13 +8,15 @@
     "Comment": ""
   },
   {
+    "Index": 1,
     "TestInput": "c:\\",
     "TestTerminatingChars": null,
-    "ExpectedResult": 0,
+    "ExpectedResult": 3,
     "ExpectedFilePath": "c:\\",
     "Comment": ""
   },
   {
+    "Index": 2,
     "TestInput": ".",
     "TestTerminatingChars": null,
     "ExpectedResult": 1,
@@ -21,6 +24,7 @@
     "Comment": ""
   },
   {
+    "Index": 3,
     "TestInput": "..",
     "TestTerminatingChars": null,
     "ExpectedResult": 2,
@@ -28,6 +32,7 @@
     "Comment": ""
   },
   {
+    "Index": 4,
     "TestInput": "my/tool ",
     "TestTerminatingChars": " ",
     "ExpectedResult": 7,
@@ -35,6 +40,7 @@
     "Comment": ""
   },
   {
+    "Index": 5,
     "TestInput": "my>tool",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -42,6 +48,7 @@
     "Comment": ""
   },
   {
+    "Index": 6,
     "TestInput": "--looks-like=key ",
     "TestTerminatingChars": " ",
     "ExpectedResult": 16,

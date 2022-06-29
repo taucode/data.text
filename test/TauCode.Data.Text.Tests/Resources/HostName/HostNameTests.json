@@ -433,7 +433,7 @@
   },
   {
     "Index": 39,
-    "TestHostName": "{@abcd.:50@}com", // will be abcd.abcd.abcd....abcd.com, total length 253 (250 + "com".Length)
+    "TestHostName": "{@abcd.:50@}com",
     "ExpectedResult": 253,
     "ExpectedHostName": "{@abcd.:50@}com",
     "ExpectedHostNameKind": "Regular",

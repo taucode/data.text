@@ -1,0 +1,162 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": "Empty input"
+  },
+  {
+    "Index": 1,
+    "TestInput": " ",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": "Space"
+  },
+  {
+    "Index": 2,
+    "TestInput": "-c",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedKey": "-c",
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "-c;",
+    "TestTerminatingChars": " ",
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "-c/",
+    "TestTerminatingChars": "/",
+    "ExpectedResult": 2,
+    "ExpectedKey": "-c",
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "-C",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 2,
+    "ExpectedKey": "-C",
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "-ї",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "-cd",
+    "TestTerminatingChars": "d",
+    "ExpectedResult": 3,
+    "ExpectedKey": "-cd",
+    "Comment": "Ignores the fact that 'd' is terminating."
+  },
+  {
+    "Index": 8,
+    "TestInput": "-some-key",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 9,
+    "ExpectedKey": "-some-key",
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "-{@a:199@}",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 200,
+    "ExpectedKey": "-{@a:199@}",
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "-{@a:200@}",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "-some-key=",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "-some-key=",
+    "TestTerminatingChars": "=",
+    "ExpectedResult": 9,
+    "ExpectedKey": "-some-key",
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "--some-key-1 ",
+    "TestTerminatingChars": " ",
+    "ExpectedResult": 12,
+    "ExpectedKey": "--some-key-1",
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "-some.key",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "---some-key",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "-some-key-",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "-some--key",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 16,
+    "TestInput": "some-key",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "-some-key- ",
+    "TestTerminatingChars": null,
+    "ExpectedResult": 0,
+    "ExpectedKey": null,
+    "Comment": ""
+  }
+]
