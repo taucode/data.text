@@ -1,12 +1,14 @@
 ﻿[
   {
+    "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
-    "ExpectedDecimal": 0,
+    "ExpectedDecimal": null,
     "Comment": "Empty input is not a valid Int32."
   },
   {
+    "Index": 1,
     "TestInput": "1",
     "TestTerminatingChars": "1",
     "ExpectedResult": 1,
@@ -14,6 +16,7 @@
     "Comment": "Empty input is not a valid Int32."
   },
   {
+    "Index": 2,
     "TestInput": "0",
     "TestTerminatingChars": null,
     "ExpectedResult": 1,
@@ -21,6 +24,7 @@
     "Comment": ""
   },
   {
+    "Index": 3,
     "TestInput": "00",
     "TestTerminatingChars": null,
     "ExpectedResult": 2,
@@ -28,6 +32,7 @@
     "Comment": ""
   },
   {
+    "Index": 4,
     "TestInput": "01;",
     "TestTerminatingChars": ";",
     "ExpectedResult": 2,
@@ -35,6 +40,7 @@
     "Comment": ""
   },
   {
+    "Index": 5,
     "TestInput": "-01/",
     "TestTerminatingChars": ";/",
     "ExpectedResult": 3,
@@ -42,13 +48,15 @@
     "Comment": ""
   },
   {
+    "Index": 6,
     "TestInput": " 1",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
-    "ExpectedDecimal": 0,
+    "ExpectedDecimal": null,
     "Comment": "Leading space is not allowed."
   },
   {
+    "Index": 7,
     "TestInput": "123;",
     "TestTerminatingChars": ";/",
     "ExpectedResult": 3,
@@ -56,20 +64,23 @@
     "Comment": ""
   },
   {
+    "Index": 8,
     "TestInput": "123;",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
-    "ExpectedDecimal": 0,
+    "ExpectedDecimal": null,
     "Comment": ""
   },
   {
+    "Index": 9,
     "TestInput": "123 ",
     "TestTerminatingChars": ";",
     "ExpectedResult": 0,
-    "ExpectedDecimal": 0,
+    "ExpectedDecimal": null,
     "Comment": ""
   },
   {
+    "Index": 10,
     "TestInput": "-12345",
     "TestTerminatingChars": "-+1234567890",
     "ExpectedResult": 6,
@@ -77,6 +88,7 @@
     "Comment": ""
   },
   {
+    "Index": 11,
     "TestInput": "123.6",
     "TestTerminatingChars": ";/",
     "ExpectedResult": 5,

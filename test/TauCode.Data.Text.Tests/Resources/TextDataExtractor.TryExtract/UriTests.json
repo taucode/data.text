@@ -1,5 +1,6 @@
 ﻿[
   {
+    "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
     "ExpectedResult": 0,
@@ -7,6 +8,7 @@
     "Comment": ""
   },
   {
+    "Index": 1,
     "TestInput": " ",
     "TestTerminatingChars": " ",
     "ExpectedResult": 0,
@@ -14,6 +16,7 @@
     "Comment": ""
   },
   {
+    "Index": 2,
     "TestInput": "https://tau.me",
     "TestTerminatingChars": null,
     "ExpectedResult": 14,
@@ -21,6 +24,7 @@
     "Comment": ""
   },
   {
+    "Index": 3,
     "TestInput": "https://tau.me/good day/",
     "TestTerminatingChars": " ",
     "ExpectedResult": 19,
@@ -28,6 +32,7 @@
     "Comment": ""
   },
   {
+    "Index": 4,
     "TestInput": "https://tau.me/good day/",
     "TestTerminatingChars": "",
     "ExpectedResult": 0,

@@ -20,8 +20,8 @@ namespace TauCode.Data.Text
         private static readonly int DateTimeOffsetMaxLength = "9999-12-31T23:59:59.9999999+00:00".Length;
         private const int UriMaxLength = 2000;
         private const int FilePathMaxLength = 256;
-        private const int KeyMaxLength = 100;
-        private const int WordMaxLength = 100;
+        private const int KeyMaxLength = 200;
+        private const int TermMaxLength = 200;
 
         private static readonly HashSet<char> ProhibitedFilePathChars = new HashSet<char>
         {
@@ -596,6 +596,18 @@ namespace TauCode.Data.Text
                 {
                     // go on...
                 }
+                else if (c == ':')
+                {
+                    if (pos == 1 && input[0].IsLatinLetterInternal())
+                    {
+                        // something like 'c:', ok
+                    }
+                    else
+                    {
+                        v = default;
+                        return 0;
+                    }
+                }
                 else if (c.IsInlineWhiteSpaceOrCaretControl() || ProhibitedFilePathChars.Contains(c))
                 {
                     if (terminatingPredicate(input, pos))
@@ -868,7 +880,111 @@ namespace TauCode.Data.Text
             out string v,
             TerminatingDelegate terminatingPredicate = null)
         {
-            throw new NotImplementedException();
+            if (input.Length == 0)
+            {
+                v = default;
+                return 0;
+            }
+
+            terminatingPredicate ??= Helper.DefaultTerminatingPredicate;
+
+            var pos = 0;
+            char? prevChar = null;
+            char? prevPrevChar = null;
+
+            while (true)
+            {
+                if (pos == input.Length)
+                {
+                    if (prevChar == '-')
+                    {
+                        v = default;
+                        return 0;
+                    }
+
+                    break;
+                }
+
+                var c = input[pos];
+
+                if (c == '-')
+                {
+                    if (pos == 0)
+                    {
+                        // ok
+                    }
+                    else
+                    {
+                        if (prevChar == '-')
+                        {
+                            if (prevPrevChar == '-')
+                            {
+                                v = default;
+                                return 0;
+                            }
+
+                            if (pos == 1)
+                            {
+                                // ok
+                            }
+                            else
+                            {
+                                v = default;
+                                return 0;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (pos == 0)
+                    {
+                        v = default;
+                        return 0;
+                    }
+
+                    if (c.IsLatinLetterInternal() || c.IsDecimalDigit())
+                    {
+                        // ok
+                    }
+                    else if (terminatingPredicate(input, pos))
+                    {
+                        if (prevChar == '-')
+                        {
+                            v = default;
+                            return 0;
+                        }
+
+                        break;
+                    }
+                    else
+                    {
+                        v = default;
+                        return 0;
+                    }
+                }
+
+                if (pos == KeyMaxLength)
+                {
+                    v = default;
+                    return 0;
+                }
+
+
+                prevPrevChar = prevChar;
+                prevChar = c;
+
+                pos++;
+            }
+
+            if (pos == 0)
+            {
+                v = default;
+                return 0;
+            }
+
+            v = input[..pos].ToString();
+            return pos;
         }
 
         public static int TryExtractTerm(
@@ -876,7 +992,84 @@ namespace TauCode.Data.Text
             out string v,
             TerminatingDelegate terminatingPredicate = null)
         {
-            throw new NotImplementedException();
+            if (input.Length == 0)
+            {
+                v = default;
+                return 0;
+            }
+
+            terminatingPredicate ??= Helper.DefaultTerminatingPredicate;
+
+            var pos = 0;
+            char? prevChar = null;
+
+            while (true)
+            {
+                if (pos == input.Length)
+                {
+                    if (prevChar == '-')
+                    {
+                        v = default;
+                        return 0;
+                    }
+
+                    break;
+                }
+
+                var c = input[pos];
+
+                if (c.IsDecimalDigit())
+                {
+                    if (pos == 0)
+                    {
+                        v = default;
+                        return 0;
+                    }
+
+                    // ok
+                }
+                else if (c.IsLatinLetterInternal())
+                {
+                    // go on
+                }
+                else if (c == '-')
+                {
+                    if (pos == 0 || prevChar == '-')
+                    {
+                        v = default;
+                        return 0;
+                    }
+
+                    // ok.
+                }
+                else if (terminatingPredicate(input, pos))
+                {
+                    break;
+                }
+                else
+                {
+                    v = default;
+                    return 0;
+                }
+
+                if (pos == TermMaxLength)
+                {
+                    v = default;
+                    return 0;
+                }
+
+                prevChar = c;
+                pos++;
+            }
+
+            if (pos == 0)
+            {
+                v = default;
+                return 0;
+            }
+
+            v = input[..pos].ToString();
+            return pos;
         }
 
         #region File Path Support

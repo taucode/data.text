@@ -623,17 +623,8 @@
     "Comment": "",
     "ExpectedException": null
   },
-  // todo remove
-  //{
-  //  "Index": 78,
-  //  "TestEmailAddress": "\"test\r\n blah\"@iana.org",
-  //  "ExpectedResult": 22,
-  //  "ExpectedEmailAddress": "\"test\r\n blah\"@iana.org",
-  //  "Comment": "Comment: This is a valid quoted string with folding white space",
-  //  "ExpectedException": null
-  //},
   {
-    "Index": 79,
+    "Index": 78,
     "TestEmailAddress": "(foo)cal(bar)@(baz)iamcal.com(quux)",
     "ExpectedResult": 35,
     "ExpectedEmailAddress": "cal@iamcal.com",
@@ -641,7 +632,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 80,
+    "Index": 79,
     "TestEmailAddress": "cal@iamcal(woo).(yay)com",
     "ExpectedResult": 24,
     "ExpectedEmailAddress": "cal@iamcal.com",
@@ -649,7 +640,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 81,
+    "Index": 80,
     "TestEmailAddress": "\"foo\"(yay)@(hoopla)[1.2.3.4]",
     "ExpectedResult": 28,
     "ExpectedEmailAddress": "\"foo\"@[1.2.3.4]",
@@ -657,7 +648,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 82,
+    "Index": 81,
     "TestEmailAddress": "cal(woo(yay)hoopla)@iamcal.com",
     "ExpectedResult": 30,
     "ExpectedEmailAddress": "cal@iamcal.com",
@@ -665,7 +656,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 83,
+    "Index": 82,
     "TestEmailAddress": "cal(foo\\@bar)@iamcal.com",
     "ExpectedResult": 24,
     "ExpectedEmailAddress": "cal@iamcal.com",
@@ -673,7 +664,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 84,
+    "Index": 83,
     "TestEmailAddress": "cal(foo\\)bar)@iamcal.com",
     "ExpectedResult": 24,
     "ExpectedEmailAddress": "cal@iamcal.com",
@@ -681,7 +672,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 85,
+    "Index": 84,
     "TestEmailAddress": "first().last@iana.org",
     "ExpectedResult": 21,
     "ExpectedEmailAddress": "first.last@iana.org",
@@ -689,7 +680,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 86,
+    "Index": 85,
     "TestEmailAddress": "first.(\r\n middle\r\n )last@iana.org",
     "ExpectedResult": 33,
     "ExpectedEmailAddress": "first.last@iana.org",
@@ -697,7 +688,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 87,
+    "Index": 86,
     "TestEmailAddress": "first(Welcome to\r\n the (\"wonderful\" (!)) world\r\n of email)@iana.org",
     "ExpectedResult": 67,
     "ExpectedEmailAddress": "first@iana.org",
@@ -705,7 +696,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 88,
+    "Index": 87,
     "TestEmailAddress": "pete(his account)@silly.test(his host)",
     "ExpectedResult": 38,
     "ExpectedEmailAddress": "pete@silly.test",
@@ -713,7 +704,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 89,
+    "Index": 88,
     "TestEmailAddress": "c@(Chris's host.)public.example",
     "ExpectedResult": 31,
     "ExpectedEmailAddress": "c@public.example",
@@ -721,7 +712,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 90,
+    "Index": 89,
     "TestEmailAddress": "first(abc.def).last@iana.org",
     "ExpectedResult": 28,
     "ExpectedEmailAddress": "first.last@iana.org",
@@ -729,7 +720,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 91,
+    "Index": 90,
     "TestEmailAddress": "first(a\"bc.def).last@iana.org",
     "ExpectedResult": 29,
     "ExpectedEmailAddress": "first.last@iana.org",
@@ -737,7 +728,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 92,
+    "Index": 91,
     "TestEmailAddress": "first.(\")middle.last(\")@iana.org",
     "ExpectedResult": 32,
     "ExpectedEmailAddress": "first.middle.last@iana.org",
@@ -745,7 +736,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 93,
+    "Index": 92,
     "TestEmailAddress": "first(abc\\(def)@iana.org",
     "ExpectedResult": 24,
     "ExpectedEmailAddress": "first@iana.org",
@@ -753,7 +744,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 94,
+    "Index": 93,
     "TestEmailAddress": "first.last@x(1234567890123456789012345678901234567890123456789012345678901234567890).com",
     "ExpectedResult": 88,
     "ExpectedEmailAddress": "first.last@x.com",
@@ -761,7 +752,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 95,
+    "Index": 94,
     "TestEmailAddress": "a(a(b(c)d(e(f))g)h(i)j)@iana.org",
     "ExpectedResult": 32,
     "ExpectedEmailAddress": "a@iana.org",
@@ -769,7 +760,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 96,
+    "Index": 95,
     "TestEmailAddress": "name.lastname@domain.com",
     "ExpectedResult": 24,
     "ExpectedEmailAddress": "name.lastname@domain.com",
@@ -777,7 +768,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 97,
+    "Index": 96,
     "TestEmailAddress": "a@b",
     "ExpectedResult": 3,
     "ExpectedEmailAddress": "a@b",
@@ -785,7 +776,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 98,
+    "Index": 97,
     "TestEmailAddress": "a@bar.com",
     "ExpectedResult": 9,
     "ExpectedEmailAddress": "a@bar.com",
@@ -793,7 +784,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 99,
+    "Index": 98,
     "TestEmailAddress": "aaa@[123.123.123.123]",
     "ExpectedResult": 21,
     "ExpectedEmailAddress": "aaa@[123.123.123.123]",
@@ -801,7 +792,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 100,
+    "Index": 99,
     "TestEmailAddress": "a@bar",
     "ExpectedResult": 5,
     "ExpectedEmailAddress": "a@bar",
@@ -809,7 +800,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 101,
+    "Index": 100,
     "TestEmailAddress": "a-b@bar.com",
     "ExpectedResult": 11,
     "ExpectedEmailAddress": "a-b@bar.com",
@@ -817,7 +808,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 102,
+    "Index": 101,
     "TestEmailAddress": "+@b.c",
     "ExpectedResult": 5,
     "ExpectedEmailAddress": "+@b.c",
@@ -825,7 +816,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 103,
+    "Index": 102,
     "TestEmailAddress": "+@b.com",
     "ExpectedResult": 7,
     "ExpectedEmailAddress": "+@b.com",
@@ -833,7 +824,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 104,
+    "Index": 103,
     "TestEmailAddress": "a@b.co-foo.uk",
     "ExpectedResult": 13,
     "ExpectedEmailAddress": "a@b.co-foo.uk",
@@ -841,7 +832,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 105,
+    "Index": 104,
     "TestEmailAddress": "\"hello my name is\"@stutter.com",
     "ExpectedResult": 30,
     "ExpectedEmailAddress": "\"hello my name is\"@stutter.com",
@@ -849,7 +840,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 106,
+    "Index": 105,
     "TestEmailAddress": "\"Test \\\"Fail\\\" Ing\"@iana.org",
     "ExpectedResult": 28,
     "ExpectedEmailAddress": "\"Test \\\"Fail\\\" Ing\"@iana.org",
@@ -857,7 +848,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 107,
+    "Index": 106,
     "TestEmailAddress": "valid@about.museum",
     "ExpectedResult": 18,
     "ExpectedEmailAddress": "valid@about.museum",
@@ -865,7 +856,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 108,
+    "Index": 107,
     "TestEmailAddress": "shaitan@my-domain.thisisminekthx",
     "ExpectedResult": 32,
     "ExpectedEmailAddress": "shaitan@my-domain.thisisminekthx",
@@ -873,7 +864,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 109,
+    "Index": 108,
     "TestEmailAddress": "\"Joe\\\\Blow\"@iana.org",
     "ExpectedResult": 20,
     "ExpectedEmailAddress": "\"Joe\\\\Blow\"@iana.org",
@@ -881,7 +872,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 110,
+    "Index": 109,
     "TestEmailAddress": "HM2Kinsists@(that comments are allowed)this.is.ok",
     "ExpectedResult": 49,
     "ExpectedEmailAddress": "HM2Kinsists@this.is.ok",
@@ -889,7 +880,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 111,
+    "Index": 110,
     "TestEmailAddress": "user%uucp!path@berkeley.edu",
     "ExpectedResult": 27,
     "ExpectedEmailAddress": "user%uucp!path@berkeley.edu",
@@ -897,7 +888,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 112,
+    "Index": 111,
     "TestEmailAddress": "\"first(last)\"@iana.org",
     "ExpectedResult": 22,
     "ExpectedEmailAddress": "\"first(last)\"@iana.org",
@@ -905,7 +896,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 113,
+    "Index": 112,
     "TestEmailAddress": " \r\n (\r\n x \r\n ) \r\n first\r\n ( \r\n x\r\n ) \r\n .\r\n ( \r\n x) \r\n last \r\n (  x \r\n ) \r\n @iana.org",
     "ExpectedResult": 85,
     "ExpectedEmailAddress": "first.last@iana.org",
@@ -913,7 +904,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 114,
+    "Index": 113,
     "TestEmailAddress": "first.last @iana.org",
     "ExpectedResult": 20,
     "ExpectedEmailAddress": "first.last@iana.org",
@@ -921,7 +912,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 115,
+    "Index": 114,
     "TestEmailAddress": "test. \r\n \r\n obs@syntax.com",
     "ExpectedResult": 26,
     "ExpectedEmailAddress": "test.obs@syntax.com",
@@ -929,7 +920,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 116,
+    "Index": 115,
     "TestEmailAddress": "\"Unicode NULL \\␀\"@char.com",
     "ExpectedResult": 26,
     "ExpectedEmailAddress": "\"Unicode NULL \\␀\"@char.com",
@@ -937,7 +928,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 117,
+    "Index": 116,
     "TestEmailAddress": "cdburgess+!#$%&'*-/=?+_{}|~test@gmail.com",
     "ExpectedResult": 41,
     "ExpectedEmailAddress": "cdburgess+!#$%&'*-/=?+_{}|~test@gmail.com",
@@ -945,7 +936,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 118,
+    "Index": 117,
     "TestEmailAddress": "first.last@[IPv6:::a2:a3:a4:b1:b2:b3:b4]",
     "ExpectedResult": 40,
     "ExpectedEmailAddress": "first.last@[IPv6:0:a2:a3:a4:b1:b2:b3:b4]",
@@ -953,7 +944,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 119,
+    "Index": 118,
     "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3::]",
     "ExpectedResult": 40,
     "ExpectedEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3:0]",
@@ -961,7 +952,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 120,
+    "Index": 119,
     "TestEmailAddress": "first.last@[IPv6:::]",
     "ExpectedResult": 20,
     "ExpectedEmailAddress": "first.last@[IPv6:::]",
@@ -969,7 +960,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 121,
+    "Index": 120,
     "TestEmailAddress": "first.last@[IPv6:::b4]",
     "ExpectedResult": 22,
     "ExpectedEmailAddress": "first.last@[IPv6:::b4]",
@@ -977,7 +968,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 122,
+    "Index": 121,
     "TestEmailAddress": "first.last@[IPv6:::b3:b4]",
     "ExpectedResult": 25,
     "ExpectedEmailAddress": "first.last@[IPv6:::0.179.0.180]",
@@ -985,7 +976,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 123,
+    "Index": 122,
     "TestEmailAddress": "first.last@[IPv6:a1::b4]",
     "ExpectedResult": 24,
     "ExpectedEmailAddress": "first.last@[IPv6:a1::b4]",
@@ -993,7 +984,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 124,
+    "Index": 123,
     "TestEmailAddress": "first.last@[IPv6:a1::]",
     "ExpectedResult": 22,
     "ExpectedEmailAddress": "first.last@[IPv6:a1::]",
@@ -1001,7 +992,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 125,
+    "Index": 124,
     "TestEmailAddress": "first.last@[IPv6:a1:a2::]",
     "ExpectedResult": 25,
     "ExpectedEmailAddress": "first.last@[IPv6:a1:a2::]",
@@ -1009,7 +1000,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 126,
+    "Index": 125,
     "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:cdef::]",
     "ExpectedResult": 39,
     "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::]",
@@ -1017,7 +1008,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 127,
+    "Index": 126,
     "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:CDEF::]",
     "ExpectedResult": 39,
     "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::]",
@@ -1025,7 +1016,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 128,
+    "Index": 127,
     "TestEmailAddress": "first.last@[IPv6:::a3:a4:b1:ffff:11.22.33.44]",
     "ExpectedResult": 45,
     "ExpectedEmailAddress": "first.last@[IPv6:::a3:a4:b1:ffff:b16:212c]",
@@ -1033,7 +1024,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 129,
+    "Index": 128,
     "TestEmailAddress": "first.last@[IPv6:::a2:a3:a4:b1:ffff:11.22.33.44]",
     "ExpectedResult": 48,
     "ExpectedEmailAddress": "first.last@[IPv6:0:a2:a3:a4:b1:ffff:b16:212c]",
@@ -1041,7 +1032,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 130,
+    "Index": 129,
     "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4::11.22.33.44]",
     "ExpectedResult": 42,
     "ExpectedEmailAddress": "first.last@[IPv6:a1:a2:a3:a4::b16:212c]",
@@ -1049,7 +1040,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 131,
+    "Index": 130,
     "TestEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1::11.22.33.44]",
     "ExpectedResult": 45,
     "ExpectedEmailAddress": "first.last@[IPv6:a1:a2:a3:a4:b1:0:b16:212c]",
@@ -1057,7 +1048,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 132,
+    "Index": 131,
     "TestEmailAddress": "first.last@[IPv6:a1::11.22.33.44]",
     "ExpectedResult": 33,
     "ExpectedEmailAddress": "first.last@[IPv6:a1::b16:212c]",
@@ -1065,7 +1056,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 133,
+    "Index": 132,
     "TestEmailAddress": "first.last@[IPv6:a1:a2::11.22.33.44]",
     "ExpectedResult": 36,
     "ExpectedEmailAddress": "first.last@[IPv6:a1:a2::b16:212c]",
@@ -1073,7 +1064,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 134,
+    "Index": 133,
     "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:cdef::11.22.33.44]",
     "ExpectedResult": 50,
     "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::b16:212c]",
@@ -1081,7 +1072,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 135,
+    "Index": 134,
     "TestEmailAddress": "first.last@[IPv6:0123:4567:89ab:CDEF::11.22.33.44]",
     "ExpectedResult": 50,
     "ExpectedEmailAddress": "first.last@[IPv6:123:4567:89ab:cdef::b16:212c]",
@@ -1089,7 +1080,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 136,
+    "Index": 135,
     "TestEmailAddress": "first.last@[IPv6:a1::b2:11.22.33.44]",
     "ExpectedResult": 36,
     "ExpectedEmailAddress": "first.last@[IPv6:a1::b2:b16:212c]",
@@ -1097,7 +1088,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 137,
+    "Index": 136,
     "TestEmailAddress": "test@test.com",
     "ExpectedResult": 13,
     "ExpectedEmailAddress": "test@test.com",
@@ -1105,7 +1096,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 138,
+    "Index": 137,
     "TestEmailAddress": "test@xn--80aa3aw5b",
     "ExpectedResult": 18,
     "ExpectedEmailAddress": "test@xn--80aa3aw5b",
@@ -1113,7 +1104,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 139,
+    "Index": 138,
     "TestEmailAddress": "test@Bücher.ch",
     "ExpectedResult": 14,
     "ExpectedEmailAddress": "test@xn--bcher-kva.ch",
@@ -1121,7 +1112,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 140,
+    "Index": 139,
     "TestEmailAddress": "john.doe@[IPv6:::]",
     "ExpectedResult": 18,
     "ExpectedEmailAddress": "john.doe@[IPv6:::]",
@@ -1129,7 +1120,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 141,
+    "Index": 140,
     "TestEmailAddress": "ABC@Foo.com",
     "ExpectedResult": 11,
     "ExpectedEmailAddress": "ABC@foo.com",
@@ -1137,7 +1128,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 142,
+    "Index": 141,
     "TestEmailAddress": "ABc@[1.1.1.1](comment1)",
     "ExpectedResult": 23,
     "ExpectedEmailAddress": "ABc@[1.1.1.1]",
@@ -1145,7 +1136,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 143,
+    "Index": 142,
     "TestEmailAddress": "abC@(comment1)[1.1.1.1]",
     "ExpectedResult": 23,
     "ExpectedEmailAddress": "abC@[1.1.1.1]",
@@ -1153,7 +1144,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 144,
+    "Index": 143,
     "TestEmailAddress": "aBc@(comment1)[1.1.1.1](comment2)",
     "ExpectedResult": 33,
     "ExpectedEmailAddress": "aBc@[1.1.1.1]",
@@ -1161,7 +1152,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 145,
+    "Index": 144,
     "TestEmailAddress": "!@M.NET",
     "ExpectedResult": 7,
     "ExpectedEmailAddress": "!@m.net",
@@ -1169,7 +1160,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 146,
+    "Index": 145,
     "TestEmailAddress": "\"John..Doe\"@example.com",
     "ExpectedResult": 23,
     "ExpectedEmailAddress": "\"John..Doe\"@example.com",
@@ -1177,7 +1168,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 147,
+    "Index": 146,
     "TestEmailAddress": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~@M.NET",
     "ExpectedResult": 45,
     "ExpectedEmailAddress": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~@m.net",
@@ -1185,7 +1176,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 148,
+    "Index": 147,
     "TestEmailAddress": "{@🐆:32@}@m.net",
     "ExpectedResult": 70,
     "ExpectedEmailAddress": "{@🐆:32@}@m.net",
@@ -1193,7 +1184,7 @@
     "ExpectedException": null
   },
   {
-    "Index": 149,
+    "Index": 148,
     "TestEmailAddress": "  first.last@iana.org",
     "ExpectedResult": 21,
     "ExpectedEmailAddress": "first.last@iana.org",
