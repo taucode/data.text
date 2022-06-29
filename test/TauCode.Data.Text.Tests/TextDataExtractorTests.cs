@@ -588,7 +588,7 @@ public class TextDataExtractorTests
 
 
     [Test]
-    //[Ignore("only for dev")]
+    [Ignore("only for dev")]
 
     [TestCase("BooleanTests.json", typeof(BooleanTestDto))]
     [TestCase("DateTimeOffsetTests.json", typeof(DateTimeOffsetTestDto))]
