@@ -1,0 +1,410 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": "c:\\",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "c:\\",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": ".",
+    "TestTerminatingChars": null,
+    "ExpectedValue": ".",
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "..",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "..",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "my/tool ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "my/tool",
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "my>tool",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "--looks-like=key ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "--looks-like=key",
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "src\\local",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "src\\local",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "src\\local files\\",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "src\\local",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "src\\local files\\some file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "src\\local",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": ".\\src\\local files\\some file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": ".\\src\\local",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "..\\src/local files/some file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "..\\src/local",
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "../..\\src/local files/some file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "../..\\src/local",
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "c:\\",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:\\",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "c: ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "c:\\file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:\\file.txt",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 16,
+    "TestInput": "c:/file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:/file.txt",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "Z:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Microsoft Azure Tools\\Visual Studio 16.0\\2.9\\VsDiagnostics\\Microsoft.VisualStudio.WindowsAzure.Diagnostics.Agent.dll",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "Z:\\Program",
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 18,
+    "TestInput": "c:/",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:/",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 19,
+    "TestInput": "c:/dir/",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:/dir/",
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 20,
+    "TestInput": "etc/ak/",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "etc/ak/",
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 21,
+    "TestInput": "etc/ak",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "etc/ak",
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 22,
+    "TestInput": "etc/ak/file",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "etc/ak/file",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 23,
+    "TestInput": "etc/ak/my file",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "etc/ak/my",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 24,
+    "TestInput": "etc/my dir/my file.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "etc/my",
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 25,
+    "TestInput": "c:\\bad dir\\bad file .txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "c:\\bad",
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 26,
+    "TestInput": " ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 27,
+    "TestInput": " a",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 28,
+    "TestInput": "a ",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 29,
+    "TestInput": "drive:/",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 30,
+    "TestInput": "c:\\ab\n.txt",
+    "TestTerminatingChars": " \n",
+    "ExpectedValue": "c:\\ab",
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 31,
+    "TestInput": "c:\\\\m.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 801
+    },
+    "ExpectedErrorMessage": "Failed to extract file path.",
+    "Comment": ""
+  },
+  {
+    "Index": 32,
+    "TestInput": "c:\\/m.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 801
+    },
+    "ExpectedErrorMessage": "Failed to extract file path.",
+    "Comment": ""
+  },
+  {
+    "Index": 33,
+    "TestInput": "c:\\bad-dir\\bad-file*.txt",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  }
+]

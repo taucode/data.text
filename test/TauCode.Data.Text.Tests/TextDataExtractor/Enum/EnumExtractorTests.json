@@ -1,0 +1,54 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestIgnoreCase": true,
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input."
+  },
+  {
+    "Index": 1,
+    "TestInput": "1",
+    "TestIgnoreCase": true,
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 1701
+    },
+    "ExpectedErrorMessage": "Item not found.",
+    "Comment": "Won't extract by enum numeric value.'"
+  },
+  {
+    "Index": 2,
+    "TestInput": "white;",
+    "TestIgnoreCase": true,
+    "TestTerminatingChars": ";",
+    "ExpectedValue": "White",
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "white;",
+    "TestIgnoreCase": false,
+    "TestTerminatingChars": ";",
+    "ExpectedValue": 0,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 1701
+    },
+    "ExpectedErrorMessage": "Item not found.",
+    "Comment": "Not found due to case."
+  }
+]

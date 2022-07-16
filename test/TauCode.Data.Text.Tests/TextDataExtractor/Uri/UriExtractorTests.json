@@ -1,0 +1,62 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": " ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 1301
+    },
+    "ExpectedErrorMessage": "Failed to extract System.Uri.",
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "https://tau.me",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "https://tau.me",
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "https://tau.me/good day/",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "https://tau.me/good",
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "https://tau.me/good day/",
+    "TestTerminatingChars": "",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  }
+]

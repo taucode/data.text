@@ -1,0 +1,242 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input."
+  },
+  {
+    "Index": 1,
+    "TestInput": " ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": "Space"
+  },
+  {
+    "Index": 2,
+    "TestInput": "-c",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "-c",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "-c;",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "-c/",
+    "TestTerminatingChars": "/",
+    "ExpectedValue": "-c",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "-C",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "-C",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "-ї",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "-cd",
+    "TestTerminatingChars": "d",
+    "ExpectedValue": "-cd",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Ignores the fact that 'd' is terminating."
+  },
+  {
+    "Index": 8,
+    "TestInput": "-some-key",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "-some-key",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "-{@a:199@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "-{@a:199@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "-{@a:200@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "-some-key=",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "-some-key=",
+    "TestTerminatingChars": "=",
+    "ExpectedValue": "-some-key",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "--some-key-1 ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "--some-key-1",
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "-some.key",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "---some-key",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 16,
+    "TestInput": "-some-key-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 901
+    },
+    "ExpectedErrorMessage": "Failed to extract key.",
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "-some--key",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 18,
+    "TestInput": "some-key",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 19,
+    "TestInput": "-some-key- ",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 901
+    },
+    "ExpectedErrorMessage": "Failed to extract key.",
+    "Comment": ""
+  }
+]

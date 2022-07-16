@@ -1,0 +1,86 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": "1abc#",
+    "TestTerminatingChars": "#",
+    "ExpectedValue": "1abc",
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "abc;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": "abc",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "{@x:200@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "{@x:200@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "{@x:201@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "{@x:200@}*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "{@x:200@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "abcd_kapa-3",
+    "TestTerminatingChars": "c",
+    "ExpectedValue": "abcd_kapa-3",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Terminator 'c' is ignored."
+  }
+]

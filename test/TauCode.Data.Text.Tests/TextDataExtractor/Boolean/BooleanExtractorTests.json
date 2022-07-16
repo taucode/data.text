@@ -1,0 +1,62 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": false,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": false,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 1701
+    },
+    "ExpectedErrorMessage": "Item not found.",
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "tRUE;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": true,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "FaLsEtRue",
+    "TestTerminatingChars": "t",
+    "ExpectedValue": false,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Weird but works. 't' is not a good choice of terminating char of course."
+  },
+  {
+    "Index": 4,
+    "TestInput": "true",
+    "TestTerminatingChars": "e",
+    "ExpectedValue": true,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Sick example: extraction will ignore the fact that 'e' is a termination char."
+  }
+]

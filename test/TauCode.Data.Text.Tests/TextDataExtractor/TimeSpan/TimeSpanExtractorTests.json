@@ -1,0 +1,62 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "00:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "00:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "0;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": "00:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "1.02:00:0]",
+    "TestTerminatingChars": "[]",
+    "ExpectedValue": "1.02:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "99:99:99",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": "00:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 1501
+    },
+    "ExpectedErrorMessage": "Failed to extract System.TimeSpan.",
+    "Comment": ""
+  }
+]

@@ -1,0 +1,7369 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": ".",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "'.' is not a valid host name"
+  },
+  {
+    "Index": 1,
+    "TestInput": "a",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "a"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a",
+    "Comment": "Technically, a valid host name"
+  },
+  {
+    "Index": 2,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Empty string"
+  },
+  {
+    "Index": 3,
+    "TestInput": " abc.com",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Leading space"
+  },
+  {
+    "Index": 4,
+    "TestInput": "abc.com ",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Trailing space"
+  },
+  {
+    "Index": 5,
+    "TestInput": "{@a:254@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 64,
+      "ErrorCode": 304
+    },
+    "ExpectedErrorMessage": "Domain label is too long.",
+    "ExpectedValueString": null,
+    "Comment": "NB: this is a replacement pattern (see code). Domain label is too long."
+  },
+  {
+    "Index": 6,
+    "TestInput": "127.0.0.1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv4",
+      "Value": "127.0.0.1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "127.0.0.1",
+    "Comment": "Normal IPv4 address"
+  },
+  {
+    "Index": 7,
+    "TestInput": "256.0.0.1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 305
+    },
+    "ExpectedErrorMessage": "Invalid IPv4 address.",
+    "ExpectedValueString": null,
+    "Comment": "Has only digital segments, but not a valid IPv4 address"
+  },
+  {
+    "Index": 8,
+    "TestInput": "35.12.16.5",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv4",
+      "Value": "35.12.16.5"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "35.12.16.5",
+    "Comment": "Normal IPv4 address"
+  },
+  {
+    "Index": 9,
+    "TestInput": "LOCALHOST",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "localhost"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "localhost",
+    "Comment": "Normal host, lowercased"
+  },
+  {
+    "Index": 10,
+    "TestInput": "РУКА.ЕСТЬ",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Internationalized",
+      "Value": "xn--80atrm.xn--e1ayd4b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "xn--80atrm.xn--e1ayd4b",
+    "Comment": "Unicode host"
+  },
+  {
+    "Index": 11,
+    "TestInput": "127.0.0.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Trailing '.'"
+  },
+  {
+    "Index": 12,
+    "TestInput": "127.0.0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 303
+    },
+    "ExpectedErrorMessage": "Invalid host name.",
+    "ExpectedValueString": null,
+    "Comment": "Has only digital segments, but not a valid IPv4 address"
+  },
+  {
+    "Index": 13,
+    "TestInput": "a.com-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Has only digital segments, but not a valid IPv4 address"
+  },
+  {
+    "Index": 14,
+    "TestInput": " google.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "[Not for Parse] Obvious"
+  },
+  {
+    "Index": 15,
+    "TestInput": "google.com.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 16,
+    "TestInput": "google .com",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 17,
+    "TestInput": "google. com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "[Not for Parse] Obvious"
+  },
+  {
+    "Index": 18,
+    "TestInput": "google..com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 19,
+    "TestInput": "[127.0.0.1]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 20,
+    "TestInput": "[127.0.0.1]",
+    "TestTerminatingChars": "[",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "[Not for Parse] Obvious"
+  },
+  {
+    "Index": 21,
+    "TestInput": "a-B",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "a-b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a-b",
+    "Comment": "hyphen"
+  },
+  {
+    "Index": 22,
+    "TestInput": "-a",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 23,
+    "TestInput": "a-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 24,
+    "TestInput": "a-.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 25,
+    "TestInput": "a.-com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 26,
+    "TestInput": "a.com-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 27,
+    "TestInput": "money.econera.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "money.econera.com"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "money.econera.com",
+    "Comment": "Normal host, lowercased"
+  },
+  {
+    "Index": 28,
+    "TestInput": "No.This.is.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "no.this.is.net"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "no.this.is.net",
+    "Comment": "Normal host, lowercased"
+  },
+  {
+    "Index": 29,
+    "TestInput": "a--B",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Internationalized",
+      "Value": "a--b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a--b",
+    "Comment": ""
+  },
+  {
+    "Index": 30,
+    "TestInput": "Xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d1.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d1.com"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 67,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d1.com",
+    "Comment": "Label with length 63 chars, OK"
+  },
+  {
+    "Index": 31,
+    "TestInput": "Xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d11.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 64,
+      "ErrorCode": 304
+    },
+    "ExpectedErrorMessage": "Domain label is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Label with length 64 chars, fail"
+  },
+  {
+    "Index": 32,
+    "TestInput": "👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆dq.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Internationalized",
+      "Value": "xn--dq-8f72aaaaaaaa41bbbbbbb42jcacccccc770hdadddddd518zeaeeeeee.com"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 84,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "xn--dq-8f72aaaaaaaa41bbbbbbb42jcacccccc770hdadddddd518zeaeeeeee.com",
+    "Comment": "Label with length 63 chars, OK"
+  },
+  {
+    "Index": 33,
+    "TestInput": "A-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-ll.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "a-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-ll.net"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 67,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-ll.net",
+    "Comment": "Another label with length 63 chars, OK"
+  },
+  {
+    "Index": 34,
+    "TestInput": "ff.a-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-lla",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 67,
+      "ErrorCode": 304
+    },
+    "ExpectedErrorMessage": "Domain label is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Another label with length 64 chars, fail"
+  },
+  {
+    "Index": 35,
+    "TestInput": "рука:0001",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 36,
+    "TestInput": "123:133:.1.2.3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Another label with length 64 chars, fail"
+  },
+  {
+    "Index": 37,
+    "TestInput": "123.12.:6:6",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 38,
+    "TestInput": "127.3.2:aafe:0001",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Another label with length 64 chars, fail"
+  },
+  {
+    "Index": 39,
+    "TestInput": "xn--example",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 303
+    },
+    "ExpectedErrorMessage": "Invalid host name.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 40,
+    "TestInput": "{@abcd.:50@}com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "Regular",
+      "Value": "{@abcd.:50@}com"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 253,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.abcd.com",
+    "Comment": "total length is 253, ok"
+  },
+  {
+    "Index": 41,
+    "TestInput": "::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": "loopback, compressed, non-routable"
+  },
+  {
+    "Index": 42,
+    "TestInput": "::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": "unspecified, compressed, non-routable"
+  },
+  {
+    "Index": 43,
+    "TestInput": "0:0:0:0:0:0:0:1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": "loopback, full"
+  },
+  {
+    "Index": 44,
+    "TestInput": "0:0:0:0:0:0:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": "unspecified, full"
+  },
+  {
+    "Index": 45,
+    "TestInput": "2001:DB8:0:0:8:800:200C:417A",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::8:800:200c:417a"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::8:800:200c:417a",
+    "Comment": "unicast, full"
+  },
+  {
+    "Index": 46,
+    "TestInput": "FF01:0:0:0:0:0:0:101",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "ff01::101"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "ff01::101",
+    "Comment": "multicast, full"
+  },
+  {
+    "Index": 47,
+    "TestInput": "2001:DB8::8:800:200C:417A",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::8:800:200c:417a"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::8:800:200c:417a",
+    "Comment": "unicast, compressed"
+  },
+  {
+    "Index": 48,
+    "TestInput": "FF01::101",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "ff01::101"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "ff01::101",
+    "Comment": "multicast, compressed"
+  },
+  {
+    "Index": 49,
+    "TestInput": "fe80::217:f2ff:fe07:ed62",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::217:f2ff:fe07:ed62"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::217:f2ff:fe07:ed62",
+    "Comment": ""
+  },
+  {
+    "Index": 50,
+    "TestInput": "2001:0000:1234:0000:0000:C1C0:ABCD:0876",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:0:1234::c1c0:abcd:876"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:0:1234::c1c0:abcd:876",
+    "Comment": ""
+  },
+  {
+    "Index": 51,
+    "TestInput": "3ffe:0b00:0000:0000:0001:0000:0000:000a",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "3ffe:b00::1:0:0:a"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "3ffe:b00::1:0:0:a",
+    "Comment": ""
+  },
+  {
+    "Index": 52,
+    "TestInput": "FF02:0000:0000:0000:0000:0000:0000:0001",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "ff02::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "ff02::1",
+    "Comment": ""
+  },
+  {
+    "Index": 53,
+    "TestInput": "0000:0000:0000:0000:0000:0000:0000:0001",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": ""
+  },
+  {
+    "Index": 54,
+    "TestInput": "0000:0000:0000:0000:0000:0000:0000:0000",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 55,
+    "TestInput": "2::10",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2::10"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2::10",
+    "Comment": ""
+  },
+  {
+    "Index": 56,
+    "TestInput": "ff02::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "ff02::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "ff02::1",
+    "Comment": ""
+  },
+  {
+    "Index": 57,
+    "TestInput": "fe80::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::",
+    "Comment": ""
+  },
+  {
+    "Index": 58,
+    "TestInput": "2002::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2002::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2002::",
+    "Comment": ""
+  },
+  {
+    "Index": 59,
+    "TestInput": "2001:db8::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::",
+    "Comment": ""
+  },
+  {
+    "Index": 60,
+    "TestInput": "2001:0db8:1234::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:1234::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:1234::",
+    "Comment": ""
+  },
+  {
+    "Index": 61,
+    "TestInput": "::ffff:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:0:0"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:0:0",
+    "Comment": ""
+  },
+  {
+    "Index": 62,
+    "TestInput": "::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": ""
+  },
+  {
+    "Index": 63,
+    "TestInput": "1:2:3:4:5:6:7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5:6:7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5:6:7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 64,
+    "TestInput": "1:2:3:4:5:6::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5:6:0:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5:6:0:8",
+    "Comment": ""
+  },
+  {
+    "Index": 65,
+    "TestInput": "1:2:3:4:5::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5::8",
+    "Comment": ""
+  },
+  {
+    "Index": 66,
+    "TestInput": "1:2:3:4::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4::8",
+    "Comment": ""
+  },
+  {
+    "Index": 67,
+    "TestInput": "1:2:3::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3::8",
+    "Comment": ""
+  },
+  {
+    "Index": 68,
+    "TestInput": "1:2::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2::8",
+    "Comment": ""
+  },
+  {
+    "Index": 69,
+    "TestInput": "1::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::8",
+    "Comment": ""
+  },
+  {
+    "Index": 70,
+    "TestInput": "1::2:3:4:5:6:7",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:0:2:3:4:5:6:7"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:0:2:3:4:5:6:7",
+    "Comment": ""
+  },
+  {
+    "Index": 71,
+    "TestInput": "1::2:3:4:5:6",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::2:3:4:5:6"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::2:3:4:5:6",
+    "Comment": ""
+  },
+  {
+    "Index": 72,
+    "TestInput": "1::2:3:4:5",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::2:3:4:5"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::2:3:4:5",
+    "Comment": ""
+  },
+  {
+    "Index": 73,
+    "TestInput": "1::2:3:4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::2:3:4"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::2:3:4",
+    "Comment": ""
+  },
+  {
+    "Index": 74,
+    "TestInput": "1::2:3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::2:3"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::2:3",
+    "Comment": ""
+  },
+  {
+    "Index": 75,
+    "TestInput": "1::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::8",
+    "Comment": ""
+  },
+  {
+    "Index": 76,
+    "TestInput": "::2:3:4:5:6:7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "0:2:3:4:5:6:7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "0:2:3:4:5:6:7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 77,
+    "TestInput": "::2:3:4:5:6:7",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::2:3:4:5:6:7"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::2:3:4:5:6:7",
+    "Comment": ""
+  },
+  {
+    "Index": 78,
+    "TestInput": "::2:3:4:5:6",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::2:3:4:5:6"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::2:3:4:5:6",
+    "Comment": ""
+  },
+  {
+    "Index": 79,
+    "TestInput": "::2:3:4:5",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::2:3:4:5"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::2:3:4:5",
+    "Comment": ""
+  },
+  {
+    "Index": 80,
+    "TestInput": "::2:3:4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::2:3:4"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::2:3:4",
+    "Comment": ""
+  },
+  {
+    "Index": 81,
+    "TestInput": "::2:3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::0.2.0.3"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::0.2.0.3",
+    "Comment": ""
+  },
+  {
+    "Index": 82,
+    "TestInput": "::8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::8",
+    "Comment": ""
+  },
+  {
+    "Index": 83,
+    "TestInput": "1:2:3:4:5:6::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5:6::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5:6::",
+    "Comment": ""
+  },
+  {
+    "Index": 84,
+    "TestInput": "1:2:3:4:5::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5::",
+    "Comment": ""
+  },
+  {
+    "Index": 85,
+    "TestInput": "1:2:3:4::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4::",
+    "Comment": ""
+  },
+  {
+    "Index": 86,
+    "TestInput": "1:2:3::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3::",
+    "Comment": ""
+  },
+  {
+    "Index": 87,
+    "TestInput": "1:2::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2::",
+    "Comment": ""
+  },
+  {
+    "Index": 88,
+    "TestInput": "1::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::",
+    "Comment": ""
+  },
+  {
+    "Index": 89,
+    "TestInput": "1:2:3:4:5::7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5:0:7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5:0:7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 90,
+    "TestInput": "1:2:3:4::7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4::7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4::7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 91,
+    "TestInput": "1:2:3::7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3::7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3::7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 92,
+    "TestInput": "1:2::7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2::7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2::7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 93,
+    "TestInput": "1::7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::7:8"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::7:8",
+    "Comment": ""
+  },
+  {
+    "Index": 94,
+    "TestInput": "1:2:3:4:5:6:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5:6:102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5:6:102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 95,
+    "TestInput": "1:2:3:4:5::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:5:0:102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:5:0:102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 96,
+    "TestInput": "1:2:3:4::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4::102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4::102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 97,
+    "TestInput": "1:2:3::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3::102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3::102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 98,
+    "TestInput": "1:2::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2::102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2::102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 99,
+    "TestInput": "1::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 100,
+    "TestInput": "1:2:3:4::5:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3:4:0:5:102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3:4:0:5:102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 101,
+    "TestInput": "1:2:3::5:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2:3::5:102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2:3::5:102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 102,
+    "TestInput": "1:2::5:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1:2::5:102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1:2::5:102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 103,
+    "TestInput": "1::5:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::5:102:304"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::5:102:304",
+    "Comment": ""
+  },
+  {
+    "Index": 104,
+    "TestInput": "1::5:11.22.33.44",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1::5:b16:212c"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1::5:b16:212c",
+    "Comment": ""
+  },
+  {
+    "Index": 105,
+    "TestInput": "fe80::217:f2ff:254.7.237.98",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::217:f2ff:fe07:ed62"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::217:f2ff:fe07:ed62",
+    "Comment": ""
+  },
+  {
+    "Index": 106,
+    "TestInput": "::ffff:192.168.1.26",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:192.168.1.26"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:192.168.1.26",
+    "Comment": ""
+  },
+  {
+    "Index": 107,
+    "TestInput": "::ffff:192.168.1.1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:192.168.1.1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:192.168.1.1",
+    "Comment": ""
+  },
+  {
+    "Index": 108,
+    "TestInput": "0:0:0:0:0:0:13.1.68.3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::13.1.68.3"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::13.1.68.3",
+    "Comment": "IPv4-compatible IPv6 address, full, deprecated"
+  },
+  {
+    "Index": 109,
+    "TestInput": "0:0:0:0:0:FFFF:129.144.52.38",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:129.144.52.38"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:129.144.52.38",
+    "Comment": "IPv4-mapped IPv6 address, full"
+  },
+  {
+    "Index": 110,
+    "TestInput": "::13.1.68.3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::13.1.68.3"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::13.1.68.3",
+    "Comment": "IPv4-compatible IPv6 address, compressed, deprecated"
+  },
+  {
+    "Index": 111,
+    "TestInput": "::FFFF:129.144.52.38",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:129.144.52.38"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:129.144.52.38",
+    "Comment": "IPv4-mapped IPv6 address, compressed"
+  },
+  {
+    "Index": 112,
+    "TestInput": "fe80:0:0:0:204:61ff:254.157.241.86",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::204:61ff:fe9d:f156"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::204:61ff:fe9d:f156",
+    "Comment": ""
+  },
+  {
+    "Index": 113,
+    "TestInput": "fe80::204:61ff:254.157.241.86",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::204:61ff:fe9d:f156"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::204:61ff:fe9d:f156",
+    "Comment": ""
+  },
+  {
+    "Index": 114,
+    "TestInput": "::ffff:12.34.56.78",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:12.34.56.78"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:12.34.56.78",
+    "Comment": ""
+  },
+  {
+    "Index": 115,
+    "TestInput": "::ffff:192.0.2.128",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:192.0.2.128"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:192.0.2.128",
+    "Comment": "# but this is OK, since there's a single digit"
+  },
+  {
+    "Index": 116,
+    "TestInput": "fe80:0000:0000:0000:0204:61ff:fe9d:f156",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::204:61ff:fe9d:f156"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::204:61ff:fe9d:f156",
+    "Comment": ""
+  },
+  {
+    "Index": 117,
+    "TestInput": "fe80:0:0:0:204:61ff:fe9d:f156",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::204:61ff:fe9d:f156"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::204:61ff:fe9d:f156",
+    "Comment": ""
+  },
+  {
+    "Index": 118,
+    "TestInput": "fe80::204:61ff:fe9d:f156",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::204:61ff:fe9d:f156"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::204:61ff:fe9d:f156",
+    "Comment": ""
+  },
+  {
+    "Index": 119,
+    "TestInput": "::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": ""
+  },
+  {
+    "Index": 120,
+    "TestInput": "fe80::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::",
+    "Comment": ""
+  },
+  {
+    "Index": 121,
+    "TestInput": "fe80::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::1",
+    "Comment": ""
+  },
+  {
+    "Index": 122,
+    "TestInput": "::ffff:c000:280",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:192.0.2.128"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:192.0.2.128",
+    "Comment": ""
+  },
+  {
+    "Index": 123,
+    "TestInput": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:85a3::8a2e:370:7334"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:85a3::8a2e:370:7334",
+    "Comment": ""
+  },
+  {
+    "Index": 124,
+    "TestInput": "2001:db8:85a3:0:0:8a2e:370:7334",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:85a3::8a2e:370:7334"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:85a3::8a2e:370:7334",
+    "Comment": ""
+  },
+  {
+    "Index": 125,
+    "TestInput": "2001:db8:85a3::8a2e:370:7334",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:85a3::8a2e:370:7334"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:85a3::8a2e:370:7334",
+    "Comment": ""
+  },
+  {
+    "Index": 126,
+    "TestInput": "2001:0db8:0000:0000:0000:0000:1428:57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::1428:57ab"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::1428:57ab",
+    "Comment": ""
+  },
+  {
+    "Index": 127,
+    "TestInput": "2001:0db8:0000:0000:0000::1428:57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::1428:57ab"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::1428:57ab",
+    "Comment": ""
+  },
+  {
+    "Index": 128,
+    "TestInput": "2001:0db8:0:0:0:0:1428:57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::1428:57ab"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::1428:57ab",
+    "Comment": ""
+  },
+  {
+    "Index": 129,
+    "TestInput": "2001:0db8:0:0::1428:57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::1428:57ab"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::1428:57ab",
+    "Comment": ""
+  },
+  {
+    "Index": 130,
+    "TestInput": "2001:0db8::1428:57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::1428:57ab"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::1428:57ab",
+    "Comment": ""
+  },
+  {
+    "Index": 131,
+    "TestInput": "2001:db8::1428:57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8::1428:57ab"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8::1428:57ab",
+    "Comment": ""
+  },
+  {
+    "Index": 132,
+    "TestInput": "0000:0000:0000:0000:0000:0000:0000:0001",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": ""
+  },
+  {
+    "Index": 133,
+    "TestInput": "::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::1"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::1",
+    "Comment": ""
+  },
+  {
+    "Index": 134,
+    "TestInput": "::ffff:0c22:384e",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::ffff:12.34.56.78"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::ffff:12.34.56.78",
+    "Comment": ""
+  },
+  {
+    "Index": 135,
+    "TestInput": "2001:0db8:1234:0000:0000:0000:0000:0000",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:1234::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:1234::",
+    "Comment": ""
+  },
+  {
+    "Index": 136,
+    "TestInput": "2001:0db8:1234:ffff:ffff:ffff:ffff:ffff",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:1234:ffff:ffff:ffff:ffff:ffff",
+    "Comment": ""
+  },
+  {
+    "Index": 137,
+    "TestInput": "2001:db8:a::123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "2001:db8:a::123"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "2001:db8:a::123",
+    "Comment": ""
+  },
+  {
+    "Index": 138,
+    "TestInput": "fe80::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "fe80::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "fe80::",
+    "Comment": ""
+  },
+  {
+    "Index": 139,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 140,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:6666:7777:0"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:6666:7777:0",
+    "Comment": ""
+  },
+  {
+    "Index": 141,
+    "TestInput": "1111:2222:3333:4444:5555:6666::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:6666::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:6666::",
+    "Comment": ""
+  },
+  {
+    "Index": 142,
+    "TestInput": "1111:2222:3333:4444:5555::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555::",
+    "Comment": ""
+  },
+  {
+    "Index": 143,
+    "TestInput": "1111:2222:3333:4444::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444::",
+    "Comment": ""
+  },
+  {
+    "Index": 144,
+    "TestInput": "1111:2222:3333::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333::",
+    "Comment": ""
+  },
+  {
+    "Index": 145,
+    "TestInput": "1111:2222::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::",
+    "Comment": ""
+  },
+  {
+    "Index": 146,
+    "TestInput": "1111::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::",
+    "Comment": ""
+  },
+  {
+    "Index": 147,
+    "TestInput": "1111:2222:3333:4444:5555:6666::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:6666:0:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:6666:0:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 148,
+    "TestInput": "1111:2222:3333:4444:5555::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555::8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555::8888",
+    "Comment": ""
+  },
+  {
+    "Index": 149,
+    "TestInput": "1111:2222:3333:4444::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444::8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444::8888",
+    "Comment": ""
+  },
+  {
+    "Index": 150,
+    "TestInput": "1111:2222:3333::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333::8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333::8888",
+    "Comment": ""
+  },
+  {
+    "Index": 151,
+    "TestInput": "1111:2222::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::8888",
+    "Comment": ""
+  },
+  {
+    "Index": 152,
+    "TestInput": "1111::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::8888",
+    "Comment": ""
+  },
+  {
+    "Index": 153,
+    "TestInput": "::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::8888",
+    "Comment": ""
+  },
+  {
+    "Index": 154,
+    "TestInput": "1111:2222:3333:4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:0:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:0:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 155,
+    "TestInput": "1111:2222:3333:4444::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444::7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444::7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 156,
+    "TestInput": "1111:2222:3333::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333::7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333::7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 157,
+    "TestInput": "1111:2222::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 158,
+    "TestInput": "1111::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 159,
+    "TestInput": "::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::119.119.136.136"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::119.119.136.136",
+    "Comment": ""
+  },
+  {
+    "Index": 160,
+    "TestInput": "1111:2222:3333:4444::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:0:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:0:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 161,
+    "TestInput": "1111:2222:3333::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333::6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333::6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 162,
+    "TestInput": "1111:2222::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 163,
+    "TestInput": "1111::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 164,
+    "TestInput": "::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 165,
+    "TestInput": "1111:2222:3333::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:0:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:0:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 166,
+    "TestInput": "1111:2222::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 167,
+    "TestInput": "1111::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 168,
+    "TestInput": "::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 169,
+    "TestInput": "1111:2222::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:0:4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:0:4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 170,
+    "TestInput": "1111::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 171,
+    "TestInput": "::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 172,
+    "TestInput": "1111::3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:0:3333:4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:0:3333:4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 173,
+    "TestInput": "::3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::3333:4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::3333:4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 174,
+    "TestInput": "::2222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "0:2222:3333:4444:5555:6666:7777:8888"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "0:2222:3333:4444:5555:6666:7777:8888",
+    "Comment": ""
+  },
+  {
+    "Index": 175,
+    "TestInput": "1111:2222:3333:4444:5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 176,
+    "TestInput": "1111:2222:3333:4444:5555::123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:0:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:0:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 177,
+    "TestInput": "1111:2222:3333:4444::123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444::7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444::7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 178,
+    "TestInput": "1111:2222:3333::123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333::7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333::7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 179,
+    "TestInput": "1111:2222::123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 180,
+    "TestInput": "1111::123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 181,
+    "TestInput": "::123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::123.123.123.123"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::123.123.123.123",
+    "Comment": ""
+  },
+  {
+    "Index": 182,
+    "TestInput": "1111:2222:3333:4444::6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:0:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:0:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 183,
+    "TestInput": "1111:2222:3333::6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333::6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333::6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 184,
+    "TestInput": "1111:2222::6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 185,
+    "TestInput": "1111::6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 186,
+    "TestInput": "::6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 187,
+    "TestInput": "1111:2222:3333::5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:0:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:0:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 188,
+    "TestInput": "1111:2222::5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222::5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222::5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 189,
+    "TestInput": "1111::5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 190,
+    "TestInput": "::5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 191,
+    "TestInput": "1111:2222::4444:5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:0:4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:0:4444:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 192,
+    "TestInput": "1111::4444:5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111::4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111::4444:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 193,
+    "TestInput": "::4444:5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::4444:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 194,
+    "TestInput": "1111::3333:4444:5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:0:3333:4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:0:3333:4444:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 195,
+    "TestInput": "::2222:3333:4444:5555:6666:123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "0:2222:3333:4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 42,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "0:2222:3333:4444:5555:6666:7b7b:7b7b",
+    "Comment": ""
+  },
+  {
+    "Index": 196,
+    "TestInput": "::0:0:0:0:0:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 197,
+    "TestInput": "::0:0:0:0:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 198,
+    "TestInput": "::0:0:0:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 199,
+    "TestInput": "::0:0:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 200,
+    "TestInput": "::0:0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 201,
+    "TestInput": "::0:0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 202,
+    "TestInput": "::0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 203,
+    "TestInput": "0:0:0:0:0:0:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 204,
+    "TestInput": "0:0:0:0:0:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 205,
+    "TestInput": "0:0:0:0:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 206,
+    "TestInput": "0:0:0:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 207,
+    "TestInput": "0:0:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 208,
+    "TestInput": "0:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 209,
+    "TestInput": "0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 210,
+    "TestInput": "0:a:b:c:d:e:f::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "0:a:b:c:d:e:f:0"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "0:a:b:c:d:e:f:0",
+    "Comment": ""
+  },
+  {
+    "Index": 211,
+    "TestInput": "::0:a:b:c:d:e:f",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::a:b:c:d:e:f"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::a:b:c:d:e:f",
+    "Comment": "# syntactically correct, but bad form (::0:... could be combined)"
+  },
+  {
+    "Index": 212,
+    "TestInput": "a:b:c:d:e:f:0::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "a:b:c:d:e:f::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a:b:c:d:e:f::",
+    "Comment": ""
+  },
+  {
+    "Index": 213,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "empty string"
+  },
+  {
+    "Index": 214,
+    "TestInput": "2001:DB8:0:0:8:800:200C:417A:221",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "unicast, full"
+  },
+  {
+    "Index": 215,
+    "TestInput": "FF01::101::2",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "multicast, compressed"
+  },
+  {
+    "Index": 216,
+    "TestInput": "02001:0000:1234:0000:0000:C1C0:ABCD:0876",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 40,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "extra 0 not allowed!"
+  },
+  {
+    "Index": 217,
+    "TestInput": "2001:0000:1234:0000:00001:C1C0:ABCD:0876",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 40,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "extra 0 not allowed!"
+  },
+  {
+    "Index": 218,
+    "TestInput": "2001:0000:1234:0000:0000:C1C0:ABCD:0876  0",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "junk after valid address"
+  },
+  {
+    "Index": 219,
+    "TestInput": "2001:0000:1234: 0000:0000:C1C0:ABCD:0876",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "internal space"
+  },
+  {
+    "Index": 220,
+    "TestInput": "3ffe:0b00:0000:0001:0000:0000:000a",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "seven segments"
+  },
+  {
+    "Index": 221,
+    "TestInput": "FF02:0000:0000:0000:0000:0000:0000:0000:0001",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "nine segments"
+  },
+  {
+    "Index": 222,
+    "TestInput": "3ffe:b00::1::a",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "double \"::\""
+  },
+  {
+    "Index": 223,
+    "TestInput": "::1111:2222:3333:4444:5555:6666::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "double \"::\""
+  },
+  {
+    "Index": 224,
+    "TestInput": "1:2:3::4:5::7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Double \"::\""
+  },
+  {
+    "Index": 225,
+    "TestInput": "12345::6:7:8",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 226,
+    "TestInput": "1::5:400.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 227,
+    "TestInput": "1::5:260.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 228,
+    "TestInput": "1::5:256.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 229,
+    "TestInput": "1::5:1.256.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 230,
+    "TestInput": "1::5:1.2.256.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 231,
+    "TestInput": "1::5:1.2.3.256",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 232,
+    "TestInput": "1::5:300.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 233,
+    "TestInput": "1::5:1.300.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 234,
+    "TestInput": "1::5:1.2.300.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 235,
+    "TestInput": "1::5:1.2.3.300",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 236,
+    "TestInput": "1::5:900.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 237,
+    "TestInput": "1::5:1.900.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 238,
+    "TestInput": "1::5:1.2.900.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 239,
+    "TestInput": "1::5:1.2.3.900",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 240,
+    "TestInput": "1::5:300.300.300.300",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 241,
+    "TestInput": "1::5:3000.30.30.30",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 242,
+    "TestInput": "1::400.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 243,
+    "TestInput": "1::260.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 244,
+    "TestInput": "1::256.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 245,
+    "TestInput": "1::1.256.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 246,
+    "TestInput": "1::1.2.256.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 247,
+    "TestInput": "1::1.2.3.256",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 248,
+    "TestInput": "1::300.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 249,
+    "TestInput": "1::1.300.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 250,
+    "TestInput": "1::1.2.300.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 251,
+    "TestInput": "1::1.2.3.300",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 252,
+    "TestInput": "1::900.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 253,
+    "TestInput": "1::1.900.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 254,
+    "TestInput": "1::1.2.900.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 255,
+    "TestInput": "1::1.2.3.900",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 256,
+    "TestInput": "1::300.300.300.300",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 257,
+    "TestInput": "1::3000.30.30.30",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 258,
+    "TestInput": "::400.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 259,
+    "TestInput": "::260.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 260,
+    "TestInput": "::256.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 261,
+    "TestInput": "::1.256.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 262,
+    "TestInput": "::1.2.256.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 263,
+    "TestInput": "::1.2.3.256",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 264,
+    "TestInput": "::300.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 265,
+    "TestInput": "::1.300.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 266,
+    "TestInput": "::1.2.300.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 267,
+    "TestInput": "::1.2.3.300",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 268,
+    "TestInput": "::900.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 269,
+    "TestInput": "::1.900.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 270,
+    "TestInput": "::1.2.900.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 271,
+    "TestInput": "::1.2.3.900",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 272,
+    "TestInput": "::300.300.300.300",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 273,
+    "TestInput": "::3000.30.30.30",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 274,
+    "TestInput": "2001:1:1:1:1:1:255Z255X255Y255",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "garbage instead of \".\" in IPv4"
+  },
+  {
+    "Index": 275,
+    "TestInput": "::ffff:192x168.1.26",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "ditto"
+  },
+  {
+    "Index": 276,
+    "TestInput": "::ffff:2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 277,
+    "TestInput": "::ffff:257.1.2.3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 278,
+    "TestInput": "1.2.3.4:1111:2222:3333:4444::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Aeron"
+  },
+  {
+    "Index": 279,
+    "TestInput": "1.2.3.4:1111:2222:3333::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 280,
+    "TestInput": "1.2.3.4:1111:2222::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 281,
+    "TestInput": "1.2.3.4:1111::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 282,
+    "TestInput": "1.2.3.4::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 283,
+    "TestInput": "1.2.3.4::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 284,
+    "TestInput": "XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 285,
+    "TestInput": "1111:2222:3333:4444:5555:6666:00.00.00.00",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 286,
+    "TestInput": "1111:2222:3333:4444:5555:6666:000.000.000.000",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 287,
+    "TestInput": "1111:2222:3333:4444:5555:6666:256.256.256.256",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 288,
+    "TestInput": ":",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 289,
+    "TestInput": "1111:2222:3333:4444::5555:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 290,
+    "TestInput": "1111:2222:3333::5555:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 291,
+    "TestInput": "1111:2222::5555:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 292,
+    "TestInput": "1111::5555:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 293,
+    "TestInput": "::5555:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 294,
+    "TestInput": ":::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 295,
+    "TestInput": "1111:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 296,
+    "TestInput": ":",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 297,
+    "TestInput": ":1111:2222:3333:4444::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 298,
+    "TestInput": ":1111:2222:3333::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 299,
+    "TestInput": ":1111:2222::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 300,
+    "TestInput": ":1111::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 301,
+    "TestInput": ":::5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 302,
+    "TestInput": ":::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 303,
+    "TestInput": "123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 303
+    },
+    "ExpectedErrorMessage": "Invalid host name.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 304,
+    "TestInput": "2001::FFD3::57ab",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 305,
+    "TestInput": "2001:db8:85a3::8a2e:37023:7334",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 306,
+    "TestInput": "2001:db8:85a3::8a2e:370k:7334",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 307,
+    "TestInput": "1:2:3:4:5:6:7:8:9",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 308,
+    "TestInput": "1::2::3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 309,
+    "TestInput": "1:::3:4:5",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 310,
+    "TestInput": "1:2:3::4:5:6:7:8:9",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 311,
+    "TestInput": "XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 312,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:9999",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 313,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 314,
+    "TestInput": "::2222:3333:4444:5555:6666:7777:8888:9999",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 315,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 316,
+    "TestInput": "1111:2222:3333:4444:5555:6666",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 317,
+    "TestInput": "1111:2222:3333:4444:5555",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 318,
+    "TestInput": "1111:2222:3333:4444",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 319,
+    "TestInput": "1111:2222:3333",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 320,
+    "TestInput": "1111:2222",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 321,
+    "TestInput": "1111",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 303
+    },
+    "ExpectedErrorMessage": "Invalid host name.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 322,
+    "TestInput": "11112222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 323,
+    "TestInput": "1111:22223333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 324,
+    "TestInput": "1111:2222:33334444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 325,
+    "TestInput": "1111:2222:3333:44445555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 326,
+    "TestInput": "1111:2222:3333:4444:55556666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 327,
+    "TestInput": "1111:2222:3333:4444:5555:66667777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 328,
+    "TestInput": "1111:2222:3333:4444:5555:6666:77778888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 329,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 40,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 330,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 331,
+    "TestInput": "1111:2222:3333:4444:5555:6666:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 332,
+    "TestInput": "1111:2222:3333:4444:5555:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 333,
+    "TestInput": "1111:2222:3333:4444:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 334,
+    "TestInput": "1111:2222:3333:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 335,
+    "TestInput": "1111:2222:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 336,
+    "TestInput": "1111:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 337,
+    "TestInput": ":",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 338,
+    "TestInput": ":8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 339,
+    "TestInput": ":7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 340,
+    "TestInput": ":6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 341,
+    "TestInput": ":5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 342,
+    "TestInput": ":4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 343,
+    "TestInput": ":3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 344,
+    "TestInput": ":2222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 345,
+    "TestInput": ":1111:2222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 40,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 346,
+    "TestInput": ":::2222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 347,
+    "TestInput": "1111:::3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 348,
+    "TestInput": "1111:2222:::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 349,
+    "TestInput": "1111:2222:3333:::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 350,
+    "TestInput": "1111:2222:3333:4444:::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 351,
+    "TestInput": "1111:2222:3333:4444:5555:::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 352,
+    "TestInput": "1111:2222:3333:4444:5555:6666:::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 353,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 354,
+    "TestInput": "::2222::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 355,
+    "TestInput": "::2222:3333::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 356,
+    "TestInput": "::2222:3333:4444::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 357,
+    "TestInput": "::2222:3333:4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 358,
+    "TestInput": "::2222:3333:4444:5555:7777::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 359,
+    "TestInput": "::2222:3333:4444:5555:7777:8888::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 360,
+    "TestInput": "1111::3333::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 361,
+    "TestInput": "1111::3333:4444::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 362,
+    "TestInput": "1111::3333:4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 363,
+    "TestInput": "1111::3333:4444:5555:6666::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 364,
+    "TestInput": "1111::3333:4444:5555:6666:7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 365,
+    "TestInput": "1111:2222::4444::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 366,
+    "TestInput": "1111:2222::4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 367,
+    "TestInput": "1111:2222::4444:5555:6666::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 368,
+    "TestInput": "1111:2222::4444:5555:6666:7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 369,
+    "TestInput": "1111:2222:3333::5555::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 370,
+    "TestInput": "1111:2222:3333::5555:6666::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 371,
+    "TestInput": "1111:2222:3333::5555:6666:7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 372,
+    "TestInput": "1111:2222:3333:4444::6666::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 373,
+    "TestInput": "1111:2222:3333:4444::6666:7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 374,
+    "TestInput": "1111:2222:3333:4444:5555::7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 375,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 376,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 42,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 377,
+    "TestInput": "1111:2222:3333:4444:5555:6666::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 378,
+    "TestInput": "::2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 379,
+    "TestInput": "1111:2222:3333:4444:5555:6666:1.2.3.4.5",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 380,
+    "TestInput": "1111:2222:3333:4444:5555:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 381,
+    "TestInput": "1111:2222:3333:4444:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 382,
+    "TestInput": "1111:2222:3333:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 383,
+    "TestInput": "1111:2222:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 384,
+    "TestInput": "1111:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 385,
+    "TestInput": "11112222:3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 386,
+    "TestInput": "1111:22223333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 387,
+    "TestInput": "1111:2222:33334444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 388,
+    "TestInput": "1111:2222:3333:44445555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 389,
+    "TestInput": "1111:2222:3333:4444:55556666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 390,
+    "TestInput": "1111:2222:3333:4444:5555:66661.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 391,
+    "TestInput": "1111:2222:3333:4444:5555:6666:255255.255.255",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 392,
+    "TestInput": "1111:2222:3333:4444:5555:6666:255.255255.255",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 393,
+    "TestInput": "1111:2222:3333:4444:5555:6666:255.255.255255",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 394,
+    "TestInput": ":1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 395,
+    "TestInput": ":6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 396,
+    "TestInput": ":5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 397,
+    "TestInput": ":4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 398,
+    "TestInput": ":3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 399,
+    "TestInput": ":2222:3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 400,
+    "TestInput": ":1111:2222:3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 401,
+    "TestInput": ":::2222:3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 402,
+    "TestInput": "1111:::3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 403,
+    "TestInput": "1111:2222:::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 404,
+    "TestInput": "1111:2222:3333:::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 405,
+    "TestInput": "1111:2222:3333:4444:::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 406,
+    "TestInput": "1111:2222:3333:4444:5555:::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 407,
+    "TestInput": "::2222::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 408,
+    "TestInput": "::2222:3333::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 409,
+    "TestInput": "::2222:3333:4444::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 410,
+    "TestInput": "::2222:3333:4444:5555::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 411,
+    "TestInput": "1111::3333::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 412,
+    "TestInput": "1111::3333:4444::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 413,
+    "TestInput": "1111::3333:4444:5555::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 414,
+    "TestInput": "1111:2222::4444::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 415,
+    "TestInput": "1111:2222::4444:5555::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 416,
+    "TestInput": "1111:2222:3333::5555::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 417,
+    "TestInput": "::.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 418,
+    "TestInput": "::..",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 419,
+    "TestInput": "::...",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 420,
+    "TestInput": "::1...",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 421,
+    "TestInput": "::1.2..",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 422,
+    "TestInput": "::1.2.3.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 423,
+    "TestInput": "::.2..",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 424,
+    "TestInput": "::.2.3.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 425,
+    "TestInput": "::.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 426,
+    "TestInput": "::..3.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 427,
+    "TestInput": "::..3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 428,
+    "TestInput": "::...4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 429,
+    "TestInput": ":1111:2222:3333:4444:5555:6666:7777::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 430,
+    "TestInput": ":1111:2222:3333:4444:5555:6666::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 431,
+    "TestInput": ":1111:2222:3333:4444:5555::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 432,
+    "TestInput": ":1111:2222:3333:4444::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 433,
+    "TestInput": ":1111:2222:3333::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 434,
+    "TestInput": ":1111:2222::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 435,
+    "TestInput": ":1111::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 436,
+    "TestInput": ":::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 437,
+    "TestInput": ":1111:2222:3333:4444:5555:6666::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 438,
+    "TestInput": ":1111:2222:3333:4444:5555::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 439,
+    "TestInput": ":1111:2222:3333:4444::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 440,
+    "TestInput": ":1111:2222:3333::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 441,
+    "TestInput": ":1111:2222::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 442,
+    "TestInput": ":1111::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 443,
+    "TestInput": ":::8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 444,
+    "TestInput": ":1111:2222:3333:4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 445,
+    "TestInput": ":1111:2222:3333:4444::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 446,
+    "TestInput": ":1111:2222:3333::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 447,
+    "TestInput": ":1111:2222::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 448,
+    "TestInput": ":1111::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 449,
+    "TestInput": ":::7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 450,
+    "TestInput": ":1111:2222:3333:4444::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 451,
+    "TestInput": ":1111:2222:3333::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 452,
+    "TestInput": ":1111:2222::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 453,
+    "TestInput": ":1111::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 454,
+    "TestInput": ":::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 455,
+    "TestInput": ":1111:2222:3333::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 456,
+    "TestInput": ":1111:2222::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 457,
+    "TestInput": ":1111::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 458,
+    "TestInput": ":::5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 459,
+    "TestInput": ":1111:2222::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 460,
+    "TestInput": ":1111::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 461,
+    "TestInput": ":::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 462,
+    "TestInput": ":1111::3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 463,
+    "TestInput": ":::3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 464,
+    "TestInput": ":::2222:3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 465,
+    "TestInput": ":1111:2222:3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 466,
+    "TestInput": ":1111:2222:3333:4444:5555::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 467,
+    "TestInput": ":1111:2222:3333:4444::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 468,
+    "TestInput": ":1111:2222:3333::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 469,
+    "TestInput": ":1111:2222::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 470,
+    "TestInput": ":1111::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 471,
+    "TestInput": ":::1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 472,
+    "TestInput": ":1111:2222:3333:4444::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 473,
+    "TestInput": ":1111:2222:3333::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 474,
+    "TestInput": ":1111:2222::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 475,
+    "TestInput": ":1111::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 476,
+    "TestInput": ":::6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 477,
+    "TestInput": ":1111:2222:3333::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 478,
+    "TestInput": ":1111:2222::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 479,
+    "TestInput": ":1111::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 480,
+    "TestInput": ":::5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 481,
+    "TestInput": ":1111:2222::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 482,
+    "TestInput": ":1111::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 483,
+    "TestInput": ":::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 484,
+    "TestInput": ":1111::3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 485,
+    "TestInput": ":::2222:3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 486,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 487,
+    "TestInput": "1111:2222:3333:4444:5555:6666:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 488,
+    "TestInput": "1111:2222:3333:4444:5555:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 489,
+    "TestInput": "1111:2222:3333:4444:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 490,
+    "TestInput": "1111:2222:3333:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 491,
+    "TestInput": "1111:2222:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 492,
+    "TestInput": "1111:::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 493,
+    "TestInput": ":::",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 494,
+    "TestInput": "1111:2222:3333:4444:5555:6666::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 495,
+    "TestInput": "1111:2222:3333:4444:5555::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 496,
+    "TestInput": "1111:2222:3333:4444::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 497,
+    "TestInput": "1111:2222:3333::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 498,
+    "TestInput": "1111:2222::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 499,
+    "TestInput": "1111::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 500,
+    "TestInput": "::8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 501,
+    "TestInput": "1111:2222:3333:4444:5555::7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 502,
+    "TestInput": "1111:2222:3333:4444::7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 503,
+    "TestInput": "1111:2222:3333::7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 504,
+    "TestInput": "1111:2222::7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 505,
+    "TestInput": "1111::7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 506,
+    "TestInput": "::7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 507,
+    "TestInput": "1111:2222:3333:4444::6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 508,
+    "TestInput": "1111:2222:3333::6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 509,
+    "TestInput": "1111:2222::6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 510,
+    "TestInput": "1111::6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 511,
+    "TestInput": "::6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 512,
+    "TestInput": "1111:2222:3333::5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 513,
+    "TestInput": "1111:2222::5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 514,
+    "TestInput": "1111::5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 515,
+    "TestInput": "::5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 516,
+    "TestInput": "1111:2222::4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 517,
+    "TestInput": "1111::4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 518,
+    "TestInput": "::4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 519,
+    "TestInput": "1111::3333:4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 520,
+    "TestInput": "::3333:4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 521,
+    "TestInput": "::2222:3333:4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 522,
+    "TestInput": "':10.0.0.1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 523,
+    "TestInput": "1111:2222:3333:4444:5555:6666:256.256.256.2561",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  }
+]

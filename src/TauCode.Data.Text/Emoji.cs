@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using TauCode.Data.Text.EmojiSupport;
 using TauCode.Data.Text.Exceptions;
+using TauCode.Data.Text.TextDataExtractors;
 
 namespace TauCode.Data.Text
 {
@@ -13,15 +14,13 @@ namespace TauCode.Data.Text
         #region Data
 
         public readonly string Value;
-
         public readonly string Name;
 
         #endregion
 
         #region ctor
 
-        // todo: internal
-        public Emoji(string value, string name)
+        internal Emoji(string value, string name)
         {
             if (value == null)
             {
@@ -37,7 +36,7 @@ namespace TauCode.Data.Text
             this.Name = name;
         }
 
-        public Emoji(string value)
+        internal Emoji(string value)
         {
             if (value == null)
             {
@@ -65,6 +64,11 @@ namespace TauCode.Data.Text
 
         public bool Equals(Emoji other)
         {
+            if (this.Value == null)
+            {
+                return other.Value == null;
+            }
+
             return this.Value.Equals(other.Value, StringComparison.Ordinal);
         }
 
@@ -100,26 +104,71 @@ namespace TauCode.Data.Text
 
         #endregion
 
-        #region Extraction
+        #region Parsing
 
-        public static int Extract(ReadOnlySpan<char> input, out Emoji? emoji)
+        public static Emoji Parse(
+            ReadOnlySpan<char> input)
         {
-            var consumed = TryExtract(input, out emoji, out var exception);
-            if (exception != null)
+            var result = EmojiExtractor.Instance.TryExtract(input, out var value);
+            if (result.ErrorCode.HasValue)
             {
-                throw exception;
+                var message = EmojiExtractor.Instance.GetErrorMessage(result.ErrorCode.Value);
+                throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
             }
 
-            return consumed;
+            if (result.CharsConsumed != input.Length)
+            {
+                var errorCode = TextDataExtractionErrorCodes.UnexpectedCharacter;
+                var message = EmojiExtractor.Instance.GetErrorMessage(errorCode);
+
+                throw new TextDataExtractionException(message, errorCode, result.CharsConsumed);
+            }
+
+            return value;
         }
 
-        public static int TryExtract(
+        public static bool TryParse(
             ReadOnlySpan<char> input,
-            out Emoji? emoji,
-            out TextDataExtractionException exception)
+            out Emoji emoji)
         {
-            return EmojiHelper.Root.TryExtract(input, out emoji, out exception);
+            var result = EmojiExtractor.Instance.TryExtract(input, out emoji);
+
+            if (result.ErrorCode != null)
+            {
+                return false;
+            }
+
+            if (result.CharsConsumed != input.Length)
+            {
+                emoji = default;
+                return false;
+            }
+
+            return true;
         }
+
+        #endregion
+
+        #region Extraction
+
+        //public static int Extract(ReadOnlySpan<char> input, out Emoji? emoji)
+        //{
+        //    var consumed = TryExtract(input, out emoji, out var exception);
+        //    if (exception != null)
+        //    {
+        //        throw exception;
+        //    }
+
+        //    return consumed;
+        //}
+
+        //public static int TryExtract(
+        //    ReadOnlySpan<char> input,
+        //    out Emoji? emoji,
+        //    out TextDataExtractionException exception)
+        //{
+        //    return EmojiHelper.Root.TryExtract(input, out emoji, out exception);
+        //}
 
         #endregion
 

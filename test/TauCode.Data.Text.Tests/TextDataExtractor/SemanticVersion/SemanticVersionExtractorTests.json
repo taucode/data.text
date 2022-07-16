@@ -1,0 +1,408 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "1.3.5",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Major": 1,
+      "Minor": 3,
+      "Patch": 5,
+      "PreRelease": null,
+      "BuildMetadata": null
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1.3.5",
+    "Comment": "Release version"
+  },
+  {
+    "Index": 1,
+    "TestInput": "1.7.6-alpha",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Major": 1,
+      "Minor": 7,
+      "Patch": 6,
+      "PreRelease": "alpha",
+      "BuildMetadata": null
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1.7.6-alpha",
+    "Comment": "Pre-release, no metadata"
+  },
+  {
+    "Index": 2,
+    "TestInput": "1.0.0+build.0123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "Major": 1,
+      "Minor": 0,
+      "Patch": 0,
+      "PreRelease": null,
+      "BuildMetadata": "build.0123"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1.0.0+build.0123",
+    "Comment": "Release, with metadata"
+  },
+  {
+    "Index": 3,
+    "TestInput": "1.20.30+-build.000.--- ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": {
+      "Major": 1,
+      "Minor": 20,
+      "Patch": 30,
+      "PreRelease": null,
+      "BuildMetadata": "-build.000.---"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1.20.30+-build.000.---",
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "1.6.12+-;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": {
+      "Major": 1,
+      "Minor": 6,
+      "Patch": 12,
+      "PreRelease": null,
+      "BuildMetadata": "-"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1.6.12+-",
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "777.3.9-rc2.0.20-.--",
+    "TestTerminatingChars": "-",
+    "ExpectedValue": {
+      "Major": 777,
+      "Minor": 3,
+      "Patch": 9,
+      "PreRelease": "rc2.0.20-.--",
+      "BuildMetadata": null
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "777.3.9-rc2.0.20-.--",
+    "Comment": "'-' is terminating char, but is ignored since valid semantic version char"
+  },
+  {
+    "Index": 6,
+    "TestInput": "12.55.99121-rc.700---+d",
+    "TestTerminatingChars": "d",
+    "ExpectedValue": {
+      "Major": 12,
+      "Minor": 55,
+      "Patch": 99121,
+      "PreRelease": "rc.700---",
+      "BuildMetadata": "d"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "12.55.99121-rc.700---+d",
+    "Comment": "terminating char is ignored"
+  },
+  {
+    "Index": 7,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": "Not full form"
+  },
+  {
+    "Index": 9,
+    "TestInput": "1.2",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": "Not full form"
+  },
+  {
+    "Index": 10,
+    "TestInput": "1.2.3.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "1.5.7-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "01.2.3;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "1.02.3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "1.2.03",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "1.2.3.15/",
+    "TestTerminatingChars": "/",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": "Too many segments"
+  },
+  {
+    "Index": 16,
+    "TestInput": "1..2.3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "1.2..3",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 18,
+    "TestInput": "1.2.3-",
+    "TestTerminatingChars": "-",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": "Terminator '-' ignored."
+  },
+  {
+    "Index": 19,
+    "TestInput": "1.2.3+",
+    "TestTerminatingChars": "+",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 20,
+    "TestInput": "1.2.3-rc+",
+    "TestTerminatingChars": "-+",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 21,
+    "TestInput": "1.2.3-rc..+build",
+    "TestTerminatingChars": "1234build",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 22,
+    "TestInput": "1.2.3-rc.2+.build",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 23,
+    "TestInput": ".",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 24,
+    "TestInput": "1.2.3-rc+build.",
+    "TestTerminatingChars": ".123",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": "Not full form"
+  },
+  {
+    "Index": 25,
+    "TestInput": "1.2.3-rc.+build",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 26,
+    "TestInput": "1.2.3-rc.00",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 27,
+    "TestInput": "1.2.2147483648",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 1601
+    },
+    "ExpectedErrorMessage": "Failed to extract TauCode.Data.Text.SemanticVersion.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  }
+]

@@ -1,0 +1,56 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestItems": [
+      "Zero",
+      "Two"
+    ],
+    "TestIgnoreCase": false,
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input."
+  },
+  {
+    "Index": 1,
+    "TestInput": "Two;",
+    "TestItems": [
+      "Zero",
+      "Two"
+    ],
+    "TestIgnoreCase": false,
+    "TestTerminatingChars": ";",
+    "ExpectedValue": {
+      "Text": "Two",
+      "Number": 2
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Happy path."
+  },
+  {
+    "Index": 2,
+    "TestInput": "zero",
+    "TestItems": [
+      "Zero",
+      "Two"
+    ],
+    "TestIgnoreCase": false,
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 1701
+    },
+    "ExpectedErrorMessage": "Item not found.",
+    "Comment": ""
+  }
+]

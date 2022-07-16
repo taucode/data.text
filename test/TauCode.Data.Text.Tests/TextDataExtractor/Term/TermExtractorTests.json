@@ -1,0 +1,254 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input"
+  },
+  {
+    "Index": 1,
+    "TestInput": " ",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Space"
+  },
+  {
+    "Index": 2,
+    "TestInput": "-c",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "a;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": "a",
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "Aa/",
+    "TestTerminatingChars": "/a",
+    "ExpectedValue": "Aa",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "my-term",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "my-term",
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "my-term-",
+    "TestTerminatingChars": "-",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "my-term1=",
+    "TestTerminatingChars": "=",
+    "ExpectedValue": "my-term1",
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "my-term1=",
+    "TestTerminatingChars": "",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "my--term",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "some-term=",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "some-term=",
+    "TestTerminatingChars": "=",
+    "ExpectedValue": "some-term",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "some-term-1 ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": "some-term-1",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "some.term",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "some-term-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "some--term",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 16,
+    "TestInput": "some-term",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "some-term",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "-some-term- ",
+    "TestTerminatingChars": "- ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 18,
+    "TestInput": "{@a:200@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "{@a:200@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 19,
+    "TestInput": "{@a:201@}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 20,
+    "TestInput": "1term",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": "Term cannot start with digit"
+  }
+]
