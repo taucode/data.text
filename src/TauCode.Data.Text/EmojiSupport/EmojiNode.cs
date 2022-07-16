@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TauCode.Data.Text.Exceptions;
 
 namespace TauCode.Data.Text.EmojiSupport
 {
-    // todo: clean, regions, rearrange
     internal class EmojiNode
     {
         private Emoji? _emoji;
@@ -45,7 +43,7 @@ namespace TauCode.Data.Text.EmojiSupport
             this.AddEmojiTail(emoji, 0);
         }
 
-        internal int TryExtract(ReadOnlySpan<char> input, out Emoji? emoji, out TextDataExtractionException exception)
+        internal TextDataExtractionResult TryExtract(ReadOnlySpan<char> input, out Emoji emoji)
         {
             if (this.Char != null)
             {
@@ -54,9 +52,8 @@ namespace TauCode.Data.Text.EmojiSupport
 
             if (input.Length == 0)
             {
-                emoji = null;
-                exception = Helper.CreateException(ExtractionErrorTag.EmptyInput, null);
-                return 0;
+                emoji = default;
+                return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
             }
 
             Emoji? lastEmoji = null;
@@ -71,15 +68,13 @@ namespace TauCode.Data.Text.EmojiSupport
                 {
                     if (lastEmoji == null)
                     {
-                        emoji = null;
-                        exception = Helper.CreateException(ExtractionErrorTag.UnexpectedEnd, offset);
-                        return 0;
+                        emoji = default;
+                        return new TextDataExtractionResult(offset, TextDataExtractionErrorCodes.UnexpectedEnd);
                     }
                     else
                     {
                         emoji = lastEmoji.Value;
-                        exception = null;
-                        return lastSuccessfulOffset.Value + 1;
+                        return new TextDataExtractionResult(lastSuccessfulOffset.Value + 1, null);
                     }
                 }
 
@@ -92,22 +87,19 @@ namespace TauCode.Data.Text.EmojiSupport
                     if (current.Emoji.HasValue)
                     {
                         emoji = current.Emoji.Value;
-                        exception = null;
-                        return offset; // todo: mistake? should be 'offset + 1'?
+                        return new TextDataExtractionResult(offset, null);
                     }
                     else
                     {
                         if (lastEmoji == null)
                         {
-                            emoji = null;
-                            exception = Helper.CreateException(ExtractionErrorTag.NonEmojiChar, offset); // todo: sure?
-                            return 0;
+                            emoji = default;
+                            return new TextDataExtractionResult(offset, TextDataExtractionErrorCodes.NonEmojiCharacter);
                         }
                         else
                         {
                             emoji = lastEmoji.Value;
-                            exception = null;
-                            return lastSuccessfulOffset.Value + 1;
+                            return new TextDataExtractionResult(lastSuccessfulOffset.Value + 1, null);
                         }
                     }
                 }
@@ -125,15 +117,13 @@ namespace TauCode.Data.Text.EmojiSupport
                     {
                         if (lastEmoji == null)
                         {
-                            emoji = null;
-                            exception = Helper.CreateException(ExtractionErrorTag.UnexpectedEnd, offset);
-                            return 0;
+                            emoji = default;
+                            return new TextDataExtractionResult(offset, TextDataExtractionErrorCodes.UnexpectedEnd);
                         }
                         else
                         {
                             emoji = lastEmoji.Value;
-                            exception = null;
-                            return lastSuccessfulOffset.Value + 1;
+                            return new TextDataExtractionResult(lastSuccessfulOffset.Value + 1, null);
                         }
                     }
 
@@ -195,80 +185,6 @@ namespace TauCode.Data.Text.EmojiSupport
             }
 
             return follower.HasPathInternal(cleanPath[1..]);
-        }
-
-        internal int Skip(ReadOnlySpan<char> input, out ExtractionErrorTag? errorTag)
-        {
-            if (this.Char != null)
-            {
-                throw new InvalidOperationException("Only applicable to the root node.");
-            }
-
-            if (input.Length == 0)
-            {
-                errorTag = ExtractionErrorTag.EmptyInput;
-                return 0;
-            }
-
-            Emoji? lastEmoji = null;
-            var lastSuccessfulOffset = 0;
-
-            var offset = 0;
-            var current = this;
-
-            while (true)
-            {
-                if (offset == input.Length)
-                {
-                    if (lastEmoji == null)
-                    {
-                        errorTag = ExtractionErrorTag.IncompleteEmoji;
-                        return offset;
-                    }
-                    else
-                    {
-                        errorTag = null;
-                        return lastSuccessfulOffset + 1;
-                    }
-                }
-
-                var c = input[offset];
-
-                var follower = current._followers.GetValueOrDefault(c);
-
-                if (follower == null)
-                {
-                    if (current.Emoji.HasValue)
-                    {
-                        errorTag = null;
-                        return offset;
-                    }
-                    else
-                    {
-                        if (lastEmoji == null)
-                        {
-                            errorTag = ExtractionErrorTag.NonEmojiChar;
-                            return offset;
-                        }
-                        else
-                        {
-                            errorTag = null;
-                            return lastSuccessfulOffset + 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (follower.Emoji.HasValue)
-                    {
-                        lastEmoji = follower.Emoji.Value;
-                        lastSuccessfulOffset = offset;
-                    }
-
-                    offset++;
-                    current = follower;
-                }
-            }
         }
 
         private void CheckIsRoot()

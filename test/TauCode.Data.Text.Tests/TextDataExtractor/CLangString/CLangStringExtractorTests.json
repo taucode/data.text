@@ -1,0 +1,386 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input."
+  },
+  {
+    "Index": 1,
+    "TestInput": "''",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": "Wrong delimiter: single quote."
+  },
+  {
+    "Index": 2,
+    "TestInput": "abc",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "\" \";",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "\" \";",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": " ",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "\"abc\\ud83e\\udd23\"/",
+    "TestTerminatingChars": "/",
+    "ExpectedValue": "abc🤣",
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "\"abc'ku'\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "abc'ku'",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "\"abc\\'ku\\'\"",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": "Single quote mustn't be escaped in CLang string."
+  },
+  {
+    "Index": 8,
+    "TestInput": "\"abc\\\"ku\\\"\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "abc\"ku\"",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "\"abc'ku\"\"",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "\"\"",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "\" \";",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "\" \";",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": " ",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "\"abc\\ud83e\\udd23\"/",
+    "TestTerminatingChars": "/",
+    "ExpectedValue": "abc🤣",
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "\"abc'ku'\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "abc'ku'",
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "\"abc\\'ku\\'\"'",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": "Single quote mustn't be escaped in double quote string."
+  },
+  {
+    "Index": 16,
+    "TestInput": "\"abc\\\"ku\\\"\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "abc\"ku\"",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "\"abc\"ku\"\"",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 18,
+    "TestInput": "\"\\n\\v\\t\\r\\a\\b\\0\\t\\f\\\\\\\"\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "\n\u000b\t\r\u0007\b\u0000\t\f\\\"",
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 19,
+    "TestInput": "\"\\n\\v\\t\\r\\a\\b\\0\\t\\f\\\\\\u1599\"*",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": "\n\u000b\t\r\u0007\b\u0000\t\f\\ᖙ",
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 20,
+    "TestInput": "\"Unclosed string",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 3
+    },
+    "ExpectedErrorMessage": "Unclosed string.",
+    "Comment": ""
+  },
+  {
+    "Index": 21,
+    "TestInput": "\"Broken string\n",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 4
+    },
+    "ExpectedErrorMessage": "New line in string.",
+    "Comment": ""
+  },
+  {
+    "Index": 22,
+    "TestInput": "\"Broken string\r",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 4
+    },
+    "ExpectedErrorMessage": "New line in string.",
+    "Comment": ""
+  },
+  {
+    "Index": 23,
+    "TestInput": "\"Broken string\n\r",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 4
+    },
+    "ExpectedErrorMessage": "New line in string.",
+    "Comment": ""
+  },
+  {
+    "Index": 24,
+    "TestInput": "\"Broken string\r\n",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 4
+    },
+    "ExpectedErrorMessage": "New line in string.",
+    "Comment": ""
+  },
+  {
+    "Index": 25,
+    "TestInput": "\"End after escape\\",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 26,
+    "TestInput": "\"Bad\\o\"",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  },
+  {
+    "Index": 27,
+    "TestInput": "\"Bad\\u",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  },
+  {
+    "Index": 28,
+    "TestInput": "\"Bad\\u1",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  },
+  {
+    "Index": 29,
+    "TestInput": "\"Bad\\u11",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  },
+  {
+    "Index": 30,
+    "TestInput": "\"Bad\\u111",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  },
+  {
+    "Index": 31,
+    "TestInput": "\"Bad\\u111zabc\"",
+    "TestTerminatingChars": "*",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 6
+    },
+    "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  }
+]

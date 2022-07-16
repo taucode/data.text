@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TauCode.Data.Text.Exceptions;
+using TauCode.Data.Text.TextDataExtractors;
 
 namespace TauCode.Data.Text.EmailAddressSupport
 {
@@ -8,17 +9,20 @@ namespace TauCode.Data.Text.EmailAddressSupport
         private readonly List<Segment> _localPartSegments;
         private readonly List<Segment> _domainSegments;
 
-        internal EmailAddressExtractionContext(TerminatingDelegate terminatingPredicate)
+        internal EmailAddressExtractionContext(TerminatingDelegate terminator)
         {
-            this.TerminatingPredicate = terminatingPredicate;
+            this.Terminator = terminator;
 
             _localPartSegments = new List<Segment>();
             _domainSegments = new List<Segment>();
+            HostNameExtractor = new HostNameExtractor(this.Terminator);
         }
+
+        internal readonly HostNameExtractor HostNameExtractor;
 
         internal int Position;
 
-        internal readonly TerminatingDelegate TerminatingPredicate;
+        internal readonly TerminatingDelegate Terminator;
 
         internal int? AtSymbolIndex; // index of '@' in span
 
@@ -38,12 +42,6 @@ namespace TauCode.Data.Text.EmailAddressSupport
             this.DomainLength += segment.Length;
         }
 
-
-        internal bool IsAtTerminatingChar(ReadOnlySpan<char> input)
-        {
-            return this.TerminatingPredicate(input, this.Position);
-        }
-
         internal SegmentType? GetLastLocalPartSegmentType()
         {
             if (this.LocalPartSegments.Count == 0)
@@ -53,7 +51,6 @@ namespace TauCode.Data.Text.EmailAddressSupport
 
             return this.LocalPartSegments[^1].Type;
         }
-
 
         internal SegmentType? GetLastDomainSegmentType()
         {
@@ -76,31 +73,28 @@ namespace TauCode.Data.Text.EmailAddressSupport
                 return this.AtSymbolIndex.Value + 1;
             }
 
-            throw Helper.CreateException(ExtractionErrorTag.InternalError, 0);
+            throw new TextDataExtractionException(
+                Helper.GetErrorMessage(TextDataExtractionErrorCodes.InternalError),
+                TextDataExtractionErrorCodes.InternalError,
+                0);
         }
 
-        internal HostName? GetIPHostName()
+        internal Segment? GetIPHostNameSegment()
         {
             if (_domainSegments.Count == 0)
             {
                 return null;
             }
 
-            return _domainSegments[0].IPHostName;
-        }
-
-        internal bool GotLabelOrPeriod()
-        {
-            if (_domainSegments.Count == 0)
+            var segment = _domainSegments[0];
+            if (segment.IPHostName == null)
             {
-                return false;
+                return null;
             }
 
-            var type = _domainSegments[0].Type;
-            return
-                type == SegmentType.Label ||
-                type == SegmentType.Period ||
-                false;
+            return _domainSegments[0];
         }
+
+        internal HostName? GetIPHostName() => GetIPHostNameSegment()?.IPHostName;
     }
 }

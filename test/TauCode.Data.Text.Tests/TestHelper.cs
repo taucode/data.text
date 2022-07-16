@@ -1,11 +1,83 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using TauCode.Data.Text.Exceptions;
 using TauCode.Extensions;
 
 namespace TauCode.Data.Text.Tests;
 
 internal static class TestHelper
 {
+    #region Dto Extensions
+
+    public static SemanticVersionDto ToDto(this Text.SemanticVersion semanticVersion)
+    {
+        return new SemanticVersionDto
+        {
+            Major = semanticVersion.Major,
+            Minor = semanticVersion.Minor,
+            Patch = semanticVersion.Patch,
+            PreRelease = semanticVersion.PreRelease,
+            BuildMetadata = semanticVersion.BuildMetadata,
+        };
+    }
+
+    public static EmojiDto ToDto(this Text.Emoji emoji)
+    {
+        return new EmojiDto
+        {
+            Value = emoji.Value,
+            Name = emoji.Name,
+        };
+    }
+
+    public static HostNameDto ToDto(this Text.HostName hostName)
+    {
+        return new HostNameDto
+        {
+            Kind = hostName.Kind,
+            Value = hostName.Value,
+        };
+    }
+
+    public static EmailAddressDto ToDto(this Text.EmailAddress emailAddress)
+    {
+        return new EmailAddressDto
+        {
+            LocalPart = emailAddress.LocalPart,
+            Domain = emailAddress.Domain.ToDto(),
+        };
+    }
+
+    public static SqlIdentifierDto ToDto(this Text.SqlIdentifier sqlIdentifier)
+    {
+        return new SqlIdentifierDto
+        {
+            Value = sqlIdentifier.Value,
+            Delimiter = sqlIdentifier.Delimiter,
+        };
+    }
+
+    public static TextDataExtractionExceptionDto ToDto(this TextDataExtractionException ex)
+    {
+        return new TextDataExtractionExceptionDto
+        {
+            Message = ex.Message,
+            CharsConsumed = ex.CharsConsumed,
+            ErrorCode = ex.ErrorCode,
+        };
+    }
+
+    public static TextDataExtractionResultDto ToDto(this TextDataExtractionResult extractionResult)
+    {
+        return new TextDataExtractionResultDto
+        {
+            CharsConsumed = extractionResult.CharsConsumed,
+            ErrorCode = extractionResult.ErrorCode,
+        };
+    }
+
+    #endregion
+
     internal static string TransformTestString(string s)
     {
         const string pattern = @"\{@([^:]+)\:(\d+)@\}";

@@ -1,0 +1,5192 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "first.last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": "john.                                                                                            smith@mail.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "john.smith",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "mail.net"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 111,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "john.smith@mail.net",
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "1234567890123456789012345678901234567890123456789012345678901234@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "1234567890123456789012345678901234567890123456789012345678901234",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 73,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1234567890123456789012345678901234567890123456789012345678901234@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "\"first\\\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\\\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\\\"last\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "first(12345678901234567890123456789012345678901234567890).last@(1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890)iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 323,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Comment: Too long with comments, not too long without"
+  },
+  {
+    "Index": 5,
+    "TestInput": "\"first@last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first@last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first@last\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "\"first\\\\last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\\\\last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\\\\last\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x2",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "x",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x2"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 254,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x2",
+    "Comment": "Comment: Total length reduced to 254 characters so it's still valid"
+  },
+  {
+    "Index": 8,
+    "TestInput": "1234567890123456789012345678901234567890123456789012345678@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.123456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "1234567890123456789012345678901234567890123456789012345678",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.123456789012345678901234567890123456789012345678901234567890123.iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 251,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1234567890123456789012345678901234567890123456789012345678@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.123456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "Comment": "Comment: Total length reduced to 254 characters so it's still valid"
+  },
+  {
+    "Index": 9,
+    "TestInput": "first.last@[12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "12.34.56.78"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[12.34.56.78]",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "first.last@[IPv6:::12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::12.34.56.78"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:::12.34.56.78]",
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "first.last@[IPv6:1111:2222:3333::4444:12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333::4444:c22:384e"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 50,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333::4444:c22:384e]",
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333:4444:5555:6666:c22:384e"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 59,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:c22:384e]",
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "first.last@[IPv6:::1111:2222:3333:4444:5555:6666]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::1111:2222:3333:4444:5555:6666"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 49,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:::1111:2222:3333:4444:5555:6666]",
+    "Comment": ""
+  },
+  {
+    "Index": 14,
+    "TestInput": "first.last@[IPv6:1111:2222:3333::4444:5555:6666]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333::4444:5555:6666"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 48,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333::4444:5555:6666]",
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333:4444:5555:6666::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 49,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333:4444:5555:6666::]",
+    "Comment": ""
+  },
+  {
+    "Index": 16,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:8888]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333:4444:5555:6666:7777:8888"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 57,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:8888]",
+    "Comment": ""
+  },
+  {
+    "Index": 17,
+    "TestInput": "first.last@x23456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "x23456789012345678901234567890123456789012345678901234567890123.iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 83,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@x23456789012345678901234567890123456789012345678901234567890123.iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 18,
+    "TestInput": "first.last@3com.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "3com.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@3com.com",
+    "Comment": ""
+  },
+  {
+    "Index": 19,
+    "TestInput": "first.last@123.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "123.iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@123.iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 20,
+    "TestInput": "\"first\\last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\\last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\\last\"@iana.org",
+    "Comment": "Comment: Any character can be escaped in a quoted string"
+  },
+  {
+    "Index": 21,
+    "TestInput": "first.last@[IPv6:1111:2222:3333::4444:5555:12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333:0:4444:5555:c22:384e"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 55,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333:0:4444:5555:c22:384e]",
+    "Comment": "Comment: RFC 4291 disagrees with RFC 5321 but is cited by it"
+  },
+  {
+    "Index": 22,
+    "TestInput": "first.last@[IPv6:1111:2222:3333::4444:5555:6666:7777]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "1111:2222:3333:0:4444:5555:6666:7777"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 53,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:1111:2222:3333:0:4444:5555:6666:7777]",
+    "Comment": "Comment: RFC 4291 disagrees with RFC 5321 but is cited by it"
+  },
+  {
+    "Index": 23,
+    "TestInput": "first.last@example.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "example.123"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@example.123",
+    "Comment": "Comment: TLD can't be all digits"
+  },
+  {
+    "Index": 24,
+    "TestInput": "first.last@com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@com",
+    "Comment": "Comment: Mail host must be second- or lower level"
+  },
+  {
+    "Index": 25,
+    "TestInput": "\"Abc\\@def\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Abc\\@def\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Abc\\@def\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 26,
+    "TestInput": "\"Fred\\ Bloggs\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Fred\\ Bloggs\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Fred\\ Bloggs\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 27,
+    "TestInput": "\"Joe.\\\\Blow\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Joe.\\\\Blow\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Joe.\\\\Blow\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 28,
+    "TestInput": "\"Abc@def\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Abc@def\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Abc@def\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 29,
+    "TestInput": "\"Fred Bloggs\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Fred Bloggs\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Fred Bloggs\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 30,
+    "TestInput": "user+mailbox@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "user+mailbox",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "user+mailbox@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 31,
+    "TestInput": "customer/department=shipping@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "customer/department=shipping",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 37,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "customer/department=shipping@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 32,
+    "TestInput": "$A12345@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "$A12345",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "$A12345@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 33,
+    "TestInput": "!def!xyz%abc@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "!def!xyz%abc",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "!def!xyz%abc@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 34,
+    "TestInput": "_somename@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "_somename",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "_somename@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 35,
+    "TestInput": "dclo@us.ibm.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "dclo",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "us.ibm.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "dclo@us.ibm.com",
+    "Comment": ""
+  },
+  {
+    "Index": 36,
+    "TestInput": "peter.piper@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "peter.piper",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "peter.piper@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 37,
+    "TestInput": "\"Doug \\\"Ace\\\" L.\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Doug \\\"Ace\\\" L.\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Doug \\\"Ace\\\" L.\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 38,
+    "TestInput": "test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 39,
+    "TestInput": "TEST@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "TEST",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "TEST@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 40,
+    "TestInput": "1234567890@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "1234567890",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1234567890@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 41,
+    "TestInput": "test+test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test+test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test+test@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 42,
+    "TestInput": "test-test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test-test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test-test@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 43,
+    "TestInput": "t*est@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "t*est",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "t*est@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 44,
+    "TestInput": "+1~1+@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "+1~1+",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "+1~1+@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 45,
+    "TestInput": "{_test_}@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "{_test_}",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "{_test_}@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 46,
+    "TestInput": "\"[[ test ]]\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"[[ test ]]\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"[[ test ]]\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 47,
+    "TestInput": "test.test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test.test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test.test@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 48,
+    "TestInput": "\"test.test\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test.test\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test.test\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 49,
+    "TestInput": "test.\"test\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test.\"test\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test.\"test\"@iana.org",
+    "Comment": "Comment: Obsolete form, but documented in RFC 5322"
+  },
+  {
+    "Index": 50,
+    "TestInput": "\"test@test\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test@test\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test@test\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 51,
+    "TestInput": "test@123.123.123.x123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "123.123.123.x123"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@123.123.123.x123",
+    "Comment": ""
+  },
+  {
+    "Index": 52,
+    "TestInput": "test@[123.123.123.123]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "123.123.123.123"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@[123.123.123.123]",
+    "Comment": ""
+  },
+  {
+    "Index": 53,
+    "TestInput": "test@example.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "example.iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@example.iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 54,
+    "TestInput": "test@example.example.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "example.example.iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@example.example.iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 55,
+    "TestInput": "\"test\\test\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test\\test\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test\\test\"@iana.org",
+    "Comment": "Comment: Any character can be escaped in a quoted string"
+  },
+  {
+    "Index": 56,
+    "TestInput": "test@example",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "example"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@example",
+    "Comment": "Comment: Dave Child says so"
+  },
+  {
+    "Index": 57,
+    "TestInput": "\"test\\\\blah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test\\\\blah\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test\\\\blah\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 58,
+    "TestInput": "\"test\\blah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test\\blah\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test\\blah\"@iana.org",
+    "Comment": "Comment: Any character can be escaped in a quoted string"
+  },
+  {
+    "Index": 59,
+    "TestInput": "\"test\\\rblah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test\\\rblah\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test\\\rblah\"@iana.org",
+    "Comment": "Comment: Quoted string specifically excludes carriage returns unless escaped"
+  },
+  {
+    "Index": 60,
+    "TestInput": "\"test\\\"blah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"test\\\"blah\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"test\\\"blah\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 61,
+    "TestInput": "customer/department@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "customer/department",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "customer/department@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 62,
+    "TestInput": "_Yosemite.Sam@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "_Yosemite.Sam",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "_Yosemite.Sam@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 63,
+    "TestInput": "~@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "~",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "~@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 64,
+    "TestInput": "\"Austin@Powers\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Austin@Powers\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Austin@Powers\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 65,
+    "TestInput": "Ima.Fool@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "Ima.Fool",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "Ima.Fool@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 66,
+    "TestInput": "\"Ima.Fool\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Ima.Fool\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Ima.Fool\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 67,
+    "TestInput": "\"Ima Fool\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Ima Fool\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 19,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Ima Fool\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 68,
+    "TestInput": "\"first\".\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\".\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\".\"last\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 69,
+    "TestInput": "\"first\".middle.\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\".middle.\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\".middle.\"last\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 70,
+    "TestInput": "\"first\".last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\".last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\".last@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322"
+  },
+  {
+    "Index": 71,
+    "TestInput": "first.\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.\"last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322"
+  },
+  {
+    "Index": 72,
+    "TestInput": "\"first\".\"middle\".\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\".\"middle\".\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\".\"middle\".\"last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322"
+  },
+  {
+    "Index": 73,
+    "TestInput": "\"first.middle\".\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first.middle\".\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first.middle\".\"last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322"
+  },
+  {
+    "Index": 74,
+    "TestInput": "\"first.middle.last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first.middle.last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first.middle.last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322"
+  },
+  {
+    "Index": 75,
+    "TestInput": "\"first..last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first..last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first..last\"@iana.org",
+    "Comment": "Comment: obs-local-part form as described in RFC 5322"
+  },
+  {
+    "Index": 76,
+    "TestInput": "\"first\\\\\\\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first\\\\\\\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first\\\\\\\"last\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 77,
+    "TestInput": "first.\"mid\\dle\".\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.\"mid\\dle\".\"last\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.\"mid\\dle\".\"last\"@iana.org",
+    "Comment": "Comment: Backslash can escape anything but must escape something"
+  },
+  {
+    "Index": 78,
+    "TestInput": "Test.\r\n Folding.\r\n Whitespace@IANA.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "Test.Folding.Whitespace",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "Test.Folding.Whitespace@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 79,
+    "TestInput": "(foo)cal(bar)@(baz)iamcal.com(quux)",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "cal",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iamcal.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments"
+  },
+  {
+    "Index": 80,
+    "TestInput": "cal@iamcal(woo).(yay)com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "cal",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iamcal.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments"
+  },
+  {
+    "Index": 81,
+    "TestInput": "\"foo\"(yay)@(hoopla)[1.2.3.4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"foo\"",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "1.2.3.4"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"foo\"@[1.2.3.4]",
+    "Comment": "Comment: Address literal can't be commented (RFC 5321)"
+  },
+  {
+    "Index": 82,
+    "TestInput": "cal(woo(yay)hoopla)@iamcal.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "cal",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iamcal.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments"
+  },
+  {
+    "Index": 83,
+    "TestInput": "cal(foo\\@bar)@iamcal.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "cal",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iamcal.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments"
+  },
+  {
+    "Index": 84,
+    "TestInput": "cal(foo\\)bar)@iamcal.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "cal",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iamcal.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "cal@iamcal.com",
+    "Comment": "Comment: A valid address containing comments and an escaped parenthesis"
+  },
+  {
+    "Index": 85,
+    "TestInput": "first().last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Comment: A valid address containing an empty comment"
+  },
+  {
+    "Index": 86,
+    "TestInput": "first.(\r\n middle\r\n )last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Comment: Comment with folding white space"
+  },
+  {
+    "Index": 87,
+    "TestInput": "first(Welcome to\r\n the (\"wonderful\" (!)) world\r\n of email)@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 67,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first@iana.org",
+    "Comment": "Comment: Silly example from my blog post"
+  },
+  {
+    "Index": 88,
+    "TestInput": "pete(his account)@silly.test(his host)",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "pete",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "silly.test"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "pete@silly.test",
+    "Comment": "Comment: Canonical example from RFC 5322"
+  },
+  {
+    "Index": 89,
+    "TestInput": "c@(Chris's host.)public.example",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "c",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "public.example"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "c@public.example",
+    "Comment": "Comment: Canonical example from RFC 5322"
+  },
+  {
+    "Index": 90,
+    "TestInput": "first(abc.def).last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Comment: Comment can contain a dot"
+  },
+  {
+    "Index": 91,
+    "TestInput": "first(a\"bc.def).last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Comment: Comment can contain double quote"
+  },
+  {
+    "Index": 92,
+    "TestInput": "first.(\")middle.last(\")@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.middle.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.middle.last@iana.org",
+    "Comment": "Comment: Comment can contain a quote"
+  },
+  {
+    "Index": 93,
+    "TestInput": "first(abc\\(def)@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first@iana.org",
+    "Comment": "Comment: Comment can contain quoted-pair"
+  },
+  {
+    "Index": 94,
+    "TestInput": "first.last@x(1234567890123456789012345678901234567890123456789012345678901234567890).com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "x.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 88,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@x.com",
+    "Comment": "Comment: Label is longer than 63 octets, but not with comment removed"
+  },
+  {
+    "Index": 95,
+    "TestInput": "a(a(b(c)d(e(f))g)h(i)j)@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "a",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 96,
+    "TestInput": "name.lastname@domain.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "name.lastname",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "domain.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "name.lastname@domain.com",
+    "Comment": ""
+  },
+  {
+    "Index": 97,
+    "TestInput": "a@b",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "a",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "b"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a@b",
+    "Comment": ""
+  },
+  {
+    "Index": 98,
+    "TestInput": "a@bar.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "a",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "bar.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a@bar.com",
+    "Comment": ""
+  },
+  {
+    "Index": 99,
+    "TestInput": "aaa@[123.123.123.123]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "aaa",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "123.123.123.123"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "aaa@[123.123.123.123]",
+    "Comment": ""
+  },
+  {
+    "Index": 100,
+    "TestInput": "a@bar",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "a",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "bar"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a@bar",
+    "Comment": ""
+  },
+  {
+    "Index": 101,
+    "TestInput": "a-b@bar.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "a-b",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "bar.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a-b@bar.com",
+    "Comment": ""
+  },
+  {
+    "Index": 102,
+    "TestInput": "+@b.c",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "+",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "b.c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "+@b.c",
+    "Comment": "Comment: TLDs can be any length"
+  },
+  {
+    "Index": 103,
+    "TestInput": "+@b.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "+",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "b.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "+@b.com",
+    "Comment": ""
+  },
+  {
+    "Index": 104,
+    "TestInput": "a@b.co-foo.uk",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "a",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "b.co-foo.uk"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "a@b.co-foo.uk",
+    "Comment": ""
+  },
+  {
+    "Index": 105,
+    "TestInput": "\"hello my name is\"@stutter.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"hello my name is\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "stutter.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"hello my name is\"@stutter.com",
+    "Comment": ""
+  },
+  {
+    "Index": 106,
+    "TestInput": "\"Test \\\"Fail\\\" Ing\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Test \\\"Fail\\\" Ing\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 28,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Test \\\"Fail\\\" Ing\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 107,
+    "TestInput": "valid@about.museum",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "valid",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "about.museum"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "valid@about.museum",
+    "Comment": ""
+  },
+  {
+    "Index": 108,
+    "TestInput": "shaitan@my-domain.thisisminekthx",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "shaitan",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "my-domain.thisisminekthx"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "shaitan@my-domain.thisisminekthx",
+    "Comment": "Comment: Disagree with Paul Gregg here"
+  },
+  {
+    "Index": 109,
+    "TestInput": "\"Joe\\\\Blow\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Joe\\\\Blow\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Joe\\\\Blow\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 110,
+    "TestInput": "HM2Kinsists@(that comments are allowed)this.is.ok",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "HM2Kinsists",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "this.is.ok"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 49,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "HM2Kinsists@this.is.ok",
+    "Comment": ""
+  },
+  {
+    "Index": 111,
+    "TestInput": "user%uucp!path@berkeley.edu",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "user%uucp!path",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "berkeley.edu"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "user%uucp!path@berkeley.edu",
+    "Comment": ""
+  },
+  {
+    "Index": 112,
+    "TestInput": "\"first(last)\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"first(last)\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"first(last)\"@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 113,
+    "TestInput": " \r\n (\r\n x \r\n ) \r\n first\r\n ( \r\n x\r\n ) \r\n .\r\n ( \r\n x) \r\n last \r\n (  x \r\n ) \r\n @iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 85,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": ""
+  },
+  {
+    "Index": 114,
+    "TestInput": "first.last @iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Comment: FWS is allowed after local part (this is similar to #152 but is the test proposed by John Kloor)"
+  },
+  {
+    "Index": 115,
+    "TestInput": "test. \r\n \r\n obs@syntax.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test.obs",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "syntax.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test.obs@syntax.com",
+    "Comment": "Comment: obs-fws allows multiple lines (test 2: space before break)"
+  },
+  {
+    "Index": 116,
+    "TestInput": "\"Unicode NULL \\␀\"@char.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"Unicode NULL \\␀\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "char.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 26,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"Unicode NULL \\␀\"@char.com",
+    "Comment": "Comment: Can have escaped Unicode Character 'NULL' (U+0000)"
+  },
+  {
+    "Index": 117,
+    "TestInput": "cdburgess+!#$%&'*-/=?+_{}|~test@gmail.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "cdburgess+!#$%&'*-/=?+_{}|~test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "gmail.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "cdburgess+!#$%&'*-/=?+_{}|~test@gmail.com",
+    "Comment": "Comment: Example given in comments"
+  },
+  {
+    "Index": 118,
+    "TestInput": "first.last@[IPv6:::a2:a3:a4:b1:b2:b3:b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "0:a2:a3:a4:b1:b2:b3:b4"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 40,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:0:a2:a3:a4:b1:b2:b3:b4]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)"
+  },
+  {
+    "Index": 119,
+    "TestInput": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1:a2:a3:a4:b1:b2:b3:0"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 40,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3:0]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)"
+  },
+  {
+    "Index": 120,
+    "TestInput": "first.last@[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 121,
+    "TestInput": "first.last@[IPv6:::b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::b4"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:::b4]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 122,
+    "TestInput": "first.last@[IPv6:::b3:b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::0.179.0.180"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:::0.179.0.180]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 123,
+    "TestInput": "first.last@[IPv6:a1::b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1::b4"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1::b4]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 124,
+    "TestInput": "first.last@[IPv6:a1::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 125,
+    "TestInput": "first.last@[IPv6:a1:a2::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1:a2::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1:a2::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 126,
+    "TestInput": "first.last@[IPv6:0123:4567:89ab:cdef::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "123:4567:89ab:cdef::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:123:4567:89ab:cdef::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 127,
+    "TestInput": "first.last@[IPv6:0123:4567:89ab:CDEF::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "123:4567:89ab:cdef::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:123:4567:89ab:cdef::]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 128,
+    "TestInput": "first.last@[IPv6:::a3:a4:b1:ffff:11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::a3:a4:b1:ffff:b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:::a3:a4:b1:ffff:b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 129,
+    "TestInput": "first.last@[IPv6:::a2:a3:a4:b1:ffff:11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "0:a2:a3:a4:b1:ffff:b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 48,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:0:a2:a3:a4:b1:ffff:b16:212c]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)"
+  },
+  {
+    "Index": 130,
+    "TestInput": "first.last@[IPv6:a1:a2:a3:a4::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1:a2:a3:a4::b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 42,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1:a2:a3:a4::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 131,
+    "TestInput": "first.last@[IPv6:a1:a2:a3:a4:b1::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1:a2:a3:a4:b1:0:b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1:a2:a3:a4:b1:0:b16:212c]",
+    "Comment": "Comment: :: only elides one zero group (IPv6 authority is RFC 4291)"
+  },
+  {
+    "Index": 132,
+    "TestInput": "first.last@[IPv6:a1::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1::b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 133,
+    "TestInput": "first.last@[IPv6:a1:a2::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1:a2::b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1:a2::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 134,
+    "TestInput": "first.last@[IPv6:0123:4567:89ab:cdef::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "123:4567:89ab:cdef::b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 50,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:123:4567:89ab:cdef::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 135,
+    "TestInput": "first.last@[IPv6:0123:4567:89ab:CDEF::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "123:4567:89ab:cdef::b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 50,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:123:4567:89ab:cdef::b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 136,
+    "TestInput": "first.last@[IPv6:a1::b2:11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "a1::b2:b16:212c"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@[IPv6:a1::b2:b16:212c]",
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 137,
+    "TestInput": "test@test.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "test.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@test.com",
+    "Comment": "Comment: test.com has an A-record but not an MX-record"
+  },
+  {
+    "Index": 138,
+    "TestInput": "test@xn--80aa3aw5b",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Internationalized",
+        "Value": "xn--80aa3aw5b"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@xn--80aa3aw5b",
+    "Comment": "Comment: Address is at an Internationalized Domain Name (Punycode)"
+  },
+  {
+    "Index": 139,
+    "TestInput": "test@Bücher.ch",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "test",
+      "Domain": {
+        "Kind": "Internationalized",
+        "Value": "xn--bcher-kva.ch"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "test@xn--bcher-kva.ch",
+    "Comment": "Comment: Address is at an Internationalized Domain Name (UTF-8)"
+  },
+  {
+    "Index": 140,
+    "TestInput": "john.doe@[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "john.doe",
+      "Domain": {
+        "Kind": "IPv6",
+        "Value": "::"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "john.doe@[IPv6:::]",
+    "Comment": "Comment: Address is at an Internationalized Domain Name (UTF-8)"
+  },
+  {
+    "Index": 141,
+    "TestInput": "ABC@Foo.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "ABC",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "foo.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "ABC@foo.com",
+    "Comment": ""
+  },
+  {
+    "Index": 142,
+    "TestInput": "ABc@[1.1.1.1](comment1)",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "ABc",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "1.1.1.1"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "ABc@[1.1.1.1]",
+    "Comment": ""
+  },
+  {
+    "Index": 143,
+    "TestInput": "abC@(comment1)[1.1.1.1]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "abC",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "1.1.1.1"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "abC@[1.1.1.1]",
+    "Comment": ""
+  },
+  {
+    "Index": 144,
+    "TestInput": "aBc@(comment1)[1.1.1.1](comment2)",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "aBc",
+      "Domain": {
+        "Kind": "IPv4",
+        "Value": "1.1.1.1"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "aBc@[1.1.1.1]",
+    "Comment": ""
+  },
+  {
+    "Index": 145,
+    "TestInput": "!@M.NET",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "!",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "m.net"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "!@m.net",
+    "Comment": ""
+  },
+  {
+    "Index": 146,
+    "TestInput": "\"John..Doe\"@example.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "\"John..Doe\"",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "example.com"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"John..Doe\"@example.com",
+    "Comment": ""
+  },
+  {
+    "Index": 147,
+    "TestInput": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~@M.NET",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "m.net"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "!#$%&'*+-/=?^_`{|}~.!#$%&'*+-/=?^_`{|}~@m.net",
+    "Comment": ""
+  },
+  {
+    "Index": 148,
+    "TestInput": "{@🐆:32@}@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "{@🐆:32@}",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "m.net"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 70,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "{@🐆:32@}@m.net",
+    "Comment": "NB: this is a replacement (see code)"
+  },
+  {
+    "Index": 149,
+    "TestInput": "  first.last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": {
+      "LocalPart": "first.last",
+      "Domain": {
+        "Kind": "Regular",
+        "Value": "iana.org"
+      }
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "first.last@iana.org",
+    "Comment": "Leading spaces"
+  },
+  {
+    "Index": 150,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 151,
+    "TestInput": "\n",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 152,
+    "TestInput": "test11@123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 203
+    },
+    "ExpectedErrorMessage": "IPv4 address must be enclosed in '[' and ']'.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Top Level Domain won't be all-numeric (see RFC 3696 Section 2). I disagree with Dave Child on this one."
+  },
+  {
+    "Index": 153,
+    "TestInput": "foobarush@192.168.0.1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 203
+    },
+    "ExpectedErrorMessage": "IPv4 address must be enclosed in '[' and ']'.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: ip need to be []"
+  },
+  {
+    "Index": 154,
+    "TestInput": "first.last@sub.do,com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Mistyped comma instead of dot (replaces old #3 which was the same as #57)"
+  },
+  {
+    "Index": 155,
+    "TestInput": "first\\@last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Escaping can only happen within a quoted string"
+  },
+  {
+    "Index": 156,
+    "TestInput": "123456789012345678901234567890123456789012345678901234567890@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.12345.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 255,
+      "ErrorCode": 202
+    },
+    "ExpectedErrorMessage": "Email address is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Entire address is longer than 254 characters"
+  },
+  {
+    "Index": 157,
+    "TestInput": "first.last",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: No @"
+  },
+  {
+    "Index": 158,
+    "TestInput": "12345678901234567890123456789012345678901234567890123456789012345@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 65,
+      "ErrorCode": 201
+    },
+    "ExpectedErrorMessage": "Local part is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part more than 64 characters"
+  },
+  {
+    "Index": 159,
+    "TestInput": ".first.last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part starts with a dot"
+  },
+  {
+    "Index": 160,
+    "TestInput": "first.last.@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part ends with a dot"
+  },
+  {
+    "Index": 161,
+    "TestInput": "first..last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part has consecutive dots"
+  },
+  {
+    "Index": 162,
+    "TestInput": "\"first\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part contains unescaped excluded characters"
+  },
+  {
+    "Index": 163,
+    "TestInput": "\"\"\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 205
+    },
+    "ExpectedErrorMessage": "Empty quoted string.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part contains unescaped excluded characters"
+  },
+  {
+    "Index": 164,
+    "TestInput": "\"\\\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 3
+    },
+    "ExpectedErrorMessage": "Unclosed string.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part cannot end with a backslash"
+  },
+  {
+    "Index": 165,
+    "TestInput": "\"\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 205
+    },
+    "ExpectedErrorMessage": "Empty quoted string.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part is effectively empty"
+  },
+  {
+    "Index": 166,
+    "TestInput": "first\\\\@last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Local part contains unescaped excluded characters"
+  },
+  {
+    "Index": 167,
+    "TestInput": "first.last@",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: No domain"
+  },
+  {
+    "Index": 168,
+    "TestInput": "x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 255,
+      "ErrorCode": 302
+    },
+    "ExpectedErrorMessage": "Host name is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Domain exceeds 255 chars"
+  },
+  {
+    "Index": 169,
+    "TestInput": "first.last@[.12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Only char that can precede IPv4 address is ':'"
+  },
+  {
+    "Index": 170,
+    "TestInput": "first.last@[12.34.56.789]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 305
+    },
+    "ExpectedErrorMessage": "Invalid IPv4 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Can't be interpreted as IPv4 so IPv6 tag is missing"
+  },
+  {
+    "Index": 171,
+    "TestInput": "first.last@[::12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 tag is missing"
+  },
+  {
+    "Index": 172,
+    "TestInput": "first.last@[IPv5:::12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 207
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 prefix.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 tag is wrong"
+  },
+  {
+    "Index": 173,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 53,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Not enough IPv6 groups"
+  },
+  {
+    "Index": 174,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:12.34.56.78]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 62,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Too many IPv6 groups (6 max)"
+  },
+  {
+    "Index": 175,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 51,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Not enough IPv6 groups"
+  },
+  {
+    "Index": 176,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:7777:8888:9999]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 61,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Too many IPv6 groups (8 max)"
+  },
+  {
+    "Index": 177,
+    "TestInput": "first.last@[IPv6:1111:2222::3333::4444:5555:6666]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 48,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Too many '::' (can be none or one)"
+  },
+  {
+    "Index": 178,
+    "TestInput": "first.last@[IPv6:1111:2222:333x::4444:5555]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: x is not valid in an IPv6 address"
+  },
+  {
+    "Index": 179,
+    "TestInput": "first.last@[IPv6:1111:2222:33333::4444:5555]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 43,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: 33333 is not a valid group in an IPv6 address"
+  },
+  {
+    "Index": 180,
+    "TestInput": "first.last@-xample.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Label can't begin with a hyphen"
+  },
+  {
+    "Index": 181,
+    "TestInput": "first.last@exampl-.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Label can't end with a hyphen"
+  },
+  {
+    "Index": 182,
+    "TestInput": "first.last@x234567890123456789012345678901234567890123456789012345678901234.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 75,
+      "ErrorCode": 304
+    },
+    "ExpectedErrorMessage": "Domain label is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Label can't be longer than 63 octets"
+  },
+  {
+    "Index": 183,
+    "TestInput": "abc\\@def@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: This example from RFC 3696 was corrected in an erratum"
+  },
+  {
+    "Index": 184,
+    "TestInput": "abc\\\\@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: This example from RFC 3696 was corrected in an erratum"
+  },
+  {
+    "Index": 185,
+    "TestInput": "Doug\\ \\\"Ace\\\"\\ Lovell@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Escaping can only happen in a quoted string"
+  },
+  {
+    "Index": 186,
+    "TestInput": "abc@def@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 187,
+    "TestInput": "abc\\\\@def@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 188,
+    "TestInput": "abc\\@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 189,
+    "TestInput": "@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: No local part"
+  },
+  {
+    "Index": 190,
+    "TestInput": "doug@",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 191,
+    "TestInput": "\"qu@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 3
+    },
+    "ExpectedErrorMessage": "Unclosed string.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 192,
+    "TestInput": "ote\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 193,
+    "TestInput": "ote.\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 3
+    },
+    "ExpectedErrorMessage": "Unclosed string.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 194,
+    "TestInput": ".dot@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 195,
+    "TestInput": "dot.@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 196,
+    "TestInput": "two..dot@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 197,
+    "TestInput": "\"Doug \"Ace\" L.\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 198,
+    "TestInput": "Doug\\ \\\"Ace\\\"\\ L\\.@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 199,
+    "TestInput": "hello world@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 200,
+    "TestInput": "gatsby@f.sc.ot.t.f.i.tzg.era.l.d.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Doug Lovell says this should fail"
+  },
+  {
+    "Index": 201,
+    "TestInput": "test.iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 202,
+    "TestInput": "test.@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 203,
+    "TestInput": "test..test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 204,
+    "TestInput": ".test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 205,
+    "TestInput": "test@test@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 206,
+    "TestInput": "test@@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 207,
+    "TestInput": "-- test --@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: No spaces allowed in local part"
+  },
+  {
+    "Index": 208,
+    "TestInput": "[test]@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Square brackets only allowed within quotes"
+  },
+  {
+    "Index": 209,
+    "TestInput": "\"test\"test\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Quotes cannot be nested"
+  },
+  {
+    "Index": 210,
+    "TestInput": "()[]\\;:,><@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Disallowed Characters"
+  },
+  {
+    "Index": 211,
+    "TestInput": "test@.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Dave Child says so"
+  },
+  {
+    "Index": 212,
+    "TestInput": "test@example.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Dave Child says so"
+  },
+  {
+    "Index": 213,
+    "TestInput": "test@.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Dave Child says so"
+  },
+  {
+    "Index": 214,
+    "TestInput": "test@123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 69,
+      "ErrorCode": 304
+    },
+    "ExpectedErrorMessage": "Domain label is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: 255 characters is maximum length for domain. This is 256."
+  },
+  {
+    "Index": 215,
+    "TestInput": "test@[123.123.123.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Dave Child says so"
+  },
+  {
+    "Index": 216,
+    "TestInput": "test@123.123.123.123]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Dave Child says so"
+  },
+  {
+    "Index": 217,
+    "TestInput": "NotAnEmail",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 218,
+    "TestInput": "@NotAnEmail",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 219,
+    "TestInput": "\"test\rblah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Quoted string specifically excludes carriage returns"
+  },
+  {
+    "Index": 220,
+    "TestInput": "\"test\"blah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 221,
+    "TestInput": ".wooly@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 222,
+    "TestInput": "wo..oly@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 223,
+    "TestInput": "pootietang.@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 224,
+    "TestInput": ".@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 225,
+    "TestInput": "Ima Fool@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Phil Haack says so"
+  },
+  {
+    "Index": 226,
+    "TestInput": "phil.h\\@\\@ck@haacked.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Escaping can only happen in a quoted string"
+  },
+  {
+    "Index": 227,
+    "TestInput": "\"first\\\\\"last\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Contains an unescaped quote"
+  },
+  {
+    "Index": 228,
+    "TestInput": "foo@[\\1.2.3.4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: RFC 5321 specifies the syntax for address-literal and does not allow escaping"
+  },
+  {
+    "Index": 229,
+    "TestInput": "first.\"\".last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 205
+    },
+    "ExpectedErrorMessage": "Empty quoted string.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Contains a zero-length element"
+  },
+  {
+    "Index": 230,
+    "TestInput": "first\\last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Unquoted string must be an atom"
+  },
+  {
+    "Index": 231,
+    "TestInput": "Abc\\@def@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Was incorrectly given as a valid address in the original RFC 3696"
+  },
+  {
+    "Index": 232,
+    "TestInput": "Fred\\ Bloggs@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Was incorrectly given as a valid address in the original RFC 3696"
+  },
+  {
+    "Index": 233,
+    "TestInput": "Joe.\\\\Blow@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Was incorrectly given as a valid address in the original RFC 3696"
+  },
+  {
+    "Index": 234,
+    "TestInput": "first.last@[IPv6:1111:2222:3333:4444:5555:6666:12.34.567.89]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 59,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv4 part contains an invalid octet"
+  },
+  {
+    "Index": 235,
+    "TestInput": "\"test\r\n blah\"@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Folding white space can't appear within a quoted pair"
+  },
+  {
+    "Index": 236,
+    "TestInput": "{^c\\@**Dog^}@cartoon.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: This is a throwaway example from Doug Lovell's article. Actually it's not a valid address."
+  },
+  {
+    "Index": 237,
+    "TestInput": "cal(foo(bar)@iamcal.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Unclosed parenthesis in comment"
+  },
+  {
+    "Index": 238,
+    "TestInput": "cal(foo).bar)@iamcal.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Too many closing parentheses"
+  },
+  {
+    "Index": 239,
+    "TestInput": "cal(foo\\)@iamcal.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Backslash at end of comment has nothing to escape"
+  },
+  {
+    "Index": 240,
+    "TestInput": "jdoe@machine(comment).  example",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Canonical example from RFC 5322"
+  },
+  {
+    "Index": 241,
+    "TestInput": "1234   @   local(blah)  .machine .example",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Canonical example from RFC 5322"
+  },
+  {
+    "Index": 242,
+    "TestInput": "first(middle)last@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Can't have a comment or white space except at an element boundary"
+  },
+  {
+    "Index": 243,
+    "TestInput": "first(abc(\"def\".ghi).mno)middle(abc(\"def\".ghi).mno).last@(abc(\"def\".ghi).mno)example(abc(\"def\".ghi).mno).(abc(\"def\".ghi).mno)com(abc(\"def\".ghi).mno)",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Can't have comments or white space except at an element boundary"
+  },
+  {
+    "Index": 244,
+    "TestInput": "a(a(b(c)d(e(f))g)(h(i)j)@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Braces are not properly matched"
+  },
+  {
+    "Index": 245,
+    "TestInput": ".@",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 246,
+    "TestInput": "@bar.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 247,
+    "TestInput": "@@bar.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 248,
+    "TestInput": "aaa.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 249,
+    "TestInput": "aaa@.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 250,
+    "TestInput": "aaa@.123",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 251,
+    "TestInput": "aaa@[123.123.123.123]a",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: extra data outside ip"
+  },
+  {
+    "Index": 252,
+    "TestInput": "aaa@[123.123.123.333]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 305
+    },
+    "ExpectedErrorMessage": "Invalid IPv4 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: not a valid IP"
+  },
+  {
+    "Index": 253,
+    "TestInput": "a@bar.com.",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 254,
+    "TestInput": "a@-b.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 255,
+    "TestInput": "a@b-.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 256,
+    "TestInput": "-@..com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 257,
+    "TestInput": "-@a..com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 258,
+    "TestInput": "invalid@about.museum-",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 21,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 259,
+    "TestInput": "test@...........com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: ......"
+  },
+  {
+    "Index": 260,
+    "TestInput": "Invalid \\\n Folding \\\n Whitespace@iana.org",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: This isn't FWS so Dominic Sayers says it's invalid"
+  },
+  {
+    "Index": 261,
+    "TestInput": "test.\r\n\r\n obs@syntax.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: obs-fws must have at least one WSP per line"
+  },
+  {
+    "Index": 262,
+    "TestInput": "\"Unicode NULL ␀\"@char.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Cannot have unescaped Unicode Character 'NULL' (U+0000)"
+  },
+  {
+    "Index": 263,
+    "TestInput": "UnicodeNULL\\␀@char.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Escaped Unicode Character 'NULL' (U+0000) must be in quoted string"
+  },
+  {
+    "Index": 264,
+    "TestInput": "first.last@[IPv6::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 18,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 265,
+    "TestInput": "first.last@[IPv6::::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 266,
+    "TestInput": "first.last@[IPv6::b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 267,
+    "TestInput": "first.last@[IPv6::::b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 268,
+    "TestInput": "first.last@[IPv6::b3:b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 269,
+    "TestInput": "first.last@[IPv6::::b3:b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 270,
+    "TestInput": "first.last@[IPv6:a1:::b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 271,
+    "TestInput": "first.last@[IPv6:a1:]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 272,
+    "TestInput": "first.last@[IPv6:a1:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 273,
+    "TestInput": "first.last@[IPv6:a1:a2:]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 274,
+    "TestInput": "first.last@[IPv6:a1:a2:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 275,
+    "TestInput": "first.last@[IPv6::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 276,
+    "TestInput": "first.last@[IPv6::::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 277,
+    "TestInput": "first.last@[IPv6:a1:11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 278,
+    "TestInput": "first.last@[IPv6:a1:::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 33,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 279,
+    "TestInput": "first.last@[IPv6:a1:a2:::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 280,
+    "TestInput": "first.last@[IPv6:0123:4567:89ab:cdef::11.22.33.xx]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 47,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 281,
+    "TestInput": "first.last@[IPv6:0123:4567:89ab:CDEFF::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 50,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 282,
+    "TestInput": "first.last@[IPv6:a1::a4:b1::b4:11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 42,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 283,
+    "TestInput": "first.last@[IPv6:a1::11.22.33]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 284,
+    "TestInput": "first.last@[IPv6:a1::11.22.33.44.55]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 35,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 285,
+    "TestInput": "first.last@[IPv6:a1::b211.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 286,
+    "TestInput": "first.last@[IPv6:a1::b2::11.22.33.44]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 287,
+    "TestInput": "first.last@[IPv6:a1::b3:]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 288,
+    "TestInput": "first.last@[IPv6::a2::b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 24,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 289,
+    "TestInput": "first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3:]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 290,
+    "TestInput": "first.last@[IPv6::a2:a3:a4:b1:b2:b3:b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 291,
+    "TestInput": "first.last@[IPv6:a1:a2:a3:a4::b1:b2:b3:b4]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 41,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: IPv6 authority is RFC 4291"
+  },
+  {
+    "Index": 292,
+    "TestInput": "test@example.com\n",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: Address has a newline at the end"
+  },
+  {
+    "Index": 293,
+    "TestInput": "123456789.(comment:10)123456789.(comment:20)123456789.(comment:30)123456789.(comment:40)123456789.(comment:50)123456789.(comment:60)12345(comment:5)@example.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 137,
+      "ErrorCode": 201
+    },
+    "ExpectedErrorMessage": "Local part is too long.",
+    "ExpectedValueString": null,
+    "Comment": "[ak] total local part exceeds 64 chars. Tag: 044523bc-6c75-4ef4-bac0-51ec9628fc0a"
+  },
+  {
+    "Index": 294,
+    "TestInput": "abc@[IPv6:::](comment).foo.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Comment: [ak] two hosts separated by comment"
+  },
+  {
+    "Index": 295,
+    "TestInput": "joe@[1.1.1.1][2.2.2.2]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 296,
+    "TestInput": "abc@foo.(comment)[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 297,
+    "TestInput": "abc@foo(comment).[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 298,
+    "TestInput": "abc@(comment)[IPv6:::](comment).com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 299,
+    "TestInput": "abc@foo.com(comment)[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 300,
+    "TestInput": "abc@foo.com[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 301,
+    "TestInput": "abc@[IPv6:::]foo.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 302,
+    "TestInput": "abc@[IPv6:::](comment1)[1.1.1.1]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 303,
+    "TestInput": "abc@[1.1.1.1](comment1)[IPv6:::]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 304,
+    "TestInput": "abc@[1.1.1.1](comment1)[2.2.2.2]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 305,
+    "TestInput": "abc@[1.2.3.4][5.6.7.8]",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 306,
+    "TestInput": "joe@0000:1111:2222:3333:4444:5555:6666:7777",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 307,
+    "TestInput": "John..Doe@example.com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 308,
+    "TestInput": "abc@[1.1.1.1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 309,
+    "TestInput": "abc@[1.1.1.1}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 310,
+    "TestInput": "abc@[IPv6:::1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 311,
+    "TestInput": "abc@[IPv6:::1}",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 312,
+    "TestInput": "joe(bad comment\u0011)@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Low ascii in comment"
+  },
+  {
+    "Index": 313,
+    "TestInput": "joe(bad comment\\\u0011)@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Escaped low ascii in comment"
+  },
+  {
+    "Index": 314,
+    "TestInput": "joe.\"bad string: \n here\"@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 17,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 315,
+    "TestInput": "joe(bad comment\\\u0002)@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 16,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Escaped low ascii in comment (another example)"
+  },
+  {
+    "Index": 316,
+    "TestInput": "joe(bad comment\u0002)@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Un-escaped low ascii in comment"
+  },
+  {
+    "Index": 317,
+    "TestInput": "joe.\"bad quoted string\\\u0002\"@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 23,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Escaped low ascii in quoted string"
+  },
+  {
+    "Index": 318,
+    "TestInput": "joe.\"bad quoted string\u0002\"@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 22,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Un-escaped low ascii in quoted string"
+  },
+  {
+    "Index": 319,
+    "TestInput": "joe.\u0002biden@m.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "low ascii in local part"
+  },
+  {
+    "Index": 320,
+    "TestInput": "joe.biden@m\u0002.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "low ascii in host"
+  },
+  {
+    "Index": 321,
+    "TestInput": "joe@{@abcd.:50@}coma",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 257,
+      "ErrorCode": 302
+    },
+    "ExpectedErrorMessage": "Host name is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Domain is too long (254 chars)"
+  },
+  {
+    "Index": 322,
+    "TestInput": "john.     ",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "Input ends with spaces."
+  },
+  {
+    "Index": 323,
+    "TestInput": "john.\"quote:8:quote:8:quote:8:quote:8:quote:8:quote:8:quote:8:quote:8:\"@mail.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 65,
+      "ErrorCode": 201
+    },
+    "ExpectedErrorMessage": "Local part is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Too long quoted string."
+  },
+  {
+    "Index": 324,
+    "TestInput": "john.   (abc)  \"quote:8:quote:8:quote:8:quote:8:quote:8:quote:8:quote:8:quote:8:\"@mail.net",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 75,
+      "ErrorCode": 201
+    },
+    "ExpectedErrorMessage": "Local part is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Same as previous, but with garbage (comment + space). Length of garbage is 10 => char position in error is greater by 10."
+  },
+  {
+    "Index": 325,
+    "TestInput": "j@{@abcd.:50@}com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 255,
+      "ErrorCode": 202
+    },
+    "ExpectedErrorMessage": "Email address is too long.",
+    "ExpectedValueString": null,
+    "Comment": "Domain is 253 which is ok, but total email address length is 255 which is not acceptable (254 is max)"
+  },
+  {
+    "Index": 326,
+    "TestInput": "john@google(some comment)com",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Period must follow a domain label, comment is omitted."
+  },
+  {
+    "Index": 327,
+    "TestInput": "john@[",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 328,
+    "TestInput": "john@$",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 329,
+    "TestInput": "john\r",
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  }
+]
