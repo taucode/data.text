@@ -6,31 +6,28 @@ namespace TauCode.Data.Text.Exceptions
     [Serializable]
     public class TextDataExtractionException : Exception
     {
-        public TextDataExtractionException()
-            : base("Text data extraction failed.")
-        {
-        }
-
-        public TextDataExtractionException(string message)
+        internal TextDataExtractionException(string message)
             : base(message)
         {
         }
 
-        public TextDataExtractionException(string message, int? index)
+        internal TextDataExtractionException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        public TextDataExtractionException(string message, int errorCode, int charsConsumed)
             : base(message)
         {
-            this.Index = index;
+            this.ErrorCode = errorCode;
+            this.CharsConsumed = charsConsumed;
         }
 
-        public TextDataExtractionException(string message, Exception inner)
+        public TextDataExtractionException(string message, int errorCode, int charsConsumed, Exception inner)
             : base(message, inner)
         {
-        }
-
-        public TextDataExtractionException(string message, int? index, Exception inner)
-            : base(message, inner)
-        {
-            this.Index = index;
+            this.ErrorCode = errorCode;
+            this.CharsConsumed = charsConsumed;
         }
 
         protected TextDataExtractionException(
@@ -39,8 +36,7 @@ namespace TauCode.Data.Text.Exceptions
         {
         }
 
-        public int? Index { get; }
-
-        internal ExtractionErrorTag? ExtractionError;
+        public int ErrorCode { get; }
+        public int CharsConsumed { get; }
     }
 }

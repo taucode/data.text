@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-// todo regions
 namespace TauCode.Data.Text.EmojiSupport
 {
     internal static class EmojiHelper
     {
-        private static readonly HashSet<char> EmojiStartingChars;
-        private static readonly HashSet<char> AsciiEmojiStartingChars;
-        private static readonly HashSet<char> SingleCharAsciiEmojis;
+        internal static readonly HashSet<char> EmojiStartingChars;
+        internal static readonly HashSet<char> AsciiEmojiStartingChars;
+        internal static readonly HashSet<char> SingleCharAsciiEmojis;
         internal static readonly Dictionary<string, Emoji> Emojis;
         internal static readonly Dictionary<string, EmojiDescriptor> EmojiDescriptors;
-
 
         internal static readonly EmojiNode Root;
 
@@ -70,10 +69,6 @@ namespace TauCode.Data.Text.EmojiSupport
         }
 
         internal static bool IsEmojiStartingChar(this char c) => EmojiStartingChars.Contains(c);
-
-        internal static bool IsAsciiEmojiStartingChar(this char c) => AsciiEmojiStartingChars.Contains(c);
-
-        internal static bool IsSingleCharAsciiEmoji(this char c) => SingleCharAsciiEmojis.Contains(c);
 
         private static string ReadStringFromStream(Stream stream, byte[] buffer)
         {
@@ -145,11 +140,6 @@ namespace TauCode.Data.Text.EmojiSupport
             }
 
             return root;
-        }
-
-        internal static int Skip(ReadOnlySpan<char> input, out ExtractionErrorTag? errorTag)
-        {
-            return Root.Skip(input, out errorTag);
         }
     }
 }

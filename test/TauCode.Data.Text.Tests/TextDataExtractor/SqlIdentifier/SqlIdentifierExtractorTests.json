@@ -1,0 +1,303 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestDelimiters": [
+      "None"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input."
+  },
+  {
+    "Index": 1,
+    "TestInput": "person_name_1+",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": "+ ",
+    "ExpectedValue": {
+      "Value": "person_name_1",
+      "Delimiter": "None"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedValueString": "person_name_1",
+    "ExpectedErrorMessage": null,
+    "Comment": "Simple happy path."
+  },
+  {
+    "Index": 2,
+    "TestInput": "[имя человека]+",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": "+ ",
+    "ExpectedValue": {
+      "Value": "имя человека",
+      "Delimiter": "Brackets"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedValueString": "[имя человека]",
+    "ExpectedErrorMessage": null,
+    "Comment": "Simple happy path."
+  },
+  {
+    "Index": 3,
+    "TestInput": "[имя человека]+",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": "Unexpected terminator ('+')."
+  },
+  {
+    "Index": 4,
+    "TestInput": "[имя человека",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": ";",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": 5
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "[vendor]",
+    "TestDelimiters": [
+      "None"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "vendor",
+    "TestDelimiters": [
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "v#endor",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "[#vendor]",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "ve#ndor",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "[v#endor]",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "[some name ]",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "[]",
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestTerminatingChars": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "`person_name`;",
+    "TestDelimiters": [
+      "None",
+      "BackQuotes"
+    ],
+    "TestTerminatingChars": "; ",
+    "ExpectedValue": {
+      "Value": "person_name",
+      "Delimiter": "BackQuotes"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedValueString": "`person_name`",
+    "ExpectedErrorMessage": null,
+    "Comment": "MySQL happy path."
+  },
+  {
+    "Index": 14,
+    "TestInput": "`person_name`;",
+    "TestDelimiters": [
+      "None",
+      "DoubleQuotes"
+    ],
+    "TestTerminatingChars": "; ",
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedValueString": null,
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 15,
+    "TestInput": "`имя человека`+",
+    "TestDelimiters": [
+      "None",
+      "BackQuotes"
+    ],
+    "TestTerminatingChars": "+ ",
+    "ExpectedValue": {
+      "Value": "имя человека",
+      "Delimiter": "BackQuotes"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": null
+    },
+    "ExpectedValueString": "`имя человека`",
+    "ExpectedErrorMessage": null,
+    "Comment": "Simple happy path."
+  },
+  {
+    "Index": 16,
+    "TestInput": "\"person_name\";",
+    "TestDelimiters": [
+      "BackQuotes",
+      "DoubleQuotes"
+    ],
+    "TestTerminatingChars": "; ",
+    "ExpectedValue": {
+      "Value": "person_name",
+      "Delimiter": "DoubleQuotes"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedValueString": "\"person_name\"",
+    "ExpectedErrorMessage": null,
+    "Comment": "Double quote happy path."
+  }
+]

@@ -1,0 +1,170 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Empty input is not a valid Decimal."
+  },
+  {
+    "Index": 1,
+    "TestInput": "1",
+    "TestTerminatingChars": "1",
+    "ExpectedValue": 1.0,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "0",
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "00",
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "01;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": 1.0,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "-01/",
+    "TestTerminatingChars": ";/",
+    "ExpectedValue": -1.0,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": " 1",
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": "Leading space is not allowed."
+  },
+  {
+    "Index": 7,
+    "TestInput": "123;",
+    "TestTerminatingChars": ";/",
+    "ExpectedValue": 123.0,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "123;",
+    "TestTerminatingChars": null,
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 9,
+    "TestInput": "123 ",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "-12345",
+    "TestTerminatingChars": "-+1234567890",
+    "ExpectedValue": -12345.0,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "123.6",
+    "TestTerminatingChars": ";/",
+    "ExpectedValue": 123.6,
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 12,
+    "TestInput": "79228162514264337593543950336 ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 601
+    },
+    "ExpectedErrorMessage": "Failed to extract System.Decimal.",
+    "Comment": ""
+  },
+  {
+    "Index": 13,
+    "TestInput": "-79228162514264337593543950336 ",
+    "TestTerminatingChars": " ",
+    "ExpectedValue": 0.0,
+    "ExpectedResult": {
+      "CharsConsumed": 30,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  }
+]

@@ -6,47 +6,42 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\EmailAddress\EmailAddressTests.Fail.ForParsing.json" />
-    <None Remove="Resources\EmailAddress\EmailAddressTests.Success.json" />
-    <None Remove="Resources\HostName\HostNameTests.IPv6.Fail.json" />
-    <None Remove="Resources\HostName\HostNameTests.IPv6.Success.json" />
-    <None Remove="Resources\HostName\HostNameTests.json" />
-    <None Remove="Resources\SemanticVersion\SemanticVersionTests.Fail.json" />
-    <None Remove="Resources\SemanticVersion\SemanticVersionTests.Success.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\BooleanTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\DateTimeOffsetTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\DecimalTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\DoubleTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\FilePathTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\Int32Tests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\Int64Tests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\JsonStringTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\KeyTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\TermTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\TimeSpanTests.json" />
-    <None Remove="Resources\TextDataExtractor.TryExtract\UriTests.json" />
+    <None Remove="TextDataExtractor\EmailAddress\EmailAddressExtractorTests.json" />
+    <None Remove="TextDataExtractor\Emoji\EmojiExtractorTests.json" />
+    <None Remove="TextDataExtractor\Enum\EnumExtractorTests.json" />
+    <None Remove="TextDataExtractor\HostName\HostNameExtractorTests.json" />
+    <None Remove="TextDataExtractor\Identifier\IdentifierExtractorTests.json" />
+    <None Remove="TextDataExtractor\Item\ItemExtractorTests.json" />
+    <None Remove="TextDataExtractor\SemanticVersion\SemanticVersionExtractorTests.json" />
+    <None Remove="TextDataExtractor\SqlIdentifier\SqlIdentifierExtractorTests.json" />
+    <None Remove="TextDataExtractor\StringItem\StringItemExtractorTests.json" />
+    <None Remove="TextDataExtractor\Word\WordExtractorTests.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\EmailAddress\EmailAddressTests.Fail.ForParsing.json" />
-    <EmbeddedResource Include="Resources\EmailAddress\EmailAddressTests.Success.json" />
-    <EmbeddedResource Include="Resources\HostName\HostNameTests.IPv6.Fail.json" />
-    <EmbeddedResource Include="Resources\HostName\HostNameTests.IPv6.Success.json" />
-    <EmbeddedResource Include="Resources\HostName\HostNameTests.json" />
-    <EmbeddedResource Include="Resources\SemanticVersion\SemanticVersionTests.Fail.json" />
-    <EmbeddedResource Include="Resources\SemanticVersion\SemanticVersionTests.Success.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\BooleanTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\DateTimeOffsetTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\DecimalTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\DoubleTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\TermTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\KeyTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\FilePathTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\Int32Tests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\Int64Tests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\JsonStringTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\TimeSpanTests.json" />
-    <EmbeddedResource Include="Resources\TextDataExtractor.TryExtract\UriTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Boolean\BooleanExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\DateTimeOffset\DateTimeOffsetExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Decimal\DecimalExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Double\DoubleExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\CLangString\CLangStringExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\EmailAddress\EmailAddressExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Emoji\EmojiExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Enum\EnumExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\HostName\HostNameExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Identifier\IdentifierExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Item\ItemExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\SemanticVersion\SemanticVersionExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\SqlIdentifier\SqlIdentifierExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\StringItem\StringItemExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Term\TermExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Key\KeyExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\FilePath\FilePathExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Int32\Int32ExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Int64\Int64ExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\JsonString\JsonStringExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\TimeSpan\TimeSpanExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Uri\UriExtractorTests.json" />
+    <EmbeddedResource Include="TextDataExtractor\Word\WordExtractorTests.json" />
   </ItemGroup>
 
   <ItemGroup>

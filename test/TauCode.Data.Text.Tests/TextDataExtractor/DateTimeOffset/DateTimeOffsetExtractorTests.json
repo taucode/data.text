@@ -1,0 +1,62 @@
+﻿[
+  {
+    "Index": 0,
+    "TestInput": "",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "0001-01-01T00:00:00+00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 1,
+    "TestInput": "2022-06-23",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "2022-06-23T00:00:00+03:00",
+    "ExpectedResult": {
+      "CharsConsumed": 10,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 2,
+    "TestInput": "2022-06-23Z;",
+    "TestTerminatingChars": ";",
+    "ExpectedValue": "2022-06-23T00:00:00+00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
+    "TestInput": "2022-06-23T10:20:30Z]",
+    "TestTerminatingChars": "[]",
+    "ExpectedValue": "2022-06-23T10:20:30+00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "7777-77-77T00:00:00Z",
+    "TestTerminatingChars": null,
+    "ExpectedValue": "0001-01-01T00:00:00+00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 20,
+      "ErrorCode": 1201
+    },
+    "ExpectedErrorMessage": "Failed to extract System.DateTimeOffset.",
+    "Comment": ""
+  }
+]
