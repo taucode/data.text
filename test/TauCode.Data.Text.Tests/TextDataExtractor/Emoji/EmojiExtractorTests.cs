@@ -2,13 +2,56 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
+using TauCode.Extensions;
 
 namespace TauCode.Data.Text.Tests.TextDataExtractor.Emoji;
 
 [TestFixture]
 public class EmojiExtractorTests
 {
+    [Test]
+    [TestCase(0)]
+    [TestCase(-1)]
+    [TestCase(2)]
+    [TestCase(null)]
+    public void MaxConsumption_AnyValue_ThrowsException(int? maxConsumption)
+    {
+        // Arrange
+        var extractor = EmojiExtractor.Instance;
+
+        // Act & Assert
+        var ex = Assert.Throws<InvalidOperationException>(() => extractor.MaxConsumption = maxConsumption);
+
+        // Assert
+        Assert.That(ex, Is.Not.Null);
+    }
+
+    [Test]
+    [TestCase(null)]
+    [TestCase("not_null")]
+    public void Terminator_AnyValue_ThrowsException(string terminatorTag)
+    {
+        // Arrange
+        var extractor = EmojiExtractor.Instance;
+        TerminatingDelegate terminator;
+        if (terminatorTag == null)
+        {
+            terminator = null;
+        }
+        else
+        {
+            terminator = DemoIsWhiteSpace;
+        }
+
+        // Act & Assert
+        var ex = Assert.Throws<InvalidOperationException>(() => extractor.Terminator = terminator);
+
+        // Assert
+        Assert.That(ex, Is.Not.Null);
+    }
+
     [Test]
     [TestCaseSource(nameof(GetSuccessfulTestDtos))]
     public void TryExtract_ValidArgument_ReturnsExpectedResult(EmojiExtractorTestDto testDto)
@@ -73,6 +116,91 @@ public class EmojiExtractorTests
 
         Assert.That(result.ErrorCode.Value, Is.EqualTo(testDto.ExpectedResult.ErrorCode));
         Assert.That(errorMessage, Is.EqualTo(testDto.ExpectedErrorMessage));
+    }
+
+    [Test]
+    [TestCaseSource(nameof(GetSuccessfulTestDtos))]
+    public void Extract_SomeArgument_ReturnsExpectedResultOrThrowsExpectedException(EmojiExtractorTestDto testDto)
+    {
+        // Arrange
+        var input = testDto.TestInput;
+
+        var extractor = EmojiExtractor.Instance;
+
+        // Act
+        if (testDto.ExpectedResult.ErrorCode.HasValue)
+        {
+            // fail
+            var value = Text.Emoji.EnumerateAll().First(x => x.Name.Contains("woman"));
+            var ex = Assert.Throws<TextDataExtractionException>(() => extractor.Extract(input, out value));
+
+            Assert.That(value, Is.EqualTo(default(Text.Emoji)));
+
+            Assert.That(ex.Message, Is.EqualTo(testDto.ExpectedErrorMessage));
+            Assert.That(ex.CharsConsumed, Is.EqualTo(testDto.ExpectedResult.CharsConsumed));
+            Assert.That(ex.ErrorCode, Is.EqualTo(testDto.ExpectedResult.ErrorCode));
+        }
+        else
+        {
+            // success
+            var consumed = extractor.Extract(input, out var value);
+
+            Assert.That(consumed, Is.EqualTo(testDto.ExpectedResult.CharsConsumed));
+            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+        }
+    }
+
+    [Test]
+    [TestCaseSource(nameof(GetSuccessfulTestDtos))]
+    public void TryParse_SomeArgument_ReturnsExpectedResult(EmojiExtractorTestDto testDto)
+    {
+        // Arrange
+        var input = testDto.TestInput;
+
+        var extractor = EmojiExtractor.Instance;
+
+        var terminatorBeforeParse = extractor.Terminator;
+
+        // Act
+        var parsed = extractor.TryParse(input, out var value);
+
+        var expectedParsed = testDto.ExpectedResult.ErrorCode == null;
+
+        Assert.That(parsed, Is.EqualTo(expectedParsed));
+        Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+
+        Assert.That(extractor.Terminator, Is.SameAs(terminatorBeforeParse));
+    }
+
+    [Test]
+    [TestCaseSource(nameof(GetSuccessfulTestDtos))]
+    public void Parse_SomeArgument_ReturnsExpectedResultOrThrowsExpectedException(EmojiExtractorTestDto testDto)
+    {
+        // Arrange
+        var input = testDto.TestInput;
+
+        var extractor = EmojiExtractor.Instance;
+
+        var terminatorBeforeParse = extractor.Terminator;
+
+        // Act
+        if (testDto.ExpectedResult.ErrorCode.HasValue)
+        {
+            // fail
+            var ex = Assert.Throws<TextDataExtractionException>(() => extractor.Parse(input));
+
+            Assert.That(ex.Message, Is.EqualTo(testDto.ExpectedErrorMessage));
+            Assert.That(ex.CharsConsumed, Is.EqualTo(testDto.ExpectedResult.CharsConsumed));
+            Assert.That(ex.ErrorCode, Is.EqualTo(testDto.ExpectedResult.ErrorCode));
+        }
+        else
+        {
+            // success
+            var value = extractor.Parse(input);
+            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+        }
+
+        Assert.That(extractor.Terminator, Is.SameAs(terminatorBeforeParse));
     }
 
     public static IList<EmojiExtractorTestDto> GetSuccessfulTestDtos()
@@ -150,4 +278,6 @@ public class EmojiExtractorTests
 
         return list;
     }
+
+    private static bool DemoIsWhiteSpace(ReadOnlySpan<char> input, int pos) => input[pos].IsIn(' ', '\t', '\r', '\n');
 }

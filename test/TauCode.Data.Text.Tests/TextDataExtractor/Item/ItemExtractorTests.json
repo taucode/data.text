@@ -8,6 +8,7 @@
     ],
     "TestIgnoreCase": false,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -25,6 +26,7 @@
     ],
     "TestIgnoreCase": false,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Text": "Two",
       "Number": 2
@@ -45,12 +47,33 @@
     ],
     "TestIgnoreCase": false,
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 1701
     },
     "ExpectedErrorMessage": "Item not found.",
+    "Comment": ""
+  },
+
+  {
+    "Index": 2,
+    "TestInput": "Seventeen",
+    "TestItems": [
+      "Zero",
+      "Two",
+      "Seventeen"
+    ],
+    "TestIgnoreCase": true,
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
     "Comment": ""
   }
 ]

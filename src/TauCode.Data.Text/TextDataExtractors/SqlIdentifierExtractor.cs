@@ -7,13 +7,17 @@ namespace TauCode.Data.Text.TextDataExtractors
         private SqlIdentifierDelimiter _delimiter;
 
         public SqlIdentifierExtractor(
+            Func<string, bool> reservedWordPredicate,
             TerminatingDelegate terminator = null)
             : base(
                 Helper.Constants.SqlIdentifier.DefaultMaxConsumption,
                 terminator)
         {
+            this.ReservedWordPredicate = reservedWordPredicate;
             _delimiter = SqlIdentifierDelimiter.None;
         }
+
+        public Func<string, bool> ReservedWordPredicate { get; }
 
         public SqlIdentifierDelimiter Delimiter
         {
@@ -21,14 +25,13 @@ namespace TauCode.Data.Text.TextDataExtractors
             set
             {
                 var valueIsOk =
-                    value != 0 &&
-                    ((int)_delimiter & ~0xf) == 0;
+                    ((int)value & 0xf) != 0;
 
                 if (!valueIsOk)
                 {
                     throw new ArgumentException(
                         "Delimiter cannot be 0 and must be a combination of valid enum values.",
-                        nameof(value)); // todo_deferred ut
+                        nameof(value));
                 }
 
                 _delimiter = value;
@@ -174,7 +177,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                         {
                             // ok
                         }
-                        else if (this.Terminator(input, pos))
+                        else if (this.IsTermination(input, pos))
                         {
                             break;
                         }
@@ -203,6 +206,12 @@ namespace TauCode.Data.Text.TextDataExtractors
                             if (this.IsEnclosedIdentifierAcceptableEndingChar(prevChar))
                             {
                                 pos++; // advance position, skip ']' or other closing delimiter
+
+                                if (this.IsOutOfCapacity(pos))
+                                {
+                                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                                }
+
                                 if (pos == input.Length)
                                 {
                                     break;
@@ -210,7 +219,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                                 else
                                 {
                                     // we need to meet a terminator here.
-                                    if (this.Terminator(input, pos))
+                                    if (this.IsTermination(input, pos))
                                     {
                                         // ok, got terminator, let's get out of here
                                         break;
@@ -248,13 +257,24 @@ namespace TauCode.Data.Text.TextDataExtractors
                 prevChar = c;
                 pos++;
 
-                this.CheckConsumption(pos); // todo_deferred ut
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             string sqlIdentifierValue;
             if (valueStartPos == 0)
             {
                 sqlIdentifierValue = input[..pos].ToString();
+
+                // no delimiter => check if not res. word.
+
+                var isReservedWord = this.ReservedWordPredicate?.Invoke(sqlIdentifierValue) ?? false;
+                if (isReservedWord)
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.ValueIsReservedWord);
+                }
             }
             else
             {

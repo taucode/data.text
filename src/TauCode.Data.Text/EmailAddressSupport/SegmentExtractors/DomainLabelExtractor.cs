@@ -30,14 +30,14 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
 
             while (true)
             {
-                if (pos == Helper.Constants.EmailAddress.MaxConsumption)
-                {
-                    segment = default;
-                    return new TextDataExtractionResult(pos - start, TextDataExtractionErrorCodes.InputTooLong);
-                }
-
                 if (pos == length)
                 {
+                    if (prevChar == '-')
+                    {
+                        segment = default;
+                        return new TextDataExtractionResult(pos - start, TextDataExtractionErrorCodes.UnexpectedEnd);
+                    }
+
                     break;
                 }
 
@@ -51,7 +51,7 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
                 {
                     // ok
                 }
-                else if (c == '.' || c == '(')
+                else if (c == '.' || c == '(' || context.EmailAddressExtractor.IsTermination(input, pos))
                 {
                     if (prevChar == '-')
                     {
@@ -81,6 +81,14 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
 
                 prevChar = c;
                 pos++;
+
+                if (context.EmailAddressExtractor.IsOutOfCapacity(pos))
+                {
+                    segment = default;
+                    return new TextDataExtractionResult(
+                        pos - start,
+                        TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             var consumed = pos - start;

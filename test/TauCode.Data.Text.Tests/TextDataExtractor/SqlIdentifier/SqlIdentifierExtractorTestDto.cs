@@ -9,7 +9,9 @@ public class SqlIdentifierExtractorTestDto
 
     public string TestInput { get; set; }
     public string TestTerminatingChars { get; set; }
+    public int? TestMaxConsumption { get; set; }
     public IList<SqlIdentifierDelimiter> TestDelimiters { get; set; }
+    public IList<string> TestReservedWords { get; set; }
 
     public SqlIdentifierDto ExpectedValue { get; set; }
     public TextDataExtractionResultDto ExpectedResult { get; set; }

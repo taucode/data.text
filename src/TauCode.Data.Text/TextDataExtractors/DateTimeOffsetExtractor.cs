@@ -15,7 +15,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         public DateTimeOffsetExtractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.DateTimeOffset.MaxConsumption,
+                Helper.Constants.DateTimeOffset.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -39,7 +39,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -48,14 +48,12 @@ namespace TauCode.Data.Text.TextDataExtractors
                     return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
                 }
 
-                if (pos == Helper.Constants.DateTimeOffset.MaxConsumption)
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
-                }
-
                 pos++;
 
-                this.CheckConsumption(pos); // todo_deferred ut
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

@@ -14,7 +14,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         public DecimalExtractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.Decimal.MaxConsumption,
+                Helper.Constants.Decimal.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -29,11 +29,6 @@ namespace TauCode.Data.Text.TextDataExtractors
 
             while (true)
             {
-                if (pos > Helper.Constants.Decimal.MaxConsumption)
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
-                }
-
                 if (pos == input.Length)
                 {
                     break;
@@ -44,7 +39,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -54,6 +49,11 @@ namespace TauCode.Data.Text.TextDataExtractors
                 }
 
                 pos++;
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

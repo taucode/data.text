@@ -6,7 +6,7 @@ namespace TauCode.Data.Text.TextDataExtractors
     public class EnumExtractor<T> : ItemExtractor<T> where T : struct
     {
         public EnumExtractor(
-            bool ignoreCase,
+            bool ignoreCase = true,
             TerminatingDelegate terminator = null)
             : base(
                 Enum
@@ -15,7 +15,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                     .Select(x => x.ToString())
                     .ToHashSet(),
                 ignoreCase,
-                x => Enum.Parse<T>(x, ignoreCase),
+                Enum.Parse<T>,
                 terminator)
         {
         }

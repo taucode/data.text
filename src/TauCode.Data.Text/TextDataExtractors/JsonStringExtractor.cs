@@ -8,8 +8,9 @@ namespace TauCode.Data.Text.TextDataExtractors
 {
     public class JsonStringExtractor : TextDataExtractorBase<string>
     {
-        private static readonly Dictionary<char, char> JsonEscapeReplacements;
-        private static readonly string[] JsonEscapeReplacementStrings =
+        #region Static
+
+        private static readonly string[] ReplacementStrings =
         {
             "\"\"",
             "''",
@@ -19,18 +20,32 @@ namespace TauCode.Data.Text.TextDataExtractors
             "t\t",
         };
 
+        private static readonly Dictionary<char, char> Replacements;
+
+        private static char? GetReplacement(char escape)
+        {
+            if (Replacements.TryGetValue(escape, out var replacement))
+            {
+                return replacement;
+            }
+
+            return null;
+        }
+
         static JsonStringExtractor()
         {
-            JsonEscapeReplacements = JsonEscapeReplacementStrings
+            Replacements = ReplacementStrings
                 .ToDictionary(
                     x => x.First(),
                     x => x.Skip(1).Single());
         }
 
+        #endregion
+
         public JsonStringExtractor(TerminatingDelegate terminator = null)
             : base(
                 null,
-                terminator) // todo_deferred ut MaxConsumption
+                terminator)
         {
         }
 
@@ -38,8 +53,6 @@ namespace TauCode.Data.Text.TextDataExtractors
             ReadOnlySpan<char> input,
             out string value)
         {
-            // todo_deferred: ut unclosed string, newline in string.
-
             value = default;
 
             var pos = 0;
@@ -62,6 +75,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             }
 
             pos++; // skip opening delimiter
+            // min 'MaxConsumption' is 1, 'pos' is 1 here, so don't need to check 'IsOutOfCapacity'.
 
             var sb = new StringBuilder();
 
@@ -86,13 +100,24 @@ namespace TauCode.Data.Text.TextDataExtractors
                     if (pos == input.Length - 1)
                     {
                         pos++;
+                        if (this.IsOutOfCapacity(pos))
+                        {
+                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                        }
+
                         break;
                     }
                     else
                     {
-                        if (this.Terminator(input, pos + 1))
+                        if (this.IsTermination(input, pos + 1))
                         {
                             pos++;
+                            if (this.IsOutOfCapacity(pos))
+                            {
+                                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                            }
+
+
                             break;
                         }
                         else
@@ -147,7 +172,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                             return new TextDataExtractionResult(pos + 1, TextDataExtractionErrorCodes.BadEscape);
                         }
 
-                        var replacement = GetJsonEscapeReplacement(nextChar);
+                        var replacement = GetReplacement(nextChar);
                         if (replacement.HasValue)
                         {
                             sb.Append(replacement);
@@ -170,21 +195,14 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                 sb.Append(c);
                 pos++;
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             value = sb.ToString();
             return new TextDataExtractionResult(pos, null);
-        }
-
-
-        private static char? GetJsonEscapeReplacement(char escape)
-        {
-            if (JsonEscapeReplacements.TryGetValue(escape, out var replacement))
-            {
-                return replacement;
-            }
-
-            return null;
         }
     }
 }

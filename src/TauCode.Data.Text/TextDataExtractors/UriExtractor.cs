@@ -66,7 +66,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                 if (c.IsInlineWhiteSpaceOrCaretControl())
                 {
-                    if (this.Terminator(input, pos))
+                    if (this.IsTermination(input, pos))
                     {
                         break;
                     }
@@ -76,12 +76,17 @@ namespace TauCode.Data.Text.TextDataExtractors
                     }
                 }
 
-                if (pos == Helper.Constants.Uri.DefaultMaxConsumption) // todo_deferred use this.CheckConsumption(pos); and ut
+                if (pos == Helper.Constants.Uri.MaxLength)
                 {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UriIsTooLong);
                 }
 
                 pos++;
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

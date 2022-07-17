@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -15,6 +16,7 @@
     "Index": 1,
     "TestInput": "1abc#",
     "TestTerminatingChars": "#",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "1abc",
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -27,6 +29,7 @@
     "Index": 2,
     "TestInput": "abc;",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc",
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -39,6 +42,7 @@
     "Index": 3,
     "TestInput": "{@x:200@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "{@x:200@}",
     "ExpectedResult": {
       "CharsConsumed": 200,
@@ -51,6 +55,7 @@
     "Index": 4,
     "TestInput": "{@x:201@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 201,
@@ -63,6 +68,7 @@
     "Index": 5,
     "TestInput": "{@x:200@}*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "{@x:200@}",
     "ExpectedResult": {
       "CharsConsumed": 200,
@@ -75,6 +81,7 @@
     "Index": 6,
     "TestInput": "abcd_kapa-3",
     "TestTerminatingChars": "c",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abcd_kapa-3",
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -82,5 +89,70 @@
     },
     "ExpectedErrorMessage": null,
     "Comment": "Terminator 'c' is ignored."
+  },
+  {
+    "Index": 7,
+    "TestInput": "{@a:200@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "{@a:200@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "OK"
+  },
+  {
+    "Index": 8,
+    "TestInput": "{@a:201@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": "aaaa...a (total 201 chars). => too long."
+  },
+  {
+    "Index": 9,
+    "TestInput": "skt\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "skt\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 3,
+    "ExpectedValue": "skt",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 11,
+    "TestInput": "skt\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
   }
 ]

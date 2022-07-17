@@ -34,18 +34,14 @@ namespace TauCode.Data.Text
 
         #region Protected
 
-        protected void CheckConsumption(int pos)
+        protected internal bool IsOutOfCapacity(int consumedCharCount)
         {
             if (this.MaxConsumption.HasValue)
             {
-                if (pos > this.MaxConsumption.Value)
-                {
-                    throw new TextDataExtractionException(
-                        Helper.GetErrorMessage(TextDataExtractionErrorCodes.InputTooLong),
-                        TextDataExtractionErrorCodes.InputTooLong,
-                        pos);
-                }
+                return consumedCharCount > this.MaxConsumption.Value;
             }
+
+            return false;
         }
 
         #endregion
@@ -54,12 +50,9 @@ namespace TauCode.Data.Text
 
         private static int? CheckMaxConsumption(int? maxConsumption)
         {
-            if (maxConsumption.HasValue)
+            if (maxConsumption < 1)
             {
-                if (maxConsumption.Value < 1)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
+                throw new ArgumentOutOfRangeException(nameof(maxConsumption));
             }
 
             return maxConsumption;
@@ -71,15 +64,7 @@ namespace TauCode.Data.Text
 
         public virtual TerminatingDelegate Terminator
         {
-            get
-            {
-                if (_terminator == null)
-                {
-                    _terminator = Helper.DefaultTerminatingPredicate;
-                }
-
-                return _terminator;
-            }
+            get => _terminator;
             set => _terminator = value;
         }
 
@@ -99,23 +84,8 @@ namespace TauCode.Data.Text
                 return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
             }
 
-            try
-            {
-                var result = this.TryExtractImpl(input, out value);
-                return result;
-            }
-            catch (TextDataExtractionException ex)
-            {
-                if (ex.ErrorCode == TextDataExtractionErrorCodes.InputTooLong)
-                {
-                    value = default;
-                    return new TextDataExtractionResult(
-                        ex.CharsConsumed,
-                        ex.ErrorCode);
-                }
-
-                throw;
-            }
+            var result = this.TryExtractImpl(input, out value);
+            return result;
         }
 
         public virtual int Extract(ReadOnlySpan<char> input, out T value)
@@ -143,7 +113,6 @@ namespace TauCode.Data.Text
             }
             finally
             {
-                // todo_deferred: ut this
                 this.Terminator = savedTerminator;
             }
         }
@@ -168,7 +137,7 @@ namespace TauCode.Data.Text
             }
             finally
             {
-                this.Terminator = savedTerminator; // todo_deferred ut this
+                this.Terminator = savedTerminator;
             }
 
         }
@@ -177,7 +146,6 @@ namespace TauCode.Data.Text
         {
             return Helper.GetErrorMessage(errorCode);
         }
-
 
         #endregion
     }

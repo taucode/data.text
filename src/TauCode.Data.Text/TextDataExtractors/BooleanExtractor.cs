@@ -10,7 +10,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             : base(
                 BooleanItems,
                 true,
-                bool.Parse,
+                (s, ignoreCase) => bool.Parse(s),
                 terminator)
         {
         }

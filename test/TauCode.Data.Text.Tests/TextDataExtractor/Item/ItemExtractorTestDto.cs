@@ -11,6 +11,7 @@ public class ItemExtractorTestDto
     public List<string> TestItems { get; set; } = new();
     public bool TestIgnoreCase { get; set; }
     public string TestTerminatingChars { get; set; }
+    public int? TestMaxConsumption { get; set; }
 
     public NumberText ExpectedValue { get; set; }
     public TextDataExtractionResultDto ExpectedResult { get; set; }

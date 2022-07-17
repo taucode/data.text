@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -14,7 +15,8 @@
   {
     "Index": 1,
     "TestInput": " ",
-    "TestTerminatingChars": null,
+    "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -27,6 +29,7 @@
     "Index": 2,
     "TestInput": "-c",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -39,6 +42,7 @@
     "Index": 3,
     "TestInput": "a;",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "a",
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -51,6 +55,7 @@
     "Index": 4,
     "TestInput": "Aa/",
     "TestTerminatingChars": "/a",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "Aa",
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -63,6 +68,7 @@
     "Index": 5,
     "TestInput": "my-term",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "my-term",
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -75,6 +81,7 @@
     "Index": 6,
     "TestInput": "my-term-",
     "TestTerminatingChars": "-",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -87,6 +94,7 @@
     "Index": 7,
     "TestInput": "my-term1=",
     "TestTerminatingChars": "=",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "my-term1",
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -99,6 +107,7 @@
     "Index": 8,
     "TestInput": "my-term1=",
     "TestTerminatingChars": "",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -111,6 +120,7 @@
     "Index": 9,
     "TestInput": "my--term",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -123,6 +133,7 @@
     "Index": 10,
     "TestInput": "some-term=",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -135,6 +146,7 @@
     "Index": 11,
     "TestInput": "some-term=",
     "TestTerminatingChars": "=",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "some-term",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -147,6 +159,7 @@
     "Index": 12,
     "TestInput": "some-term-1 ",
     "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "some-term-1",
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -159,6 +172,7 @@
     "Index": 13,
     "TestInput": "some.term",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -171,6 +185,7 @@
     "Index": 14,
     "TestInput": "some-term-",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
@@ -183,6 +198,7 @@
     "Index": 15,
     "TestInput": "some--term",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -195,6 +211,7 @@
     "Index": 16,
     "TestInput": "some-term",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "some-term",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -207,6 +224,7 @@
     "Index": 17,
     "TestInput": "-some-term- ",
     "TestTerminatingChars": "- ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -219,6 +237,7 @@
     "Index": 18,
     "TestInput": "{@a:200@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "{@a:200@}",
     "ExpectedResult": {
       "CharsConsumed": 200,
@@ -231,6 +250,7 @@
     "Index": 19,
     "TestInput": "{@a:201@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 201,
@@ -243,6 +263,7 @@
     "Index": 20,
     "TestInput": "1term",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -250,5 +271,70 @@
     },
     "ExpectedErrorMessage": "Unexpected character.",
     "Comment": "Term cannot start with digit"
+  },
+  {
+    "Index": 20,
+    "TestInput": "{@a:200@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "{@a:200@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "OK"
+  },
+  {
+    "Index": 21,
+    "TestInput": "{@a:201@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": "aaaa...a (total 201 chars). => too long."
+  },
+  {
+    "Index": 22,
+    "TestInput": "s-t\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 23,
+    "TestInput": "s-t\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 3,
+    "ExpectedValue": "s-t",
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 24,
+    "TestInput": "s-t\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
   }
 ]

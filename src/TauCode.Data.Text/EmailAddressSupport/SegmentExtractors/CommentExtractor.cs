@@ -34,12 +34,12 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
             while (true)
             {
                 // '>' can be because of emoji thing (Emoji extractor isn't aware of MaxEmailAddressInputLength)
-                if (pos >= Helper.Constants.EmailAddress.MaxConsumption)
+                if (context.EmailAddressExtractor.IsOutOfCapacity(pos))
                 {
                     segment = default;
                     return new TextDataExtractionResult(
-                        Helper.Constants.EmailAddress.MaxConsumption - start,
-                        TextDataExtractionErrorCodes.InputTooLong);
+                        pos - start,
+                        TextDataExtractionErrorCodes.InputIsTooLong);
                 }
 
                 if (pos == length)
@@ -62,7 +62,16 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
                         }
                         else
                         {
-                            pos++; // todo_deferred: ut the case when pos hits MaxEmailAddressInputLength
+                            pos++;
+
+                            if (context.EmailAddressExtractor.IsOutOfCapacity(pos))
+                            {
+                                segment = default;
+                                return new TextDataExtractionResult(
+                                    pos - start,
+                                    TextDataExtractionErrorCodes.InputIsTooLong);
+                            }
+
                             break;
                         }
                     }
@@ -118,7 +127,11 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
                     }
                     else
                     {
-                        var fwsResult = TrySkipFoldingWhiteSpace(input, pos);
+                        var fwsResult = TrySkipFoldingWhiteSpace(
+                            input,
+                            pos,
+                            context.EmailAddressExtractor.MaxConsumption);
+
                         if (fwsResult.ErrorCode.HasValue)
                         {
                             segment = null;
@@ -144,6 +157,12 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
                 }
 
                 pos++;
+
+                if (context.EmailAddressExtractor.IsOutOfCapacity(pos))
+                {
+                    segment = default;
+                    return new TextDataExtractionResult(pos - start, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             var consumed = pos - start;

@@ -16,7 +16,7 @@ namespace TauCode.Data.Text.TextDataExtractors
         public TimeSpanExtractor(
             TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.TimeSpan.TimeSpanMaxConsumption,
+                Helper.Constants.TimeSpan.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -40,7 +40,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -50,13 +50,12 @@ namespace TauCode.Data.Text.TextDataExtractors
                     return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
                 }
 
-                if (pos == this.MaxConsumption) // todo_deferred ut
-                {
-                    value = default;
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
-                }
-
                 pos++;
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

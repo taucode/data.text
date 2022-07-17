@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -15,6 +16,7 @@
     "Index": 1,
     "TestInput": " ",
     "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -27,6 +29,7 @@
     "Index": 2,
     "TestInput": "-c",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-c",
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -39,6 +42,7 @@
     "Index": 3,
     "TestInput": "-c;",
     "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -51,6 +55,7 @@
     "Index": 4,
     "TestInput": "-c/",
     "TestTerminatingChars": "/",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-c",
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -63,6 +68,7 @@
     "Index": 5,
     "TestInput": "-C",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-C",
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -75,6 +81,7 @@
     "Index": 6,
     "TestInput": "-ї",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -87,6 +94,7 @@
     "Index": 7,
     "TestInput": "-cd",
     "TestTerminatingChars": "d",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-cd",
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -99,6 +107,7 @@
     "Index": 8,
     "TestInput": "-some-key",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-some-key",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -111,6 +120,7 @@
     "Index": 9,
     "TestInput": "-{@a:199@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-{@a:199@}",
     "ExpectedResult": {
       "CharsConsumed": 200,
@@ -123,6 +133,7 @@
     "Index": 10,
     "TestInput": "-{@a:200@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 201,
@@ -135,6 +146,7 @@
     "Index": 11,
     "TestInput": "-some-key=",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -147,6 +159,7 @@
     "Index": 12,
     "TestInput": "-some-key=",
     "TestTerminatingChars": "=",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "-some-key",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -159,6 +172,7 @@
     "Index": 13,
     "TestInput": "--some-key-1 ",
     "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "--some-key-1",
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -171,6 +185,7 @@
     "Index": 14,
     "TestInput": "-some.key",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -183,6 +198,7 @@
     "Index": 15,
     "TestInput": "---some-key",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -195,6 +211,7 @@
     "Index": 16,
     "TestInput": "-some-key-",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
@@ -207,6 +224,7 @@
     "Index": 17,
     "TestInput": "-some--key",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 6,
@@ -219,6 +237,7 @@
     "Index": 18,
     "TestInput": "some-key",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -230,13 +249,79 @@
   {
     "Index": 19,
     "TestInput": "-some-key- ",
-    "TestTerminatingChars": null,
+    "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
-      "ErrorCode": 901
+      "ErrorCode": 5
     },
-    "ExpectedErrorMessage": "Failed to extract key.",
+    "ExpectedErrorMessage": "Unexpected end.",
+    "Comment": ""
+  },
+  {
+    "Index": 20,
+    "TestInput": "-{@a:199@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "-{@a:199@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "OK"
+  },
+  {
+    "Index": 21,
+    "TestInput": "-{@a:200@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": "-aaaa...a (total 201 chars). => too long."
+  },
+  {
+    "Index": 22,
+    "TestInput": "-s\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 23,
+    "TestInput": "-a\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": "-a",
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 24,
+    "TestInput": "-ab\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
     "Comment": ""
   }
 ]

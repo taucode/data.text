@@ -7,7 +7,7 @@ namespace TauCode.Data.Text.TextDataExtractors
     public class StringItemExtractor : TextDataExtractorBase<string>
     {
         public StringItemExtractor(
-            HashSet<string> items,
+            IEnumerable<string> items,
             bool ignoreCase,
             TerminatingDelegate terminator = null)
             : base(
@@ -19,12 +19,14 @@ namespace TauCode.Data.Text.TextDataExtractors
                 throw new ArgumentNullException(nameof(items));
             }
 
-            if (items.Count == 0 || items.Any(string.IsNullOrEmpty))
+            var itemHashSet = new HashSet<string>(items);
+
+            if (itemHashSet.Count == 0 || itemHashSet.Any(string.IsNullOrEmpty))
             {
                 throw new ArgumentException($"'{nameof(items)}' cannot be empty or contain empty items.", nameof(items));
             }
 
-            this.Items = items;
+            this.Items = itemHashSet;
             this.IgnoreCase = ignoreCase;
         }
 
@@ -38,19 +40,35 @@ namespace TauCode.Data.Text.TextDataExtractors
         {
             var comparison = this.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 
-            foreach (var item in Items)
+            foreach (var item in this.Items)
             {
                 if (input.StartsWith(item, comparison))
                 {
                     if (input.Length == item.Length)
                     {
+                        if (item.Length > this.MaxConsumption)
+                        {
+                            value = default;
+                            return new TextDataExtractionResult(
+                                this.MaxConsumption.Value + 1,
+                                TextDataExtractionErrorCodes.InputIsTooLong);
+                        }
+
                         value = item;
                         return new TextDataExtractionResult(item.Length, null);
                     }
                     else
                     {
-                        if (this.Terminator(input, item.Length))
+                        if (this.IsTermination(input, item.Length))
                         {
+                            if (item.Length > this.MaxConsumption)
+                            {
+                                value = default;
+                                return new TextDataExtractionResult(
+                                    this.MaxConsumption.Value + 1,
+                                    TextDataExtractionErrorCodes.InputIsTooLong);
+                            }
+
                             value = item;
                             return new TextDataExtractionResult(item.Length, null);
                         }
@@ -62,7 +80,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             }
 
             value = default;
-            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.ItemNotFound); // todo_deferred ut
+            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.ItemNotFound);
         }
     }
 }

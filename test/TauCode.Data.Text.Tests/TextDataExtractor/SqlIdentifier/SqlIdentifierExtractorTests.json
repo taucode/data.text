@@ -2,27 +2,31 @@
   {
     "Index": 0,
     "TestInput": "",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 5
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
     "Comment": "Empty input."
   },
   {
     "Index": 1,
     "TestInput": "person_name_1+",
+    "TestTerminatingChars": "+ ",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": "+ ",
+    "TestReservedWords": null,
     "ExpectedValue": {
       "Value": "person_name_1",
       "Delimiter": "None"
@@ -31,18 +35,20 @@
       "CharsConsumed": 13,
       "ErrorCode": null
     },
-    "ExpectedValueString": "person_name_1",
     "ExpectedErrorMessage": null,
+    "ExpectedValueString": "person_name_1",
     "Comment": "Simple happy path."
   },
   {
     "Index": 2,
     "TestInput": "[имя человека]+",
+    "TestTerminatingChars": "+ ",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": "+ ",
+    "TestReservedWords": null,
     "ExpectedValue": {
       "Value": "имя человека",
       "Delimiter": "Brackets"
@@ -51,186 +57,208 @@
       "CharsConsumed": 14,
       "ErrorCode": null
     },
-    "ExpectedValueString": "[имя человека]",
     "ExpectedErrorMessage": null,
+    "ExpectedValueString": "[имя человека]",
     "Comment": "Simple happy path."
   },
   {
     "Index": 3,
     "TestInput": "[имя человека]+",
+    "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": ";",
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": "Unexpected terminator ('+')."
   },
   {
     "Index": 4,
     "TestInput": "[имя человека",
+    "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": ";",
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 13,
       "ErrorCode": 5
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 5,
     "TestInput": "[vendor]",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 6,
     "TestInput": "vendor",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 7,
     "TestInput": "v#endor",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 8,
     "TestInput": "[#vendor]",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 9,
     "TestInput": "ve#ndor",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 10,
     "TestInput": "[v#endor]",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 11,
     "TestInput": "[some name ]",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 12,
     "TestInput": "[]",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "Brackets"
     ],
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 13,
     "TestInput": "`person_name`;",
+    "TestTerminatingChars": "; ",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "BackQuotes"
     ],
-    "TestTerminatingChars": "; ",
+    "TestReservedWords": null,
     "ExpectedValue": {
       "Value": "person_name",
       "Delimiter": "BackQuotes"
@@ -239,35 +267,39 @@
       "CharsConsumed": 13,
       "ErrorCode": null
     },
-    "ExpectedValueString": "`person_name`",
     "ExpectedErrorMessage": null,
+    "ExpectedValueString": "`person_name`",
     "Comment": "MySQL happy path."
   },
   {
     "Index": 14,
     "TestInput": "`person_name`;",
+    "TestTerminatingChars": "; ",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "DoubleQuotes"
     ],
-    "TestTerminatingChars": "; ",
+    "TestReservedWords": null,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 7
     },
-    "ExpectedValueString": null,
     "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 15,
     "TestInput": "`имя человека`+",
+    "TestTerminatingChars": "+ ",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "None",
       "BackQuotes"
     ],
-    "TestTerminatingChars": "+ ",
+    "TestReservedWords": null,
     "ExpectedValue": {
       "Value": "имя человека",
       "Delimiter": "BackQuotes"
@@ -276,18 +308,20 @@
       "CharsConsumed": 14,
       "ErrorCode": null
     },
-    "ExpectedValueString": "`имя человека`",
     "ExpectedErrorMessage": null,
+    "ExpectedValueString": "`имя человека`",
     "Comment": "Simple happy path."
   },
   {
     "Index": 16,
     "TestInput": "\"person_name\";",
+    "TestTerminatingChars": "; ",
+    "TestMaxConsumption": -1,
     "TestDelimiters": [
       "BackQuotes",
       "DoubleQuotes"
     ],
-    "TestTerminatingChars": "; ",
+    "TestReservedWords": null,
     "ExpectedValue": {
       "Value": "person_name",
       "Delimiter": "DoubleQuotes"
@@ -296,8 +330,223 @@
       "CharsConsumed": 13,
       "ErrorCode": null
     },
-    "ExpectedValueString": "\"person_name\"",
     "ExpectedErrorMessage": null,
+    "ExpectedValueString": "\"person_name\"",
     "Comment": "Double quote happy path."
+  },
+  {
+    "Index": 17,
+    "TestInput": "[{@a:198@}]\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": -1,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": {
+      "Value": "{@a:198@}",
+      "Delimiter": "Brackets"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "[{@a:198@}]",
+    "Comment": "Almost too long."
+  },
+  {
+    "Index": 18,
+    "TestInput": "[{@a:199@}]\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": -1,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 19,
+    "TestInput": "{@a:200@}\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": -1,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": {
+      "Value": "{@a:200@}",
+      "Delimiter": "None"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "{@a:200@}",
+    "Comment": "Almost too long."
+  },
+  {
+    "Index": 20,
+    "TestInput": "{@a:201@}\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": -1,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 21,
+    "TestInput": "[{@a:199@}]\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": null,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": {
+      "Value": "{@a:199@}",
+      "Delimiter": "Brackets"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "[{@a:199@}]",
+    "Comment": "As long as you want."
+  },
+  {
+    "Index": 22,
+    "TestInput": "{@a:201@}\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": null,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": {
+      "Value": "{@a:201@}",
+      "Delimiter": "None"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "{@a:201@}",
+    "Comment": "As long as you want."
+  },
+  {
+    "Index": 23,
+    "TestInput": "[{@a:199@}]\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": 250,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": {
+      "Value": "{@a:199@}",
+      "Delimiter": "Brackets"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "[{@a:199@}]",
+    "Comment": "As long as you want."
+  },
+  {
+    "Index": 24,
+    "TestInput": "{@a:201@}\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": 250,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": null,
+    "ExpectedValue": {
+      "Value": "{@a:201@}",
+      "Delimiter": "None"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "{@a:201@}",
+    "Comment": "As long as you want."
+  },
+  {
+    "Index": 25,
+    "TestInput": "Select\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": -1,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": [
+      "select"
+    ],
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 6,
+      "ErrorCode": 1801
+    },
+    "ExpectedErrorMessage": "Value is a reserved word.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 26,
+    "TestInput": "[Select]\t",
+    "TestTerminatingChars": ";\t",
+    "TestMaxConsumption": -1,
+    "TestDelimiters": [
+      "None",
+      "Brackets"
+    ],
+    "TestReservedWords": [
+      "select"
+    ],
+    "ExpectedValue": {
+      "Value": "Select",
+      "Delimiter": "Brackets"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 8,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "[Select]",
+    "Comment": "Reserved word delimited => ok."
   }
 ]

@@ -16,7 +16,7 @@ namespace TauCode.Data.Text.EmailAddressSupport
             EmailAddressExtractionContext context,
             out Segment? segment)
         {
-            if (context.Position >= Helper.Constants.EmailAddress.MaxConsumption || context.Position < 0)
+            if (context.Position > context.EmailAddressExtractor.MaxConsumption.Value || context.Position < 0)
             {
                 throw new TextDataExtractionException(
                     "Context position is out of range. See inner exception.",
@@ -81,7 +81,8 @@ namespace TauCode.Data.Text.EmailAddressSupport
 
         protected static TextDataExtractionResult TrySkipFoldingWhiteSpace(
             ReadOnlySpan<char> input,
-            int position)
+            int position,
+            int? maxConsumption)
         {
             var length = input.Length;
             var start = position;
@@ -90,9 +91,12 @@ namespace TauCode.Data.Text.EmailAddressSupport
             for (var i = 1; i < Helper.Constants.EmailAddress.FoldingWhiteSpaceLength; i++) // 'i = 1' because we skipped '\r' since we've got here
             {
                 pos = start + i;
-                if (pos >= Helper.Constants.EmailAddress.MaxConsumption)
+
+                if (pos > maxConsumption)
                 {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
+                    return new TextDataExtractionResult(
+                        pos - start,
+                        TextDataExtractionErrorCodes.InputIsTooLong);
                 }
 
                 if (pos == length)
@@ -106,7 +110,9 @@ namespace TauCode.Data.Text.EmailAddressSupport
                 var fwsOk = IsValidFwsChar(c, i);
                 if (!fwsOk)
                 {
-                    return new TextDataExtractionResult(pos - start, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                    return new TextDataExtractionResult(
+                        pos - start,
+                        TextDataExtractionErrorCodes.UnexpectedCharacter);
                 }
             }
 
