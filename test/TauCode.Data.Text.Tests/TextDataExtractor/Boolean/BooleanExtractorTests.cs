@@ -16,13 +16,13 @@ public class BooleanExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminatingPredicate =
+        TerminatingDelegate terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
                 null;
 
-        var extractor = new BooleanExtractor(terminatingPredicate);
+        var extractor = new BooleanExtractor(terminator);
 
         // Act
         var result = extractor.TryExtract(input, out var value);
@@ -33,7 +33,7 @@ public class BooleanExtractorTests
         }
 
         // Assert
-        Assert.That(result.ToDto(), Is.EqualTo(testDto.ExpectedResult));
+        Assert.That(result.ToDto().ToString(), Is.EqualTo(testDto.ExpectedResult.ToString()));
 
         if (result.ErrorCode.HasValue)
         {

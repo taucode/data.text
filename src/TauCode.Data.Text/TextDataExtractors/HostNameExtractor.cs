@@ -23,7 +23,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         public HostNameExtractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.HostName.MaxConsumption,
+                Helper.Constants.HostName.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -43,10 +43,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
             while (true)
             {
-                if (
-                    pos == input.Length ||
-                    (pos == this.MaxConsumption && this.Terminator(input, pos)) // todo_deferred ut, much shit can appear
-                    )
+                if (pos == input.Length)
                 {
                     if (
                         prevChar == '.' ||
@@ -59,50 +56,24 @@ namespace TauCode.Data.Text.TextDataExtractors
                     }
 
                     break;
-                }
-
-                if (pos == Helper.Constants.HostName.MaxConsumption)
-                {
-                    // todo_deferred: seem wrong to me. or not? ut this.
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
                 }
 
                 if (canBeIPv6 && gotColon && pos == Helper.Constants.HostName.MaxIPv6Length)
                 {
                     // got IPv6 here, cannot consume more chars
-                    if (this.Terminator(input, pos))
+                    if (this.IsTermination(input, pos))
                     {
                         // got terminating char, let's try parse IPv6 below
-                        break; // todo_deferred ut
+                        break;
                     }
                     else
                     {
-                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
+                        // looks like bad ipv6 to me
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InvalidIPv6Address);
                     }
                 }
 
                 var c = input[pos];
-
-                if (this.Terminator(input, pos)) // todo_deferred: ut this // todo_deferred: this is wrong. e.g. terminating char '.' will terminate while it shouldn't.
-                {
-                    if (pos == 0)
-                    {
-                        return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
-                    }
-
-                    // got terminating char
-                    if (
-                        prevChar == '.' ||
-                        prevChar == '-' ||
-                        false
-                    )
-                    {
-                        // these chars cannot be last ones
-                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedEnd);
-                    }
-
-                    break;
-                }
 
                 if (c == '.')
                 {
@@ -221,6 +192,26 @@ namespace TauCode.Data.Text.TextDataExtractors
                         currentAsciiLabelLength++;
                     }
                 }
+                else if (this.IsTermination(input, pos))
+                {
+                    if (pos == 0)
+                    {
+                        return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
+                    }
+
+                    // got terminating char
+                    if (
+                        prevChar == '.' ||
+                        prevChar == '-' ||
+                        false
+                    )
+                    {
+                        // these chars cannot be last ones
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedEnd);
+                    }
+
+                    break;
+                }
                 else
                 {
                     // wrong char for a host name.
@@ -230,10 +221,14 @@ namespace TauCode.Data.Text.TextDataExtractors
                 prevChar = c;
                 pos++;
 
-                // todo_deferred: ut this. I have doubts :(
                 if (currentAsciiLabelLength > Helper.Constants.HostName.MaxAsciiLabelLength)
                 {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.DomainLabelTooLong);
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.DomainLabelIsTooLong);
+                }
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
                 }
             }
 

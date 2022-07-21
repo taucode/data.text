@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace TauCode.Data.Text.Tests.TextDataExtractor.Identifier;
 
@@ -8,12 +9,15 @@ public class IdentifierExtractorTestDto
 
     public string TestInput { get; set; }
     public string TestTerminatingChars { get; set; }
+    public int? TestMaxConsumption { get; set; }
+    public IList<string> TestReservedWords { get; set; }
 
     public string ExpectedValue { get; set; }
     public TextDataExtractionResultDto ExpectedResult { get; set; }
     public string ExpectedErrorMessage { get; set; }
 
     public string Comment { get; set; }
+
 
     public override string ToString()
     {

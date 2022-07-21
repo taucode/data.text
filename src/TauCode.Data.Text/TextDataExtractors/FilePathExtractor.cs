@@ -21,7 +21,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         public FilePathExtractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.FilePath.MaxConsumption,
+                Helper.Constants.FilePath.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -59,7 +59,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 }
                 else if (c.IsInlineWhiteSpaceOrCaretControl() || ProhibitedFilePathChars.Contains(c))
                 {
-                    if (this.Terminator(input, pos))
+                    if (this.IsTermination(input, pos))
                     {
                         break;
                     }
@@ -69,14 +69,17 @@ namespace TauCode.Data.Text.TextDataExtractors
                     }
                 }
 
-                if (pos == Helper.Constants.FilePath.MaxConsumption) // todo_deferred remove, CheckConsumption should do the job.
+                if (pos == Helper.Constants.FilePath.MaxLength)
                 {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.FilePathIsTooLong);
                 }
 
                 pos++;
 
-                this.CheckConsumption(pos); // todo_deferred ut
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)
@@ -92,23 +95,6 @@ namespace TauCode.Data.Text.TextDataExtractors
             }
 
             return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.FailedToExtractFilePath);
-        }
-
-        public override int? MaxConsumption
-        {
-            get => base.MaxConsumption;
-            set // todo_deferred ut
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value > Helper.Constants.FilePath.MaxConsumption)
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(value));
-                    }
-
-                    base.MaxConsumption = value.Value;
-                }
-            }
         }
 
         private static bool IsValidFilePath(ReadOnlySpan<char> input)

@@ -8,6 +8,7 @@ public class DoubleExtractorTestDto
 
     public string TestInput { get; set; }
     public string TestTerminatingChars { get; set; }
+    public int? TestMaxConsumption { get; set; }
 
     public double ExpectedValue { get; set; }
     public TextDataExtractionResultDto ExpectedResult { get; set; }

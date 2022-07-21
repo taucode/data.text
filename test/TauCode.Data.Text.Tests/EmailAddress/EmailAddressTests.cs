@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.Tests.TextDataExtractor.EmailAddress;
@@ -142,6 +143,9 @@ public class EmailAddressTests
 
     public static IList<EmailAddressExtractorTestDto> GetTestCases()
     {
-        return EmailAddressExtractorTests.GetTestDtos();
+        return EmailAddressExtractorTests
+            .GetTestDtos()
+            .Where(x => !x.Comment.Contains("[Not for Parse]"))
+            .ToList();
     }
 }

@@ -1,8 +1,51 @@
 ﻿[
   {
     "Index": 0,
+    "TestInput": "abc.com\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 6,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": "[Not for Parse]"
+  },
+  {
+    "Index": 1,
+    "TestInput": "abc.com",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 6,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedValueString": null,
+    "Comment": "[Not for Parse]"
+  },
+  {
+    "Index": 2,
+    "TestInput": "abc.{@x:64@}.com",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 68,
+      "ErrorCode": 304
+    },
+    "ExpectedErrorMessage": "Domain label is too long.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 3,
     "TestInput": ".",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -13,9 +56,10 @@
     "Comment": "'.' is not a valid host name"
   },
   {
-    "Index": 1,
+    "Index": 4,
     "TestInput": "a",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "a"
@@ -29,9 +73,10 @@
     "Comment": "Technically, a valid host name"
   },
   {
-    "Index": 2,
+    "Index": 5,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -42,9 +87,10 @@
     "Comment": "Empty string"
   },
   {
-    "Index": 3,
+    "Index": 6,
     "TestInput": " abc.com",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -55,9 +101,10 @@
     "Comment": "Leading space"
   },
   {
-    "Index": 4,
+    "Index": 7,
     "TestInput": "abc.com ",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -68,9 +115,10 @@
     "Comment": "Trailing space"
   },
   {
-    "Index": 5,
+    "Index": 8,
     "TestInput": "{@a:254@}",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 64,
@@ -81,9 +129,10 @@
     "Comment": "NB: this is a replacement pattern (see code). Domain label is too long."
   },
   {
-    "Index": 6,
+    "Index": 9,
     "TestInput": "127.0.0.1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv4",
       "Value": "127.0.0.1"
@@ -97,9 +146,10 @@
     "Comment": "Normal IPv4 address"
   },
   {
-    "Index": 7,
+    "Index": 10,
     "TestInput": "256.0.0.1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -110,9 +160,10 @@
     "Comment": "Has only digital segments, but not a valid IPv4 address"
   },
   {
-    "Index": 8,
+    "Index": 11,
     "TestInput": "35.12.16.5",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv4",
       "Value": "35.12.16.5"
@@ -126,9 +177,10 @@
     "Comment": "Normal IPv4 address"
   },
   {
-    "Index": 9,
+    "Index": 12,
     "TestInput": "LOCALHOST",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "localhost"
@@ -142,9 +194,10 @@
     "Comment": "Normal host, lowercased"
   },
   {
-    "Index": 10,
+    "Index": 13,
     "TestInput": "РУКА.ЕСТЬ",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Internationalized",
       "Value": "xn--80atrm.xn--e1ayd4b"
@@ -158,9 +211,10 @@
     "Comment": "Unicode host"
   },
   {
-    "Index": 11,
+    "Index": 14,
     "TestInput": "127.0.0.",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -171,9 +225,10 @@
     "Comment": "Trailing '.'"
   },
   {
-    "Index": 12,
+    "Index": 15,
     "TestInput": "127.0.0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -184,9 +239,10 @@
     "Comment": "Has only digital segments, but not a valid IPv4 address"
   },
   {
-    "Index": 13,
+    "Index": 16,
     "TestInput": "a.com-",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 6,
@@ -197,9 +253,10 @@
     "Comment": "Has only digital segments, but not a valid IPv4 address"
   },
   {
-    "Index": 14,
+    "Index": 17,
     "TestInput": " google.com",
-    "TestTerminatingChars": null,
+    "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -210,9 +267,10 @@
     "Comment": "[Not for Parse] Obvious"
   },
   {
-    "Index": 15,
+    "Index": 18,
     "TestInput": "google.com.",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -223,9 +281,10 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 16,
+    "Index": 19,
     "TestInput": "google .com",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 6,
@@ -236,51 +295,13 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 17,
-    "TestInput": "google. com",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 7,
-      "ErrorCode": 5
-    },
-    "ExpectedErrorMessage": "Unexpected end.",
-    "ExpectedValueString": null,
-    "Comment": "[Not for Parse] Obvious"
-  },
-  {
-    "Index": 18,
-    "TestInput": "google..com",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 7,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": "Obvious"
-  },
-  {
-    "Index": 19,
-    "TestInput": "[127.0.0.1]",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 0,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": "Obvious"
-  },
-  {
     "Index": 20,
-    "TestInput": "[127.0.0.1]",
-    "TestTerminatingChars": "[",
+    "TestInput": "google. com",
+    "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 0,
+      "CharsConsumed": 7,
       "ErrorCode": 5
     },
     "ExpectedErrorMessage": "Unexpected end.",
@@ -289,8 +310,51 @@
   },
   {
     "Index": 21,
+    "TestInput": "google..com",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 22,
+    "TestInput": "[127.0.0.1]",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": "Obvious"
+  },
+  {
+    "Index": 23,
+    "TestInput": "[127.0.0.1]",
+    "TestTerminatingChars": "[",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 0,
+      "ErrorCode": 5
+    },
+    "ExpectedErrorMessage": "Unexpected end.",
+    "ExpectedValueString": null,
+    "Comment": "[Not for Parse]"
+  },
+  {
+    "Index": 24,
     "TestInput": "a-B",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "a-b"
@@ -304,9 +368,10 @@
     "Comment": "hyphen"
   },
   {
-    "Index": 22,
+    "Index": 25,
     "TestInput": "-a",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -317,9 +382,10 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 23,
+    "Index": 26,
     "TestInput": "a-",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -330,9 +396,10 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 24,
+    "Index": 27,
     "TestInput": "a-.com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -343,9 +410,10 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 25,
+    "Index": 28,
     "TestInput": "a.-com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -356,9 +424,10 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 26,
+    "Index": 29,
     "TestInput": "a.com-",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 6,
@@ -369,9 +438,10 @@
     "Comment": "Obvious"
   },
   {
-    "Index": 27,
+    "Index": 30,
     "TestInput": "money.econera.com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "money.econera.com"
@@ -385,9 +455,10 @@
     "Comment": "Normal host, lowercased"
   },
   {
-    "Index": 28,
+    "Index": 31,
     "TestInput": "No.This.is.net",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "no.this.is.net"
@@ -401,9 +472,10 @@
     "Comment": "Normal host, lowercased"
   },
   {
-    "Index": 29,
+    "Index": 32,
     "TestInput": "a--B",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Internationalized",
       "Value": "a--b"
@@ -417,9 +489,10 @@
     "Comment": ""
   },
   {
-    "Index": 30,
+    "Index": 33,
     "TestInput": "Xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d1.com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d1.com"
@@ -433,9 +506,10 @@
     "Comment": "Label with length 63 chars, OK"
   },
   {
-    "Index": 31,
+    "Index": 34,
     "TestInput": "Xaaaaaaaaaaaaaaaa-60-chars-between-x-aaaaaaaaaaaaaaaaaaaaaax-d11.com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 64,
@@ -446,9 +520,10 @@
     "Comment": "Label with length 64 chars, fail"
   },
   {
-    "Index": 32,
+    "Index": 35,
     "TestInput": "👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆🐫👯🤼🗯🐆dq.com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Internationalized",
       "Value": "xn--dq-8f72aaaaaaaa41bbbbbbb42jcacccccc770hdadddddd518zeaeeeeee.com"
@@ -462,9 +537,10 @@
     "Comment": "Label with length 63 chars, OK"
   },
   {
-    "Index": 33,
+    "Index": 36,
     "TestInput": "A-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-ll.net",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "a-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-ll.net"
@@ -478,9 +554,10 @@
     "Comment": "Another label with length 63 chars, OK"
   },
   {
-    "Index": 34,
+    "Index": 37,
     "TestInput": "ff.a-1-d-ddd-deee-36-222-ko-la-maaaaaa-3-dee-pppp-33-depeak-222-lla",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 67,
@@ -491,9 +568,10 @@
     "Comment": "Another label with length 64 chars, fail"
   },
   {
-    "Index": 35,
+    "Index": 38,
     "TestInput": "рука:0001",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -504,9 +582,10 @@
     "Comment": ""
   },
   {
-    "Index": 36,
+    "Index": 39,
     "TestInput": "123:133:.1.2.3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -517,9 +596,10 @@
     "Comment": "Another label with length 64 chars, fail"
   },
   {
-    "Index": 37,
+    "Index": 40,
     "TestInput": "123.12.:6:6",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -530,9 +610,10 @@
     "Comment": ""
   },
   {
-    "Index": 38,
+    "Index": 41,
     "TestInput": "127.3.2:aafe:0001",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -543,9 +624,10 @@
     "Comment": "Another label with length 64 chars, fail"
   },
   {
-    "Index": 39,
+    "Index": 42,
     "TestInput": "xn--example",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -556,9 +638,10 @@
     "Comment": ""
   },
   {
-    "Index": 40,
+    "Index": 43,
     "TestInput": "{@abcd.:50@}com",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "Regular",
       "Value": "{@abcd.:50@}com"
@@ -572,9 +655,10 @@
     "Comment": "total length is 253, ok"
   },
   {
-    "Index": 41,
+    "Index": 44,
     "TestInput": "::1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -588,9 +672,10 @@
     "Comment": "loopback, compressed, non-routable"
   },
   {
-    "Index": 42,
+    "Index": 45,
     "TestInput": "::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -604,9 +689,10 @@
     "Comment": "unspecified, compressed, non-routable"
   },
   {
-    "Index": 43,
+    "Index": 46,
     "TestInput": "0:0:0:0:0:0:0:1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -620,9 +706,10 @@
     "Comment": "loopback, full"
   },
   {
-    "Index": 44,
+    "Index": 47,
     "TestInput": "0:0:0:0:0:0:0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -636,9 +723,10 @@
     "Comment": "unspecified, full"
   },
   {
-    "Index": 45,
+    "Index": 48,
     "TestInput": "2001:DB8:0:0:8:800:200C:417A",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::8:800:200c:417a"
@@ -652,9 +740,10 @@
     "Comment": "unicast, full"
   },
   {
-    "Index": 46,
+    "Index": 49,
     "TestInput": "FF01:0:0:0:0:0:0:101",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "ff01::101"
@@ -668,9 +757,10 @@
     "Comment": "multicast, full"
   },
   {
-    "Index": 47,
+    "Index": 50,
     "TestInput": "2001:DB8::8:800:200C:417A",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::8:800:200c:417a"
@@ -684,9 +774,10 @@
     "Comment": "unicast, compressed"
   },
   {
-    "Index": 48,
+    "Index": 51,
     "TestInput": "FF01::101",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "ff01::101"
@@ -700,9 +791,10 @@
     "Comment": "multicast, compressed"
   },
   {
-    "Index": 49,
+    "Index": 52,
     "TestInput": "fe80::217:f2ff:fe07:ed62",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::217:f2ff:fe07:ed62"
@@ -716,9 +808,10 @@
     "Comment": ""
   },
   {
-    "Index": 50,
+    "Index": 53,
     "TestInput": "2001:0000:1234:0000:0000:C1C0:ABCD:0876",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:0:1234::c1c0:abcd:876"
@@ -732,9 +825,10 @@
     "Comment": ""
   },
   {
-    "Index": 51,
+    "Index": 54,
     "TestInput": "3ffe:0b00:0000:0000:0001:0000:0000:000a",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "3ffe:b00::1:0:0:a"
@@ -748,9 +842,10 @@
     "Comment": ""
   },
   {
-    "Index": 52,
+    "Index": 55,
     "TestInput": "FF02:0000:0000:0000:0000:0000:0000:0001",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "ff02::1"
@@ -764,9 +859,10 @@
     "Comment": ""
   },
   {
-    "Index": 53,
+    "Index": 56,
     "TestInput": "0000:0000:0000:0000:0000:0000:0000:0001",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -780,9 +876,10 @@
     "Comment": ""
   },
   {
-    "Index": 54,
+    "Index": 57,
     "TestInput": "0000:0000:0000:0000:0000:0000:0000:0000",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -796,9 +893,10 @@
     "Comment": ""
   },
   {
-    "Index": 55,
+    "Index": 58,
     "TestInput": "2::10",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2::10"
@@ -812,9 +910,10 @@
     "Comment": ""
   },
   {
-    "Index": 56,
+    "Index": 59,
     "TestInput": "ff02::1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "ff02::1"
@@ -828,9 +927,10 @@
     "Comment": ""
   },
   {
-    "Index": 57,
+    "Index": 60,
     "TestInput": "fe80::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::"
@@ -844,9 +944,10 @@
     "Comment": ""
   },
   {
-    "Index": 58,
+    "Index": 61,
     "TestInput": "2002::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2002::"
@@ -860,9 +961,10 @@
     "Comment": ""
   },
   {
-    "Index": 59,
+    "Index": 62,
     "TestInput": "2001:db8::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::"
@@ -876,9 +978,10 @@
     "Comment": ""
   },
   {
-    "Index": 60,
+    "Index": 63,
     "TestInput": "2001:0db8:1234::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:1234::"
@@ -892,9 +995,10 @@
     "Comment": ""
   },
   {
-    "Index": 61,
+    "Index": 64,
     "TestInput": "::ffff:0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:0:0"
@@ -908,9 +1012,10 @@
     "Comment": ""
   },
   {
-    "Index": 62,
+    "Index": 65,
     "TestInput": "::1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -924,9 +1029,10 @@
     "Comment": ""
   },
   {
-    "Index": 63,
+    "Index": 66,
     "TestInput": "1:2:3:4:5:6:7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5:6:7:8"
@@ -940,9 +1046,10 @@
     "Comment": ""
   },
   {
-    "Index": 64,
+    "Index": 67,
     "TestInput": "1:2:3:4:5:6::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5:6:0:8"
@@ -956,9 +1063,10 @@
     "Comment": ""
   },
   {
-    "Index": 65,
+    "Index": 68,
     "TestInput": "1:2:3:4:5::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5::8"
@@ -972,9 +1080,10 @@
     "Comment": ""
   },
   {
-    "Index": 66,
+    "Index": 69,
     "TestInput": "1:2:3:4::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4::8"
@@ -988,9 +1097,10 @@
     "Comment": ""
   },
   {
-    "Index": 67,
+    "Index": 70,
     "TestInput": "1:2:3::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3::8"
@@ -1004,9 +1114,10 @@
     "Comment": ""
   },
   {
-    "Index": 68,
+    "Index": 71,
     "TestInput": "1:2::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2::8"
@@ -1020,9 +1131,10 @@
     "Comment": ""
   },
   {
-    "Index": 69,
+    "Index": 72,
     "TestInput": "1::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::8"
@@ -1036,9 +1148,10 @@
     "Comment": ""
   },
   {
-    "Index": 70,
+    "Index": 73,
     "TestInput": "1::2:3:4:5:6:7",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:0:2:3:4:5:6:7"
@@ -1052,9 +1165,10 @@
     "Comment": ""
   },
   {
-    "Index": 71,
+    "Index": 74,
     "TestInput": "1::2:3:4:5:6",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::2:3:4:5:6"
@@ -1068,9 +1182,10 @@
     "Comment": ""
   },
   {
-    "Index": 72,
+    "Index": 75,
     "TestInput": "1::2:3:4:5",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::2:3:4:5"
@@ -1084,9 +1199,10 @@
     "Comment": ""
   },
   {
-    "Index": 73,
+    "Index": 76,
     "TestInput": "1::2:3:4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::2:3:4"
@@ -1100,9 +1216,10 @@
     "Comment": ""
   },
   {
-    "Index": 74,
+    "Index": 77,
     "TestInput": "1::2:3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::2:3"
@@ -1116,9 +1233,10 @@
     "Comment": ""
   },
   {
-    "Index": 75,
+    "Index": 78,
     "TestInput": "1::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::8"
@@ -1132,9 +1250,10 @@
     "Comment": ""
   },
   {
-    "Index": 76,
+    "Index": 79,
     "TestInput": "::2:3:4:5:6:7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "0:2:3:4:5:6:7:8"
@@ -1148,9 +1267,10 @@
     "Comment": ""
   },
   {
-    "Index": 77,
+    "Index": 80,
     "TestInput": "::2:3:4:5:6:7",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::2:3:4:5:6:7"
@@ -1164,9 +1284,10 @@
     "Comment": ""
   },
   {
-    "Index": 78,
+    "Index": 81,
     "TestInput": "::2:3:4:5:6",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::2:3:4:5:6"
@@ -1180,9 +1301,10 @@
     "Comment": ""
   },
   {
-    "Index": 79,
+    "Index": 82,
     "TestInput": "::2:3:4:5",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::2:3:4:5"
@@ -1196,9 +1318,10 @@
     "Comment": ""
   },
   {
-    "Index": 80,
+    "Index": 83,
     "TestInput": "::2:3:4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::2:3:4"
@@ -1212,9 +1335,10 @@
     "Comment": ""
   },
   {
-    "Index": 81,
+    "Index": 84,
     "TestInput": "::2:3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::0.2.0.3"
@@ -1228,9 +1352,10 @@
     "Comment": ""
   },
   {
-    "Index": 82,
+    "Index": 85,
     "TestInput": "::8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::8"
@@ -1244,9 +1369,10 @@
     "Comment": ""
   },
   {
-    "Index": 83,
+    "Index": 86,
     "TestInput": "1:2:3:4:5:6::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5:6::"
@@ -1260,9 +1386,10 @@
     "Comment": ""
   },
   {
-    "Index": 84,
+    "Index": 87,
     "TestInput": "1:2:3:4:5::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5::"
@@ -1276,9 +1403,10 @@
     "Comment": ""
   },
   {
-    "Index": 85,
+    "Index": 88,
     "TestInput": "1:2:3:4::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4::"
@@ -1292,9 +1420,10 @@
     "Comment": ""
   },
   {
-    "Index": 86,
+    "Index": 89,
     "TestInput": "1:2:3::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3::"
@@ -1308,9 +1437,10 @@
     "Comment": ""
   },
   {
-    "Index": 87,
+    "Index": 90,
     "TestInput": "1:2::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2::"
@@ -1324,9 +1454,10 @@
     "Comment": ""
   },
   {
-    "Index": 88,
+    "Index": 91,
     "TestInput": "1::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::"
@@ -1340,9 +1471,10 @@
     "Comment": ""
   },
   {
-    "Index": 89,
+    "Index": 92,
     "TestInput": "1:2:3:4:5::7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5:0:7:8"
@@ -1356,9 +1488,10 @@
     "Comment": ""
   },
   {
-    "Index": 90,
+    "Index": 93,
     "TestInput": "1:2:3:4::7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4::7:8"
@@ -1372,9 +1505,10 @@
     "Comment": ""
   },
   {
-    "Index": 91,
+    "Index": 94,
     "TestInput": "1:2:3::7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3::7:8"
@@ -1388,9 +1522,10 @@
     "Comment": ""
   },
   {
-    "Index": 92,
+    "Index": 95,
     "TestInput": "1:2::7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2::7:8"
@@ -1404,9 +1539,10 @@
     "Comment": ""
   },
   {
-    "Index": 93,
+    "Index": 96,
     "TestInput": "1::7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::7:8"
@@ -1420,9 +1556,10 @@
     "Comment": ""
   },
   {
-    "Index": 94,
+    "Index": 97,
     "TestInput": "1:2:3:4:5:6:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5:6:102:304"
@@ -1436,9 +1573,10 @@
     "Comment": ""
   },
   {
-    "Index": 95,
+    "Index": 98,
     "TestInput": "1:2:3:4:5::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:5:0:102:304"
@@ -1452,9 +1590,10 @@
     "Comment": ""
   },
   {
-    "Index": 96,
+    "Index": 99,
     "TestInput": "1:2:3:4::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4::102:304"
@@ -1468,9 +1607,10 @@
     "Comment": ""
   },
   {
-    "Index": 97,
+    "Index": 100,
     "TestInput": "1:2:3::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3::102:304"
@@ -1484,9 +1624,10 @@
     "Comment": ""
   },
   {
-    "Index": 98,
+    "Index": 101,
     "TestInput": "1:2::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2::102:304"
@@ -1500,9 +1641,10 @@
     "Comment": ""
   },
   {
-    "Index": 99,
+    "Index": 102,
     "TestInput": "1::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::102:304"
@@ -1516,9 +1658,10 @@
     "Comment": ""
   },
   {
-    "Index": 100,
+    "Index": 103,
     "TestInput": "1:2:3:4::5:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3:4:0:5:102:304"
@@ -1532,9 +1675,10 @@
     "Comment": ""
   },
   {
-    "Index": 101,
+    "Index": 104,
     "TestInput": "1:2:3::5:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2:3::5:102:304"
@@ -1548,9 +1692,10 @@
     "Comment": ""
   },
   {
-    "Index": 102,
+    "Index": 105,
     "TestInput": "1:2::5:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1:2::5:102:304"
@@ -1564,9 +1709,10 @@
     "Comment": ""
   },
   {
-    "Index": 103,
+    "Index": 106,
     "TestInput": "1::5:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::5:102:304"
@@ -1580,9 +1726,10 @@
     "Comment": ""
   },
   {
-    "Index": 104,
+    "Index": 107,
     "TestInput": "1::5:11.22.33.44",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1::5:b16:212c"
@@ -1596,9 +1743,10 @@
     "Comment": ""
   },
   {
-    "Index": 105,
+    "Index": 108,
     "TestInput": "fe80::217:f2ff:254.7.237.98",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::217:f2ff:fe07:ed62"
@@ -1612,9 +1760,10 @@
     "Comment": ""
   },
   {
-    "Index": 106,
+    "Index": 109,
     "TestInput": "::ffff:192.168.1.26",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:192.168.1.26"
@@ -1628,9 +1777,10 @@
     "Comment": ""
   },
   {
-    "Index": 107,
+    "Index": 110,
     "TestInput": "::ffff:192.168.1.1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:192.168.1.1"
@@ -1644,9 +1794,10 @@
     "Comment": ""
   },
   {
-    "Index": 108,
+    "Index": 111,
     "TestInput": "0:0:0:0:0:0:13.1.68.3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::13.1.68.3"
@@ -1660,9 +1811,10 @@
     "Comment": "IPv4-compatible IPv6 address, full, deprecated"
   },
   {
-    "Index": 109,
+    "Index": 112,
     "TestInput": "0:0:0:0:0:FFFF:129.144.52.38",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:129.144.52.38"
@@ -1676,9 +1828,10 @@
     "Comment": "IPv4-mapped IPv6 address, full"
   },
   {
-    "Index": 110,
+    "Index": 113,
     "TestInput": "::13.1.68.3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::13.1.68.3"
@@ -1692,9 +1845,10 @@
     "Comment": "IPv4-compatible IPv6 address, compressed, deprecated"
   },
   {
-    "Index": 111,
+    "Index": 114,
     "TestInput": "::FFFF:129.144.52.38",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:129.144.52.38"
@@ -1708,9 +1862,10 @@
     "Comment": "IPv4-mapped IPv6 address, compressed"
   },
   {
-    "Index": 112,
+    "Index": 115,
     "TestInput": "fe80:0:0:0:204:61ff:254.157.241.86",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::204:61ff:fe9d:f156"
@@ -1724,9 +1879,10 @@
     "Comment": ""
   },
   {
-    "Index": 113,
+    "Index": 116,
     "TestInput": "fe80::204:61ff:254.157.241.86",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::204:61ff:fe9d:f156"
@@ -1740,9 +1896,10 @@
     "Comment": ""
   },
   {
-    "Index": 114,
+    "Index": 117,
     "TestInput": "::ffff:12.34.56.78",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:12.34.56.78"
@@ -1756,9 +1913,10 @@
     "Comment": ""
   },
   {
-    "Index": 115,
+    "Index": 118,
     "TestInput": "::ffff:192.0.2.128",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:192.0.2.128"
@@ -1772,9 +1930,10 @@
     "Comment": "# but this is OK, since there's a single digit"
   },
   {
-    "Index": 116,
+    "Index": 119,
     "TestInput": "fe80:0000:0000:0000:0204:61ff:fe9d:f156",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::204:61ff:fe9d:f156"
@@ -1788,9 +1947,10 @@
     "Comment": ""
   },
   {
-    "Index": 117,
+    "Index": 120,
     "TestInput": "fe80:0:0:0:204:61ff:fe9d:f156",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::204:61ff:fe9d:f156"
@@ -1804,9 +1964,10 @@
     "Comment": ""
   },
   {
-    "Index": 118,
+    "Index": 121,
     "TestInput": "fe80::204:61ff:fe9d:f156",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::204:61ff:fe9d:f156"
@@ -1820,9 +1981,10 @@
     "Comment": ""
   },
   {
-    "Index": 119,
+    "Index": 122,
     "TestInput": "::1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -1836,9 +1998,10 @@
     "Comment": ""
   },
   {
-    "Index": 120,
+    "Index": 123,
     "TestInput": "fe80::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::"
@@ -1852,9 +2015,10 @@
     "Comment": ""
   },
   {
-    "Index": 121,
+    "Index": 124,
     "TestInput": "fe80::1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::1"
@@ -1868,9 +2032,10 @@
     "Comment": ""
   },
   {
-    "Index": 122,
+    "Index": 125,
     "TestInput": "::ffff:c000:280",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:192.0.2.128"
@@ -1884,9 +2049,10 @@
     "Comment": ""
   },
   {
-    "Index": 123,
+    "Index": 126,
     "TestInput": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:85a3::8a2e:370:7334"
@@ -1900,9 +2066,10 @@
     "Comment": ""
   },
   {
-    "Index": 124,
+    "Index": 127,
     "TestInput": "2001:db8:85a3:0:0:8a2e:370:7334",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:85a3::8a2e:370:7334"
@@ -1916,9 +2083,10 @@
     "Comment": ""
   },
   {
-    "Index": 125,
+    "Index": 128,
     "TestInput": "2001:db8:85a3::8a2e:370:7334",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:85a3::8a2e:370:7334"
@@ -1932,9 +2100,10 @@
     "Comment": ""
   },
   {
-    "Index": 126,
+    "Index": 129,
     "TestInput": "2001:0db8:0000:0000:0000:0000:1428:57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::1428:57ab"
@@ -1948,9 +2117,10 @@
     "Comment": ""
   },
   {
-    "Index": 127,
+    "Index": 130,
     "TestInput": "2001:0db8:0000:0000:0000::1428:57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::1428:57ab"
@@ -1964,9 +2134,10 @@
     "Comment": ""
   },
   {
-    "Index": 128,
+    "Index": 131,
     "TestInput": "2001:0db8:0:0:0:0:1428:57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::1428:57ab"
@@ -1980,9 +2151,10 @@
     "Comment": ""
   },
   {
-    "Index": 129,
+    "Index": 132,
     "TestInput": "2001:0db8:0:0::1428:57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::1428:57ab"
@@ -1996,9 +2168,10 @@
     "Comment": ""
   },
   {
-    "Index": 130,
+    "Index": 133,
     "TestInput": "2001:0db8::1428:57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::1428:57ab"
@@ -2012,9 +2185,10 @@
     "Comment": ""
   },
   {
-    "Index": 131,
+    "Index": 134,
     "TestInput": "2001:db8::1428:57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8::1428:57ab"
@@ -2028,9 +2202,10 @@
     "Comment": ""
   },
   {
-    "Index": 132,
+    "Index": 135,
     "TestInput": "0000:0000:0000:0000:0000:0000:0000:0001",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -2044,9 +2219,10 @@
     "Comment": ""
   },
   {
-    "Index": 133,
+    "Index": 136,
     "TestInput": "::1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::1"
@@ -2060,9 +2236,10 @@
     "Comment": ""
   },
   {
-    "Index": 134,
+    "Index": 137,
     "TestInput": "::ffff:0c22:384e",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::ffff:12.34.56.78"
@@ -2076,9 +2253,10 @@
     "Comment": ""
   },
   {
-    "Index": 135,
+    "Index": 138,
     "TestInput": "2001:0db8:1234:0000:0000:0000:0000:0000",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:1234::"
@@ -2092,9 +2270,10 @@
     "Comment": ""
   },
   {
-    "Index": 136,
+    "Index": 139,
     "TestInput": "2001:0db8:1234:ffff:ffff:ffff:ffff:ffff",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:1234:ffff:ffff:ffff:ffff:ffff"
@@ -2108,9 +2287,10 @@
     "Comment": ""
   },
   {
-    "Index": 137,
+    "Index": 140,
     "TestInput": "2001:db8:a::123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "2001:db8:a::123"
@@ -2124,9 +2304,10 @@
     "Comment": ""
   },
   {
-    "Index": 138,
+    "Index": 141,
     "TestInput": "fe80::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "fe80::"
@@ -2140,9 +2321,10 @@
     "Comment": ""
   },
   {
-    "Index": 139,
+    "Index": 142,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:6666:7777:8888"
@@ -2156,9 +2338,10 @@
     "Comment": ""
   },
   {
-    "Index": 140,
+    "Index": 143,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:6666:7777:0"
@@ -2172,9 +2355,10 @@
     "Comment": ""
   },
   {
-    "Index": 141,
+    "Index": 144,
     "TestInput": "1111:2222:3333:4444:5555:6666::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:6666::"
@@ -2188,9 +2372,10 @@
     "Comment": ""
   },
   {
-    "Index": 142,
+    "Index": 145,
     "TestInput": "1111:2222:3333:4444:5555::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555::"
@@ -2204,9 +2389,10 @@
     "Comment": ""
   },
   {
-    "Index": 143,
+    "Index": 146,
     "TestInput": "1111:2222:3333:4444::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444::"
@@ -2220,9 +2406,10 @@
     "Comment": ""
   },
   {
-    "Index": 144,
+    "Index": 147,
     "TestInput": "1111:2222:3333::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333::"
@@ -2236,9 +2423,10 @@
     "Comment": ""
   },
   {
-    "Index": 145,
+    "Index": 148,
     "TestInput": "1111:2222::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::"
@@ -2252,9 +2440,10 @@
     "Comment": ""
   },
   {
-    "Index": 146,
+    "Index": 149,
     "TestInput": "1111::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::"
@@ -2268,9 +2457,10 @@
     "Comment": ""
   },
   {
-    "Index": 147,
+    "Index": 150,
     "TestInput": "1111:2222:3333:4444:5555:6666::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:6666:0:8888"
@@ -2284,9 +2474,10 @@
     "Comment": ""
   },
   {
-    "Index": 148,
+    "Index": 151,
     "TestInput": "1111:2222:3333:4444:5555::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555::8888"
@@ -2300,9 +2491,10 @@
     "Comment": ""
   },
   {
-    "Index": 149,
+    "Index": 152,
     "TestInput": "1111:2222:3333:4444::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444::8888"
@@ -2316,9 +2508,10 @@
     "Comment": ""
   },
   {
-    "Index": 150,
+    "Index": 153,
     "TestInput": "1111:2222:3333::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333::8888"
@@ -2332,9 +2525,10 @@
     "Comment": ""
   },
   {
-    "Index": 151,
+    "Index": 154,
     "TestInput": "1111:2222::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::8888"
@@ -2348,9 +2542,10 @@
     "Comment": ""
   },
   {
-    "Index": 152,
+    "Index": 155,
     "TestInput": "1111::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::8888"
@@ -2364,9 +2559,10 @@
     "Comment": ""
   },
   {
-    "Index": 153,
+    "Index": 156,
     "TestInput": "::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::8888"
@@ -2380,9 +2576,10 @@
     "Comment": ""
   },
   {
-    "Index": 154,
+    "Index": 157,
     "TestInput": "1111:2222:3333:4444:5555::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:0:7777:8888"
@@ -2396,9 +2593,10 @@
     "Comment": ""
   },
   {
-    "Index": 155,
+    "Index": 158,
     "TestInput": "1111:2222:3333:4444::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444::7777:8888"
@@ -2412,9 +2610,10 @@
     "Comment": ""
   },
   {
-    "Index": 156,
+    "Index": 159,
     "TestInput": "1111:2222:3333::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333::7777:8888"
@@ -2428,9 +2627,10 @@
     "Comment": ""
   },
   {
-    "Index": 157,
+    "Index": 160,
     "TestInput": "1111:2222::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::7777:8888"
@@ -2444,9 +2644,10 @@
     "Comment": ""
   },
   {
-    "Index": 158,
+    "Index": 161,
     "TestInput": "1111::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::7777:8888"
@@ -2460,9 +2661,10 @@
     "Comment": ""
   },
   {
-    "Index": 159,
+    "Index": 162,
     "TestInput": "::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::119.119.136.136"
@@ -2476,9 +2678,10 @@
     "Comment": ""
   },
   {
-    "Index": 160,
+    "Index": 163,
     "TestInput": "1111:2222:3333:4444::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:0:6666:7777:8888"
@@ -2492,9 +2695,10 @@
     "Comment": ""
   },
   {
-    "Index": 161,
+    "Index": 164,
     "TestInput": "1111:2222:3333::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333::6666:7777:8888"
@@ -2508,9 +2712,10 @@
     "Comment": ""
   },
   {
-    "Index": 162,
+    "Index": 165,
     "TestInput": "1111:2222::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::6666:7777:8888"
@@ -2524,9 +2729,10 @@
     "Comment": ""
   },
   {
-    "Index": 163,
+    "Index": 166,
     "TestInput": "1111::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::6666:7777:8888"
@@ -2540,9 +2746,10 @@
     "Comment": ""
   },
   {
-    "Index": 164,
+    "Index": 167,
     "TestInput": "::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::6666:7777:8888"
@@ -2556,9 +2763,10 @@
     "Comment": ""
   },
   {
-    "Index": 165,
+    "Index": 168,
     "TestInput": "1111:2222:3333::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:0:5555:6666:7777:8888"
@@ -2572,9 +2780,10 @@
     "Comment": ""
   },
   {
-    "Index": 166,
+    "Index": 169,
     "TestInput": "1111:2222::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::5555:6666:7777:8888"
@@ -2588,9 +2797,10 @@
     "Comment": ""
   },
   {
-    "Index": 167,
+    "Index": 170,
     "TestInput": "1111::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::5555:6666:7777:8888"
@@ -2604,9 +2814,10 @@
     "Comment": ""
   },
   {
-    "Index": 168,
+    "Index": 171,
     "TestInput": "::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::5555:6666:7777:8888"
@@ -2620,9 +2831,10 @@
     "Comment": ""
   },
   {
-    "Index": 169,
+    "Index": 172,
     "TestInput": "1111:2222::4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:0:4444:5555:6666:7777:8888"
@@ -2636,9 +2848,10 @@
     "Comment": ""
   },
   {
-    "Index": 170,
+    "Index": 173,
     "TestInput": "1111::4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::4444:5555:6666:7777:8888"
@@ -2652,9 +2865,10 @@
     "Comment": ""
   },
   {
-    "Index": 171,
+    "Index": 174,
     "TestInput": "::4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::4444:5555:6666:7777:8888"
@@ -2668,9 +2882,10 @@
     "Comment": ""
   },
   {
-    "Index": 172,
+    "Index": 175,
     "TestInput": "1111::3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:0:3333:4444:5555:6666:7777:8888"
@@ -2684,9 +2899,10 @@
     "Comment": ""
   },
   {
-    "Index": 173,
+    "Index": 176,
     "TestInput": "::3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::3333:4444:5555:6666:7777:8888"
@@ -2700,9 +2916,10 @@
     "Comment": ""
   },
   {
-    "Index": 174,
+    "Index": 177,
     "TestInput": "::2222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "0:2222:3333:4444:5555:6666:7777:8888"
@@ -2716,9 +2933,10 @@
     "Comment": ""
   },
   {
-    "Index": 175,
+    "Index": 178,
     "TestInput": "1111:2222:3333:4444:5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:6666:7b7b:7b7b"
@@ -2732,9 +2950,10 @@
     "Comment": ""
   },
   {
-    "Index": 176,
+    "Index": 179,
     "TestInput": "1111:2222:3333:4444:5555::123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:5555:0:7b7b:7b7b"
@@ -2748,9 +2967,10 @@
     "Comment": ""
   },
   {
-    "Index": 177,
+    "Index": 180,
     "TestInput": "1111:2222:3333:4444::123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444::7b7b:7b7b"
@@ -2764,9 +2984,10 @@
     "Comment": ""
   },
   {
-    "Index": 178,
+    "Index": 181,
     "TestInput": "1111:2222:3333::123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333::7b7b:7b7b"
@@ -2780,9 +3001,10 @@
     "Comment": ""
   },
   {
-    "Index": 179,
+    "Index": 182,
     "TestInput": "1111:2222::123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::7b7b:7b7b"
@@ -2796,9 +3018,10 @@
     "Comment": ""
   },
   {
-    "Index": 180,
+    "Index": 183,
     "TestInput": "1111::123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::7b7b:7b7b"
@@ -2812,9 +3035,10 @@
     "Comment": ""
   },
   {
-    "Index": 181,
+    "Index": 184,
     "TestInput": "::123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::123.123.123.123"
@@ -2828,9 +3052,10 @@
     "Comment": ""
   },
   {
-    "Index": 182,
+    "Index": 185,
     "TestInput": "1111:2222:3333:4444::6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:4444:0:6666:7b7b:7b7b"
@@ -2844,9 +3069,10 @@
     "Comment": ""
   },
   {
-    "Index": 183,
+    "Index": 186,
     "TestInput": "1111:2222:3333::6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333::6666:7b7b:7b7b"
@@ -2860,9 +3086,10 @@
     "Comment": ""
   },
   {
-    "Index": 184,
+    "Index": 187,
     "TestInput": "1111:2222::6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::6666:7b7b:7b7b"
@@ -2876,9 +3103,10 @@
     "Comment": ""
   },
   {
-    "Index": 185,
+    "Index": 188,
     "TestInput": "1111::6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::6666:7b7b:7b7b"
@@ -2892,9 +3120,10 @@
     "Comment": ""
   },
   {
-    "Index": 186,
+    "Index": 189,
     "TestInput": "::6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::6666:7b7b:7b7b"
@@ -2908,9 +3137,10 @@
     "Comment": ""
   },
   {
-    "Index": 187,
+    "Index": 190,
     "TestInput": "1111:2222:3333::5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:3333:0:5555:6666:7b7b:7b7b"
@@ -2924,9 +3154,10 @@
     "Comment": ""
   },
   {
-    "Index": 188,
+    "Index": 191,
     "TestInput": "1111:2222::5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222::5555:6666:7b7b:7b7b"
@@ -2940,9 +3171,10 @@
     "Comment": ""
   },
   {
-    "Index": 189,
+    "Index": 192,
     "TestInput": "1111::5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::5555:6666:7b7b:7b7b"
@@ -2956,9 +3188,10 @@
     "Comment": ""
   },
   {
-    "Index": 190,
+    "Index": 193,
     "TestInput": "::5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::5555:6666:7b7b:7b7b"
@@ -2972,9 +3205,10 @@
     "Comment": ""
   },
   {
-    "Index": 191,
+    "Index": 194,
     "TestInput": "1111:2222::4444:5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:2222:0:4444:5555:6666:7b7b:7b7b"
@@ -2988,9 +3222,10 @@
     "Comment": ""
   },
   {
-    "Index": 192,
+    "Index": 195,
     "TestInput": "1111::4444:5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111::4444:5555:6666:7b7b:7b7b"
@@ -3004,9 +3239,10 @@
     "Comment": ""
   },
   {
-    "Index": 193,
+    "Index": 196,
     "TestInput": "::4444:5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::4444:5555:6666:7b7b:7b7b"
@@ -3020,9 +3256,10 @@
     "Comment": ""
   },
   {
-    "Index": 194,
+    "Index": 197,
     "TestInput": "1111::3333:4444:5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "1111:0:3333:4444:5555:6666:7b7b:7b7b"
@@ -3036,9 +3273,10 @@
     "Comment": ""
   },
   {
-    "Index": 195,
+    "Index": 198,
     "TestInput": "::2222:3333:4444:5555:6666:123.123.123.123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "0:2222:3333:4444:5555:6666:7b7b:7b7b"
@@ -3052,63 +3290,16 @@
     "Comment": ""
   },
   {
-    "Index": 196,
+    "Index": 199,
     "TestInput": "::0:0:0:0:0:0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
     },
     "ExpectedResult": {
       "CharsConsumed": 15,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 197,
-    "TestInput": "::0:0:0:0:0:0",
-    "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 13,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 198,
-    "TestInput": "::0:0:0:0:0",
-    "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 11,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 199,
-    "TestInput": "::0:0:0:0",
-    "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 9,
       "ErrorCode": null
     },
     "ExpectedErrorMessage": null,
@@ -3117,72 +3308,9 @@
   },
   {
     "Index": 200,
-    "TestInput": "::0:0:0",
+    "TestInput": "::0:0:0:0:0:0",
     "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 7,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 201,
-    "TestInput": "::0:0",
-    "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 5,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 202,
-    "TestInput": "::0",
-    "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 3,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 203,
-    "TestInput": "0:0:0:0:0:0:0::",
-    "TestTerminatingChars": null,
-    "ExpectedValue": {
-      "Kind": "IPv6",
-      "Value": "::"
-    },
-    "ExpectedResult": {
-      "CharsConsumed": 15,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "ExpectedValueString": "::",
-    "Comment": ""
-  },
-  {
-    "Index": 204,
-    "TestInput": "0:0:0:0:0:0::",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -3196,9 +3324,10 @@
     "Comment": ""
   },
   {
-    "Index": 205,
-    "TestInput": "0:0:0:0:0::",
+    "Index": 201,
+    "TestInput": "::0:0:0:0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -3212,9 +3341,10 @@
     "Comment": ""
   },
   {
-    "Index": 206,
-    "TestInput": "0:0:0:0::",
+    "Index": 202,
+    "TestInput": "::0:0:0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -3228,9 +3358,10 @@
     "Comment": ""
   },
   {
-    "Index": 207,
-    "TestInput": "0:0:0::",
+    "Index": 203,
+    "TestInput": "::0:0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -3244,9 +3375,10 @@
     "Comment": ""
   },
   {
-    "Index": 208,
-    "TestInput": "0:0::",
+    "Index": 204,
+    "TestInput": "::0:0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -3260,9 +3392,10 @@
     "Comment": ""
   },
   {
-    "Index": 209,
-    "TestInput": "0::",
+    "Index": 205,
+    "TestInput": "::0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::"
@@ -3276,9 +3409,129 @@
     "Comment": ""
   },
   {
+    "Index": 206,
+    "TestInput": "0:0:0:0:0:0:0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 15,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 207,
+    "TestInput": "0:0:0:0:0:0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 13,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 208,
+    "TestInput": "0:0:0:0:0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 209,
+    "TestInput": "0:0:0:0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 9,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
     "Index": 210,
+    "TestInput": "0:0:0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 211,
+    "TestInput": "0:0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 212,
+    "TestInput": "0::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "::"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "::",
+    "Comment": ""
+  },
+  {
+    "Index": 213,
     "TestInput": "0:a:b:c:d:e:f::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "0:a:b:c:d:e:f:0"
@@ -3292,9 +3545,10 @@
     "Comment": ""
   },
   {
-    "Index": 211,
+    "Index": 214,
     "TestInput": "::0:a:b:c:d:e:f",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "::a:b:c:d:e:f"
@@ -3308,9 +3562,10 @@
     "Comment": "# syntactically correct, but bad form (::0:... could be combined)"
   },
   {
-    "Index": 212,
+    "Index": 215,
     "TestInput": "a:b:c:d:e:f:0::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": {
       "Kind": "IPv6",
       "Value": "a:b:c:d:e:f::"
@@ -3324,9 +3579,10 @@
     "Comment": ""
   },
   {
-    "Index": 213,
+    "Index": 216,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -3337,9 +3593,10 @@
     "Comment": "empty string"
   },
   {
-    "Index": 214,
+    "Index": 217,
     "TestInput": "2001:DB8:0:0:8:800:200C:417A:221",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -3350,9 +3607,10 @@
     "Comment": "unicast, full"
   },
   {
-    "Index": 215,
+    "Index": 218,
     "TestInput": "FF01::101::2",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3363,9 +3621,10 @@
     "Comment": "multicast, compressed"
   },
   {
-    "Index": 216,
+    "Index": 219,
     "TestInput": "02001:0000:1234:0000:0000:C1C0:ABCD:0876",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 40,
@@ -3376,9 +3635,10 @@
     "Comment": "extra 0 not allowed!"
   },
   {
-    "Index": 217,
+    "Index": 220,
     "TestInput": "2001:0000:1234:0000:00001:C1C0:ABCD:0876",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 40,
@@ -3389,9 +3649,10 @@
     "Comment": "extra 0 not allowed!"
   },
   {
-    "Index": 218,
+    "Index": 221,
     "TestInput": "2001:0000:1234:0000:0000:C1C0:ABCD:0876  0",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 39,
@@ -3402,9 +3663,10 @@
     "Comment": "junk after valid address"
   },
   {
-    "Index": 219,
+    "Index": 222,
     "TestInput": "2001:0000:1234: 0000:0000:C1C0:ABCD:0876",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 15,
@@ -3415,9 +3677,10 @@
     "Comment": "internal space"
   },
   {
-    "Index": 220,
+    "Index": 223,
     "TestInput": "3ffe:0b00:0000:0001:0000:0000:000a",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -3428,9 +3691,10 @@
     "Comment": "seven segments"
   },
   {
-    "Index": 221,
+    "Index": 224,
     "TestInput": "FF02:0000:0000:0000:0000:0000:0000:0000:0001",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 44,
@@ -3441,9 +3705,10 @@
     "Comment": "nine segments"
   },
   {
-    "Index": 222,
+    "Index": 225,
     "TestInput": "3ffe:b00::1::a",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3454,9 +3719,10 @@
     "Comment": "double \"::\""
   },
   {
-    "Index": 223,
+    "Index": 226,
     "TestInput": "::1111:2222:3333:4444:5555:6666::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 33,
@@ -3467,9 +3733,10 @@
     "Comment": "double \"::\""
   },
   {
-    "Index": 224,
+    "Index": 227,
     "TestInput": "1:2:3::4:5::7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 15,
@@ -3480,9 +3747,10 @@
     "Comment": "Double \"::\""
   },
   {
-    "Index": 225,
+    "Index": 228,
     "TestInput": "12345::6:7:8",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3493,48 +3761,10 @@
     "Comment": ""
   },
   {
-    "Index": 226,
+    "Index": 229,
     "TestInput": "1::5:400.2.3.4",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 14,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 227,
-    "TestInput": "1::5:260.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 14,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 228,
-    "TestInput": "1::5:256.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 14,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 229,
-    "TestInput": "1::5:1.256.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3546,8 +3776,9 @@
   },
   {
     "Index": 230,
-    "TestInput": "1::5:1.2.256.4",
+    "TestInput": "1::5:260.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3559,8 +3790,9 @@
   },
   {
     "Index": 231,
-    "TestInput": "1::5:1.2.3.256",
+    "TestInput": "1::5:256.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3572,8 +3804,9 @@
   },
   {
     "Index": 232,
-    "TestInput": "1::5:300.2.3.4",
+    "TestInput": "1::5:1.256.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3585,8 +3818,9 @@
   },
   {
     "Index": 233,
-    "TestInput": "1::5:1.300.3.4",
+    "TestInput": "1::5:1.2.256.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3598,8 +3832,9 @@
   },
   {
     "Index": 234,
-    "TestInput": "1::5:1.2.300.4",
+    "TestInput": "1::5:1.2.3.256",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3611,8 +3846,9 @@
   },
   {
     "Index": 235,
-    "TestInput": "1::5:1.2.3.300",
+    "TestInput": "1::5:300.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3624,8 +3860,9 @@
   },
   {
     "Index": 236,
-    "TestInput": "1::5:900.2.3.4",
+    "TestInput": "1::5:1.300.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3637,8 +3874,9 @@
   },
   {
     "Index": 237,
-    "TestInput": "1::5:1.900.3.4",
+    "TestInput": "1::5:1.2.300.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3650,8 +3888,9 @@
   },
   {
     "Index": 238,
-    "TestInput": "1::5:1.2.900.4",
+    "TestInput": "1::5:1.2.3.300",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3663,8 +3902,9 @@
   },
   {
     "Index": 239,
-    "TestInput": "1::5:1.2.3.900",
+    "TestInput": "1::5:900.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -3676,8 +3916,51 @@
   },
   {
     "Index": 240,
+    "TestInput": "1::5:1.900.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 241,
+    "TestInput": "1::5:1.2.900.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 242,
+    "TestInput": "1::5:1.2.3.900",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 14,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 243,
     "TestInput": "1::5:300.300.300.300",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 20,
@@ -3688,9 +3971,10 @@
     "Comment": ""
   },
   {
-    "Index": 241,
+    "Index": 244,
     "TestInput": "1::5:3000.30.30.30",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 18,
@@ -3701,48 +3985,10 @@
     "Comment": ""
   },
   {
-    "Index": 242,
+    "Index": 245,
     "TestInput": "1::400.2.3.4",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 12,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 243,
-    "TestInput": "1::260.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 12,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 244,
-    "TestInput": "1::256.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 12,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 245,
-    "TestInput": "1::1.256.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3754,8 +4000,9 @@
   },
   {
     "Index": 246,
-    "TestInput": "1::1.2.256.4",
+    "TestInput": "1::260.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3767,8 +4014,9 @@
   },
   {
     "Index": 247,
-    "TestInput": "1::1.2.3.256",
+    "TestInput": "1::256.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3780,8 +4028,9 @@
   },
   {
     "Index": 248,
-    "TestInput": "1::300.2.3.4",
+    "TestInput": "1::1.256.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3793,8 +4042,9 @@
   },
   {
     "Index": 249,
-    "TestInput": "1::1.300.3.4",
+    "TestInput": "1::1.2.256.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3806,8 +4056,9 @@
   },
   {
     "Index": 250,
-    "TestInput": "1::1.2.300.4",
+    "TestInput": "1::1.2.3.256",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3819,8 +4070,9 @@
   },
   {
     "Index": 251,
-    "TestInput": "1::1.2.3.300",
+    "TestInput": "1::300.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3832,8 +4084,9 @@
   },
   {
     "Index": 252,
-    "TestInput": "1::900.2.3.4",
+    "TestInput": "1::1.300.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3845,8 +4098,9 @@
   },
   {
     "Index": 253,
-    "TestInput": "1::1.900.3.4",
+    "TestInput": "1::1.2.300.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3858,8 +4112,9 @@
   },
   {
     "Index": 254,
-    "TestInput": "1::1.2.900.4",
+    "TestInput": "1::1.2.3.300",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3871,8 +4126,9 @@
   },
   {
     "Index": 255,
-    "TestInput": "1::1.2.3.900",
+    "TestInput": "1::900.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -3884,8 +4140,51 @@
   },
   {
     "Index": 256,
+    "TestInput": "1::1.900.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 257,
+    "TestInput": "1::1.2.900.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 258,
+    "TestInput": "1::1.2.3.900",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 12,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 259,
     "TestInput": "1::300.300.300.300",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 18,
@@ -3896,9 +4195,10 @@
     "Comment": ""
   },
   {
-    "Index": 257,
+    "Index": 260,
     "TestInput": "1::3000.30.30.30",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -3909,48 +4209,10 @@
     "Comment": ""
   },
   {
-    "Index": 258,
+    "Index": 261,
     "TestInput": "::400.2.3.4",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 11,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 259,
-    "TestInput": "::260.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 11,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 260,
-    "TestInput": "::256.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 11,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 261,
-    "TestInput": "::1.256.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -3962,8 +4224,9 @@
   },
   {
     "Index": 262,
-    "TestInput": "::1.2.256.4",
+    "TestInput": "::260.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -3975,8 +4238,9 @@
   },
   {
     "Index": 263,
-    "TestInput": "::1.2.3.256",
+    "TestInput": "::256.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -3988,8 +4252,9 @@
   },
   {
     "Index": 264,
-    "TestInput": "::300.2.3.4",
+    "TestInput": "::1.256.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4001,8 +4266,9 @@
   },
   {
     "Index": 265,
-    "TestInput": "::1.300.3.4",
+    "TestInput": "::1.2.256.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4014,8 +4280,9 @@
   },
   {
     "Index": 266,
-    "TestInput": "::1.2.300.4",
+    "TestInput": "::1.2.3.256",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4027,8 +4294,9 @@
   },
   {
     "Index": 267,
-    "TestInput": "::1.2.3.300",
+    "TestInput": "::300.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4040,8 +4308,9 @@
   },
   {
     "Index": 268,
-    "TestInput": "::900.2.3.4",
+    "TestInput": "::1.300.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4053,8 +4322,9 @@
   },
   {
     "Index": 269,
-    "TestInput": "::1.900.3.4",
+    "TestInput": "::1.2.300.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4066,8 +4336,9 @@
   },
   {
     "Index": 270,
-    "TestInput": "::1.2.900.4",
+    "TestInput": "::1.2.3.300",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4079,8 +4350,9 @@
   },
   {
     "Index": 271,
-    "TestInput": "::1.2.3.900",
+    "TestInput": "::900.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4092,8 +4364,51 @@
   },
   {
     "Index": 272,
+    "TestInput": "::1.900.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 273,
+    "TestInput": "::1.2.900.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 274,
+    "TestInput": "::1.2.3.900",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 275,
     "TestInput": "::300.300.300.300",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -4104,9 +4419,10 @@
     "Comment": ""
   },
   {
-    "Index": 273,
+    "Index": 276,
     "TestInput": "::3000.30.30.30",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 15,
@@ -4117,9 +4433,10 @@
     "Comment": ""
   },
   {
-    "Index": 274,
+    "Index": 277,
     "TestInput": "2001:1:1:1:1:1:255Z255X255Y255",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 18,
@@ -4130,9 +4447,10 @@
     "Comment": "garbage instead of \".\" in IPv4"
   },
   {
-    "Index": 275,
+    "Index": 278,
     "TestInput": "::ffff:192x168.1.26",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
@@ -4143,9 +4461,10 @@
     "Comment": "ditto"
   },
   {
-    "Index": 276,
+    "Index": 279,
     "TestInput": "::ffff:2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -4156,9 +4475,10 @@
     "Comment": ""
   },
   {
-    "Index": 277,
+    "Index": 280,
     "TestInput": "::ffff:257.1.2.3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -4169,9 +4489,10 @@
     "Comment": ""
   },
   {
-    "Index": 278,
+    "Index": 281,
     "TestInput": "1.2.3.4:1111:2222:3333:4444::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -4182,48 +4503,10 @@
     "Comment": "Aeron"
   },
   {
-    "Index": 279,
+    "Index": 282,
     "TestInput": "1.2.3.4:1111:2222:3333::5555",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 7,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 280,
-    "TestInput": "1.2.3.4:1111:2222::5555",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 7,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 281,
-    "TestInput": "1.2.3.4:1111::5555",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 7,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 282,
-    "TestInput": "1.2.3.4::5555",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -4235,8 +4518,9 @@
   },
   {
     "Index": 283,
-    "TestInput": "1.2.3.4::",
+    "TestInput": "1.2.3.4:1111:2222::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -4248,8 +4532,51 @@
   },
   {
     "Index": 284,
+    "TestInput": "1.2.3.4:1111::5555",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 285,
+    "TestInput": "1.2.3.4::5555",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 286,
+    "TestInput": "1.2.3.4::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 7,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 287,
     "TestInput": "XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -4260,9 +4587,10 @@
     "Comment": ""
   },
   {
-    "Index": 285,
+    "Index": 288,
     "TestInput": "1111:2222:3333:4444:5555:6666:00.00.00.00",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 41,
@@ -4273,9 +4601,10 @@
     "Comment": ""
   },
   {
-    "Index": 286,
+    "Index": 289,
     "TestInput": "1111:2222:3333:4444:5555:6666:000.000.000.000",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 45,
@@ -4286,9 +4615,10 @@
     "Comment": ""
   },
   {
-    "Index": 287,
+    "Index": 290,
     "TestInput": "1111:2222:3333:4444:5555:6666:256.256.256.256",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 45,
@@ -4299,9 +4629,10 @@
     "Comment": ""
   },
   {
-    "Index": 288,
+    "Index": 291,
     "TestInput": ":",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -4312,9 +4643,10 @@
     "Comment": ""
   },
   {
-    "Index": 289,
+    "Index": 292,
     "TestInput": "1111:2222:3333:4444::5555:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -4325,9 +4657,10 @@
     "Comment": ""
   },
   {
-    "Index": 290,
+    "Index": 293,
     "TestInput": "1111:2222:3333::5555:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -4338,9 +4671,10 @@
     "Comment": ""
   },
   {
-    "Index": 291,
+    "Index": 294,
     "TestInput": "1111:2222::5555:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -4351,9 +4685,10 @@
     "Comment": ""
   },
   {
-    "Index": 292,
+    "Index": 295,
     "TestInput": "1111::5555:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4364,9 +4699,10 @@
     "Comment": ""
   },
   {
-    "Index": 293,
+    "Index": 296,
     "TestInput": "::5555:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -4377,9 +4713,10 @@
     "Comment": ""
   },
   {
-    "Index": 294,
+    "Index": 297,
     "TestInput": ":::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -4390,9 +4727,10 @@
     "Comment": ""
   },
   {
-    "Index": 295,
+    "Index": 298,
     "TestInput": "1111:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -4403,9 +4741,10 @@
     "Comment": ""
   },
   {
-    "Index": 296,
+    "Index": 299,
     "TestInput": ":",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -4416,9 +4755,10 @@
     "Comment": ""
   },
   {
-    "Index": 297,
+    "Index": 300,
     "TestInput": ":1111:2222:3333:4444::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -4429,9 +4769,10 @@
     "Comment": ""
   },
   {
-    "Index": 298,
+    "Index": 301,
     "TestInput": ":1111:2222:3333::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -4442,9 +4783,10 @@
     "Comment": ""
   },
   {
-    "Index": 299,
+    "Index": 302,
     "TestInput": ":1111:2222::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -4455,9 +4797,10 @@
     "Comment": ""
   },
   {
-    "Index": 300,
+    "Index": 303,
     "TestInput": ":1111::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -4468,9 +4811,10 @@
     "Comment": ""
   },
   {
-    "Index": 301,
+    "Index": 304,
     "TestInput": ":::5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -4481,9 +4825,10 @@
     "Comment": ""
   },
   {
-    "Index": 302,
+    "Index": 305,
     "TestInput": ":::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -4494,9 +4839,10 @@
     "Comment": ""
   },
   {
-    "Index": 303,
+    "Index": 306,
     "TestInput": "123",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -4507,9 +4853,10 @@
     "Comment": ""
   },
   {
-    "Index": 304,
+    "Index": 307,
     "TestInput": "2001::FFD3::57ab",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -4520,9 +4867,10 @@
     "Comment": ""
   },
   {
-    "Index": 305,
+    "Index": 308,
     "TestInput": "2001:db8:85a3::8a2e:37023:7334",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 30,
@@ -4533,9 +4881,10 @@
     "Comment": ""
   },
   {
-    "Index": 306,
+    "Index": 309,
     "TestInput": "2001:db8:85a3::8a2e:370k:7334",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 23,
@@ -4546,9 +4895,10 @@
     "Comment": ""
   },
   {
-    "Index": 307,
+    "Index": 310,
     "TestInput": "1:2:3:4:5:6:7:8:9",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -4559,9 +4909,10 @@
     "Comment": ""
   },
   {
-    "Index": 308,
+    "Index": 311,
     "TestInput": "1::2::3",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -4572,9 +4923,10 @@
     "Comment": ""
   },
   {
-    "Index": 309,
+    "Index": 312,
     "TestInput": "1:::3:4:5",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -4585,9 +4937,10 @@
     "Comment": ""
   },
   {
-    "Index": 310,
+    "Index": 313,
     "TestInput": "1:2:3::4:5:6:7:8:9",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 18,
@@ -4598,9 +4951,10 @@
     "Comment": ""
   },
   {
-    "Index": 311,
+    "Index": 314,
     "TestInput": "XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -4611,9 +4965,10 @@
     "Comment": ""
   },
   {
-    "Index": 312,
+    "Index": 315,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:9999",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 44,
@@ -4624,9 +4979,10 @@
     "Comment": ""
   },
   {
-    "Index": 313,
+    "Index": 316,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 41,
@@ -4637,9 +4993,10 @@
     "Comment": ""
   },
   {
-    "Index": 314,
+    "Index": 317,
     "TestInput": "::2222:3333:4444:5555:6666:7777:8888:9999",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 41,
@@ -4650,9 +5007,10 @@
     "Comment": ""
   },
   {
-    "Index": 315,
+    "Index": 318,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -4663,9 +5021,10 @@
     "Comment": ""
   },
   {
-    "Index": 316,
+    "Index": 319,
     "TestInput": "1111:2222:3333:4444:5555:6666",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -4676,9 +5035,10 @@
     "Comment": ""
   },
   {
-    "Index": 317,
+    "Index": 320,
     "TestInput": "1111:2222:3333:4444:5555",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 24,
@@ -4689,9 +5049,10 @@
     "Comment": ""
   },
   {
-    "Index": 318,
+    "Index": 321,
     "TestInput": "1111:2222:3333:4444",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 19,
@@ -4702,9 +5063,10 @@
     "Comment": ""
   },
   {
-    "Index": 319,
+    "Index": 322,
     "TestInput": "1111:2222:3333",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -4715,9 +5077,10 @@
     "Comment": ""
   },
   {
-    "Index": 320,
+    "Index": 323,
     "TestInput": "1111:2222",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -4728,9 +5091,10 @@
     "Comment": ""
   },
   {
-    "Index": 321,
+    "Index": 324,
     "TestInput": "1111",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -4741,48 +5105,10 @@
     "Comment": ""
   },
   {
-    "Index": 322,
+    "Index": 325,
     "TestInput": "11112222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 38,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 323,
-    "TestInput": "1111:22223333:4444:5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 38,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 324,
-    "TestInput": "1111:2222:33334444:5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 38,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 325,
-    "TestInput": "1111:2222:3333:44445555:6666:7777:8888",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 38,
@@ -4794,8 +5120,9 @@
   },
   {
     "Index": 326,
-    "TestInput": "1111:2222:3333:4444:55556666:7777:8888",
+    "TestInput": "1111:22223333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 38,
@@ -4807,8 +5134,9 @@
   },
   {
     "Index": 327,
-    "TestInput": "1111:2222:3333:4444:5555:66667777:8888",
+    "TestInput": "1111:2222:33334444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 38,
@@ -4820,8 +5148,9 @@
   },
   {
     "Index": 328,
-    "TestInput": "1111:2222:3333:4444:5555:6666:77778888",
+    "TestInput": "1111:2222:3333:44445555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 38,
@@ -4833,8 +5162,51 @@
   },
   {
     "Index": 329,
+    "TestInput": "1111:2222:3333:4444:55556666:7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 330,
+    "TestInput": "1111:2222:3333:4444:5555:66667777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 331,
+    "TestInput": "1111:2222:3333:4444:5555:6666:77778888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 332,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 40,
@@ -4845,9 +5217,10 @@
     "Comment": ""
   },
   {
-    "Index": 330,
+    "Index": 333,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 35,
@@ -4858,9 +5231,10 @@
     "Comment": ""
   },
   {
-    "Index": 331,
+    "Index": 334,
     "TestInput": "1111:2222:3333:4444:5555:6666:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 30,
@@ -4871,9 +5245,10 @@
     "Comment": ""
   },
   {
-    "Index": 332,
+    "Index": 335,
     "TestInput": "1111:2222:3333:4444:5555:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 25,
@@ -4884,9 +5259,10 @@
     "Comment": ""
   },
   {
-    "Index": 333,
+    "Index": 336,
     "TestInput": "1111:2222:3333:4444:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 20,
@@ -4897,9 +5273,10 @@
     "Comment": ""
   },
   {
-    "Index": 334,
+    "Index": 337,
     "TestInput": "1111:2222:3333:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 15,
@@ -4910,9 +5287,10 @@
     "Comment": ""
   },
   {
-    "Index": 335,
+    "Index": 338,
     "TestInput": "1111:2222:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
@@ -4923,9 +5301,10 @@
     "Comment": ""
   },
   {
-    "Index": 336,
+    "Index": 339,
     "TestInput": "1111:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -4936,9 +5315,10 @@
     "Comment": ""
   },
   {
-    "Index": 337,
+    "Index": 340,
     "TestInput": ":",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -4949,9 +5329,10 @@
     "Comment": ""
   },
   {
-    "Index": 338,
+    "Index": 341,
     "TestInput": ":8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -4962,9 +5343,10 @@
     "Comment": ""
   },
   {
-    "Index": 339,
+    "Index": 342,
     "TestInput": ":7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
@@ -4975,9 +5357,10 @@
     "Comment": ""
   },
   {
-    "Index": 340,
+    "Index": 343,
     "TestInput": ":6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 15,
@@ -4988,9 +5371,10 @@
     "Comment": ""
   },
   {
-    "Index": 341,
+    "Index": 344,
     "TestInput": ":5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 20,
@@ -5001,9 +5385,10 @@
     "Comment": ""
   },
   {
-    "Index": 342,
+    "Index": 345,
     "TestInput": ":4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 25,
@@ -5014,9 +5399,10 @@
     "Comment": ""
   },
   {
-    "Index": 343,
+    "Index": 346,
     "TestInput": ":3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 30,
@@ -5027,9 +5413,10 @@
     "Comment": ""
   },
   {
-    "Index": 344,
+    "Index": 347,
     "TestInput": ":2222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 35,
@@ -5040,9 +5427,10 @@
     "Comment": ""
   },
   {
-    "Index": 345,
+    "Index": 348,
     "TestInput": ":1111:2222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 40,
@@ -5053,9 +5441,10 @@
     "Comment": ""
   },
   {
-    "Index": 346,
+    "Index": 349,
     "TestInput": ":::2222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 37,
@@ -5066,48 +5455,10 @@
     "Comment": ""
   },
   {
-    "Index": 347,
+    "Index": 350,
     "TestInput": "1111:::3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 348,
-    "TestInput": "1111:2222:::4444:5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 349,
-    "TestInput": "1111:2222:3333:::5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 350,
-    "TestInput": "1111:2222:3333:4444:::6666:7777:8888",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -5119,8 +5470,9 @@
   },
   {
     "Index": 351,
-    "TestInput": "1111:2222:3333:4444:5555:::7777:8888",
+    "TestInput": "1111:2222:::4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -5132,8 +5484,9 @@
   },
   {
     "Index": 352,
-    "TestInput": "1111:2222:3333:4444:5555:6666:::8888",
+    "TestInput": "1111:2222:3333:::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -5145,8 +5498,51 @@
   },
   {
     "Index": 353,
+    "TestInput": "1111:2222:3333:4444:::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 354,
+    "TestInput": "1111:2222:3333:4444:5555:::7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 355,
+    "TestInput": "1111:2222:3333:4444:5555:6666:::8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 356,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 37,
@@ -5157,48 +5553,10 @@
     "Comment": ""
   },
   {
-    "Index": 354,
+    "Index": 357,
     "TestInput": "::2222::4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 32,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 355,
-    "TestInput": "::2222:3333::5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 32,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 356,
-    "TestInput": "::2222:3333:4444::6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 32,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 357,
-    "TestInput": "::2222:3333:4444:5555::7777:8888",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -5210,8 +5568,9 @@
   },
   {
     "Index": 358,
-    "TestInput": "::2222:3333:4444:5555:7777::8888",
+    "TestInput": "::2222:3333::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -5223,8 +5582,51 @@
   },
   {
     "Index": 359,
+    "TestInput": "::2222:3333:4444::6666:7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 360,
+    "TestInput": "::2222:3333:4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 361,
+    "TestInput": "::2222:3333:4444:5555:7777::8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 362,
     "TestInput": "::2222:3333:4444:5555:7777:8888::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 33,
@@ -5235,48 +5637,10 @@
     "Comment": ""
   },
   {
-    "Index": 360,
+    "Index": 363,
     "TestInput": "1111::3333::5555:6666:7777:8888",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 31,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 361,
-    "TestInput": "1111::3333:4444::6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 31,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 362,
-    "TestInput": "1111::3333:4444:5555::7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 31,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 363,
-    "TestInput": "1111::3333:4444:5555:6666::8888",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -5288,11 +5652,12 @@
   },
   {
     "Index": 364,
-    "TestInput": "1111::3333:4444:5555:6666:7777::",
+    "TestInput": "1111::3333:4444::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 32,
+      "CharsConsumed": 31,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5301,8 +5666,9 @@
   },
   {
     "Index": 365,
-    "TestInput": "1111:2222::4444::6666:7777:8888",
+    "TestInput": "1111::3333:4444:5555::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -5314,8 +5680,9 @@
   },
   {
     "Index": 366,
-    "TestInput": "1111:2222::4444:5555::7777:8888",
+    "TestInput": "1111::3333:4444:5555:6666::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -5327,21 +5694,9 @@
   },
   {
     "Index": 367,
-    "TestInput": "1111:2222::4444:5555:6666::8888",
+    "TestInput": "1111::3333:4444:5555:6666:7777::",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 31,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 368,
-    "TestInput": "1111:2222::4444:5555:6666:7777::",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -5352,9 +5707,24 @@
     "Comment": ""
   },
   {
-    "Index": 369,
-    "TestInput": "1111:2222:3333::5555::7777:8888",
+    "Index": 368,
+    "TestInput": "1111:2222::4444::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 369,
+    "TestInput": "1111:2222::4444:5555::7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -5366,8 +5736,9 @@
   },
   {
     "Index": 370,
-    "TestInput": "1111:2222:3333::5555:6666::8888",
+    "TestInput": "1111:2222::4444:5555:6666::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -5379,8 +5750,9 @@
   },
   {
     "Index": 371,
-    "TestInput": "1111:2222:3333::5555:6666:7777::",
+    "TestInput": "1111:2222::4444:5555:6666:7777::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -5392,8 +5764,9 @@
   },
   {
     "Index": 372,
-    "TestInput": "1111:2222:3333:4444::6666::8888",
+    "TestInput": "1111:2222:3333::5555::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -5405,11 +5778,12 @@
   },
   {
     "Index": 373,
-    "TestInput": "1111:2222:3333:4444::6666:7777::",
+    "TestInput": "1111:2222:3333::5555:6666::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 32,
+      "CharsConsumed": 31,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5418,8 +5792,9 @@
   },
   {
     "Index": 374,
-    "TestInput": "1111:2222:3333:4444:5555::7777::",
+    "TestInput": "1111:2222:3333::5555:6666:7777::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -5431,73 +5806,23 @@
   },
   {
     "Index": 375,
-    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:1.2.3.4",
+    "TestInput": "1111:2222:3333:4444::6666::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 45,
-      "ErrorCode": 2
+      "CharsConsumed": 31,
+      "ErrorCode": 306
     },
-    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
     "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 376,
-    "TestInput": "1111:2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "TestInput": "1111:2222:3333:4444::6666:7777::",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 42,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 377,
-    "TestInput": "1111:2222:3333:4444:5555:6666::1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 38,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 378,
-    "TestInput": "::2222:3333:4444:5555:6666:7777:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 39,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 379,
-    "TestInput": "1111:2222:3333:4444:5555:6666:1.2.3.4.5",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 39,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 380,
-    "TestInput": "1111:2222:3333:4444:5555:1.2.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -5508,9 +5833,108 @@
     "Comment": ""
   },
   {
+    "Index": 377,
+    "TestInput": "1111:2222:3333:4444:5555::7777::",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 378,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:8888:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 379,
+    "TestInput": "1111:2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 42,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 380,
+    "TestInput": "1111:2222:3333:4444:5555:6666::1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 38,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
     "Index": 381,
+    "TestInput": "::2222:3333:4444:5555:6666:7777:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 382,
+    "TestInput": "1111:2222:3333:4444:5555:6666:1.2.3.4.5",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 39,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 383,
+    "TestInput": "1111:2222:3333:4444:5555:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 32,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 384,
     "TestInput": "1111:2222:3333:4444:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 27,
@@ -5521,9 +5945,10 @@
     "Comment": ""
   },
   {
-    "Index": 382,
+    "Index": 385,
     "TestInput": "1111:2222:3333:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 22,
@@ -5534,9 +5959,10 @@
     "Comment": ""
   },
   {
-    "Index": 383,
+    "Index": 386,
     "TestInput": "1111:2222:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -5547,9 +5973,10 @@
     "Comment": ""
   },
   {
-    "Index": 384,
+    "Index": 387,
     "TestInput": "1111:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -5560,48 +5987,10 @@
     "Comment": ""
   },
   {
-    "Index": 385,
+    "Index": 388,
     "TestInput": "11112222:3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 386,
-    "TestInput": "1111:22223333:4444:5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 387,
-    "TestInput": "1111:2222:33334444:5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 388,
-    "TestInput": "1111:2222:3333:44445555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -5613,8 +6002,9 @@
   },
   {
     "Index": 389,
-    "TestInput": "1111:2222:3333:4444:55556666:1.2.3.4",
+    "TestInput": "1111:22223333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -5626,8 +6016,9 @@
   },
   {
     "Index": 390,
-    "TestInput": "1111:2222:3333:4444:5555:66661.2.3.4",
+    "TestInput": "1111:2222:33334444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -5639,11 +6030,12 @@
   },
   {
     "Index": 391,
-    "TestInput": "1111:2222:3333:4444:5555:6666:255255.255.255",
+    "TestInput": "1111:2222:3333:44445555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 44,
+      "CharsConsumed": 36,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5652,11 +6044,12 @@
   },
   {
     "Index": 392,
-    "TestInput": "1111:2222:3333:4444:5555:6666:255.255255.255",
+    "TestInput": "1111:2222:3333:4444:55556666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 44,
+      "CharsConsumed": 36,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5665,8 +6058,23 @@
   },
   {
     "Index": 393,
-    "TestInput": "1111:2222:3333:4444:5555:6666:255.255.255255",
+    "TestInput": "1111:2222:3333:4444:5555:66661.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 394,
+    "TestInput": "1111:2222:3333:4444:5555:6666:255255.255.255",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 44,
@@ -5677,9 +6085,38 @@
     "Comment": ""
   },
   {
-    "Index": 394,
+    "Index": 395,
+    "TestInput": "1111:2222:3333:4444:5555:6666:255.255255.255",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 396,
+    "TestInput": "1111:2222:3333:4444:5555:6666:255.255.255255",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 44,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 397,
     "TestInput": ":1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -5690,9 +6127,10 @@
     "Comment": ""
   },
   {
-    "Index": 395,
+    "Index": 398,
     "TestInput": ":6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 13,
@@ -5703,9 +6141,10 @@
     "Comment": ""
   },
   {
-    "Index": 396,
+    "Index": 399,
     "TestInput": ":5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 18,
@@ -5716,9 +6155,10 @@
     "Comment": ""
   },
   {
-    "Index": 397,
+    "Index": 400,
     "TestInput": ":4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 23,
@@ -5729,9 +6169,10 @@
     "Comment": ""
   },
   {
-    "Index": 398,
+    "Index": 401,
     "TestInput": ":3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 28,
@@ -5742,9 +6183,10 @@
     "Comment": ""
   },
   {
-    "Index": 399,
+    "Index": 402,
     "TestInput": ":2222:3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 33,
@@ -5755,9 +6197,10 @@
     "Comment": ""
   },
   {
-    "Index": 400,
+    "Index": 403,
     "TestInput": ":1111:2222:3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 38,
@@ -5768,9 +6211,10 @@
     "Comment": ""
   },
   {
-    "Index": 401,
+    "Index": 404,
     "TestInput": ":::2222:3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 35,
@@ -5781,48 +6225,10 @@
     "Comment": ""
   },
   {
-    "Index": 402,
+    "Index": 405,
     "TestInput": "1111:::3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 34,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 403,
-    "TestInput": "1111:2222:::4444:5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 34,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 404,
-    "TestInput": "1111:2222:3333:::5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 34,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 405,
-    "TestInput": "1111:2222:3333:4444:::6666:1.2.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -5834,8 +6240,9 @@
   },
   {
     "Index": 406,
-    "TestInput": "1111:2222:3333:4444:5555:::1.2.3.4",
+    "TestInput": "1111:2222:::4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -5847,11 +6254,12 @@
   },
   {
     "Index": 407,
-    "TestInput": "::2222::4444:5555:6666:1.2.3.4",
+    "TestInput": "1111:2222:3333:::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 30,
+      "CharsConsumed": 34,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5860,11 +6268,12 @@
   },
   {
     "Index": 408,
-    "TestInput": "::2222:3333::5555:6666:1.2.3.4",
+    "TestInput": "1111:2222:3333:4444:::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 30,
+      "CharsConsumed": 34,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5873,11 +6282,12 @@
   },
   {
     "Index": 409,
-    "TestInput": "::2222:3333:4444::6666:1.2.3.4",
+    "TestInput": "1111:2222:3333:4444:5555:::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 30,
+      "CharsConsumed": 34,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5886,8 +6296,9 @@
   },
   {
     "Index": 410,
-    "TestInput": "::2222:3333:4444:5555::1.2.3.4",
+    "TestInput": "::2222::4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 30,
@@ -5899,11 +6310,12 @@
   },
   {
     "Index": 411,
-    "TestInput": "1111::3333::5555:6666:1.2.3.4",
+    "TestInput": "::2222:3333::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 29,
+      "CharsConsumed": 30,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5912,11 +6324,12 @@
   },
   {
     "Index": 412,
-    "TestInput": "1111::3333:4444::6666:1.2.3.4",
+    "TestInput": "::2222:3333:4444::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 29,
+      "CharsConsumed": 30,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5925,11 +6338,12 @@
   },
   {
     "Index": 413,
-    "TestInput": "1111::3333:4444:5555::1.2.3.4",
+    "TestInput": "::2222:3333:4444:5555::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 29,
+      "CharsConsumed": 30,
       "ErrorCode": 306
     },
     "ExpectedErrorMessage": "Invalid IPv6 address.",
@@ -5938,8 +6352,9 @@
   },
   {
     "Index": 414,
-    "TestInput": "1111:2222::4444::6666:1.2.3.4",
+    "TestInput": "1111::3333::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -5951,8 +6366,9 @@
   },
   {
     "Index": 415,
-    "TestInput": "1111:2222::4444:5555::1.2.3.4",
+    "TestInput": "1111::3333:4444::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -5964,8 +6380,9 @@
   },
   {
     "Index": 416,
-    "TestInput": "1111:2222:3333::5555::1.2.3.4",
+    "TestInput": "1111::3333:4444:5555::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -5977,34 +6394,51 @@
   },
   {
     "Index": 417,
-    "TestInput": "::.",
+    "TestInput": "1111:2222::4444::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 2,
-      "ErrorCode": 7
+      "CharsConsumed": 29,
+      "ErrorCode": 306
     },
-    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
     "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 418,
-    "TestInput": "::..",
+    "TestInput": "1111:2222::4444:5555::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
-      "CharsConsumed": 2,
-      "ErrorCode": 7
+      "CharsConsumed": 29,
+      "ErrorCode": 306
     },
-    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
     "ExpectedValueString": null,
     "Comment": ""
   },
   {
     "Index": 419,
-    "TestInput": "::...",
+    "TestInput": "1111:2222:3333::5555::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 420,
+    "TestInput": "::.",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -6015,9 +6449,38 @@
     "Comment": ""
   },
   {
-    "Index": 420,
+    "Index": 421,
+    "TestInput": "::..",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 422,
+    "TestInput": "::...",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 423,
     "TestInput": "::1...",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -6028,9 +6491,10 @@
     "Comment": ""
   },
   {
-    "Index": 421,
+    "Index": 424,
     "TestInput": "::1.2..",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 6,
@@ -6041,9 +6505,10 @@
     "Comment": ""
   },
   {
-    "Index": 422,
+    "Index": 425,
     "TestInput": "::1.2.3.",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -6054,48 +6519,10 @@
     "Comment": ""
   },
   {
-    "Index": 423,
+    "Index": 426,
     "TestInput": "::.2..",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 2,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 424,
-    "TestInput": "::.2.3.",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 2,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 425,
-    "TestInput": "::.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 2,
-      "ErrorCode": 7
-    },
-    "ExpectedErrorMessage": "Unexpected character.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 426,
-    "TestInput": "::..3.",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -6107,8 +6534,9 @@
   },
   {
     "Index": 427,
-    "TestInput": "::..3.4",
+    "TestInput": "::.2.3.",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -6120,8 +6548,9 @@
   },
   {
     "Index": 428,
-    "TestInput": "::...4",
+    "TestInput": "::.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -6133,8 +6562,51 @@
   },
   {
     "Index": 429,
+    "TestInput": "::..3.",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 430,
+    "TestInput": "::..3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 431,
+    "TestInput": "::...4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 7
+    },
+    "ExpectedErrorMessage": "Unexpected character.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 432,
     "TestInput": ":1111:2222:3333:4444:5555:6666:7777::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 37,
@@ -6145,9 +6617,10 @@
     "Comment": ""
   },
   {
-    "Index": 430,
+    "Index": 433,
     "TestInput": ":1111:2222:3333:4444:5555:6666::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -6158,9 +6631,10 @@
     "Comment": ""
   },
   {
-    "Index": 431,
+    "Index": 434,
     "TestInput": ":1111:2222:3333:4444:5555::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 27,
@@ -6171,9 +6645,10 @@
     "Comment": ""
   },
   {
-    "Index": 432,
+    "Index": 435,
     "TestInput": ":1111:2222:3333:4444::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 22,
@@ -6184,9 +6659,10 @@
     "Comment": ""
   },
   {
-    "Index": 433,
+    "Index": 436,
     "TestInput": ":1111:2222:3333::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -6197,9 +6673,10 @@
     "Comment": ""
   },
   {
-    "Index": 434,
+    "Index": 437,
     "TestInput": ":1111:2222::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -6210,9 +6687,10 @@
     "Comment": ""
   },
   {
-    "Index": 435,
+    "Index": 438,
     "TestInput": ":1111::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -6223,9 +6701,10 @@
     "Comment": ""
   },
   {
-    "Index": 436,
+    "Index": 439,
     "TestInput": ":::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -6236,9 +6715,10 @@
     "Comment": ""
   },
   {
-    "Index": 437,
+    "Index": 440,
     "TestInput": ":1111:2222:3333:4444:5555:6666::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -6249,9 +6729,10 @@
     "Comment": ""
   },
   {
-    "Index": 438,
+    "Index": 441,
     "TestInput": ":1111:2222:3333:4444:5555::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -6262,9 +6743,10 @@
     "Comment": ""
   },
   {
-    "Index": 439,
+    "Index": 442,
     "TestInput": ":1111:2222:3333:4444::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -6275,9 +6757,10 @@
     "Comment": ""
   },
   {
-    "Index": 440,
+    "Index": 443,
     "TestInput": ":1111:2222:3333::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -6288,9 +6771,10 @@
     "Comment": ""
   },
   {
-    "Index": 441,
+    "Index": 444,
     "TestInput": ":1111:2222::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -6301,9 +6785,10 @@
     "Comment": ""
   },
   {
-    "Index": 442,
+    "Index": 445,
     "TestInput": ":1111::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -6314,9 +6799,10 @@
     "Comment": ""
   },
   {
-    "Index": 443,
+    "Index": 446,
     "TestInput": ":::8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -6327,9 +6813,10 @@
     "Comment": ""
   },
   {
-    "Index": 444,
+    "Index": 447,
     "TestInput": ":1111:2222:3333:4444:5555::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -6340,9 +6827,10 @@
     "Comment": ""
   },
   {
-    "Index": 445,
+    "Index": 448,
     "TestInput": ":1111:2222:3333:4444::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -6353,9 +6841,10 @@
     "Comment": ""
   },
   {
-    "Index": 446,
+    "Index": 449,
     "TestInput": ":1111:2222:3333::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -6366,9 +6855,10 @@
     "Comment": ""
   },
   {
-    "Index": 447,
+    "Index": 450,
     "TestInput": ":1111:2222::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -6379,9 +6869,10 @@
     "Comment": ""
   },
   {
-    "Index": 448,
+    "Index": 451,
     "TestInput": ":1111::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -6392,9 +6883,10 @@
     "Comment": ""
   },
   {
-    "Index": 449,
+    "Index": 452,
     "TestInput": ":::7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -6405,9 +6897,10 @@
     "Comment": ""
   },
   {
-    "Index": 450,
+    "Index": 453,
     "TestInput": ":1111:2222:3333:4444::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -6418,9 +6911,10 @@
     "Comment": ""
   },
   {
-    "Index": 451,
+    "Index": 454,
     "TestInput": ":1111:2222:3333::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -6431,9 +6925,10 @@
     "Comment": ""
   },
   {
-    "Index": 452,
+    "Index": 455,
     "TestInput": ":1111:2222::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -6444,9 +6939,10 @@
     "Comment": ""
   },
   {
-    "Index": 453,
+    "Index": 456,
     "TestInput": ":1111::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -6457,9 +6953,10 @@
     "Comment": ""
   },
   {
-    "Index": 454,
+    "Index": 457,
     "TestInput": ":::6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -6470,9 +6967,10 @@
     "Comment": ""
   },
   {
-    "Index": 455,
+    "Index": 458,
     "TestInput": ":1111:2222:3333::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -6483,9 +6981,10 @@
     "Comment": ""
   },
   {
-    "Index": 456,
+    "Index": 459,
     "TestInput": ":1111:2222::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -6496,9 +6995,10 @@
     "Comment": ""
   },
   {
-    "Index": 457,
+    "Index": 460,
     "TestInput": ":1111::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -6509,9 +7009,10 @@
     "Comment": ""
   },
   {
-    "Index": 458,
+    "Index": 461,
     "TestInput": ":::5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 22,
@@ -6522,48 +7023,10 @@
     "Comment": ""
   },
   {
-    "Index": 459,
+    "Index": 462,
     "TestInput": ":1111:2222::4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 460,
-    "TestInput": ":1111::4444:5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 31,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 461,
-    "TestInput": ":::4444:5555:6666:7777:8888",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 27,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 462,
-    "TestInput": ":1111::3333:4444:5555:6666:7777:8888",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -6575,8 +7038,51 @@
   },
   {
     "Index": 463,
+    "TestInput": ":1111::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 464,
+    "TestInput": ":::4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 465,
+    "TestInput": ":1111::3333:4444:5555:6666:7777:8888",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 466,
     "TestInput": ":::3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -6587,9 +7093,10 @@
     "Comment": ""
   },
   {
-    "Index": 464,
+    "Index": 467,
     "TestInput": ":::2222:3333:4444:5555:6666:7777:8888",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 37,
@@ -6600,9 +7107,10 @@
     "Comment": ""
   },
   {
-    "Index": 465,
+    "Index": 468,
     "TestInput": ":1111:2222:3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 38,
@@ -6613,9 +7121,10 @@
     "Comment": ""
   },
   {
-    "Index": 466,
+    "Index": 469,
     "TestInput": ":1111:2222:3333:4444:5555::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -6626,9 +7135,10 @@
     "Comment": ""
   },
   {
-    "Index": 467,
+    "Index": 470,
     "TestInput": ":1111:2222:3333:4444::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -6639,9 +7149,10 @@
     "Comment": ""
   },
   {
-    "Index": 468,
+    "Index": 471,
     "TestInput": ":1111:2222:3333::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 24,
@@ -6652,9 +7163,10 @@
     "Comment": ""
   },
   {
-    "Index": 469,
+    "Index": 472,
     "TestInput": ":1111:2222::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 19,
@@ -6665,9 +7177,10 @@
     "Comment": ""
   },
   {
-    "Index": 470,
+    "Index": 473,
     "TestInput": ":1111::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -6678,9 +7191,10 @@
     "Comment": ""
   },
   {
-    "Index": 471,
+    "Index": 474,
     "TestInput": ":::1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 10,
@@ -6691,9 +7205,10 @@
     "Comment": ""
   },
   {
-    "Index": 472,
+    "Index": 475,
     "TestInput": ":1111:2222:3333:4444::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -6704,9 +7219,10 @@
     "Comment": ""
   },
   {
-    "Index": 473,
+    "Index": 476,
     "TestInput": ":1111:2222:3333::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -6717,9 +7233,10 @@
     "Comment": ""
   },
   {
-    "Index": 474,
+    "Index": 477,
     "TestInput": ":1111:2222::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 24,
@@ -6730,9 +7247,10 @@
     "Comment": ""
   },
   {
-    "Index": 475,
+    "Index": 478,
     "TestInput": ":1111::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 19,
@@ -6743,9 +7261,10 @@
     "Comment": ""
   },
   {
-    "Index": 476,
+    "Index": 479,
     "TestInput": ":::6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 15,
@@ -6756,9 +7275,10 @@
     "Comment": ""
   },
   {
-    "Index": 477,
+    "Index": 480,
     "TestInput": ":1111:2222:3333::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -6769,9 +7289,10 @@
     "Comment": ""
   },
   {
-    "Index": 478,
+    "Index": 481,
     "TestInput": ":1111:2222::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 29,
@@ -6782,9 +7303,10 @@
     "Comment": ""
   },
   {
-    "Index": 479,
+    "Index": 482,
     "TestInput": ":1111::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 24,
@@ -6795,9 +7317,10 @@
     "Comment": ""
   },
   {
-    "Index": 480,
+    "Index": 483,
     "TestInput": ":::5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 20,
@@ -6808,48 +7331,10 @@
     "Comment": ""
   },
   {
-    "Index": 481,
+    "Index": 484,
     "TestInput": ":1111:2222::4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 34,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 482,
-    "TestInput": ":1111::4444:5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 29,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 483,
-    "TestInput": ":::4444:5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 25,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 484,
-    "TestInput": ":1111::3333:4444:5555:6666:1.2.3.4",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 34,
@@ -6861,8 +7346,51 @@
   },
   {
     "Index": 485,
+    "TestInput": ":1111::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 29,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 486,
+    "TestInput": ":::4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 25,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 487,
+    "TestInput": ":1111::3333:4444:5555:6666:1.2.3.4",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 34,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 488,
     "TestInput": ":::2222:3333:4444:5555:6666:1.2.3.4",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 35,
@@ -6873,9 +7401,10 @@
     "Comment": ""
   },
   {
-    "Index": 486,
+    "Index": 489,
     "TestInput": "1111:2222:3333:4444:5555:6666:7777:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 37,
@@ -6886,9 +7415,10 @@
     "Comment": ""
   },
   {
-    "Index": 487,
+    "Index": 490,
     "TestInput": "1111:2222:3333:4444:5555:6666:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -6899,9 +7429,10 @@
     "Comment": ""
   },
   {
-    "Index": 488,
+    "Index": 491,
     "TestInput": "1111:2222:3333:4444:5555:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 27,
@@ -6912,9 +7443,10 @@
     "Comment": ""
   },
   {
-    "Index": 489,
+    "Index": 492,
     "TestInput": "1111:2222:3333:4444:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 22,
@@ -6925,9 +7457,10 @@
     "Comment": ""
   },
   {
-    "Index": 490,
+    "Index": 493,
     "TestInput": "1111:2222:3333:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -6938,9 +7471,10 @@
     "Comment": ""
   },
   {
-    "Index": 491,
+    "Index": 494,
     "TestInput": "1111:2222:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -6951,9 +7485,10 @@
     "Comment": ""
   },
   {
-    "Index": 492,
+    "Index": 495,
     "TestInput": "1111:::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -6964,9 +7499,10 @@
     "Comment": ""
   },
   {
-    "Index": 493,
+    "Index": 496,
     "TestInput": ":::",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -6977,9 +7513,10 @@
     "Comment": ""
   },
   {
-    "Index": 494,
+    "Index": 497,
     "TestInput": "1111:2222:3333:4444:5555:6666::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -6990,9 +7527,10 @@
     "Comment": ""
   },
   {
-    "Index": 495,
+    "Index": 498,
     "TestInput": "1111:2222:3333:4444:5555::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -7003,9 +7541,10 @@
     "Comment": ""
   },
   {
-    "Index": 496,
+    "Index": 499,
     "TestInput": "1111:2222:3333:4444::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -7016,9 +7555,10 @@
     "Comment": ""
   },
   {
-    "Index": 497,
+    "Index": 500,
     "TestInput": "1111:2222:3333::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -7029,9 +7569,10 @@
     "Comment": ""
   },
   {
-    "Index": 498,
+    "Index": 501,
     "TestInput": "1111:2222::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -7042,9 +7583,10 @@
     "Comment": ""
   },
   {
-    "Index": 499,
+    "Index": 502,
     "TestInput": "1111::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -7055,9 +7597,10 @@
     "Comment": ""
   },
   {
-    "Index": 500,
+    "Index": 503,
     "TestInput": "::8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 7,
@@ -7068,9 +7611,10 @@
     "Comment": ""
   },
   {
-    "Index": 501,
+    "Index": 504,
     "TestInput": "1111:2222:3333:4444:5555::7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -7081,9 +7625,10 @@
     "Comment": ""
   },
   {
-    "Index": 502,
+    "Index": 505,
     "TestInput": "1111:2222:3333:4444::7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -7094,9 +7639,10 @@
     "Comment": ""
   },
   {
-    "Index": 503,
+    "Index": 506,
     "TestInput": "1111:2222:3333::7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -7107,9 +7653,10 @@
     "Comment": ""
   },
   {
-    "Index": 504,
+    "Index": 507,
     "TestInput": "1111:2222::7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -7120,9 +7667,10 @@
     "Comment": ""
   },
   {
-    "Index": 505,
+    "Index": 508,
     "TestInput": "1111::7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -7133,9 +7681,10 @@
     "Comment": ""
   },
   {
-    "Index": 506,
+    "Index": 509,
     "TestInput": "::7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 12,
@@ -7146,9 +7695,10 @@
     "Comment": ""
   },
   {
-    "Index": 507,
+    "Index": 510,
     "TestInput": "1111:2222:3333:4444::6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -7159,9 +7709,10 @@
     "Comment": ""
   },
   {
-    "Index": 508,
+    "Index": 511,
     "TestInput": "1111:2222:3333::6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -7172,9 +7723,10 @@
     "Comment": ""
   },
   {
-    "Index": 509,
+    "Index": 512,
     "TestInput": "1111:2222::6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -7185,9 +7737,10 @@
     "Comment": ""
   },
   {
-    "Index": 510,
+    "Index": 513,
     "TestInput": "1111::6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 21,
@@ -7198,9 +7751,10 @@
     "Comment": ""
   },
   {
-    "Index": 511,
+    "Index": 514,
     "TestInput": "::6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -7211,9 +7765,10 @@
     "Comment": ""
   },
   {
-    "Index": 512,
+    "Index": 515,
     "TestInput": "1111:2222:3333::5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -7224,9 +7779,10 @@
     "Comment": ""
   },
   {
-    "Index": 513,
+    "Index": 516,
     "TestInput": "1111:2222::5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 31,
@@ -7237,9 +7793,10 @@
     "Comment": ""
   },
   {
-    "Index": 514,
+    "Index": 517,
     "TestInput": "1111::5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 26,
@@ -7250,9 +7807,10 @@
     "Comment": ""
   },
   {
-    "Index": 515,
+    "Index": 518,
     "TestInput": "::5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 22,
@@ -7263,48 +7821,10 @@
     "Comment": ""
   },
   {
-    "Index": 516,
+    "Index": 519,
     "TestInput": "1111:2222::4444:5555:6666:7777:8888:",
     "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 36,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 517,
-    "TestInput": "1111::4444:5555:6666:7777:8888:",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 31,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 518,
-    "TestInput": "::4444:5555:6666:7777:8888:",
-    "TestTerminatingChars": null,
-    "ExpectedValue": null,
-    "ExpectedResult": {
-      "CharsConsumed": 27,
-      "ErrorCode": 306
-    },
-    "ExpectedErrorMessage": "Invalid IPv6 address.",
-    "ExpectedValueString": null,
-    "Comment": ""
-  },
-  {
-    "Index": 519,
-    "TestInput": "1111::3333:4444:5555:6666:7777:8888:",
-    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 36,
@@ -7316,8 +7836,51 @@
   },
   {
     "Index": 520,
+    "TestInput": "1111::4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 31,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 521,
+    "TestInput": "::4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 522,
+    "TestInput": "1111::3333:4444:5555:6666:7777:8888:",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 36,
+      "ErrorCode": 306
+    },
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
+    "ExpectedValueString": null,
+    "Comment": ""
+  },
+  {
+    "Index": 523,
     "TestInput": "::3333:4444:5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 32,
@@ -7328,9 +7891,10 @@
     "Comment": ""
   },
   {
-    "Index": 521,
+    "Index": 524,
     "TestInput": "::2222:3333:4444:5555:6666:7777:8888:",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 37,
@@ -7341,9 +7905,10 @@
     "Comment": ""
   },
   {
-    "Index": 522,
+    "Index": 525,
     "TestInput": "':10.0.0.1",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -7354,16 +7919,34 @@
     "Comment": ""
   },
   {
-    "Index": 523,
+    "Index": 526,
     "TestInput": "1111:2222:3333:4444:5555:6666:256.256.256.2561",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 45,
-      "ErrorCode": 2
+      "ErrorCode": 306
     },
-    "ExpectedErrorMessage": "Input is too long.",
+    "ExpectedErrorMessage": "Invalid IPv6 address.",
     "ExpectedValueString": null,
     "Comment": ""
+  },
+  {
+    "Index": 527,
+    "TestInput": "1111:2222:3333:4444:5555:6666:123.123.123.123\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": {
+      "Kind": "IPv6",
+      "Value": "1111:2222:3333:4444:5555:6666:7b7b:7b7b"
+    },
+    "ExpectedResult": {
+      "CharsConsumed": 45,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "ExpectedValueString": "1111:2222:3333:4444:5555:6666:7b7b:7b7b",
+    "Comment": "[Not for Parse]"
   }
 ]

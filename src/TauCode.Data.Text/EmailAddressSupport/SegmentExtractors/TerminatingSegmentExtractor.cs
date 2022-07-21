@@ -5,16 +5,16 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
 {
     internal class TerminatingSegmentExtractor : SegmentExtractor
     {
-        private readonly EmailAddressExtractor _host;
+        private readonly EmailAddressExtractor _emailAddressExtractor;
 
-        internal TerminatingSegmentExtractor(EmailAddressExtractor host)
+        internal TerminatingSegmentExtractor(EmailAddressExtractor emailAddressExtractor)
         {
-            _host = host;
+            _emailAddressExtractor = emailAddressExtractor;
         }
 
         internal override bool Accepts(ReadOnlySpan<char> input, EmailAddressExtractionContext context)
         {
-            return _host.Terminator(input, context.Position);
+            return _emailAddressExtractor.IsTermination(input, context.Position);
         }
 
         protected override TextDataExtractionResult ExtractImpl(
@@ -22,7 +22,8 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
             EmailAddressExtractionContext context,
             out Segment? segment)
         {
-            throw new InvalidOperationException();
+            segment = new Segment(SegmentType.Termination, context.Position, 1, null);
+            return new TextDataExtractionResult(0, null);
         }
     }
 }

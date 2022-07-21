@@ -14,5 +14,7 @@
 
         DomainLabel, // part of sub-domain. e.g. in 'mail.google.com' labels are: 'mail', 'google', 'com'.
         DomainIPAddress,
+
+        Termination,
     }
 }

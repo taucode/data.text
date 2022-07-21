@@ -15,7 +15,7 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
             EmailAddressExtractionContext context,
             out Segment? segment)
         {
-            var fwsResult = TrySkipFoldingWhiteSpace(input, context.Position);
+            var fwsResult = TrySkipFoldingWhiteSpace(input, context.Position, context.EmailAddressExtractor.MaxConsumption);
             if (fwsResult.ErrorCode.HasValue)
             {
                 segment = null;

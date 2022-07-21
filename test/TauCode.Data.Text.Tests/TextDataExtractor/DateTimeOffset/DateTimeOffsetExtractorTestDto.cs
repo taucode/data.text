@@ -8,6 +8,7 @@ public class DateTimeOffsetExtractorTestDto
 
     public string TestInput { get; set; }
     public string TestTerminatingChars { get; set; }
+    public int? TestMaxConsumption { get; set; }
 
     public System.DateTimeOffset ExpectedValue { get; set; }
     public TextDataExtractionResultDto ExpectedResult { get; set; }

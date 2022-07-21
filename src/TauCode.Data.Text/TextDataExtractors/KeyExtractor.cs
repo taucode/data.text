@@ -73,11 +73,11 @@ namespace TauCode.Data.Text.TextDataExtractors
                     {
                         // ok
                     }
-                    else if (this.Terminator(input, pos))
+                    else if (this.IsTermination(input, pos))
                     {
                         if (prevChar == '-')
                         {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.FailedToExtractKey);
+                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedEnd);
                         }
 
                         break;
@@ -93,7 +93,10 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                 pos++;
 
-                this.CheckConsumption(pos); // todo_deferred ut
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

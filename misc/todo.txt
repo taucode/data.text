@@ -1,1 +1,95 @@
-﻿
+﻿-06-27
+==========
+    1. Deploy 1.3.5
+
+2022-05-10
+==========
++   1. (e.g. John..Doe@example.com is not allowed but "John..Doe"@example.com is allowed); https://stackoverflow.com/questions/2049502/what-characters-are-allowed-in-an-email-address
++   2. !#$%&'*+-/=?^_`{|}~            ===> allowed. ut this.
++   3. Get rid of 'SubDomain'. Use 'Label'.
+    4. UT-s:
++       joe@0000:1111:2222:3333:4444:5555:6666:7777
++       !@m.net
++       !#$%&'*+-/=?^_`{|}~ - use this chars in ut.
++       abc@[1.2.3.4][5.6.7.8]
++       abc@(comment1)[1.1.1.1](comment2)
++       abc@(comment1)[1.1.1.1]
++       abc@[1.1.1.1](comment1)
++       abc@[1.1.1.1](comment1)[2.2.2.2]
++       abc@[1.1.1.1](comment1)[IPv6:::]
++       abc@[IPv6:::](comment1)[1.1.1.1]
++       abc@[IPv6:::]foo.com
++       abc@foo.com[IPv6:::]
++       abc@[IPv6:::](comment)foo.com
++       abc@foo.com(comment)[IPv6:::]
++       abc@foo.(comment)[IPv6:::]
++       abc@foo(comment).[IPv6:::]
++       abc@(comment)[IPv6:::](comment).com
+        <less_than_1000>[IPv6:1111.2222.3333.4444.5555.6666.7777.8888] total is more than 1000 => error
+        <less_than_1000>[IPv6:1111.2222.3333.4444.5555.6666.7777.8888] total is still less than 1000 => ok
+        <exactly_1000><terminating_char> => ok
+        emoji local part not changed
+        emoji domain changes to punycode, length is respected
+        local part with accent not lowercased
++       domain is lowercased
++       abc@[1.1.1.1
++       abc@[1.1.1.1}
++       abc@[IPv6:::1
++       abc@[IPv6:::1}
++       127.3.2:aafe:0001
++       рука:0001
++       123:133:.1.2.3
++       123.12.:6:6
++       bad punycode won't pass
+        bad unicode that cannot be punycoded won't pass
+        bad symbols cannot be in quoted strings
+        bad symbols cannot be in comments        
+        emoji-specific error messages
+
+        '\r', '\n', '\t', '\v', '\f' inside quoted string or comment should pass, but \x01, \x19 (e.g.) should not
+
+
+#       emoji tests
+        non-existing emoji sequence => error
+        right emoji sequence but whaterver name => valid name
++       wales flag, last char corrupted => flag
+
+
+        get rid of all warnings
+
+        TryExtract: not int? but int
+
+        play around with comments
+        play around with quoted strings
+
+2022-05-29
+==========
+        get rid of ␀ replacement. use \u0000
+        re-order json ut-s, because some were deleted.
+        sweep out TauCode.Omicron.Tests.Common, TauCode.Omicron.Tests.Exe
+        ut-s for all Parse, TryParse, Extract, TryExtract.
++       EmailAddressTests.Fail.ForParsing.json - get rid of 'ForParsing'
+        Folding white space in comment is ok, but any other usage of '\r' and '\n' is not unless escaped.
+
+2022-06-01
+==========
++       Semantic Version: long & pseudo-long input, term.char and w/o term.char
+        Semantic Version: unexpected chars
+        Get rid of 1488 (and of this one, too)
+
+2022-06-05
+==========
+    ut Graphs
+    ut Interval
+
+
++   1. MaxConsumption: challenge for all Extractors.
+    2. todo: ut 'john.@mail.net'
+    3. 'john@.mail.net'
+	4. '.john@mail.net'
+    5. ut performance of "123456789012345678901234567890123456789012345678901234567890@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.12345.iana.org",
+    6. groom all jsons when uts are done.    
+
+
+  // todo: .[
+  // todo: ].

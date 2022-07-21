@@ -26,14 +26,6 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         private static readonly Dictionary<char, char> Replacements;
 
-        static CLangStringExtractor()
-        {
-            Replacements = ReplacementStrings
-                .ToDictionary(
-                    x => x.First(),
-                    x => x.Skip(1).Single());
-        }
-
         private static char? GetReplacement(char escape)
         {
             if (Replacements.TryGetValue(escape, out var replacement))
@@ -44,11 +36,20 @@ namespace TauCode.Data.Text.TextDataExtractors
             return null;
         }
 
+        static CLangStringExtractor()
+        {
+            Replacements = ReplacementStrings
+                .ToDictionary(
+                    x => x.First(),
+                    x => x.Skip(1).Single());
+        }
 
         #endregion
 
         public CLangStringExtractor(TerminatingDelegate terminator = null)
-            : base(null, terminator)
+            : base(
+                null,
+                terminator)
         {
         }
 
@@ -79,17 +80,28 @@ namespace TauCode.Data.Text.TextDataExtractors
                         if (pos == input.Length - 1)
                         {
                             pos++;
+                            if (this.IsOutOfCapacity(pos))
+                            {
+                                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                            }
+
                             break;
                         }
 
                         // pos < input.Length - 1
-                        if (this.Terminator(input, pos + 1))
+                        if (this.IsTermination(input, pos + 1))
                         {
                             pos++;
+                            if (this.IsOutOfCapacity(pos))
+                            {
+                                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                            }
                             break;
                         }
 
-                        return new TextDataExtractionResult(pos + 1, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                        return new TextDataExtractionResult(
+                            pos + 1,
+                            TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
 
                     #endregion
@@ -163,8 +175,10 @@ namespace TauCode.Data.Text.TextDataExtractors
                 }
 
                 pos++;
-
-                this.CheckConsumption(pos); // todo_deferred ut
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             value = sb.ToString();

@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -15,6 +16,7 @@
     "Index": 1,
     "TestInput": " ",
     "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -27,18 +29,20 @@
     "Index": 2,
     "TestInput": "https://tau.me",
     "TestTerminatingChars": null,
-    "ExpectedValue": "https://tau.me",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "https://tau.me/",
     "ExpectedResult": {
       "CharsConsumed": 14,
       "ErrorCode": null
     },
     "ExpectedErrorMessage": null,
-    "Comment": ""
+    "Comment": "Input is 'https://tau.me', but Uri.ToString() is 'https://tau.me/'"
   },
   {
     "Index": 3,
     "TestInput": "https://tau.me/good day/",
     "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "https://tau.me/good",
     "ExpectedResult": {
       "CharsConsumed": 19,
@@ -51,6 +55,7 @@
     "Index": 4,
     "TestInput": "https://tau.me/good day/",
     "TestTerminatingChars": "",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 19,
@@ -58,5 +63,109 @@
     },
     "ExpectedErrorMessage": "Unexpected character.",
     "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "https://monaliz.com/{@abcde-100/:198@}",
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Length is 2000"
+  },
+  {
+    "Index": 6,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": null,
+    "ExpectedValue": "https://monaliz.com/{@abcde-100/:198@}",
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Length is 2000"
+  },
+  {
+    "Index": 7,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2010,
+    "ExpectedValue": "https://monaliz.com/{@abcde-100/:198@}",
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "Length is 2000"
+  },
+  {
+    "Index": 8,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 1999,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": "Length is 2000"
+  },
+  {
+    "Index": 9,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}p\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": 1302
+    },
+    "ExpectedErrorMessage": "Uri is too long.",
+    "Comment": "Length is 2001"
+  },
+  {
+    "Index": 10,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}p\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": null,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": 1302
+    },
+    "ExpectedErrorMessage": "Uri is too long.",
+    "Comment": "Length is 2001"
+  },
+  {
+    "Index": 11,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}p\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 2010,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": 1302
+    },
+    "ExpectedErrorMessage": "Uri is too long.",
+    "Comment": "Length is 2001"
+  },
+  {
+    "Index": 12,
+    "TestInput": "https://monaliz.com/{@abcde-100/:198@}p\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 1999,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2000,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": "Length is 2001"
   }
 ]

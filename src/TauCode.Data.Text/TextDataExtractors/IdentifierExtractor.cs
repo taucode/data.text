@@ -5,11 +5,16 @@ namespace TauCode.Data.Text.TextDataExtractors
     public class IdentifierExtractor : TextDataExtractorBase<string>
     {
         public IdentifierExtractor(
-            int maxConsumption = Helper.Constants.Identifier.DefaultMaxConsumption,
+            Func<string, bool> reservedWordPredicate,
             TerminatingDelegate terminator = null)
-            : base(maxConsumption, terminator)
+            : base(
+                Helper.Constants.Identifier.DefaultMaxConsumption,
+                terminator)
         {
+            this.ReservedWordPredicate = reservedWordPredicate;
         }
+
+        public Func<string, bool> ReservedWordPredicate { get; }
 
         protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string value)
         {
@@ -40,7 +45,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -51,9 +56,9 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                 pos++;
 
-                if (pos > this.MaxConsumption)
+                if (this.IsOutOfCapacity(pos))
                 {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
                 }
             }
 
@@ -63,6 +68,14 @@ namespace TauCode.Data.Text.TextDataExtractors
             }
 
             value = input[..pos].ToString();
+
+            var isReservedWord = this.ReservedWordPredicate?.Invoke(value) ?? false;
+            if (isReservedWord)
+            {
+                value = default;
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.ValueIsReservedWord);
+            }
+
             return new TextDataExtractionResult(pos, null);
         }
     }

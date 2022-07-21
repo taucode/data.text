@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": false,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -15,6 +16,7 @@
     "Index": 1,
     "TestInput": "0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": false,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -27,6 +29,7 @@
     "Index": 2,
     "TestInput": "tRUE;",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": true,
     "ExpectedResult": {
       "CharsConsumed": 4,
@@ -39,6 +42,7 @@
     "Index": 3,
     "TestInput": "FaLsEtRue",
     "TestTerminatingChars": "t",
+    "TestMaxConsumption": -1,
     "ExpectedValue": false,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -51,6 +55,7 @@
     "Index": 4,
     "TestInput": "true",
     "TestTerminatingChars": "e",
+    "TestMaxConsumption": -1,
     "ExpectedValue": true,
     "ExpectedResult": {
       "CharsConsumed": 4,

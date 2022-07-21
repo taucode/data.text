@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -15,6 +16,7 @@
     "Index": 1,
     "TestInput": "''",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -27,6 +29,7 @@
     "Index": 2,
     "TestInput": "abc",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -39,6 +42,7 @@
     "Index": 3,
     "TestInput": "\" \";",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -51,6 +55,7 @@
     "Index": 4,
     "TestInput": "\" \";",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": " ",
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -63,6 +68,7 @@
     "Index": 5,
     "TestInput": "\"abc\\ud83e\\udd23\"/",
     "TestTerminatingChars": "/",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc🤣",
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -75,6 +81,7 @@
     "Index": 6,
     "TestInput": "\"abc'ku'\"*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc'ku'",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -87,6 +94,7 @@
     "Index": 7,
     "TestInput": "\"abc\\'ku\\'\"",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -99,6 +107,7 @@
     "Index": 8,
     "TestInput": "\"abc\\\"ku\\\"\"*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc\"ku\"",
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -111,6 +120,7 @@
     "Index": 9,
     "TestInput": "\"abc'ku\"\"",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 8,
@@ -123,6 +133,7 @@
     "Index": 10,
     "TestInput": "\"\"",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "",
     "ExpectedResult": {
       "CharsConsumed": 2,
@@ -135,6 +146,7 @@
     "Index": 11,
     "TestInput": "\" \";",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -147,6 +159,7 @@
     "Index": 12,
     "TestInput": "\" \";",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": " ",
     "ExpectedResult": {
       "CharsConsumed": 3,
@@ -159,6 +172,7 @@
     "Index": 13,
     "TestInput": "\"abc\\ud83e\\udd23\"/",
     "TestTerminatingChars": "/",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc🤣",
     "ExpectedResult": {
       "CharsConsumed": 17,
@@ -171,6 +185,7 @@
     "Index": 14,
     "TestInput": "\"abc'ku'\"*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc'ku'",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -183,6 +198,7 @@
     "Index": 15,
     "TestInput": "\"abc\\'ku\\'\"'",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -195,6 +211,7 @@
     "Index": 16,
     "TestInput": "\"abc\\\"ku\\\"\"*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "abc\"ku\"",
     "ExpectedResult": {
       "CharsConsumed": 11,
@@ -207,6 +224,7 @@
     "Index": 17,
     "TestInput": "\"abc\"ku\"\"",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -219,6 +237,7 @@
     "Index": 18,
     "TestInput": "\"\\n\\v\\t\\r\\a\\b\\0\\t\\f\\\\\\\"\"*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "\n\u000b\t\r\u0007\b\u0000\t\f\\\"",
     "ExpectedResult": {
       "CharsConsumed": 24,
@@ -231,6 +250,7 @@
     "Index": 19,
     "TestInput": "\"\\n\\v\\t\\r\\a\\b\\0\\t\\f\\\\\\u1599\"*",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "\n\u000b\t\r\u0007\b\u0000\t\f\\ᖙ",
     "ExpectedResult": {
       "CharsConsumed": 28,
@@ -243,6 +263,7 @@
     "Index": 20,
     "TestInput": "\"Unclosed string",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 16,
@@ -255,6 +276,7 @@
     "Index": 21,
     "TestInput": "\"Broken string\n",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -267,6 +289,7 @@
     "Index": 22,
     "TestInput": "\"Broken string\r",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -279,6 +302,7 @@
     "Index": 23,
     "TestInput": "\"Broken string\n\r",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -291,6 +315,7 @@
     "Index": 24,
     "TestInput": "\"Broken string\r\n",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 14,
@@ -303,6 +328,7 @@
     "Index": 25,
     "TestInput": "\"End after escape\\",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 18,
@@ -315,6 +341,7 @@
     "Index": 26,
     "TestInput": "\"Bad\\o\"",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -327,6 +354,7 @@
     "Index": 27,
     "TestInput": "\"Bad\\u",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -339,6 +367,7 @@
     "Index": 28,
     "TestInput": "\"Bad\\u1",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -351,6 +380,7 @@
     "Index": 29,
     "TestInput": "\"Bad\\u11",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -363,6 +393,7 @@
     "Index": 30,
     "TestInput": "\"Bad\\u111",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -375,12 +406,105 @@
     "Index": 31,
     "TestInput": "\"Bad\\u111zabc\"",
     "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 5,
       "ErrorCode": 6
     },
     "ExpectedErrorMessage": "Bad escape.",
+    "Comment": ""
+  },
+
+  {
+    "Index": 31,
+    "TestInput": "\"Newline in\r string.\"",
+    "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 4
+    },
+    "ExpectedErrorMessage": "New line in string.",
+    "Comment": ""
+  },
+  {
+    "Index": 31,
+    "TestInput": "\"Newline in\n string.\"",
+    "TestTerminatingChars": "*",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 11,
+      "ErrorCode": 4
+    },
+    "ExpectedErrorMessage": "New line in string.",
+    "Comment": ""
+  },
+  {
+    "Index": 21,
+    "TestInput": "\"abc\"",
+    "TestTerminatingChars": "*",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 22,
+    "TestInput": "\"\"",
+    "TestTerminatingChars": "*",
+    "TestMaxConsumption": 1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 23,
+    "TestInput": "\"",
+    "TestTerminatingChars": "*",
+    "TestMaxConsumption": 1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": 3
+    },
+    "ExpectedErrorMessage": "Unclosed string.",
+    "Comment": ""
+  },
+  {
+    "Index": 24,
+    "TestInput": "\"a\"",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 25,
+    "TestInput": "\"abc\"",
+    "TestTerminatingChars": null,
+    "TestMaxConsumption": 3,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
     "Comment": ""
   }
 ]

@@ -2,7 +2,9 @@
   {
     "Index": 0,
     "TestInput": "",
+    "TestReservedWords": null,
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -14,7 +16,9 @@
   {
     "Index": 1,
     "TestInput": " ",
-    "TestTerminatingChars": null,
+    "TestReservedWords": null,
+    "TestTerminatingChars": " ",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -26,7 +30,9 @@
   {
     "Index": 2,
     "TestInput": "-c",
+    "TestReservedWords": null,
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -38,7 +44,128 @@
   {
     "Index": 3,
     "TestInput": "a;",
+    "TestReservedWords": null,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "a",
+    "ExpectedResult": {
+      "CharsConsumed": 1,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 4,
+    "TestInput": "void;",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 4,
+      "ErrorCode": 1801
+    },
+    "ExpectedErrorMessage": "Value is a reserved word.",
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "{@a:200@}\t",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": "\t;",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "{@a:200@}",
+    "ExpectedResult": {
+      "CharsConsumed": 200,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "{@a:201@}\t",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": "\t;",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "{@a:201@}\t",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": "\t;",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 8,
+    "TestInput": "{@a:201@}\t",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": "\t;",
+    "TestMaxConsumption": null,
+    "ExpectedValue": "{@a:201@}",
+    "ExpectedResult": {
+      "CharsConsumed": 201,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
+    "Comment": "MaxConsumption is null, use whatever long idents you want."
+  },
+  {
+    "Index": 9,
+    "TestInput": "aa\t",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": "\t;",
+    "TestMaxConsumption": 1,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 2,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 10,
+    "TestInput": "a\t",
+    "TestReservedWords": [
+      "void",
+      "public"
+    ],
+    "TestTerminatingChars": "\t;",
+    "TestMaxConsumption": 1,
     "ExpectedValue": "a",
     "ExpectedResult": {
       "CharsConsumed": 1,
