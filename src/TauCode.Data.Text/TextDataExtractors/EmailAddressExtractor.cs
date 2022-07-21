@@ -129,48 +129,50 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         #region Fields
 
-        private readonly TerminatingSegmentExtractor _terminatingSegmentExtractor;
         private readonly SegmentExtractor[] _afterDomainLabelSegmentExtractors;
         private readonly SegmentExtractor[] _afterDomainIPAddressSegmentExtractors;
 
         #endregion
 
-        public EmailAddressExtractor(TerminatingDelegate terminator)
+        public EmailAddressExtractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.EmailAddress.MaxConsumption,
+                Helper.Constants.EmailAddress.DefaultMaxConsumption,
                 terminator)
         {
-            _terminatingSegmentExtractor = new TerminatingSegmentExtractor(this);
+            var terminatingSegmentExtractor = new TerminatingSegmentExtractor(this);
 
             _afterDomainLabelSegmentExtractors = new SegmentExtractor[]
             {
                 new PeriodExtractor(),
-                _terminatingSegmentExtractor,
+                terminatingSegmentExtractor,
                 new CommentExtractor(false),
             };
 
             _afterDomainIPAddressSegmentExtractors = new SegmentExtractor[]
             {
-                _terminatingSegmentExtractor,
+                terminatingSegmentExtractor,
                 new CommentExtractor(false),
             };
+
+            this.HostNameExtractor = new HostNameExtractor(terminator);
+        }
+
+        internal HostNameExtractor HostNameExtractor { get; }
+
+        public override TerminatingDelegate Terminator
+        {
+            get => this.HostNameExtractor.Terminator;
+            set => this.HostNameExtractor.Terminator = value;
         }
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
             out EmailAddress emailAddress)
         {
-            var context = new EmailAddressExtractionContext(this.Terminator);
+            var context = new EmailAddressExtractionContext(this);
 
             while (true)
             {
-                if (context.Position >= Helper.Constants.EmailAddress.MaxConsumption)
-                {
-                    emailAddress = default;
-                    return new TextDataExtractionResult(Helper.Constants.EmailAddress.MaxConsumption,
-                        TextDataExtractionErrorCodes.InputTooLong);
-                }
-
                 if (context.Position == input.Length)
                 {
                     break;
@@ -205,13 +207,23 @@ namespace TauCode.Data.Text.TextDataExtractors
                     var charsConsumed = context.Position + result.CharsConsumed;
 
                     // out of input => ignore error segment extractor returned
-                    if (charsConsumed >= Helper.Constants.EmailAddress.MaxConsumption)
+                    if (this.IsOutOfCapacity(charsConsumed))
                     {
-                        return new TextDataExtractionResult(Helper.Constants.EmailAddress.MaxConsumption,
-                            TextDataExtractionErrorCodes.InputTooLong);
+                        emailAddress = default;
+                        return new TextDataExtractionResult(
+                            this.MaxConsumption.Value + 1,
+                            TextDataExtractionErrorCodes.InputIsTooLong);
                     }
 
                     return new TextDataExtractionResult(charsConsumed, result.ErrorCode);
+                }
+
+                if (this.IsOutOfCapacity(context.Position + result.CharsConsumed))
+                {
+                    emailAddress = default;
+                    return new TextDataExtractionResult(
+                        this.MaxConsumption.Value + 1,
+                        TextDataExtractionErrorCodes.InputIsTooLong);
                 }
 
                 if (!segment.HasValue)
@@ -220,9 +232,6 @@ namespace TauCode.Data.Text.TextDataExtractors
                     emailAddress = default;
                     return new TextDataExtractionResult(context.Position, TextDataExtractionErrorCodes.InternalError);
                 }
-
-                // todo_deferred: check 'context.Position + result.Consumed' is less than MaxEmailAddressInputLength
-                // todo_deferred: e.g. IP HostName extractor can produce such result, because HostNameExtractor isn't aware of MaxEmailAddressInputLength.
 
                 var segmentValue = segment.Value;
 
@@ -248,8 +257,13 @@ namespace TauCode.Data.Text.TextDataExtractors
                         emailAddress = null;
                         return new TextDataExtractionResult(
                             consumedBeforeItBecameTooMuch + 1,
-                            TextDataExtractionErrorCodes.LocalPartTooLong);
+                            TextDataExtractionErrorCodes.LocalPartIsTooLong);
                     }
+                }
+
+                if (segmentValue.Type == SegmentType.Termination)
+                {
+                    break;
                 }
 
                 context.Position += segmentValue.Length;
@@ -288,7 +302,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             if (length > Helper.Constants.EmailAddress.MaxCleanEmailAddressLength)
             {
                 emailAddress = default;
-                return new TextDataExtractionResult(context.Position, TextDataExtractionErrorCodes.EmailAddressTooLong);
+                return new TextDataExtractionResult(context.Position, TextDataExtractionErrorCodes.EmailAddressIsTooLong);
             }
 
             emailAddress = new EmailAddress(localPart, hostNameNullable.Value);
@@ -394,17 +408,17 @@ namespace TauCode.Data.Text.TextDataExtractors
 
             var domainString = new string(domainArray);
 
-            var domainResult = context.HostNameExtractor.TryExtract(
+            var domainResult = context.EmailAddressExtractor.HostNameExtractor.TryExtract(
                 domainString,
                 out var domain);
 
             if (domainResult.ErrorCode.HasValue)
             {
-                if (domainResult.ErrorCode.Value == TextDataExtractionErrorCodes.InputTooLong)
+                if (domainResult.ErrorCode.Value == TextDataExtractionErrorCodes.InputIsTooLong)
                 {
                     result = new TextDataExtractionResult(
                         context.GetDomainStartIndex() + domainResult.CharsConsumed,
-                        TextDataExtractionErrorCodes.HostNameTooLong);
+                        TextDataExtractionErrorCodes.HostNameIsTooLong);
                 }
                 else
                 {

@@ -6,7 +6,7 @@ namespace TauCode.Data.Text.TextDataExtractors
     {
         public Int64Extractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.Int64.MaxConsumption,
+                Helper.Constants.Int64.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -21,11 +21,6 @@ namespace TauCode.Data.Text.TextDataExtractors
 
             while (true)
             {
-                if (pos > Helper.Constants.Int64.MaxConsumption)
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.FailedToExtractInt64);
-                }
-
                 if (pos == input.Length)
                 {
                     break;
@@ -38,7 +33,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                     {
                         // ok
                     }
-                    else if (this.Terminator(input, pos))
+                    else if (this.IsTermination(input, pos))
                     {
                         break;
                     }
@@ -51,7 +46,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -61,6 +56,11 @@ namespace TauCode.Data.Text.TextDataExtractors
                 }
 
                 pos++;
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

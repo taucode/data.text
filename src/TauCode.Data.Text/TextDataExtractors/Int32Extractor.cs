@@ -6,7 +6,7 @@ namespace TauCode.Data.Text.TextDataExtractors
     {
         public Int32Extractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.Int32.MaxConsumption,
+                Helper.Constants.Int32.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -16,15 +16,10 @@ namespace TauCode.Data.Text.TextDataExtractors
             out int value)
         {
             var pos = 0;
+            value = default;
 
             while (true)
             {
-                if (pos > Helper.Constants.Int32.MaxConsumption)
-                {
-                    value = default;
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong); // todo_deferred ut
-                }
-
                 if (pos == input.Length)
                 {
                     break;
@@ -37,7 +32,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                     {
                         // ok
                     }
-                    else if (this.Terminator(input, pos))
+                    else if (this.IsTermination(input, pos))
                     {
                         break;
                     }
@@ -46,14 +41,14 @@ namespace TauCode.Data.Text.TextDataExtractors
                         value = default;
                         return new TextDataExtractionResult(
                             pos,
-                            TextDataExtractionErrorCodes.UnexpectedCharacter); // todo_deferred ut
+                            TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
                 }
                 else if (c.IsDecimalDigit())
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -64,6 +59,11 @@ namespace TauCode.Data.Text.TextDataExtractors
                 }
 
                 pos++;
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

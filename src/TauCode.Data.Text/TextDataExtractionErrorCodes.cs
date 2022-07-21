@@ -3,7 +3,7 @@
     public static class TextDataExtractionErrorCodes
     {
         // Common: 0
-        public const int InputTooLong = 2;
+        public const int InputIsTooLong = 2;
         public const int UnclosedString = 3;
         public const int NewLineInString = 4;
         public const int UnexpectedEnd = 5;
@@ -15,19 +15,18 @@
         public const int NonEmojiCharacter = 102;
 
         // EmailAddress: 200
-        public const int LocalPartTooLong = 201;
-        public const int EmailAddressTooLong = 202;
+        public const int LocalPartIsTooLong = 201;
+        public const int EmailAddressIsTooLong = 202;
         public const int IPv4MustBeEnclosedInBrackets = 203;
         public const int EmptyLocalPart = 204;
         public const int EmptyString = 205;
-        public const int UnescapedSpecialCharacter = 206;
         public const int InvalidIPv6Prefix = 207;
 
         // HostName: 300
         public const int InvalidDomain = 301;
-        public const int HostNameTooLong = 302;
+        public const int HostNameIsTooLong = 302;
         public const int InvalidHostName = 303;
-        public const int DomainLabelTooLong = 304;
+        public const int DomainLabelIsTooLong = 304;
         public const int InvalidIPv4Address = 305;
         public const int InvalidIPv6Address = 306;
 
@@ -45,6 +44,7 @@
 
         // FilePath: 800
         public const int FailedToExtractFilePath = 801;
+        public const int FilePathIsTooLong = 802;
 
         // Key: 900
         public const int FailedToExtractKey = 901;
@@ -60,6 +60,7 @@
 
         // Uri: 1300
         public const int FailedToExtractUri = 1301;
+        public const int UriIsTooLong = 1302;
 
         // Item: 1400
         public const int FailedToExtractItem = 1401;
@@ -72,5 +73,8 @@
 
         // StringItem: 1700
         public const int ItemNotFound = 1701;
+
+        // Identifier: 1800
+        public const int ValueIsReservedWord = 1801;
     }
 }

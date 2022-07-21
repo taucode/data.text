@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Extensions;
@@ -113,5 +114,12 @@ internal static class TestHelper
     {
         var txt = typeof(TestHelper).Assembly.GetResourceText(resourceName, true);
         return txt;
+    }
+
+    public static bool IsWhiteSpace(ReadOnlySpan<char> input, int pos)
+    {
+        var c = input[pos];
+        var result = c.IsIn(' ', '\t', '\r', '\n');
+        return result;
     }
 }

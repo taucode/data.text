@@ -4,6 +4,7 @@
     "TestInput": "",
     "TestIgnoreCase": true,
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": 0,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -17,6 +18,7 @@
     "TestInput": "1",
     "TestIgnoreCase": true,
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": 0,
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -30,6 +32,7 @@
     "TestInput": "white;",
     "TestIgnoreCase": true,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "White",
     "ExpectedResult": {
       "CharsConsumed": 5,
@@ -43,12 +46,29 @@
     "TestInput": "white;",
     "TestIgnoreCase": false,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": 0,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 1701
     },
     "ExpectedErrorMessage": "Item not found.",
+    "Comment": "Not found due to case."
+  },
+
+
+  {
+    "Index": 4,
+    "TestInput": "white;",
+    "TestIgnoreCase": true,
+    "TestTerminatingChars": ";",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": 0,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
     "Comment": "Not found due to case."
   }
 ]

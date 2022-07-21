@@ -9,15 +9,13 @@
     ],
     "TestIgnoreCase": true,
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 5
     },
     "ExpectedErrorMessage": "Unexpected end.",
-    "ExpectedConsumed": 0,
-    "ExpectedStringItem": null,
-    "ExpectedErrorCode": 5,
     "Comment": ""
   },
   {
@@ -30,15 +28,13 @@
     ],
     "TestIgnoreCase": true,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "one",
     "ExpectedResult": {
       "CharsConsumed": 3,
       "ErrorCode": null
     },
     "ExpectedErrorMessage": null,
-    "ExpectedConsumed": 3,
-    "ExpectedStringItem": "one",
-    "ExpectedErrorCode": null,
     "Comment": "Happy path."
   },
   {
@@ -51,15 +47,13 @@
     ],
     "TestIgnoreCase": false,
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 0,
       "ErrorCode": 1701
     },
     "ExpectedErrorMessage": "Item not found.",
-    "ExpectedConsumed": 0,
-    "ExpectedStringItem": null,
-    "ExpectedErrorCode": 1701,
     "Comment": "Not found due to the case."
   },
   {
@@ -72,15 +66,32 @@
     ],
     "TestIgnoreCase": true,
     "TestTerminatingChars": "/",
+    "TestMaxConsumption": -1,
     "ExpectedValue": null,
     "ExpectedResult": {
       "CharsConsumed": 3,
       "ErrorCode": 1701
     },
     "ExpectedErrorMessage": "Item not found.",
-    "ExpectedConsumed": 3,
-    "ExpectedStringItem": null,
-    "ExpectedErrorCode": 1701,
+    "Comment": "Item was found, but terminator isn't ours."
+  },
+  {
+    "Index": 4,
+    "TestInput": "three*",
+    "TestItems": [
+      "one",
+      "two",
+      "three"
+    ],
+    "TestIgnoreCase": true,
+    "TestTerminatingChars": "*",
+    "TestMaxConsumption": 2,
+    "ExpectedValue": null,
+    "ExpectedResult": {
+      "CharsConsumed": 3,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
     "Comment": "Item was found, but terminator isn't ours."
   }
 ]

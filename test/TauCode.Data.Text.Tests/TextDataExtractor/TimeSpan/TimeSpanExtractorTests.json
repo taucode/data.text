@@ -3,6 +3,7 @@
     "Index": 0,
     "TestInput": "",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "00:00:00",
     "ExpectedResult": {
       "CharsConsumed": 0,
@@ -15,6 +16,7 @@
     "Index": 1,
     "TestInput": "0",
     "TestTerminatingChars": null,
+    "TestMaxConsumption": -1,
     "ExpectedValue": "00:00:00",
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -27,6 +29,7 @@
     "Index": 2,
     "TestInput": "0;",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "00:00:00",
     "ExpectedResult": {
       "CharsConsumed": 1,
@@ -39,6 +42,7 @@
     "Index": 3,
     "TestInput": "1.02:00:0]",
     "TestTerminatingChars": "[]",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "1.02:00:00",
     "ExpectedResult": {
       "CharsConsumed": 9,
@@ -51,12 +55,52 @@
     "Index": 4,
     "TestInput": "99:99:99",
     "TestTerminatingChars": ";",
+    "TestMaxConsumption": -1,
     "ExpectedValue": "00:00:00",
     "ExpectedResult": {
       "CharsConsumed": 8,
       "ErrorCode": 1501
     },
     "ExpectedErrorMessage": "Failed to extract System.TimeSpan.",
+    "Comment": ""
+  },
+  {
+    "Index": 5,
+    "TestInput": "11111111111111111111111111111111111111111111111111111111\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": -1,
+    "ExpectedValue": "00:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 27,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 6,
+    "TestInput": "7:7:7\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 4,
+    "ExpectedValue": "00:00:00",
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": 2
+    },
+    "ExpectedErrorMessage": "Input is too long.",
+    "Comment": ""
+  },
+  {
+    "Index": 7,
+    "TestInput": "7:7:7\t",
+    "TestTerminatingChars": "\t",
+    "TestMaxConsumption": 5,
+    "ExpectedValue": "07:07:07",
+    "ExpectedResult": {
+      "CharsConsumed": 5,
+      "ErrorCode": null
+    },
+    "ExpectedErrorMessage": null,
     "Comment": ""
   }
 ]

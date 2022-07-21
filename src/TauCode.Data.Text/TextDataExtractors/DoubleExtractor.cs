@@ -12,9 +12,9 @@ namespace TauCode.Data.Text.TextDataExtractors
             DoubleChars = new HashSet<char>("+-eE0123456789.");
         }
 
-        public DoubleExtractor(TerminatingDelegate terminator)
+        public DoubleExtractor(TerminatingDelegate terminator = null)
             : base(
-                Helper.Constants.Double.MaxConsumption,
+                Helper.Constants.Double.DefaultMaxConsumption,
                 terminator)
         {
         }
@@ -28,11 +28,6 @@ namespace TauCode.Data.Text.TextDataExtractors
 
             while (true)
             {
-                if (pos > Helper.Constants.Double.MaxConsumption)
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputTooLong);
-                }
-
                 if (pos == input.Length)
                 {
                     break;
@@ -43,7 +38,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     // ok
                 }
-                else if (this.Terminator(input, pos))
+                else if (this.IsTermination(input, pos))
                 {
                     break;
                 }
@@ -53,6 +48,11 @@ namespace TauCode.Data.Text.TextDataExtractors
                 }
 
                 pos++;
+
+                if (this.IsOutOfCapacity(pos))
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                }
             }
 
             if (pos == 0)

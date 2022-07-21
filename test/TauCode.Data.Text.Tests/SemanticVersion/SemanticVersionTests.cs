@@ -55,6 +55,14 @@ public class SemanticVersionTests
                 : null;
 
         var extractor = new SemanticVersionExtractor(terminatingPredicate);
+        if (testDto.TestMaxConsumption == -1)
+        {
+            // do nothing
+        }
+        else
+        {
+            extractor.MaxConsumption = testDto.TestMaxConsumption;
+        }
 
         // Act
         var result = extractor.TryExtract(input, out var value);
@@ -65,7 +73,7 @@ public class SemanticVersionTests
         }
 
         // Assert
-        Assert.That(result.ToDto(), Is.EqualTo(testDto.ExpectedResult));
+        Assert.That(result.ToDto().ToString(), Is.EqualTo(testDto.ExpectedResult.ToString()));
 
         if (result.ErrorCode.HasValue)
         {

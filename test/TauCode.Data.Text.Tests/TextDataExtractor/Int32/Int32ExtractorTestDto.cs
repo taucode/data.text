@@ -8,6 +8,7 @@ public class Int32ExtractorTestDto
 
     public string TestInput { get; set; }
     public string TestTerminatingChars { get; set; }
+    public int? TestMaxConsumption { get; set; }
 
     public int ExpectedValue { get; set; }
     public TextDataExtractionResultDto ExpectedResult { get; set; }

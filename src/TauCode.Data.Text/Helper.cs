@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using TauCode.Data.Text.EmailAddressSupport;
 using TauCode.Extensions;
 
 namespace TauCode.Data.Text
@@ -20,19 +18,21 @@ namespace TauCode.Data.Text
                 /// </summary>
                 internal const int MaxAsciiLabelLength = 63;
 
-                internal const int MaxConsumption = 253;
+                internal const int MaxLength = 253;
+                internal const int DefaultMaxConsumption = 253;
 
-                internal static readonly int MaxIPv6Length = "1111:2222:3333:4444:5555:6666:123.123.123.123".Length;
+                // "1111:2222:3333:4444:5555:6666:123.123.123.123".Length
+                internal const int MaxIPv6Length = 45;
             }
 
             internal static class TimeSpan
             {
-                internal const int TimeSpanMaxConsumption = 26; // "-10675199.02:48:05.4775808".Length;
+                internal const int DefaultMaxConsumption = 26; // "-10675199.02:48:05.4775808".Length;
             }
 
             internal static class EmailAddress
             {
-                internal const int MaxConsumption = 1000; // with all comments and folding whitespaces
+                internal const int DefaultMaxConsumption = 1000; // with all comments and folding whitespaces
                 internal const int MaxLocalPartLength = 64;
                 internal const int MaxCleanEmailAddressLength = 254;
                 internal const int FoldingWhiteSpaceLength = 3;
@@ -40,12 +40,14 @@ namespace TauCode.Data.Text
 
             internal static class FilePath
             {
-                internal const int MaxConsumption = 256;
+                internal const int MaxLength = 260;
+                internal const int DefaultMaxConsumption = 260;
             }
 
             internal static class DateTimeOffset
             {
-                internal static readonly int MaxConsumption = "9999-12-31T23:59:59.9999999+00:00".Length;
+                // "9999-12-31T23:59:59.9999999+00:00".Length
+                internal const int DefaultMaxConsumption = 33;
             }
 
             internal static class Key
@@ -55,22 +57,26 @@ namespace TauCode.Data.Text
 
             internal static class Decimal
             {
-                internal static readonly int MaxConsumption = "79228162514264337593543950335".Length;
+                // "79228162514264337593543950335".Length
+                internal const int DefaultMaxConsumption = 29;
             }
 
             internal static class Double
             {
-                internal static readonly int MaxConsumption = "-1.7976931348623157E+308".Length;
+                // "-1.7976931348623157E+308".Length
+                internal const int DefaultMaxConsumption = 24;
             }
 
             internal static class Int32
             {
-                internal static readonly int MaxConsumption = int.MinValue.ToString(CultureInfo.InvariantCulture).Length;
+                // int.MinValue.ToString(CultureInfo.InvariantCulture).Length
+                internal const int DefaultMaxConsumption = 11;
             }
 
             internal static class Int64
             {
-                internal static readonly int MaxConsumption = long.MinValue.ToString(CultureInfo.InvariantCulture).Length;
+                // long.MinValue.ToString(CultureInfo.InvariantCulture).Length
+                internal const int DefaultMaxConsumption = 20;
             }
 
             internal static class SemanticVersion
@@ -95,11 +101,12 @@ namespace TauCode.Data.Text
 
             internal static class SqlIdentifier
             {
-                internal const int DefaultMaxConsumption = 202;
+                internal const int DefaultMaxConsumption = 200;
             }
 
             internal static class Uri
             {
+                internal const int MaxLength = 2000;
                 internal const int DefaultMaxConsumption = 2000;
             }
         }
@@ -153,29 +160,11 @@ namespace TauCode.Data.Text
 
         internal static bool IsUnicodeInternal(this char c) => c >= 256;
 
-        internal static bool IsLocalPartSegment(this SegmentType segmentType)
-        {
-            return
-                segmentType == SegmentType.LocalPartWord ||
-                segmentType == SegmentType.Period ||
-                segmentType == SegmentType.LocalPartQuotedString ||
-                false;
-        }
-
-        internal static bool IsDomainSegment(this SegmentType segmentType)
-        {
-            return
-                segmentType == SegmentType.DomainLabel ||
-                segmentType == SegmentType.Period ||
-                segmentType == SegmentType.DomainIPAddress ||
-                false;
-        }
-
         internal static string GetErrorMessage(int errorCode)
         {
             return errorCode switch
             {
-                TextDataExtractionErrorCodes.InputTooLong => // 2
+                TextDataExtractionErrorCodes.InputIsTooLong => // 2
                     "Input is too long.",
 
                 TextDataExtractionErrorCodes.UnclosedString => // 3
@@ -198,10 +187,10 @@ namespace TauCode.Data.Text
                     "Non-emoji character.",
 
                 // EmailAddress: 200
-                TextDataExtractionErrorCodes.LocalPartTooLong => // 201
+                TextDataExtractionErrorCodes.LocalPartIsTooLong => // 201
                     "Local part is too long.",
 
-                TextDataExtractionErrorCodes.EmailAddressTooLong => // 202
+                TextDataExtractionErrorCodes.EmailAddressIsTooLong => // 202
                     "Email address is too long.",
 
                 TextDataExtractionErrorCodes.IPv4MustBeEnclosedInBrackets => // 203
@@ -213,9 +202,6 @@ namespace TauCode.Data.Text
                 TextDataExtractionErrorCodes.EmptyString => // 205
                     "Empty quoted string.",
 
-                TextDataExtractionErrorCodes.UnescapedSpecialCharacter => // 206
-                    "Unescaped special character.",
-
                 TextDataExtractionErrorCodes.InvalidIPv6Prefix => // 207
                     "Invalid IPv6 prefix.",
 
@@ -223,13 +209,13 @@ namespace TauCode.Data.Text
                 TextDataExtractionErrorCodes.InvalidDomain =>  // 301
                     "Invalid domain.",
 
-                TextDataExtractionErrorCodes.HostNameTooLong => // 302
+                TextDataExtractionErrorCodes.HostNameIsTooLong => // 302
                         "Host name is too long.",
 
                 TextDataExtractionErrorCodes.InvalidHostName => // 303
                     "Invalid host name.",
 
-                TextDataExtractionErrorCodes.DomainLabelTooLong => // 304
+                TextDataExtractionErrorCodes.DomainLabelIsTooLong => // 304
                     "Domain label is too long.",
 
                 TextDataExtractionErrorCodes.InvalidIPv4Address => // 305
@@ -258,6 +244,9 @@ namespace TauCode.Data.Text
                 TextDataExtractionErrorCodes.FailedToExtractFilePath => // 801
                     $"Failed to extract file path.",
 
+                TextDataExtractionErrorCodes.FilePathIsTooLong => // 802
+                    $"File path is too long.",
+
                 // Key: 900
                 TextDataExtractionErrorCodes.FailedToExtractKey => // 901
                     $"Failed to extract key.",
@@ -270,6 +259,9 @@ namespace TauCode.Data.Text
                 TextDataExtractionErrorCodes.FailedToExtractUri => // 1301
                     $"Failed to extract {typeof(Uri).FullName}.",
 
+                TextDataExtractionErrorCodes.UriIsTooLong => // 1302
+                    $"Uri is too long.",
+
                 // TimeSpan: 1500
                 TextDataExtractionErrorCodes.FailedToExtractTimeSpan => // 1501
                     $"Failed to extract {typeof(TimeSpan).FullName}.",
@@ -278,19 +270,17 @@ namespace TauCode.Data.Text
                 TextDataExtractionErrorCodes.FailedToExtractSemanticVersion => // 1601
                     $"Failed to extract {typeof(SemanticVersion).FullName}.",
 
-
                 // StringItem: 1700
                 TextDataExtractionErrorCodes.ItemNotFound => // 1701
                     "Item not found.",
 
+                // Identifier: 1800
+                TextDataExtractionErrorCodes.ValueIsReservedWord => // 1801
+                    "Value is a reserved word.",
+
+                // unknown
                 _ => $"Unknown error. Error code: {errorCode}."
             };
-        }
-
-        internal static bool DefaultTerminatingPredicate(ReadOnlySpan<char> input, int position)
-        {
-            var c = input[position];
-            return c.IsIn(' ', '\r', '\n', '\t');
         }
 
         internal static bool IsInlineWhiteSpaceOrCaretControl(this char c) => IsInlineWhiteSpace(c) || IsCaretControl(c);
@@ -339,6 +329,11 @@ namespace TauCode.Data.Text
                 default:
                     throw new ArgumentException($"Cannot resolve opening delimiter for '{delimiter}'.", nameof(delimiter));
             }
+        }
+
+        internal static bool IsTermination<T>(this ITextDataExtractor<T> extractor, ReadOnlySpan<char> input, int pos)
+        {
+            return extractor.Terminator != null && extractor.Terminator(input, pos);
         }
     }
 }

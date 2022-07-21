@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.Tests.TextDataExtractor.HostName;
 
@@ -47,11 +48,6 @@ public class HostNameTests
     [TestCaseSource(nameof(GetTestCases))]
     public void Parse_AnyArgument_ReturnsExpectedResult(HostNameExtractorTestDto dto)
     {
-        if (dto.Comment.Contains("[Not for Parse]"))
-        {
-            Assert.Pass("Skipped");
-        }
-
         // Arrange
         var successExpected = dto.ExpectedResult.ErrorCode == null;
         var input = dto.TestInput;
@@ -91,6 +87,9 @@ public class HostNameTests
 
     public static IList<HostNameExtractorTestDto> GetTestCases()
     {
-        return HostNameExtractorTests.GetTestDtos();
+        return HostNameExtractorTests
+            .GetTestDtos()
+            .Where(x => !x.Comment.Contains("[Not for Parse]"))
+            .ToList();
     }
 }

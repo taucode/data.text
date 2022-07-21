@@ -9,20 +9,17 @@ namespace TauCode.Data.Text.EmailAddressSupport
         private readonly List<Segment> _localPartSegments;
         private readonly List<Segment> _domainSegments;
 
-        internal EmailAddressExtractionContext(TerminatingDelegate terminator)
-        {
-            this.Terminator = terminator;
+        internal EmailAddressExtractor EmailAddressExtractor { get; }
 
+        internal EmailAddressExtractionContext(EmailAddressExtractor emailAddressExtractor)
+        {
             _localPartSegments = new List<Segment>();
             _domainSegments = new List<Segment>();
-            HostNameExtractor = new HostNameExtractor(this.Terminator);
+
+            this.EmailAddressExtractor = emailAddressExtractor;
         }
 
-        internal readonly HostNameExtractor HostNameExtractor;
-
         internal int Position;
-
-        internal readonly TerminatingDelegate Terminator;
 
         internal int? AtSymbolIndex; // index of '@' in span
 
@@ -94,7 +91,5 @@ namespace TauCode.Data.Text.EmailAddressSupport
 
             return _domainSegments[0];
         }
-
-        internal HostName? GetIPHostName() => GetIPHostNameSegment()?.IPHostName;
     }
 }
