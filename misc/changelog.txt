@@ -1,3 +1,7 @@
 ﻿2022-06-27
 ==========
     1. Initial version.
+
+2022-07-26
+==========
+    1. Added more extractors.

@@ -1,0 +1,13 @@
+﻿2021-06-27
+==========
+    1. https://www.punycoder.com/
+    2. https://verifalia.com/validate-email
+
+2022-05-22
+==========
+    1. https://stackoverflow.com/questions/50761133/how-to-check-for-invalid-utf-8-characters
+
+2022-05-29
+==========
+    1. https://stackoverflow.com/questions/2049502/what-characters-are-allowed-in-an-email-address
+    2. https://semver.org/
