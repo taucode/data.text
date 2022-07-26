@@ -309,6 +309,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 c == '_' ||
                 c == ' ' ||
                 char.IsLetter(c) ||
+                char.IsDigit(c) ||
                 false;
 
             return result;
