@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace TauCode.Data.Text.TextDataExtractors
 {
@@ -37,14 +35,14 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         #endregion
 
-        public SemanticVersionExtractor(TerminatingDelegate terminator = null)
+        public SemanticVersionExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.SemanticVersion.DefaultMaxConsumption,
                 terminator)
         {
         }
 
-        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out SemanticVersion value)
+        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out SemanticVersion? value)
         {
             int pos;
             value = default;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Extensions;
@@ -79,8 +78,13 @@ internal static class TestHelper
 
     #endregion
 
-    internal static string TransformTestString(string s)
+    internal static string TransformTestString(string? s)
     {
+        if (s == null)
+        {
+            throw new ArgumentNullException(nameof(s));
+        }
+
         const string pattern = @"\{@([^:]+)\:(\d+)@\}";
         var result = Regex.Replace(s, pattern, TestHelper.PatternEvaluator);
 

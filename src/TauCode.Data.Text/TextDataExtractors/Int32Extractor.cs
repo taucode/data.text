@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class Int32Extractor : TextDataExtractorBase<int>
     {
-        public Int32Extractor(TerminatingDelegate terminator = null)
+        public Int32Extractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Int32.DefaultMaxConsumption,
                 terminator)

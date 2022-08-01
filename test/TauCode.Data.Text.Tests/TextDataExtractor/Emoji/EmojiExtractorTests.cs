@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 using TauCode.Extensions;
@@ -31,11 +28,11 @@ public class EmojiExtractorTests
     [Test]
     [TestCase(null)]
     [TestCase("not_null")]
-    public void Terminator_AnyValue_ThrowsException(string terminatorTag)
+    public void Terminator_AnyValue_ThrowsException(string? terminatorTag)
     {
         // Arrange
         var extractor = EmojiExtractor.Instance;
-        TerminatingDelegate terminator;
+        TerminatingDelegate? terminator;
         if (terminatorTag == null)
         {
             terminator = null;
@@ -57,7 +54,6 @@ public class EmojiExtractorTests
     public void TryExtract_ValidArgument_ReturnsExpectedResult(EmojiExtractorTestDto testDto)
     {
         // Arrange
-
         var input = testDto.TestInput;
 
         var extractor = EmojiExtractor.Instance;
@@ -66,7 +62,7 @@ public class EmojiExtractorTests
         var result = extractor.TryExtract(input, out var value);
 
         // Assert
-        Assert.That(result.CharsConsumed, Is.EqualTo(testDto.ExpectedValue.Value.Length));
+        Assert.That(result.CharsConsumed, Is.EqualTo(testDto.ExpectedValue!.Value.Length));
         Assert.That(result.CharsConsumed, Is.EqualTo(testDto.ExpectedResult.CharsConsumed));
 
         Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));

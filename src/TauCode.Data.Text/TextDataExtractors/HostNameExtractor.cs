@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Net;
 
 namespace TauCode.Data.Text.TextDataExtractors
@@ -21,7 +20,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         #endregion
 
-        public HostNameExtractor(TerminatingDelegate terminator = null)
+        public HostNameExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.HostName.DefaultMaxConsumption,
                 terminator)
@@ -239,7 +238,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                 if (parsed)
                 {
-                    value = new HostName(HostNameKind.IPv6, ipAddress.ToString());
+                    value = new HostName(HostNameKind.IPv6, ipAddress!.ToString());
                     return new TextDataExtractionResult(pos, null);
                 }
                 else
@@ -257,7 +256,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                     if (parsed)
                     {
-                        value = new HostName(HostNameKind.IPv4, ipAddress.ToString());
+                        value = new HostName(HostNameKind.IPv4, ipAddress!.ToString());
                         return new TextDataExtractionResult(pos, null);
                     }
                     else

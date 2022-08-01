@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class KeyExtractor : TextDataExtractorBase<string>
     {
-        public KeyExtractor(TerminatingDelegate terminator = null)
+        public KeyExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Key.DefaultMaxConsumption,
                 terminator)
@@ -13,7 +11,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out string value)
+            out string? value)
         {
             var pos = 0;
 

@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.Tests.TextDataExtractor.EmailAddress;
@@ -90,8 +88,8 @@ public class EmailAddressTests
 
             // check test itself
             Assert.That(parsed, Is.True);
-            Assert.That(hostName.ToDto(), Is.EqualTo(dto.ExpectedValue));
-            Assert.That(hostName.ToString(), Is.EqualTo(dto.ExpectedValueString));
+            Assert.That(hostName!.ToDto(), Is.EqualTo(dto.ExpectedValue));
+            Assert.That(hostName!.ToString(), Is.EqualTo(dto.ExpectedValueString));
         }
     }
 

@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 using TauCode.Extensions;
@@ -63,7 +60,7 @@ public class StringItemExtractorTests
         // Arrange
 
         // Act
-        var ex = Assert.Throws<ArgumentNullException>(() => new StringItemExtractor(null, false));
+        var ex = Assert.Throws<ArgumentNullException>(() => new StringItemExtractor(null!, false));
 
         // Assert
         Assert.That(ex.ParamName, Is.EqualTo("items"));
@@ -89,7 +86,7 @@ public class StringItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -111,7 +108,7 @@ public class StringItemExtractorTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -148,7 +145,7 @@ public class StringItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -197,7 +194,7 @@ public class StringItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -236,7 +233,7 @@ public class StringItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -300,7 +297,7 @@ public class StringItemExtractorTests
 
     public static IList<IEnumerable<string>> GetBadStringCollections()
     {
-        return new List<List<string>>
+        return new List<List<string?>>
             {
                 new(),
                 new(new[] { "one", "" }),

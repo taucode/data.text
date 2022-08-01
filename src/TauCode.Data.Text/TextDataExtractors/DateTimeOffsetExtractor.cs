@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class DateTimeOffsetExtractor : TextDataExtractorBase<DateTimeOffset>
     {
@@ -13,7 +10,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             DateTimeOffsetChars = new HashSet<char>("+-0123456789.:TZ");
         }
 
-        public DateTimeOffsetExtractor(TerminatingDelegate terminator = null)
+        public DateTimeOffsetExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.DateTimeOffset.DefaultMaxConsumption,
                 terminator)

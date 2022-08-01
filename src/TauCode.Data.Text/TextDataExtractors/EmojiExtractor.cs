@@ -1,5 +1,4 @@
-﻿using System;
-using TauCode.Data.Text.EmojiSupport;
+﻿using TauCode.Data.Text.EmojiSupport;
 using TauCode.Data.Text.Exceptions;
 
 namespace TauCode.Data.Text.TextDataExtractors
@@ -19,7 +18,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             set => throw new InvalidOperationException();
         }
 
-        public override TerminatingDelegate Terminator
+        public override TerminatingDelegate? Terminator
         {
             get => null;
             set => throw new InvalidOperationException();

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TauCode.Data.Text.EmailAddressSupport;
+﻿using TauCode.Data.Text.EmailAddressSupport;
 using TauCode.Data.Text.EmailAddressSupport.SegmentExtractors;
 using TauCode.Data.Text.Exceptions;
 
@@ -134,7 +132,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         #endregion
 
-        public EmailAddressExtractor(TerminatingDelegate terminator = null)
+        public EmailAddressExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.EmailAddress.DefaultMaxConsumption,
                 terminator)
@@ -159,7 +157,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         internal HostNameExtractor HostNameExtractor { get; }
 
-        public override TerminatingDelegate Terminator
+        public override TerminatingDelegate? Terminator
         {
             get => this.HostNameExtractor.Terminator;
             set => this.HostNameExtractor.Terminator = value;
@@ -167,7 +165,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out EmailAddress emailAddress)
+            out EmailAddress? emailAddress)
         {
             var context = new EmailAddressExtractionContext(this);
 
@@ -180,7 +178,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
                 var segmentExtractors = GetAppropriateSegmentExtractors(context);
 
-                SegmentExtractor selectedExtractor = null;
+                SegmentExtractor? selectedExtractor = null;
                 foreach (var extractor in segmentExtractors)
                 {
                     if (extractor.Accepts(input, context))
@@ -211,7 +209,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                     {
                         emailAddress = default;
                         return new TextDataExtractionResult(
-                            this.MaxConsumption.Value + 1,
+                            this.MaxConsumption!.Value + 1,
                             TextDataExtractionErrorCodes.InputIsTooLong);
                     }
 
@@ -222,7 +220,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 {
                     emailAddress = default;
                     return new TextDataExtractionResult(
-                        this.MaxConsumption.Value + 1,
+                        this.MaxConsumption!.Value + 1,
                         TextDataExtractionErrorCodes.InputIsTooLong);
                 }
 

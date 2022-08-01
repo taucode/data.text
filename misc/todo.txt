@@ -66,15 +66,15 @@
 ==========
         get rid of ␀ replacement. use \u0000
         re-order json ut-s, because some were deleted.
-        sweep out TauCode.Omicron.Tests.Common, TauCode.Omicron.Tests.Exe
-        ut-s for all Parse, TryParse, Extract, TryExtract.
++       sweep out TauCode.Omicron.Tests.Common, TauCode.Omicron.Tests.Exe
++       ut-s for all Parse, TryParse, Extract, TryExtract.
 +       EmailAddressTests.Fail.ForParsing.json - get rid of 'ForParsing'
-        Folding white space in comment is ok, but any other usage of '\r' and '\n' is not unless escaped.
+x       Folding white space in comment is ok, but any other usage of '\r' and '\n' is not unless escaped.
 
 2022-06-01
 ==========
 +       Semantic Version: long & pseudo-long input, term.char and w/o term.char
-        Semantic Version: unexpected chars
+x       Semantic Version: unexpected chars
         Get rid of 1488 (and of this one, too)
 
 2022-06-05

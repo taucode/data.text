@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TauCode.Data.Text.Exceptions;
+﻿using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 
 namespace TauCode.Data.Text.EmailAddressSupport
@@ -16,7 +14,7 @@ namespace TauCode.Data.Text.EmailAddressSupport
             EmailAddressExtractionContext context,
             out Segment? segment)
         {
-            if (context.Position > context.EmailAddressExtractor.MaxConsumption.Value || context.Position < 0)
+            if (context.Position > (context.EmailAddressExtractor.MaxConsumption ?? int.MaxValue) || context.Position < 0)
             {
                 throw new TextDataExtractionException(
                     "Context position is out of range. See inner exception.",

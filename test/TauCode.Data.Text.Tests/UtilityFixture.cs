@@ -2,9 +2,6 @@
 using Newtonsoft.Json.Converters;
 using NUnit.Framework;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 using TauCode.Extensions;
 
@@ -50,7 +47,7 @@ public class UtilityFixture
         var list = (IList)JsonConvert.DeserializeObject(json, dtoListType);
         for (var i = 0; i < list.Count; i++)
         {
-            var dto = (dynamic)list[i];
+            var dto = (dynamic)list[i]!;
             dto.Index = i;
         }
 

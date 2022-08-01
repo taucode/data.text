@@ -1,5 +1,4 @@
-﻿using System;
-using TauCode.Data.Text.Exceptions;
+﻿using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 
 namespace TauCode.Data.Text
@@ -8,7 +7,7 @@ namespace TauCode.Data.Text
     {
         #region Static
 
-        private static readonly HostNameExtractor Extractor = new HostNameExtractor((input, index) => false);
+        private static readonly HostNameExtractor Extractor = new((_, _) => false);
 
         #endregion
 
@@ -67,7 +66,7 @@ namespace TauCode.Data.Text
 
         #region Overridden
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is HostName other && Equals(other);
         }

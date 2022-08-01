@@ -6,15 +6,15 @@ public class TimeSpanExtractorTestDto
 {
     public int? Index { get; set; }
 
-    public string TestInput { get; set; }
-    public string TestTerminatingChars { get; set; }
+    public string? TestInput { get; set; }
+    public string? TestTerminatingChars { get; set; }
     public int? TestMaxConsumption { get; set; }
 
     public System.TimeSpan ExpectedValue { get; set; }
-    public TextDataExtractionResultDto ExpectedResult { get; set; }
-    public string ExpectedErrorMessage { get; set; }
+    public TextDataExtractionResultDto ExpectedResult { get; set; } = default!; // deserialized from JSON
+    public string? ExpectedErrorMessage { get; set; }
 
-    public string Comment { get; set; }
+    public string Comment { get; set; } = default!; // deserialized from JSON
 
     public override string ToString()
     {

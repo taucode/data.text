@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class UriExtractor : TextDataExtractorBase<Uri>
     {
@@ -19,7 +17,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             Uri.UriSchemeNntp + ":",
         };
 
-        public UriExtractor(TerminatingDelegate terminator = null)
+        public UriExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Uri.DefaultMaxConsumption,
                 terminator)
@@ -29,7 +27,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out Uri value)
+            out Uri? value)
         {
             value = default;
 

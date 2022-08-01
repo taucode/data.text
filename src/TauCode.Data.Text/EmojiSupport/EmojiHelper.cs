@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
+﻿using System.Data;
 using System.Text;
 
 namespace TauCode.Data.Text.EmojiSupport
@@ -70,7 +66,7 @@ namespace TauCode.Data.Text.EmojiSupport
 
         internal static bool IsEmojiStartingChar(this char c) => EmojiStartingChars.Contains(c);
 
-        private static string ReadStringFromStream(Stream stream, byte[] buffer)
+        private static string? ReadStringFromStream(Stream stream, byte[] buffer)
         {
             // read value
             var intLength = stream.ReadByte();
@@ -103,7 +99,10 @@ namespace TauCode.Data.Text.EmojiSupport
 
         private static IList<Emoji> LoadEmojis()
         {
-            using var stream = typeof(EmojiHelper).Assembly.GetManifestResourceStream($"{typeof(Emoji).Namespace}.Resources.emojis.bin");
+            using var stream =
+                typeof(EmojiHelper).Assembly.GetManifestResourceStream($"{typeof(Emoji).Namespace}.Resources.emojis.bin")
+                ??
+                throw new FileNotFoundException("Emoji resource not found.");
 
             var list = new List<Emoji>();
 
