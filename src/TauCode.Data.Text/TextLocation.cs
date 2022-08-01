@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TauCode.Data.Text
+﻿namespace TauCode.Data.Text
 {
     public readonly struct TextLocation : IEquatable<TextLocation>, IComparable<TextLocation>
     {
@@ -66,7 +64,7 @@ namespace TauCode.Data.Text
 
         #region Overridden
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return
                 obj is TextLocation other &&

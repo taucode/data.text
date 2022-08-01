@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace TauCode.Data.Text.Tests.TextDataExtractor.Item;
 
@@ -7,17 +6,17 @@ public class ItemExtractorTestDto
 {
     public int? Index { get; set; }
 
-    public string TestInput { get; set; }
+    public string? TestInput { get; set; }
     public List<string> TestItems { get; set; } = new();
     public bool TestIgnoreCase { get; set; }
-    public string TestTerminatingChars { get; set; }
+    public string? TestTerminatingChars { get; set; }
     public int? TestMaxConsumption { get; set; }
 
-    public NumberText ExpectedValue { get; set; }
-    public TextDataExtractionResultDto ExpectedResult { get; set; }
-    public string ExpectedErrorMessage { get; set; }
+    public NumberText? ExpectedValue { get; set; }
+    public TextDataExtractionResultDto ExpectedResult { get; set; } = default!; // deserialized from JSON
+    public string? ExpectedErrorMessage { get; set; }
 
-    public string Comment { get; set; }
+    public string Comment { get; set; } = default!; // deserialized from JSON
 
     public override string ToString()
     {

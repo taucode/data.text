@@ -6,13 +6,13 @@ public class EmojiExtractorTestDto
 {
     public int? Index { get; set; }
 
-    public string TestInput { get; set; }
+    public string? TestInput { get; set; }
 
-    public EmojiDto ExpectedValue { get; set; }
-    public TextDataExtractionResultDto ExpectedResult { get; set; }
-    public string ExpectedErrorMessage { get; set; }
+    public EmojiDto? ExpectedValue { get; set; }
+    public TextDataExtractionResultDto ExpectedResult { get; set; } = default!; // deserialized from JSON = default!; // deserialized from JSON
+    public string? ExpectedErrorMessage { get; set; }
 
-    public string Comment { get; set; }
+    public string Comment { get; set; } = default!; // deserialized from JSON
 
     public override string ToString()
     {

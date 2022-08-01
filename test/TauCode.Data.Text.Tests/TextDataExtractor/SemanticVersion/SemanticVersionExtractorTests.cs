@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 using TauCode.Extensions;
@@ -73,7 +70,7 @@ public class SemanticVersionExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminatingPredicate =
+        TerminatingDelegate? terminatingPredicate =
             testDto.TestTerminatingChars != null
                 ? (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 : null;
@@ -90,7 +87,7 @@ public class SemanticVersionExtractorTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -117,8 +114,8 @@ public class SemanticVersionExtractorTests
             Assert.That(testDto.ExpectedResult.ErrorCode, Is.Null);
 
             // check test itself
-            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
-            Assert.That(value.ToString(), Is.EqualTo(testDto.ExpectedValueString));
+            Assert.That(value!.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToString(), Is.EqualTo(testDto.ExpectedValueString));
         }
     }
 
@@ -128,7 +125,7 @@ public class SemanticVersionExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -148,7 +145,7 @@ public class SemanticVersionExtractorTests
         if (testDto.ExpectedResult.ErrorCode.HasValue)
         {
             // fail
-            Text.SemanticVersion value = default;
+            Text.SemanticVersion? value = default;
             var ex = Assert.Throws<TextDataExtractionException>(() => extractor.Extract(input, out value));
 
             Assert.That(value, Is.EqualTo(default(Text.SemanticVersion)));
@@ -163,7 +160,7 @@ public class SemanticVersionExtractorTests
             var consumed = extractor.Extract(input, out var value);
 
             Assert.That(consumed, Is.EqualTo(testDto.ExpectedResult.CharsConsumed));
-            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToDto(), Is.EqualTo(testDto.ExpectedValue));
         }
     }
 
@@ -173,7 +170,7 @@ public class SemanticVersionExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -200,7 +197,7 @@ public class SemanticVersionExtractorTests
 
         if (expectedParsed)
         {
-            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToDto(), Is.EqualTo(testDto.ExpectedValue));
         }
         else
         {
@@ -216,7 +213,7 @@ public class SemanticVersionExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -248,7 +245,7 @@ public class SemanticVersionExtractorTests
         {
             // success
             var value = extractor.Parse(input);
-            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToDto(), Is.EqualTo(testDto.ExpectedValue));
         }
 
         Assert.That(extractor.Terminator, Is.SameAs(terminatorBeforeParse));

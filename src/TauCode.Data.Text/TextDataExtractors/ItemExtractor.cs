@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class ItemExtractor<T> : TextDataExtractorBase<T>
     {
@@ -11,7 +8,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             IEnumerable<string> items,
             bool ignoreCase,
             Func<string, bool, T> itemParser,
-            TerminatingDelegate terminator = null)
+            TerminatingDelegate? terminator = null)
             : base(
                 null,
                 terminator)
@@ -34,7 +31,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out T value)
+            out T? value)
         {
             var innerResult = _innerExtractor.TryExtract(input, out var stringValue);
             if (innerResult.ErrorCode.HasValue)
@@ -43,7 +40,7 @@ namespace TauCode.Data.Text.TextDataExtractors
                 return innerResult;
             }
 
-            value = ItemParser(stringValue, this.IgnoreCase);
+            value = ItemParser(stringValue!, this.IgnoreCase);
             return new TextDataExtractionResult(innerResult.CharsConsumed, null);
         }
     }

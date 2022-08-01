@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class SqlIdentifierExtractor : TextDataExtractorBase<SqlIdentifier>
     {
         private SqlIdentifierDelimiter _delimiter;
 
         public SqlIdentifierExtractor(
-            Func<string, bool> reservedWordPredicate,
-            TerminatingDelegate terminator = null)
+            Func<string, bool>? reservedWordPredicate,
+            TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.SqlIdentifier.DefaultMaxConsumption,
                 terminator)
@@ -17,7 +15,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             _delimiter = SqlIdentifierDelimiter.None;
         }
 
-        public Func<string, bool> ReservedWordPredicate { get; }
+        public Func<string, bool>? ReservedWordPredicate { get; }
 
         public SqlIdentifierDelimiter Delimiter
         {

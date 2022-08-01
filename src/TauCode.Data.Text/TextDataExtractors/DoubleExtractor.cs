@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class DoubleExtractor : TextDataExtractorBase<double>
     {
@@ -12,7 +9,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             DoubleChars = new HashSet<char>("+-eE0123456789.");
         }
 
-        public DoubleExtractor(TerminatingDelegate terminator = null)
+        public DoubleExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Double.DefaultMaxConsumption,
                 terminator)

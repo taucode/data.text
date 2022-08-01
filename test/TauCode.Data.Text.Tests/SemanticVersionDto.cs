@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace TauCode.Data.Text.Tests;
+﻿namespace TauCode.Data.Text.Tests;
 
 public class SemanticVersionDto : IEquatable<SemanticVersionDto>
 {
     public int Major { get; set; }
     public int Minor { get; set; }
     public int Patch { get; set; }
-    public string PreRelease { get; set; }
-    public string BuildMetadata { get; set; }
+    public string? PreRelease { get; set; }
+    public string? BuildMetadata { get; set; }
 
-    public bool Equals(SemanticVersionDto other)
+    public bool Equals(SemanticVersionDto? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -21,7 +19,7 @@ public class SemanticVersionDto : IEquatable<SemanticVersionDto>
             PreRelease == other.PreRelease;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

@@ -73,7 +73,7 @@ public class Int64ExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null
                 ? (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 : null;
@@ -90,7 +90,7 @@ public class Int64ExtractorTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -126,7 +126,7 @@ public class Int64ExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null
                 ? (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 : null;
@@ -170,7 +170,7 @@ public class Int64ExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null
                 ? (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 : null;
@@ -204,7 +204,7 @@ public class Int64ExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null
                 ? (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 : null;

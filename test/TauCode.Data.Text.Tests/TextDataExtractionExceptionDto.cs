@@ -1,24 +1,23 @@
-﻿using System;
-
-namespace TauCode.Data.Text.Tests;
+﻿namespace TauCode.Data.Text.Tests;
 
 public class TextDataExtractionExceptionDto : IEquatable<TextDataExtractionExceptionDto>
 {
-    public string Message { get; set; }
+    public string Message { get; set; } = null!; // deserialized from JSON
     public int ErrorCode { get; set; }
     public int CharsConsumed { get; set; }
 
-    public bool Equals(TextDataExtractionExceptionDto other)
+    public bool Equals(TextDataExtractionExceptionDto? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
+
         return
             Message == other.Message &&
             ErrorCode == other.ErrorCode &&
             CharsConsumed == other.CharsConsumed;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

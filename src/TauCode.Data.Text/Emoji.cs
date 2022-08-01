@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using TauCode.Data.Text.EmojiSupport;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
@@ -85,7 +82,7 @@ namespace TauCode.Data.Text
 
         #region Overridden
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Emoji other)
             {

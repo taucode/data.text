@@ -1,5 +1,4 @@
-﻿using System;
-using TauCode.Data.Text.Exceptions;
+﻿using TauCode.Data.Text.Exceptions;
 
 namespace TauCode.Data.Text
 {
@@ -8,7 +7,7 @@ namespace TauCode.Data.Text
         #region Fields
 
         private int? _maxConsumption;
-        private TerminatingDelegate _terminator;
+        private TerminatingDelegate? _terminator;
 
         #endregion
 
@@ -16,7 +15,7 @@ namespace TauCode.Data.Text
 
         protected TextDataExtractorBase(
             int? maxConsumption,
-            TerminatingDelegate terminator)
+            TerminatingDelegate? terminator)
         {
             _maxConsumption = CheckMaxConsumption(maxConsumption);
             _terminator = terminator;
@@ -28,7 +27,7 @@ namespace TauCode.Data.Text
 
         protected abstract TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out T value);
+            out T? value);
 
         #endregion
 
@@ -62,7 +61,7 @@ namespace TauCode.Data.Text
 
         #region ITextDataExtractor<T> Members
 
-        public virtual TerminatingDelegate Terminator
+        public virtual TerminatingDelegate? Terminator
         {
             get => _terminator;
             set => _terminator = value;
@@ -76,7 +75,7 @@ namespace TauCode.Data.Text
 
         public TextDataExtractionResult TryExtract(
             ReadOnlySpan<char> input,
-            out T value)
+            out T? value)
         {
             if (input.Length == 0)
             {
@@ -88,7 +87,7 @@ namespace TauCode.Data.Text
             return result;
         }
 
-        public virtual int Extract(ReadOnlySpan<char> input, out T value)
+        public virtual int Extract(ReadOnlySpan<char> input, out T? value)
         {
             var result = this.TryExtract(input, out value);
             if (result.ErrorCode == null)
@@ -101,7 +100,7 @@ namespace TauCode.Data.Text
             throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
         }
 
-        public virtual bool TryParse(ReadOnlySpan<char> input, out T value)
+        public virtual bool TryParse(ReadOnlySpan<char> input, out T? value)
         {
             var savedTerminator = this.Terminator;
 
@@ -117,7 +116,7 @@ namespace TauCode.Data.Text
             }
         }
 
-        public virtual T Parse(ReadOnlySpan<char> input)
+        public virtual T? Parse(ReadOnlySpan<char> input)
         {
             var savedTerminator = this.Terminator;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
 
 namespace TauCode.Data.Text.TextDataExtractors
@@ -46,7 +43,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         #endregion
 
-        public CLangStringExtractor(TerminatingDelegate terminator = null)
+        public CLangStringExtractor(TerminatingDelegate? terminator = null)
             : base(
                 null,
                 terminator)
@@ -55,7 +52,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out string value)
+            out string? value)
         {
             value = default;
             var pos = 0;
