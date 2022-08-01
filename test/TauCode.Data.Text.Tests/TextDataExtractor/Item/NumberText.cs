@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TauCode.Data.Text.Tests.TextDataExtractor.Item;
+﻿namespace TauCode.Data.Text.Tests.TextDataExtractor.Item;
 
 public class NumberText : IEquatable<NumberText>
 {
@@ -9,8 +7,12 @@ public class NumberText : IEquatable<NumberText>
     public static readonly NumberText Two = new NumberText("Two", 2);
     public static readonly NumberText Three = new NumberText("Three", 3);
 
+    /// <summary>
+    /// Deserialization ctor
+    /// </summary>
     public NumberText()
     {
+        this.Text = default!; // deserialized from JSON
     }
 
     public NumberText(string text, int number)
@@ -22,14 +24,14 @@ public class NumberText : IEquatable<NumberText>
     public string Text { get; set; }
     public int Number { get; set; }
 
-    public bool Equals(NumberText other)
+    public bool Equals(NumberText? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return Text == other.Text && Number == other.Number;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
@@ -54,6 +56,6 @@ public class NumberText : IEquatable<NumberText>
             }
         }
 
-        return null;
+        return null!;
     }
 }

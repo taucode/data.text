@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.SemanticVersionSupport;
 using TauCode.Data.Text.TextDataExtractors;
@@ -21,11 +18,11 @@ namespace TauCode.Data.Text
         public readonly int Major;
         public readonly int Minor;
         public readonly int Patch;
-        public readonly string PreRelease;
-        public readonly string BuildMetadata;
+        public readonly string? PreRelease;
+        public readonly string? BuildMetadata;
 
-        private List<SemanticVersionIdentifier> _preReleaseIdentifiers;
-        private List<SemanticVersionIdentifier> _buildMetadataIdentifiers;
+        private List<SemanticVersionIdentifier>? _preReleaseIdentifiers;
+        private List<SemanticVersionIdentifier>? _buildMetadataIdentifiers;
 
         #endregion
 
@@ -35,8 +32,8 @@ namespace TauCode.Data.Text
             int major,
             int minor,
             int patch,
-            string preRelease,
-            string buildMetadata)
+            string? preRelease,
+            string? buildMetadata)
         {
             this.Major = major;
             this.Minor = minor;
@@ -133,7 +130,7 @@ namespace TauCode.Data.Text
 
         public override string ToString() => this.ToString(true);
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is SemanticVersion other && Equals(other);
         }
@@ -152,7 +149,7 @@ namespace TauCode.Data.Text
 
         #region IEquatable<SemanticVersion> Members
 
-        public bool Equals(SemanticVersion other)
+        public bool Equals(SemanticVersion? other)
         {
             if (other == null)
             {
@@ -170,8 +167,13 @@ namespace TauCode.Data.Text
 
         #region IComparable<SemanticVersion2> Members
 
-        public int CompareTo(SemanticVersion other)
+        public int CompareTo(SemanticVersion? other)
         {
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
             var majorComparison = this.Major.CompareTo(other.Major);
             if (majorComparison != 0)
             {
@@ -233,7 +235,7 @@ namespace TauCode.Data.Text
 
         #region Operators
 
-        public static bool operator ==(SemanticVersion v1, SemanticVersion v2)
+        public static bool operator ==(SemanticVersion? v1, SemanticVersion? v2)
         {
             if (ReferenceEquals(v1, null))
             {
@@ -243,7 +245,7 @@ namespace TauCode.Data.Text
             return v1.Equals(v2);
         }
 
-        public static bool operator !=(SemanticVersion v1, SemanticVersion v2)
+        public static bool operator !=(SemanticVersion? v1, SemanticVersion? v2)
         {
             return !(v1 == v2);
         }
@@ -281,12 +283,12 @@ namespace TauCode.Data.Text
                 throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
             }
 
-            return value;
+            return value!;
         }
 
         public static bool TryParse(
             ReadOnlySpan<char> input,
-            out SemanticVersion semanticVersion)
+            out SemanticVersion? semanticVersion)
         {
             var result = Extractor.TryExtract(input, out semanticVersion);
             return result.ErrorCode == null;

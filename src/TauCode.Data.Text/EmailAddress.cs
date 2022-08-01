@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 
@@ -18,8 +17,8 @@ namespace TauCode.Data.Text
         public readonly string LocalPart;
         public readonly HostName Domain;
 
-        private string _value;
-        private bool _valueBuilt;
+        private string? _stringRepresentation;
+        private bool _stringRepresentationBuilt;
 
         #endregion
 
@@ -35,7 +34,7 @@ namespace TauCode.Data.Text
 
         #region Private
 
-        private string BuildValue()
+        private string? BuildValue()
         {
             if (this.Domain.Value == null) // domain is default(HostName), which should not happen, actually
             {
@@ -119,12 +118,12 @@ namespace TauCode.Data.Text
                 throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
             }
 
-            return value;
+            return value!;
         }
 
         public static bool TryParse(
             ReadOnlySpan<char> input,
-            out EmailAddress emailAddress)
+            out EmailAddress? emailAddress)
         {
             var result = Extractor.TryExtract(input, out emailAddress);
             return result.ErrorCode == null;
@@ -134,7 +133,7 @@ namespace TauCode.Data.Text
 
         #region IEquatable<EmailAddress> Members
 
-        public bool Equals(EmailAddress other)
+        public bool Equals(EmailAddress? other)
         {
             if (other == null)
             {
@@ -150,7 +149,7 @@ namespace TauCode.Data.Text
 
         #region Overridden
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is EmailAddress other && Equals(other);
         }
@@ -160,15 +159,15 @@ namespace TauCode.Data.Text
             return HashCode.Combine(this.LocalPart, this.Domain);
         }
 
-        public override string ToString()
+        public override string? ToString()
         {
-            if (!_valueBuilt)
+            if (!_stringRepresentationBuilt)
             {
-                _value = this.BuildValue();
-                _valueBuilt = true;
+                _stringRepresentation = this.BuildValue();
+                _stringRepresentationBuilt = true;
             }
 
-            return _value;
+            return _stringRepresentation;
         }
 
         #endregion

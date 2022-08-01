@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
+﻿namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
 {
     internal class LocalPartWhiteSpaceExtractor : SegmentExtractor
     {
@@ -25,7 +23,7 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
                 {
                     segment = default;
                     return new TextDataExtractionResult(
-                        context.EmailAddressExtractor.MaxConsumption.Value + 1 - start,
+                        context.EmailAddressExtractor.MaxConsumption!.Value + 1 - start,
                         TextDataExtractionErrorCodes.InputIsTooLong);
                 }
 
@@ -49,7 +47,7 @@ namespace TauCode.Data.Text.EmailAddressSupport.SegmentExtractors
                 {
                     segment = default;
                     return new TextDataExtractionResult(
-                        context.EmailAddressExtractor.MaxConsumption.Value + 1 - start,
+                        context.EmailAddressExtractor.MaxConsumption!.Value + 1 - start,
                         TextDataExtractionErrorCodes.InputIsTooLong);
                 }
             }

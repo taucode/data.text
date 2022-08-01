@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class IdentifierExtractor : TextDataExtractorBase<string>
     {
         public IdentifierExtractor(
-            Func<string, bool> reservedWordPredicate,
-            TerminatingDelegate terminator = null)
+            Func<string, bool>? reservedWordPredicate,
+            TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Identifier.DefaultMaxConsumption,
                 terminator)
@@ -14,9 +12,9 @@ namespace TauCode.Data.Text.TextDataExtractors
             this.ReservedWordPredicate = reservedWordPredicate;
         }
 
-        public Func<string, bool> ReservedWordPredicate { get; }
+        public Func<string, bool>? ReservedWordPredicate { get; }
 
-        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string value)
+        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string? value)
         {
             var pos = 0;
 

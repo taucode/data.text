@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class DecimalExtractor : TextDataExtractorBase<decimal>
     {
@@ -12,7 +9,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             DecimalChars = new HashSet<char>("+-0123456789.");
         }
 
-        public DecimalExtractor(TerminatingDelegate terminator = null)
+        public DecimalExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Decimal.DefaultMaxConsumption,
                 terminator)

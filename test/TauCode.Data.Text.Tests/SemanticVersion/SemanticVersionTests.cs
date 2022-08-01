@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Tests.TextDataExtractor.SemanticVersion;
 using TauCode.Data.Text.TextDataExtractors;
 using TauCode.Extensions;
@@ -49,7 +47,7 @@ public class SemanticVersionTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminatingPredicate =
+        TerminatingDelegate? terminatingPredicate =
             testDto.TestTerminatingChars != null
                 ? (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 : null;
@@ -66,7 +64,7 @@ public class SemanticVersionTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -93,8 +91,8 @@ public class SemanticVersionTests
             Assert.That(testDto.ExpectedResult.ErrorCode, Is.Null);
 
             // check test itself
-            Assert.That(value.ToDto(), Is.EqualTo(testDto.ExpectedValue));
-            Assert.That(value.ToString(), Is.EqualTo(testDto.ExpectedValueString));
+            Assert.That(value!.ToDto(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToString(), Is.EqualTo(testDto.ExpectedValueString));
         }
     }
 

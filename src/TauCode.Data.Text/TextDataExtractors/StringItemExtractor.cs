@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class StringItemExtractor : TextDataExtractorBase<string>
     {
         public StringItemExtractor(
             IEnumerable<string> items,
             bool ignoreCase,
-            TerminatingDelegate terminator = null)
+            TerminatingDelegate? terminator = null)
             : base(
                 null,
                 terminator)
@@ -36,7 +32,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out string value)
+            out string? value)
         {
             var comparison = this.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
 

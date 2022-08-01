@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TauCode.Extensions;
+﻿using TauCode.Extensions;
 
 namespace TauCode.Data.Text.TextDataExtractors
 {
@@ -19,7 +17,7 @@ namespace TauCode.Data.Text.TextDataExtractors
             '*',
         };
 
-        public FilePathExtractor(TerminatingDelegate terminator = null)
+        public FilePathExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.FilePath.DefaultMaxConsumption,
                 terminator)
@@ -28,7 +26,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out string value)
+            out string? value)
         {
             value = default;
             var pos = 0;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class StringExtractor : TextDataExtractorBase<string>
     {
@@ -11,7 +9,7 @@ namespace TauCode.Data.Text.TextDataExtractors
         {
         }
 
-        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string value)
+        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string? value)
         {
             var pos = 0;
             value = default;

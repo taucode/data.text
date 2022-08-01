@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 using TauCode.Extensions;
@@ -17,7 +14,7 @@ public class ItemExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         // Act
         var extractor = new ItemExtractor<NumberText>(
@@ -39,7 +36,7 @@ public class ItemExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         var extractor = new ItemExtractor<NumberText>(
             new[] { "a", "b" },
@@ -61,7 +58,7 @@ public class ItemExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         var extractor = new ItemExtractor<NumberText>(
             new[] { "a", "b" },
@@ -82,11 +79,11 @@ public class ItemExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         // Act
         var ex = Assert.Throws<ArgumentNullException>(() => new ItemExtractor<NumberText>(
-            null,
+            null!,
             true,
             parser,
             terminator));
@@ -101,7 +98,7 @@ public class ItemExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         // Act
         var ex = Assert.Throws<ArgumentException>(() => new ItemExtractor<NumberText>(
@@ -121,7 +118,7 @@ public class ItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -144,7 +141,7 @@ public class ItemExtractorTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -180,7 +177,7 @@ public class ItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -230,7 +227,7 @@ public class ItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -270,7 +267,7 @@ public class ItemExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -331,7 +328,7 @@ public class ItemExtractorTests
 
     public static IList<IEnumerable<string>> GetBadStringCollections()
     {
-        return new List<List<string>>
+        return new List<List<string?>>
             {
                 new(),
                 new(new[] { "one", "" }),

@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 using TauCode.Extensions;
@@ -73,7 +70,7 @@ public class UriExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -91,7 +88,7 @@ public class UriExtractorTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -117,7 +114,7 @@ public class UriExtractorTests
             Assert.That(testDto.ExpectedResult.ErrorCode, Is.Null);
 
             // check test itself
-            Assert.That(value.ToString(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToString(), Is.EqualTo(testDto.ExpectedValue));
         }
     }
 
@@ -127,7 +124,7 @@ public class UriExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -162,7 +159,7 @@ public class UriExtractorTests
             var consumed = extractor.Extract(input, out var value);
 
             Assert.That(consumed, Is.EqualTo(testDto.ExpectedResult.CharsConsumed));
-            Assert.That(value.ToString(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToString(), Is.EqualTo(testDto.ExpectedValue));
         }
     }
 
@@ -172,7 +169,7 @@ public class UriExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -207,7 +204,7 @@ public class UriExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -239,7 +236,7 @@ public class UriExtractorTests
         {
             // success
             var value = extractor.Parse(input);
-            Assert.That(value.ToString(), Is.EqualTo(testDto.ExpectedValue));
+            Assert.That(value!.ToString(), Is.EqualTo(testDto.ExpectedValue));
         }
 
         Assert.That(extractor.Terminator, Is.SameAs(terminatorBeforeParse));

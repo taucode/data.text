@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace TauCode.Data.Text
 {
@@ -19,7 +18,7 @@ namespace TauCode.Data.Text
             return Value == other.Value && Delimiter == other.Delimiter;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is SqlIdentifier other && Equals(other);
         }
@@ -29,7 +28,7 @@ namespace TauCode.Data.Text
             return HashCode.Combine(Value, (int)Delimiter);
         }
 
-        public override string ToString()
+        public override string? ToString()
         {
             if (this.Value == null)
             {

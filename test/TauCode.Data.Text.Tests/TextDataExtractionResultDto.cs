@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace TauCode.Data.Text.Tests;
 
@@ -8,14 +7,14 @@ public class TextDataExtractionResultDto : IEquatable<TextDataExtractionResultDt
     public int CharsConsumed { get; set; }
     public int? ErrorCode { get; set; }
 
-    public bool Equals(TextDataExtractionResultDto other)
+    public bool Equals(TextDataExtractionResultDto? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
         return CharsConsumed == other.CharsConsumed && ErrorCode == other.ErrorCode;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;

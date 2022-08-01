@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class TermExtractor : TextDataExtractorBase<string>
     {
         public TermExtractor(
-            TerminatingDelegate terminator = null)
+            TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Term.DefaultMaxConsumption,
                 terminator)
@@ -14,7 +12,7 @@ namespace TauCode.Data.Text.TextDataExtractors
 
         protected override TextDataExtractionResult TryExtractImpl(
             ReadOnlySpan<char> input,
-            out string value)
+            out string? value)
         {
             var pos = 0;
             char? prevChar = null;

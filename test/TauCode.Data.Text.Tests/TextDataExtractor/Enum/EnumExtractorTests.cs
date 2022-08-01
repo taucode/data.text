@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.Tests.TextDataExtractor.Item;
 using TauCode.Data.Text.TextDataExtractors;
@@ -18,7 +15,7 @@ public class EnumExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         // Act
         var extractor = new EnumExtractor<Color>(
@@ -36,7 +33,7 @@ public class EnumExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         var extractor = new EnumExtractor<Color>(
             true,
@@ -56,7 +53,7 @@ public class EnumExtractorTests
     {
         // Arrange
         Func<string, bool, NumberText> parser = (text, ignoreCase) => new NumberText(text, 11);
-        TerminatingDelegate terminator = (input, index) => input[0] == ' ';
+        TerminatingDelegate? terminator = (input, index) => input[0] == ' ';
 
         var extractor = new EnumExtractor<Color>(
             true,
@@ -75,7 +72,7 @@ public class EnumExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -96,7 +93,7 @@ public class EnumExtractorTests
 
         // Act
         var result = extractor.TryExtract(input, out var value);
-        string errorMessage = null;
+        string? errorMessage = null;
         if (result.ErrorCode.HasValue)
         {
             errorMessage = extractor.GetErrorMessage(result.ErrorCode.Value);
@@ -132,7 +129,7 @@ public class EnumExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -179,7 +176,7 @@ public class EnumExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :
@@ -216,7 +213,7 @@ public class EnumExtractorTests
     {
         // Arrange
         var input = testDto.TestInput;
-        TerminatingDelegate terminator =
+        TerminatingDelegate? terminator =
             testDto.TestTerminatingChars != null ?
                 (span, position) => span[position].IsIn(testDto.TestTerminatingChars.ToArray())
                 :

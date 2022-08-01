@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TauCode.Data.Text.EmojiSupport
+﻿namespace TauCode.Data.Text.EmojiSupport
 {
     internal class EmojiNode
     {
@@ -74,7 +71,7 @@ namespace TauCode.Data.Text.EmojiSupport
                     else
                     {
                         emoji = lastEmoji.Value;
-                        return new TextDataExtractionResult(lastSuccessfulOffset.Value + 1, null);
+                        return new TextDataExtractionResult(lastSuccessfulOffset!.Value + 1, null);
                     }
                 }
 
@@ -99,7 +96,7 @@ namespace TauCode.Data.Text.EmojiSupport
                         else
                         {
                             emoji = lastEmoji.Value;
-                            return new TextDataExtractionResult(lastSuccessfulOffset.Value + 1, null);
+                            return new TextDataExtractionResult(lastSuccessfulOffset!.Value + 1, null);
                         }
                     }
                 }
@@ -123,7 +120,7 @@ namespace TauCode.Data.Text.EmojiSupport
                         else
                         {
                             emoji = lastEmoji.Value;
-                            return new TextDataExtractionResult(lastSuccessfulOffset.Value + 1, null);
+                            return new TextDataExtractionResult(lastSuccessfulOffset!.Value + 1, null);
                         }
                     }
 

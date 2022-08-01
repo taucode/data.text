@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace TauCode.Data.Text.TextDataExtractors
 {
@@ -14,7 +12,7 @@ namespace TauCode.Data.Text.TextDataExtractors
         }
 
         public TimeSpanExtractor(
-            TerminatingDelegate terminator = null)
+            TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.TimeSpan.DefaultMaxConsumption,
                 terminator)

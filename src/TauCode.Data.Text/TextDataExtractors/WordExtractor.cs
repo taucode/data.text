@@ -1,17 +1,15 @@
-﻿using System;
-
-namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors
 {
     public class WordExtractor : TextDataExtractorBase<string>
     {
-        public WordExtractor(TerminatingDelegate terminator = null)
+        public WordExtractor(TerminatingDelegate? terminator = null)
             : base(
                 Helper.Constants.Word.DefaultMaxConsumption,
                 terminator)
         {
         }
 
-        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string value)
+        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string? value)
         {
             var pos = 0;
             char? prevChar = null;
