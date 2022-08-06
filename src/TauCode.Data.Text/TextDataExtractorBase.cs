@@ -1,151 +1,150 @@
 ﻿using TauCode.Data.Text.Exceptions;
 
-namespace TauCode.Data.Text
+namespace TauCode.Data.Text;
+
+public abstract class TextDataExtractorBase<T> : ITextDataExtractor<T>
 {
-    public abstract class TextDataExtractorBase<T> : ITextDataExtractor<T>
+    #region Fields
+
+    private int? _maxConsumption;
+    private TerminatingDelegate? _terminator;
+
+    #endregion
+
+    #region ctor
+
+    protected TextDataExtractorBase(
+        int? maxConsumption,
+        TerminatingDelegate? terminator)
     {
-        #region Fields
+        _maxConsumption = CheckMaxConsumption(maxConsumption);
+        _terminator = terminator;
+    }
 
-        private int? _maxConsumption;
-        private TerminatingDelegate? _terminator;
+    #endregion
 
-        #endregion
+    #region Abstract
 
-        #region ctor
+    protected abstract TextDataExtractionResult TryExtractImpl(
+        ReadOnlySpan<char> input,
+        out T? value);
 
-        protected TextDataExtractorBase(
-            int? maxConsumption,
-            TerminatingDelegate? terminator)
+    #endregion
+
+    #region Protected
+
+    protected internal bool IsOutOfCapacity(int consumedCharCount)
+    {
+        if (this.MaxConsumption.HasValue)
         {
-            _maxConsumption = CheckMaxConsumption(maxConsumption);
-            _terminator = terminator;
+            return consumedCharCount > this.MaxConsumption.Value;
         }
 
-        #endregion
+        return false;
+    }
 
-        #region Abstract
+    #endregion
 
-        protected abstract TextDataExtractionResult TryExtractImpl(
-            ReadOnlySpan<char> input,
-            out T? value);
+    #region Private
 
-        #endregion
-
-        #region Protected
-
-        protected internal bool IsOutOfCapacity(int consumedCharCount)
+    private static int? CheckMaxConsumption(int? maxConsumption)
+    {
+        if (maxConsumption < 1)
         {
-            if (this.MaxConsumption.HasValue)
-            {
-                return consumedCharCount > this.MaxConsumption.Value;
-            }
-
-            return false;
+            throw new ArgumentOutOfRangeException(nameof(maxConsumption));
         }
 
-        #endregion
+        return maxConsumption;
+    }
 
-        #region Private
+    #endregion
 
-        private static int? CheckMaxConsumption(int? maxConsumption)
+    #region ITextDataExtractor<T> Members
+
+    public virtual TerminatingDelegate? Terminator
+    {
+        get => _terminator;
+        set => _terminator = value;
+    }
+
+    public virtual int? MaxConsumption
+    {
+        get => _maxConsumption;
+        set => _maxConsumption = CheckMaxConsumption(value);
+    }
+
+    public TextDataExtractionResult TryExtract(
+        ReadOnlySpan<char> input,
+        out T? value)
+    {
+        if (input.Length == 0)
         {
-            if (maxConsumption < 1)
-            {
-                throw new ArgumentOutOfRangeException(nameof(maxConsumption));
-            }
-
-            return maxConsumption;
+            value = default;
+            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
         }
 
-        #endregion
+        var result = this.TryExtractImpl(input, out value);
+        return result;
+    }
 
-        #region ITextDataExtractor<T> Members
-
-        public virtual TerminatingDelegate? Terminator
+    public virtual int Extract(ReadOnlySpan<char> input, out T? value)
+    {
+        var result = this.TryExtract(input, out value);
+        if (result.ErrorCode == null)
         {
-            get => _terminator;
-            set => _terminator = value;
+            return result.CharsConsumed;
         }
 
-        public virtual int? MaxConsumption
-        {
-            get => _maxConsumption;
-            set => _maxConsumption = CheckMaxConsumption(value);
-        }
+        var message = this.GetErrorMessage(result.ErrorCode.Value);
 
-        public TextDataExtractionResult TryExtract(
-            ReadOnlySpan<char> input,
-            out T? value)
-        {
-            if (input.Length == 0)
-            {
-                value = default;
-                return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
-            }
+        throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
+    }
 
-            var result = this.TryExtractImpl(input, out value);
-            return result;
-        }
+    public virtual bool TryParse(ReadOnlySpan<char> input, out T? value)
+    {
+        var savedTerminator = this.Terminator;
 
-        public virtual int Extract(ReadOnlySpan<char> input, out T? value)
+        try
         {
+            this.Terminator = (inputArg, indexArg) => false;
             var result = this.TryExtract(input, out value);
+            return result.ErrorCode == null;
+        }
+        finally
+        {
+            this.Terminator = savedTerminator;
+        }
+    }
+
+    public virtual T? Parse(ReadOnlySpan<char> input)
+    {
+        var savedTerminator = this.Terminator;
+
+        try
+        {
+            this.Terminator = (inputArg, indexArg) => false;
+            var result = this.TryExtract(input, out var value);
+
             if (result.ErrorCode == null)
             {
-                return result.CharsConsumed;
+                return value;
             }
 
-            var message = this.GetErrorMessage(result.ErrorCode.Value);
+            var message = Helper.GetErrorMessage(result.ErrorCode.Value);
 
             throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
         }
-
-        public virtual bool TryParse(ReadOnlySpan<char> input, out T? value)
+        finally
         {
-            var savedTerminator = this.Terminator;
-
-            try
-            {
-                this.Terminator = (inputArg, indexArg) => false;
-                var result = this.TryExtract(input, out value);
-                return result.ErrorCode == null;
-            }
-            finally
-            {
-                this.Terminator = savedTerminator;
-            }
+            this.Terminator = savedTerminator;
         }
 
-        public virtual T? Parse(ReadOnlySpan<char> input)
-        {
-            var savedTerminator = this.Terminator;
-
-            try
-            {
-                this.Terminator = (inputArg, indexArg) => false;
-                var result = this.TryExtract(input, out var value);
-
-                if (result.ErrorCode == null)
-                {
-                    return value;
-                }
-
-                var message = Helper.GetErrorMessage(result.ErrorCode.Value);
-
-                throw new TextDataExtractionException(message, result.ErrorCode.Value, result.CharsConsumed);
-            }
-            finally
-            {
-                this.Terminator = savedTerminator;
-            }
-
-        }
-
-        public virtual string GetErrorMessage(int errorCode)
-        {
-            return Helper.GetErrorMessage(errorCode);
-        }
-
-        #endregion
     }
+
+    public virtual string GetErrorMessage(int errorCode)
+    {
+        return Helper.GetErrorMessage(errorCode);
+    }
+
+    #endregion
 }

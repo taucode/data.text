@@ -1,8 +1,7 @@
-﻿namespace TauCode.Data.Text.SemanticVersionSupport
+﻿namespace TauCode.Data.Text.SemanticVersionSupport;
+
+internal enum SemanticVersionIdentifierType : byte
 {
-    internal enum SemanticVersionIdentifierType : byte
-    {
-        Numeric = 1,
-        Text = 2,
-    }
+    Numeric = 1,
+    Text = 2,
 }

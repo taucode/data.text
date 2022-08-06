@@ -1,332 +1,331 @@
-﻿namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors;
+
+public class SqlIdentifierExtractor : TextDataExtractorBase<SqlIdentifier>
 {
-    public class SqlIdentifierExtractor : TextDataExtractorBase<SqlIdentifier>
+    private SqlIdentifierDelimiter _delimiter;
+
+    public SqlIdentifierExtractor(
+        Func<string, bool>? reservedWordPredicate,
+        TerminatingDelegate? terminator = null)
+        : base(
+            Helper.Constants.SqlIdentifier.DefaultMaxConsumption,
+            terminator)
     {
-        private SqlIdentifierDelimiter _delimiter;
+        this.ReservedWordPredicate = reservedWordPredicate;
+        _delimiter = SqlIdentifierDelimiter.None;
+    }
 
-        public SqlIdentifierExtractor(
-            Func<string, bool>? reservedWordPredicate,
-            TerminatingDelegate? terminator = null)
-            : base(
-                Helper.Constants.SqlIdentifier.DefaultMaxConsumption,
-                terminator)
+    public Func<string, bool>? ReservedWordPredicate { get; }
+
+    public SqlIdentifierDelimiter Delimiter
+    {
+        get => _delimiter;
+        set
         {
-            this.ReservedWordPredicate = reservedWordPredicate;
-            _delimiter = SqlIdentifierDelimiter.None;
-        }
+            var valueIsOk =
+                ((int)value & 0xf) != 0;
 
-        public Func<string, bool>? ReservedWordPredicate { get; }
-
-        public SqlIdentifierDelimiter Delimiter
-        {
-            get => _delimiter;
-            set
+            if (!valueIsOk)
             {
-                var valueIsOk =
-                    ((int)value & 0xf) != 0;
-
-                if (!valueIsOk)
-                {
-                    throw new ArgumentException(
-                        "Delimiter cannot be 0 and must be a combination of valid enum values.",
-                        nameof(value));
-                }
-
-                _delimiter = value;
+                throw new ArgumentException(
+                    "Delimiter cannot be 0 and must be a combination of valid enum values.",
+                    nameof(value));
             }
+
+            _delimiter = value;
         }
+    }
 
-        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out SqlIdentifier value)
+    protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out SqlIdentifier value)
+    {
+        var pos = 0;
+        value = default;
+
+        var actualDelimiter = SqlIdentifierDelimiter.None;
+        char? closingDelimiterChar = null;
+        var valueStartPos = 0;
+        char? prevChar = null;
+
+        while (true)
         {
-            var pos = 0;
-            value = default;
-
-            var actualDelimiter = SqlIdentifierDelimiter.None;
-            char? closingDelimiterChar = null;
-            var valueStartPos = 0;
-            char? prevChar = null;
-
-            while (true)
+            if (pos == input.Length)
             {
-                if (pos == input.Length)
+                if (closingDelimiterChar.HasValue)
                 {
-                    if (closingDelimiterChar.HasValue)
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedEnd);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            var c = input[pos];
+
+            if (pos == 0)
+            {
+                #region pos == 0
+
+                // 0th char can be opening delimiter or 'ascii identifier' beginning
+                if (c == '"')
+                {
+                    if ((this.Delimiter & SqlIdentifierDelimiter.DoubleQuotes) != 0)
                     {
-                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedEnd);
+                        actualDelimiter = SqlIdentifierDelimiter.DoubleQuotes;
+                        valueStartPos = 1;
+                        closingDelimiterChar = '"';
                     }
                     else
                     {
-                        break;
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                    }
+                }
+                else if (c == '[')
+                {
+                    if ((this.Delimiter & SqlIdentifierDelimiter.Brackets) != 0)
+                    {
+                        actualDelimiter = SqlIdentifierDelimiter.Brackets;
+                        valueStartPos = 1;
+                        closingDelimiterChar = ']';
+                    }
+                    else
+                    {
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                    }
+                }
+                else if (c == '`')
+                {
+                    if ((this.Delimiter & SqlIdentifierDelimiter.BackQuotes) != 0)
+                    {
+                        actualDelimiter = SqlIdentifierDelimiter.BackQuotes;
+                        valueStartPos = 1;
+                        closingDelimiterChar = '`';
+                    }
+                    else
+                    {
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                    }
+                }
+                else if (c.IsLatinLetterInternal() || c == '_')
+                {
+                    // got ascii identifier
+                    if ((this.Delimiter & SqlIdentifierDelimiter.None) != 0)
+                    {
+                        actualDelimiter = SqlIdentifierDelimiter.None;
+                    }
+                    else
+                    {
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                    }
+                }
+                else
+                {
+                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                }
+
+                #endregion
+            }
+            else if (pos == 1)
+            {
+                #region pos == 1
+
+                if (actualDelimiter == SqlIdentifierDelimiter.None)
+                {
+                    // no delimiter
+                    if (
+                        c.IsLatinLetterInternal() ||
+                        c == '_' ||
+                        c.IsDecimalDigit() ||
+                        false)
+                    {
+                        // ok
+                    }
+                    else
+                    {
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                    }
+                }
+                else
+                {
+                    if (IsEnclosedIdentifierAcceptableStartingChar(c))
+                    {
+                        // ok.
+                    }
+                    else
+                    {
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
                 }
 
-                var c = input[pos];
+                #endregion
+            }
+            else
+            {
+                #region pos > 1
 
-                if (pos == 0)
+                if (actualDelimiter == SqlIdentifierDelimiter.None)
                 {
-                    #region pos == 0
+                    #region no delimiter
 
-                    // 0th char can be opening delimiter or 'ascii identifier' beginning
-                    if (c == '"')
+                    if (
+                        c.IsLatinLetterInternal() ||
+                        c == '_' ||
+                        c.IsDecimalDigit() ||
+                        false)
                     {
-                        if ((this.Delimiter & SqlIdentifierDelimiter.DoubleQuotes) != 0)
-                        {
-                            actualDelimiter = SqlIdentifierDelimiter.DoubleQuotes;
-                            valueStartPos = 1;
-                            closingDelimiterChar = '"';
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
+                        // ok
                     }
-                    else if (c == '[')
+                    else if (this.IsTermination(input, pos))
                     {
-                        if ((this.Delimiter & SqlIdentifierDelimiter.Brackets) != 0)
-                        {
-                            actualDelimiter = SqlIdentifierDelimiter.Brackets;
-                            valueStartPos = 1;
-                            closingDelimiterChar = ']';
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
-                    }
-                    else if (c == '`')
-                    {
-                        if ((this.Delimiter & SqlIdentifierDelimiter.BackQuotes) != 0)
-                        {
-                            actualDelimiter = SqlIdentifierDelimiter.BackQuotes;
-                            valueStartPos = 1;
-                            closingDelimiterChar = '`';
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
-                    }
-                    else if (c.IsLatinLetterInternal() || c == '_')
-                    {
-                        // got ascii identifier
-                        if ((this.Delimiter & SqlIdentifierDelimiter.None) != 0)
-                        {
-                            actualDelimiter = SqlIdentifierDelimiter.None;
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
+                        break;
                     }
                     else
                     {
                         return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
 
-                    #endregion
-                }
-                else if (pos == 1)
-                {
-                    #region pos == 1
-
-                    if (actualDelimiter == SqlIdentifierDelimiter.None)
-                    {
-                        // no delimiter
-                        if (
-                            c.IsLatinLetterInternal() ||
-                            c == '_' ||
-                            c.IsDecimalDigit() ||
-                            false)
-                        {
-                            // ok
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
-                    }
-                    else
-                    {
-                        if (IsEnclosedIdentifierAcceptableStartingChar(c))
-                        {
-                            // ok.
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
-                    }
 
                     #endregion
+
                 }
                 else
                 {
-                    #region pos > 1
+                    #region have delimiter
 
-                    if (actualDelimiter == SqlIdentifierDelimiter.None)
+                    if (this.IsEnclosedIdentifierAcceptableInnerChar(c))
                     {
-                        #region no delimiter
-
-                        if (
-                            c.IsLatinLetterInternal() ||
-                            c == '_' ||
-                            c.IsDecimalDigit() ||
-                            false)
-                        {
-                            // ok
-                        }
-                        else if (this.IsTermination(input, pos))
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
-
-
-                        #endregion
-
+                        // ok
                     }
-                    else
+                    else if (c == closingDelimiterChar)
                     {
-                        #region have delimiter
+                        // got identifier delimiter
 
-                        if (this.IsEnclosedIdentifierAcceptableInnerChar(c))
+                        // check prev char
+                        if (this.IsEnclosedIdentifierAcceptableEndingChar(prevChar))
                         {
-                            // ok
-                        }
-                        else if (c == closingDelimiterChar)
-                        {
-                            // got identifier delimiter
+                            pos++; // advance position, skip ']' or other closing delimiter
 
-                            // check prev char
-                            if (this.IsEnclosedIdentifierAcceptableEndingChar(prevChar))
+                            if (this.IsOutOfCapacity(pos))
                             {
-                                pos++; // advance position, skip ']' or other closing delimiter
+                                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                            }
 
-                                if (this.IsOutOfCapacity(pos))
+                            if (pos == input.Length)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                // we need to meet a terminator here.
+                                if (this.IsTermination(input, pos))
                                 {
-                                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
-                                }
-
-                                if (pos == input.Length)
-                                {
+                                    // ok, got terminator, let's get out of here
                                     break;
                                 }
                                 else
                                 {
-                                    // we need to meet a terminator here.
-                                    if (this.IsTermination(input, pos))
-                                    {
-                                        // ok, got terminator, let's get out of here
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        // failed to terminate extraction, the char was incorrect.
-                                        return new TextDataExtractionResult(
-                                            pos,
-                                            TextDataExtractionErrorCodes.UnexpectedCharacter);
-                                    }
+                                    // failed to terminate extraction, the char was incorrect.
+                                    return new TextDataExtractionResult(
+                                        pos,
+                                        TextDataExtractionErrorCodes.UnexpectedCharacter);
                                 }
-                            }
-                            else
-                            {
-                                // got delimiter, but it is not wanted here.
-                                return new TextDataExtractionResult(
-                                    pos,
-                                    TextDataExtractionErrorCodes.UnexpectedCharacter);
                             }
                         }
                         else
                         {
+                            // got delimiter, but it is not wanted here.
                             return new TextDataExtractionResult(
                                 pos,
                                 TextDataExtractionErrorCodes.UnexpectedCharacter);
                         }
-
-                        #endregion
+                    }
+                    else
+                    {
+                        return new TextDataExtractionResult(
+                            pos,
+                            TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
 
                     #endregion
                 }
 
-                prevChar = c;
-                pos++;
-
-                if (this.IsOutOfCapacity(pos))
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
-                }
+                #endregion
             }
 
-            string sqlIdentifierValue;
-            if (valueStartPos == 0)
+            prevChar = c;
+            pos++;
+
+            if (this.IsOutOfCapacity(pos))
             {
-                sqlIdentifierValue = input[..pos].ToString();
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+            }
+        }
 
-                // no delimiter => check if not res. word.
+        string sqlIdentifierValue;
+        if (valueStartPos == 0)
+        {
+            sqlIdentifierValue = input[..pos].ToString();
 
-                var isReservedWord = this.ReservedWordPredicate?.Invoke(sqlIdentifierValue) ?? false;
-                if (isReservedWord)
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.ValueIsReservedWord);
-                }
+            // no delimiter => check if not res. word.
+
+            var isReservedWord = this.ReservedWordPredicate?.Invoke(sqlIdentifierValue) ?? false;
+            if (isReservedWord)
+            {
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.ValueIsReservedWord);
+            }
+        }
+        else
+        {
+            if (pos < 3) // [x] is the minimal delimited identifier
+            {
+                // should not happen, actually.
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
             }
             else
             {
-                if (pos < 3) // [x] is the minimal delimited identifier
-                {
-                    // should not happen, actually.
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                }
-                else
-                {
-                    sqlIdentifierValue = input[1..(pos - 1)].ToString();
-                }
+                sqlIdentifierValue = input[1..(pos - 1)].ToString();
             }
-
-            value = new SqlIdentifier(sqlIdentifierValue, actualDelimiter);
-            return new TextDataExtractionResult(pos, null);
         }
 
-        protected virtual bool IsEnclosedIdentifierAcceptableStartingChar(char c)
+        value = new SqlIdentifier(sqlIdentifierValue, actualDelimiter);
+        return new TextDataExtractionResult(pos, null);
+    }
+
+    protected virtual bool IsEnclosedIdentifierAcceptableStartingChar(char c)
+    {
+        var result =
+            c == '_' ||
+            char.IsLetter(c) ||
+            false;
+
+        return result;
+    }
+
+    protected virtual bool IsEnclosedIdentifierAcceptableInnerChar(char c)
+    {
+        var result =
+            c == '_' ||
+            c == ' ' ||
+            char.IsLetter(c) ||
+            char.IsDigit(c) ||
+            false;
+
+        return result;
+    }
+
+    protected virtual bool IsEnclosedIdentifierAcceptableEndingChar(char? c)
+    {
+        if (c == null)
         {
-            var result =
-                c == '_' ||
-                char.IsLetter(c) ||
-                false;
-
-            return result;
+            return false;
         }
 
-        protected virtual bool IsEnclosedIdentifierAcceptableInnerChar(char c)
-        {
-            var result =
-                c == '_' ||
-                c == ' ' ||
-                char.IsLetter(c) ||
-                char.IsDigit(c) ||
-                false;
+        var result =
+            c == '_' ||
+            char.IsLetter(c.Value) ||
+            c.Value.IsDecimalDigit() ||
+            false;
 
-            return result;
-        }
-
-        protected virtual bool IsEnclosedIdentifierAcceptableEndingChar(char? c)
-        {
-            if (c == null)
-            {
-                return false;
-            }
-
-            var result =
-                c == '_' ||
-                char.IsLetter(c.Value) ||
-                c.Value.IsDecimalDigit() ||
-                false;
-
-            return result;
-        }
+        return result;
     }
 }

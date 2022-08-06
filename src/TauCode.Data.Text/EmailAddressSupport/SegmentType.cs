@@ -1,20 +1,19 @@
-﻿namespace TauCode.Data.Text.EmailAddressSupport
+﻿namespace TauCode.Data.Text.EmailAddressSupport;
+
+internal enum SegmentType : byte
 {
-    internal enum SegmentType : byte
-    {
-        Period = 1,
-        Comment,
+    Period = 1,
+    Comment,
 
-        LocalPartSpace,
-        LocalPartFoldingWhiteSpace,
-        LocalPartWord,
-        LocalPartQuotedString,
+    LocalPartSpace,
+    LocalPartFoldingWhiteSpace,
+    LocalPartWord,
+    LocalPartQuotedString,
 
-        At, // '@' symbol
+    At, // '@' symbol
 
-        DomainLabel, // part of sub-domain. e.g. in 'mail.google.com' labels are: 'mail', 'google', 'com'.
-        DomainIPAddress,
+    DomainLabel, // part of sub-domain. e.g. in 'mail.google.com' labels are: 'mail', 'google', 'com'.
+    DomainIPAddress,
 
-        Termination,
-    }
+    Termination,
 }

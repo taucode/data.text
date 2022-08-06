@@ -1,134 +1,133 @@
 ﻿using TauCode.Data.Text.Exceptions;
 using TauCode.Data.Text.TextDataExtractors;
 
-namespace TauCode.Data.Text.EmailAddressSupport
+namespace TauCode.Data.Text.EmailAddressSupport;
+
+internal abstract class SegmentExtractor
 {
-    internal abstract class SegmentExtractor
+    private static readonly HashSet<char> ValidFwsSpaces = new HashSet<char>(new[] { ' ', (char)160 });
+
+    internal abstract bool Accepts(ReadOnlySpan<char> input, EmailAddressExtractionContext context);
+
+    internal TextDataExtractionResult Extract(
+        ReadOnlySpan<char> input,
+        EmailAddressExtractionContext context,
+        out Segment? segment)
     {
-        private static readonly HashSet<char> ValidFwsSpaces = new HashSet<char>(new[] { ' ', (char)160 });
-
-        internal abstract bool Accepts(ReadOnlySpan<char> input, EmailAddressExtractionContext context);
-
-        internal TextDataExtractionResult Extract(
-            ReadOnlySpan<char> input,
-            EmailAddressExtractionContext context,
-            out Segment? segment)
+        if (context.Position > (context.EmailAddressExtractor.MaxConsumption ?? int.MaxValue) || context.Position < 0)
         {
-            if (context.Position > (context.EmailAddressExtractor.MaxConsumption ?? int.MaxValue) || context.Position < 0)
-            {
-                throw new TextDataExtractionException(
-                    "Context position is out of range. See inner exception.",
-                    TextDataExtractionErrorCodes.InternalError,
-                    context.Position);
-            }
-
-            var result = this.ExtractImpl(input, context, out segment);
-            return result;
+            throw new TextDataExtractionException(
+                "Context position is out of range. See inner exception.",
+                TextDataExtractionErrorCodes.InternalError,
+                context.Position);
         }
 
-        protected abstract TextDataExtractionResult ExtractImpl(
-            ReadOnlySpan<char> input,
-            EmailAddressExtractionContext context,
-            out Segment? segment);
+        var result = this.ExtractImpl(input, context, out segment);
+        return result;
+    }
 
-        protected static TextDataExtractionResult TrySkipEmoji(
-            ReadOnlySpan<char> emojiSpan)
+    protected abstract TextDataExtractionResult ExtractImpl(
+        ReadOnlySpan<char> input,
+        EmailAddressExtractionContext context,
+        out Segment? segment);
+
+    protected static TextDataExtractionResult TrySkipEmoji(
+        ReadOnlySpan<char> emojiSpan)
+    {
+        var emojiResult = EmojiExtractor.Instance.TryExtract(emojiSpan, out var emoji);
+        var c = emojiSpan[0];
+
+        switch (emojiResult.ErrorCode)
         {
-            var emojiResult = EmojiExtractor.Instance.TryExtract(emojiSpan, out var emoji);
-            var c = emojiSpan[0];
+            case null:
+                return new TextDataExtractionResult(emojiResult.CharsConsumed, null);
 
-            switch (emojiResult.ErrorCode)
-            {
-                case null:
-                    return new TextDataExtractionResult(emojiResult.CharsConsumed, null);
+            case TextDataExtractionErrorCodes.NonEmojiCharacter:
+                switch (emojiResult.CharsConsumed)
+                {
+                    // 'case 0:' is impossible since this method callers should check that 0th char of the span is emoji start.
 
-                case TextDataExtractionErrorCodes.NonEmojiCharacter:
-                    switch (emojiResult.CharsConsumed)
-                    {
-                        // 'case 0:' is impossible since this method callers should check that 0th char of the span is emoji start.
+                    case 1:
+                        if (
+                            c.IsDecimalDigit() ||
+                            EmailAddressExtractor.AllowedSymbols.Contains(c) ||
+                            false)
+                        {
+                            // something like #, *, 0..9
+                            return new TextDataExtractionResult(1, null);
 
-                        case 1:
-                            if (
-                                c.IsDecimalDigit() ||
-                                EmailAddressExtractor.AllowedSymbols.Contains(c) ||
-                                false)
-                            {
-                                // something like #, *, 0..9
-                                return new TextDataExtractionResult(1, null);
-
-                            }
-                            else
-                            {
-                                return emojiResult;
-                            }
-
-                        default:
+                        }
+                        else
+                        {
                             return emojiResult;
-                    }
+                        }
 
-                case TextDataExtractionErrorCodes.UnexpectedEnd:
-                    return emojiResult;
+                    default:
+                        return emojiResult;
+                }
 
-                default:
-                    // should never happen
-                    return new TextDataExtractionResult(
-                        emojiResult.CharsConsumed,
-                        TextDataExtractionErrorCodes.InternalError);
+            case TextDataExtractionErrorCodes.UnexpectedEnd:
+                return emojiResult;
+
+            default:
+                // should never happen
+                return new TextDataExtractionResult(
+                    emojiResult.CharsConsumed,
+                    TextDataExtractionErrorCodes.InternalError);
+        }
+    }
+
+    protected static TextDataExtractionResult TrySkipFoldingWhiteSpace(
+        ReadOnlySpan<char> input,
+        int position,
+        int? maxConsumption)
+    {
+        var length = input.Length;
+        var start = position;
+        var pos = start + 1;  // skip '\r' since we've got here
+
+        for (var i = 1; i < Helper.Constants.EmailAddress.FoldingWhiteSpaceLength; i++) // 'i = 1' because we skipped '\r' since we've got here
+        {
+            pos = start + i;
+
+            if (pos > maxConsumption)
+            {
+                return new TextDataExtractionResult(
+                    pos - start,
+                    TextDataExtractionErrorCodes.InputIsTooLong);
+            }
+
+            if (pos == length)
+            {
+                // unclosed fws
+                return new TextDataExtractionResult(pos - start, TextDataExtractionErrorCodes.UnexpectedEnd);
+            }
+
+            var c = input[pos];
+
+            var fwsOk = IsValidFwsChar(c, i);
+            if (!fwsOk)
+            {
+                return new TextDataExtractionResult(
+                    pos - start,
+                    TextDataExtractionErrorCodes.UnexpectedCharacter);
             }
         }
 
-        protected static TextDataExtractionResult TrySkipFoldingWhiteSpace(
-            ReadOnlySpan<char> input,
-            int position,
-            int? maxConsumption)
+        var consumed = pos - start;
+        return new TextDataExtractionResult(consumed, null);
+    }
+
+    private static bool IsValidFwsChar(char c, int pos)
+    {
+        switch (pos)
         {
-            var length = input.Length;
-            var start = position;
-            var pos = start + 1;  // skip '\r' since we've got here
+            case 0: return c == '\r';
+            case 1: return c == '\n';
+            case 2: return ValidFwsSpaces.Contains(c);
 
-            for (var i = 1; i < Helper.Constants.EmailAddress.FoldingWhiteSpaceLength; i++) // 'i = 1' because we skipped '\r' since we've got here
-            {
-                pos = start + i;
-
-                if (pos > maxConsumption)
-                {
-                    return new TextDataExtractionResult(
-                        pos - start,
-                        TextDataExtractionErrorCodes.InputIsTooLong);
-                }
-
-                if (pos == length)
-                {
-                    // unclosed fws
-                    return new TextDataExtractionResult(pos - start, TextDataExtractionErrorCodes.UnexpectedEnd);
-                }
-
-                var c = input[pos];
-
-                var fwsOk = IsValidFwsChar(c, i);
-                if (!fwsOk)
-                {
-                    return new TextDataExtractionResult(
-                        pos - start,
-                        TextDataExtractionErrorCodes.UnexpectedCharacter);
-                }
-            }
-
-            var consumed = pos - start;
-            return new TextDataExtractionResult(consumed, null);
-        }
-
-        private static bool IsValidFwsChar(char c, int pos)
-        {
-            switch (pos)
-            {
-                case 0: return c == '\r';
-                case 1: return c == '\n';
-                case 2: return ValidFwsSpaces.Contains(c);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(pos));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(pos));
         }
     }
 }

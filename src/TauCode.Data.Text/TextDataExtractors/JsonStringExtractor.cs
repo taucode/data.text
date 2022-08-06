@@ -1,100 +1,112 @@
 ﻿using System.Globalization;
 using System.Text;
 
-namespace TauCode.Data.Text.TextDataExtractors
+namespace TauCode.Data.Text.TextDataExtractors;
+
+public class JsonStringExtractor : TextDataExtractorBase<string>
 {
-    public class JsonStringExtractor : TextDataExtractorBase<string>
+    #region Static
+
+    private static readonly string[] ReplacementStrings =
     {
-        #region Static
+        "\"\"",
+        "''",
+        "\\\\",
+        "n\n",
+        "r\r",
+        "t\t",
+    };
 
-        private static readonly string[] ReplacementStrings =
+    private static readonly Dictionary<char, char> Replacements;
+
+    private static char? GetReplacement(char escape)
+    {
+        if (Replacements.TryGetValue(escape, out var replacement))
         {
-            "\"\"",
-            "''",
-            "\\\\",
-            "n\n",
-            "r\r",
-            "t\t",
-        };
-
-        private static readonly Dictionary<char, char> Replacements;
-
-        private static char? GetReplacement(char escape)
-        {
-            if (Replacements.TryGetValue(escape, out var replacement))
-            {
-                return replacement;
-            }
-
-            return null;
+            return replacement;
         }
 
-        static JsonStringExtractor()
+        return null;
+    }
+
+    static JsonStringExtractor()
+    {
+        Replacements = ReplacementStrings
+            .ToDictionary(
+                x => x.First(),
+                x => x.Skip(1).Single());
+    }
+
+    #endregion
+
+    public JsonStringExtractor(TerminatingDelegate? terminator = null)
+        : base(
+            null,
+            terminator)
+    {
+    }
+
+    protected override TextDataExtractionResult TryExtractImpl(
+        ReadOnlySpan<char> input,
+        out string? value)
+    {
+        value = default;
+
+        var pos = 0;
+        var c = input[0];
+        char delimiter;
+
+        if (c == '"' || c == '\'')
         {
-            Replacements = ReplacementStrings
-                .ToDictionary(
-                    x => x.First(),
-                    x => x.Skip(1).Single());
+            delimiter = c;
+        }
+        else
+        {
+            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
         }
 
-        #endregion
-
-        public JsonStringExtractor(TerminatingDelegate? terminator = null)
-            : base(
-                null,
-                terminator)
+        var oppositeDelimiter = '\'';
+        if (delimiter == '\'')
         {
+            oppositeDelimiter = '"';
         }
 
-        protected override TextDataExtractionResult TryExtractImpl(
-            ReadOnlySpan<char> input,
-            out string? value)
+        pos++; // skip opening delimiter
+        // min 'MaxConsumption' is 1, 'pos' is 1 here, so don't need to check 'IsOutOfCapacity'.
+
+        var sb = new StringBuilder();
+
+        while (true)
         {
-            value = default;
-
-            var pos = 0;
-            var c = input[0];
-            char delimiter;
-
-            if (c == '"' || c == '\'')
+            if (pos == input.Length)
             {
-                delimiter = c;
-            }
-            else
-            {
-                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
+                // unclosed string
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnclosedString);
             }
 
-            var oppositeDelimiter = '\'';
-            if (delimiter == '\'')
+            c = input[pos];
+
+            if (c.IsCaretControl())
             {
-                oppositeDelimiter = '"';
+                // newline in string
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.NewLineInString);
             }
 
-            pos++; // skip opening delimiter
-            // min 'MaxConsumption' is 1, 'pos' is 1 here, so don't need to check 'IsOutOfCapacity'.
-
-            var sb = new StringBuilder();
-
-            while (true)
+            if (c == delimiter)
             {
-                if (pos == input.Length)
+                if (pos == input.Length - 1)
                 {
-                    // unclosed string
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnclosedString);
+                    pos++;
+                    if (this.IsOutOfCapacity(pos))
+                    {
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                    }
+
+                    break;
                 }
-
-                c = input[pos];
-
-                if (c.IsCaretControl())
+                else
                 {
-                    // newline in string
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.NewLineInString);
-                }
-
-                if (c == delimiter)
-                {
-                    if (pos == input.Length - 1)
+                    if (this.IsTermination(input, pos + 1))
                     {
                         pos++;
                         if (this.IsOutOfCapacity(pos))
@@ -102,104 +114,91 @@ namespace TauCode.Data.Text.TextDataExtractors
                             return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
                         }
 
+
                         break;
                     }
                     else
                     {
-                        if (this.IsTermination(input, pos + 1))
-                        {
-                            pos++;
-                            if (this.IsOutOfCapacity(pos))
-                            {
-                                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
-                            }
-
-
-                            break;
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(
-                                pos + 1,
-                                TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
+                        return new TextDataExtractionResult(
+                            pos + 1,
+                            TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
                 }
-                else if (c == '\\')
-                {
-                    #region escaping
+            }
+            else if (c == '\\')
+            {
+                #region escaping
 
-                    if (pos + 1 == input.Length)
+                if (pos + 1 == input.Length)
+                {
+                    return new TextDataExtractionResult(pos + 1, TextDataExtractionErrorCodes.UnclosedString);
+                }
+
+                var nextChar = input[pos + 1];
+                if (nextChar == 'u')
+                {
+                    var remaining = input.Length - (pos + 1);
+                    if (remaining < 5)
                     {
-                        return new TextDataExtractionResult(pos + 1, TextDataExtractionErrorCodes.UnclosedString);
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.BadEscape);
                     }
 
-                    var nextChar = input[pos + 1];
-                    if (nextChar == 'u')
+                    var hexNumString = input.Slice(pos + 2, 4);
+                    var codeParsed = int.TryParse(
+                        hexNumString,
+                        NumberStyles.HexNumber,
+                        CultureInfo.InvariantCulture,
+                        out var code);
+
+                    if (!codeParsed)
                     {
-                        var remaining = input.Length - (pos + 1);
-                        if (remaining < 5)
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.BadEscape);
-                        }
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.BadEscape);
+                    }
 
-                        var hexNumString = input.Slice(pos + 2, 4);
-                        var codeParsed = int.TryParse(
-                            hexNumString,
-                            NumberStyles.HexNumber,
-                            CultureInfo.InvariantCulture,
-                            out var code);
+                    var unescapedChar = (char)code;
+                    sb.Append(unescapedChar);
 
-                        if (!codeParsed)
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.BadEscape);
-                        }
+                    pos += 6;
+                    continue;
+                }
+                else
+                {
+                    if (nextChar == oppositeDelimiter)
+                    {
+                        // opposite delimiter doesn't need to be escaped, e.g. strings 'escaped double quote \" inside' and "escaped quote \' inside" are wrong.
+                        return new TextDataExtractionResult(pos + 1, TextDataExtractionErrorCodes.BadEscape);
+                    }
 
-                        var unescapedChar = (char)code;
-                        sb.Append(unescapedChar);
-
-                        pos += 6;
+                    var replacement = GetReplacement(nextChar);
+                    if (replacement.HasValue)
+                    {
+                        sb.Append(replacement);
+                        pos += 2;
                         continue;
                     }
                     else
                     {
-                        if (nextChar == oppositeDelimiter)
-                        {
-                            // opposite delimiter doesn't need to be escaped, e.g. strings 'escaped double quote \" inside' and "escaped quote \' inside" are wrong.
-                            return new TextDataExtractionResult(pos + 1, TextDataExtractionErrorCodes.BadEscape);
-                        }
-
-                        var replacement = GetReplacement(nextChar);
-                        if (replacement.HasValue)
-                        {
-                            sb.Append(replacement);
-                            pos += 2;
-                            continue;
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.BadEscape);
-                        }
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.BadEscape);
                     }
-
-
-                    #endregion
-                }
-                else
-                {
-                    // go on
                 }
 
-                sb.Append(c);
-                pos++;
-                if (this.IsOutOfCapacity(pos))
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
-                }
+
+                #endregion
+            }
+            else
+            {
+                // go on
             }
 
-            value = sb.ToString();
-            return new TextDataExtractionResult(pos, null);
+            sb.Append(c);
+            pos++;
+            if (this.IsOutOfCapacity(pos))
+            {
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+            }
         }
+
+        value = sb.ToString();
+        return new TextDataExtractionResult(pos, null);
     }
 }
