@@ -1,48 +1,32 @@
-﻿namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors;
+
+public class Int32Extractor : TextDataExtractorBase<int>
 {
-    public class Int32Extractor : TextDataExtractorBase<int>
+    public Int32Extractor(TerminatingDelegate? terminator = null)
+        : base(
+            Helper.Constants.Int32.DefaultMaxConsumption,
+            terminator)
     {
-        public Int32Extractor(TerminatingDelegate? terminator = null)
-            : base(
-                Helper.Constants.Int32.DefaultMaxConsumption,
-                terminator)
-        {
-        }
+    }
 
-        protected override TextDataExtractionResult TryExtractImpl(
-            ReadOnlySpan<char> input,
-            out int value)
-        {
-            var pos = 0;
-            value = default;
+    protected override TextDataExtractionResult TryExtractImpl(
+        ReadOnlySpan<char> input,
+        out int value)
+    {
+        var pos = 0;
+        value = default;
 
-            while (true)
+        while (true)
+        {
+            if (pos == input.Length)
             {
-                if (pos == input.Length)
-                {
-                    break;
-                }
+                break;
+            }
 
-                var c = input[pos];
-                if (c == '-' || c == '+')
-                {
-                    if (pos == 0)
-                    {
-                        // ok
-                    }
-                    else if (this.IsTermination(input, pos))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        value = default;
-                        return new TextDataExtractionResult(
-                            pos,
-                            TextDataExtractionErrorCodes.UnexpectedCharacter);
-                    }
-                }
-                else if (c.IsDecimalDigit())
+            var c = input[pos];
+            if (c == '-' || c == '+')
+            {
+                if (pos == 0)
                 {
                     // ok
                 }
@@ -53,32 +37,47 @@
                 else
                 {
                     value = default;
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                }
-
-                pos++;
-
-                if (this.IsOutOfCapacity(pos))
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
+                    return new TextDataExtractionResult(
+                        pos,
+                        TextDataExtractionErrorCodes.UnexpectedCharacter);
                 }
             }
-
-            if (pos == 0)
+            else if (c.IsDecimalDigit())
+            {
+                // ok
+            }
+            else if (this.IsTermination(input, pos))
+            {
+                break;
+            }
+            else
             {
                 value = default;
-                return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
             }
 
-            input = input[..pos];
-            var parsed = int.TryParse(input, out value);
+            pos++;
 
-            if (parsed)
+            if (this.IsOutOfCapacity(pos))
             {
-                return new TextDataExtractionResult(pos, null);
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.InputIsTooLong);
             }
-
-            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.FailedToExtractInt32);
         }
+
+        if (pos == 0)
+        {
+            value = default;
+            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
+        }
+
+        input = input[..pos];
+        var parsed = int.TryParse(input, out value);
+
+        if (parsed)
+        {
+            return new TextDataExtractionResult(pos, null);
+        }
+
+        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.FailedToExtractInt32);
     }
 }

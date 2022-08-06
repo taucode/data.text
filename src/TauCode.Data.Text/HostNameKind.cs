@@ -1,12 +1,11 @@
-﻿namespace TauCode.Data.Text
-{
-    public enum HostNameKind : byte
-    {
-        Unknown = 0,
+﻿namespace TauCode.Data.Text;
 
-        Regular = 1,
-        Internationalized = 2,
-        IPv4 = 3,
-        IPv6 = 4,
-    }
+public enum HostNameKind : byte
+{
+    Unknown = 0,
+
+    Regular = 1,
+    Internationalized = 2,
+    IPv4 = 3,
+    IPv6 = 4,
 }

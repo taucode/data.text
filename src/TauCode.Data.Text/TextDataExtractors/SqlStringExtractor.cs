@@ -1,88 +1,87 @@
 ﻿using System.Text;
 
 // todo ut this extractor
-namespace TauCode.Data.Text.TextDataExtractors
+namespace TauCode.Data.Text.TextDataExtractors;
+
+public class SqlStringExtractor : TextDataExtractorBase<string>
 {
-    public class SqlStringExtractor : TextDataExtractorBase<string>
+    public SqlStringExtractor(TerminatingDelegate? terminator = null)
+        : base(null, terminator)
     {
-        public SqlStringExtractor(TerminatingDelegate? terminator = null)
-            : base(null, terminator)
+    }
+
+    protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string? value)
+    {
+        var pos = 0;
+        value = default;
+
+        if (input.Length == 0)
         {
+            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
         }
 
-        protected override TextDataExtractionResult TryExtractImpl(ReadOnlySpan<char> input, out string? value)
+        var c = input[0];
+        if (c != '\'')
         {
-            var pos = 0;
-            value = default;
+            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedCharacter);
+        }
 
-            if (input.Length == 0)
+        pos++;
+
+        var sb = new StringBuilder();
+
+        while (true)
+        {
+            if (pos == input.Length)
             {
-                return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedEnd);
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnclosedString);
             }
 
-            var c = input[0];
-            if (c != '\'')
+            c = input[pos];
+
+            if (c == '\'')
             {
-                return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.UnexpectedCharacter);
-            }
+                // consume '\''
+                pos++;
 
-            pos++;
-
-            var sb = new StringBuilder();
-
-            while (true)
-            {
                 if (pos == input.Length)
                 {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnclosedString);
+                    // input ends with closing '\''
+                    break;
                 }
-
-                c = input[pos];
-
-                if (c == '\'')
+                else
                 {
-                    // consume '\''
-                    pos++;
-
-                    if (pos == input.Length)
+                    // input goes on
+                    c = input[pos];
+                    if (c == '\'')
                     {
-                        // input ends with closing '\''
+                        // two quotes in row => one quote in result
+                        sb.Append('\'');
+                    }
+                    else if (this.IsTermination(input, pos))
+                    {
+                        // char going after closing '\'' gotta be a valid one, i.e. terminator
                         break;
                     }
                     else
                     {
-                        // input goes on
-                        c = input[pos];
-                        if (c == '\'')
-                        {
-                            // two quotes in row => one quote in result
-                            sb.Append('\'');
-                        }
-                        else if (this.IsTermination(input, pos))
-                        {
-                            // char going after closing '\'' gotta be a valid one, i.e. terminator
-                            break;
-                        }
-                        else
-                        {
-                            return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
-                        }
+                        return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.UnexpectedCharacter);
                     }
                 }
-                else if (c.IsCaretControl())
-                {
-                    return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.NewLineInString);
-                }
-                else
-                {
-                    sb.Append(c);
-                }
-
-                pos++;
+            }
+            else if (c.IsCaretControl())
+            {
+                return new TextDataExtractionResult(pos, TextDataExtractionErrorCodes.NewLineInString);
+            }
+            else
+            {
+                sb.Append(c);
             }
 
-            value = sb.ToString();
-            return new TextDataExtractionResult(pos, null);
+            pos++;
         }
+
+        value = sb.ToString();
+        return new TextDataExtractionResult(pos, null);
     }
 }
