@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Data.Text</id>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,7 +11,7 @@
     <repository type="git" url="https://github.com/taucode/taucode.data.text" />
     <description>TauCode library for text data representation</description>
     <releaseNotes>
-      Release 1.5.0.
+      Release 1.5.1.
     </releaseNotes>
     <tags>taucode data text extraction email address host name semantic version emoji</tags>
     <dependencies>

@@ -1,6 +1,3 @@
-﻿using System;
+﻿namespace TauCode.Data.Text;
 
-namespace TauCode.Data.Text
-{
-    public delegate bool TerminatingDelegate(ReadOnlySpan<char> input, int index);
-}
+public delegate bool TerminatingDelegate(ReadOnlySpan<char> input, int index);

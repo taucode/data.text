@@ -1,46 +1,61 @@
-﻿namespace TauCode.Data.Text.TextDataExtractors
+﻿namespace TauCode.Data.Text.TextDataExtractors;
+
+public class StringItemExtractor : TextDataExtractorBase<string>
 {
-    public class StringItemExtractor : TextDataExtractorBase<string>
+    public StringItemExtractor(
+        IEnumerable<string> items,
+        bool ignoreCase,
+        TerminatingDelegate? terminator = null)
+        : base(
+            null,
+            terminator)
     {
-        public StringItemExtractor(
-            IEnumerable<string> items,
-            bool ignoreCase,
-            TerminatingDelegate? terminator = null)
-            : base(
-                null,
-                terminator)
+        if (items == null)
         {
-            if (items == null)
-            {
-                throw new ArgumentNullException(nameof(items));
-            }
-
-            var itemHashSet = new HashSet<string>(items);
-
-            if (itemHashSet.Count == 0 || itemHashSet.Any(string.IsNullOrEmpty))
-            {
-                throw new ArgumentException($"'{nameof(items)}' cannot be empty or contain empty items.", nameof(items));
-            }
-
-            this.Items = itemHashSet;
-            this.IgnoreCase = ignoreCase;
+            throw new ArgumentNullException(nameof(items));
         }
 
-        public HashSet<string> Items { get; }
+        var itemHashSet = new HashSet<string>(items);
 
-        public bool IgnoreCase { get; }
-
-        protected override TextDataExtractionResult TryExtractImpl(
-            ReadOnlySpan<char> input,
-            out string? value)
+        if (itemHashSet.Count == 0 || itemHashSet.Any(string.IsNullOrEmpty))
         {
-            var comparison = this.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            throw new ArgumentException($"'{nameof(items)}' cannot be empty or contain empty items.", nameof(items));
+        }
 
-            foreach (var item in this.Items)
+        this.Items = itemHashSet;
+        this.IgnoreCase = ignoreCase;
+    }
+
+    public HashSet<string> Items { get; }
+
+    public bool IgnoreCase { get; }
+
+    protected override TextDataExtractionResult TryExtractImpl(
+        ReadOnlySpan<char> input,
+        out string? value)
+    {
+        var comparison = this.IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+
+        foreach (var item in this.Items)
+        {
+            if (input.StartsWith(item, comparison))
             {
-                if (input.StartsWith(item, comparison))
+                if (input.Length == item.Length)
                 {
-                    if (input.Length == item.Length)
+                    if (item.Length > this.MaxConsumption)
+                    {
+                        value = default;
+                        return new TextDataExtractionResult(
+                            this.MaxConsumption.Value + 1,
+                            TextDataExtractionErrorCodes.InputIsTooLong);
+                    }
+
+                    value = item;
+                    return new TextDataExtractionResult(item.Length, null);
+                }
+                else
+                {
+                    if (this.IsTermination(input, item.Length))
                     {
                         if (item.Length > this.MaxConsumption)
                         {
@@ -53,30 +68,14 @@
                         value = item;
                         return new TextDataExtractionResult(item.Length, null);
                     }
-                    else
-                    {
-                        if (this.IsTermination(input, item.Length))
-                        {
-                            if (item.Length > this.MaxConsumption)
-                            {
-                                value = default;
-                                return new TextDataExtractionResult(
-                                    this.MaxConsumption.Value + 1,
-                                    TextDataExtractionErrorCodes.InputIsTooLong);
-                            }
 
-                            value = item;
-                            return new TextDataExtractionResult(item.Length, null);
-                        }
-
-                        value = default;
-                        return new TextDataExtractionResult(item.Length, TextDataExtractionErrorCodes.ItemNotFound);
-                    }
+                    value = default;
+                    return new TextDataExtractionResult(item.Length, TextDataExtractionErrorCodes.ItemNotFound);
                 }
             }
-
-            value = default;
-            return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.ItemNotFound);
         }
+
+        value = default;
+        return new TextDataExtractionResult(0, TextDataExtractionErrorCodes.ItemNotFound);
     }
 }
