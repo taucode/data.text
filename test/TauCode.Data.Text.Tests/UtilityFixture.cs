@@ -34,7 +34,7 @@ public class UtilityFixture
     [TestCase("TimeSpan")]
     [TestCase("Uri")]
     [TestCase("Word")]
-    //[Ignore("dev only")]
+    [Ignore("dev only")]
     public void ReSerializeExtractorUnitTests(string prefix)
     {
         var resourceName = $".{prefix}ExtractorTests.json";

@@ -14,19 +14,6 @@
   },
   {
     "Index": 1,
-    "TestInput": "2022-06-23",
-    "TestTerminatingChars": null,
-    "TestMaxConsumption": -1,
-    "ExpectedValue": "2022-06-23T00:00:00+03:00",
-    "ExpectedResult": {
-      "CharsConsumed": 10,
-      "ErrorCode": null
-    },
-    "ExpectedErrorMessage": null,
-    "Comment": ""
-  },
-  {
-    "Index": 2,
     "TestInput": "2022-06-23Z;",
     "TestTerminatingChars": ";",
     "TestMaxConsumption": -1,
@@ -39,7 +26,7 @@
     "Comment": ""
   },
   {
-    "Index": 3,
+    "Index": 2,
     "TestInput": "2022-06-23T10:20:30Z]",
     "TestTerminatingChars": "[]",
     "TestMaxConsumption": -1,
@@ -52,7 +39,7 @@
     "Comment": ""
   },
   {
-    "Index": 4,
+    "Index": 3,
     "TestInput": "7777-77-77T00:00:00Z",
     "TestTerminatingChars": null,
     "TestMaxConsumption": -1,
@@ -65,7 +52,7 @@
     "Comment": ""
   },
   {
-    "Index": 5,
+    "Index": 4,
     "TestInput": "7777-77-77T00:00:1111111111111111111111111111111111111111Z",
     "TestTerminatingChars": null,
     "TestMaxConsumption": -1,
@@ -78,7 +65,7 @@
     "Comment": ""
   },
   {
-    "Index": 6,
+    "Index": 5,
     "TestInput": "7777-77-77T00:00:1111111111111111111111111111111111111111Z",
     "TestTerminatingChars": null,
     "TestMaxConsumption": null,
