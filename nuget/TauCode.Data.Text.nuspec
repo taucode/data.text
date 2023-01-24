@@ -16,7 +16,7 @@
     <tags>taucode data text extraction email address host name semantic version emoji</tags>
     <dependencies>
       <group targetFramework=".NETCoreApp6.0">
-        <dependency Include="TauCode.Extensions" version="1.7.0" />
+        <dependency id="TauCode.Extensions" version="1.7.0" />
       </group>
     </dependencies>
   </metadata>
