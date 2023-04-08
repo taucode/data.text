@@ -1,9 +1,9 @@
 dotnet restore
 
-dotnet build --configuration Debug
-dotnet build --configuration Release
+dotnet build TauCode.Data.Text.sln -c Debug
+dotnet build TauCode.Data.Text.sln -c Release
 
-dotnet test -c Debug .\test\TauCode.Data.Text.Tests\TauCode.Data.Text.Tests.csproj
-dotnet test -c Release .\test\TauCode.Data.Text.Tests\TauCode.Data.Text.Tests.csproj
+dotnet test TauCode.Data.Text.sln -c Debug
+dotnet test TauCode.Data.Text.sln -c Release
 
 nuget pack nuget\TauCode.Data.Text.nuspec
