@@ -1,16 +1,25 @@
-﻿2022-06-27
+﻿2024-10-14
 ==========
-    1. Initial version.
+    1. Resurrected.
+    2. Ported to .NET 8
 
-2022-07-26
+2023-04-08
 ==========
-    1. Added more extractors.
+    1. Ported from lab.
+
+2023-01-23
+==========
+    1. Winter resurrection - 2023.
 
 2022-08-01
 ==========
     1. Moved to .NET 6.
     2. Released 1.5.0
 
-2023-01-23
+2022-07-26
 ==========
-    1. Winter resurrection - 2023.
+    1. Added more extractors.
+
+2022-06-27
+==========
+    1. Initial version.
