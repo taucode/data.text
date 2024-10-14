@@ -2,26 +2,28 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.Data.Text</id>
-    <version>1.8.1-alpha.1.2023-04-08.16-21</version>
+    <version>2.0.1-alpha.1.2024-10-14.08-43</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE</license>
     <projectUrl>https://github.com/taucode/data.text</projectUrl>
     <repository type="git" url="https://github.com/taucode/data.text" />
+    <readme>README.md</readme>
     <description>TauCode library for text data representation</description>
     <releaseNotes>
-      Developing release 1.8.1.
+      Developing release 2.0.1.
     </releaseNotes>
     <tags>taucode data text extraction email address host name semantic version emoji</tags>
     <dependencies>
-      <group targetFramework=".NETCoreApp6.0">
-        <dependency id="TauCode.Extensions" version="1.8.1-alpha.1.2023-04-06.11-19" />
+      <group targetFramework="net8.0">
+        <dependency id="TauCode.Extensions" version="2.0.1" />
       </group>
     </dependencies>
   </metadata>
   <files>
     <file src="..\LICENSE*" target="" />
-    <file src="..\src\TauCode.Data.Text\bin\Release\net6.0\TauCode.Data.Text.dll" target="lib\net6.0" />
+    <file src="..\README.md" target="" />
+    <file src="..\src\TauCode.Data.Text\bin\Release\net8.0\TauCode.Data.Text.dll" target="lib\net8.0" />
   </files>
 </package>

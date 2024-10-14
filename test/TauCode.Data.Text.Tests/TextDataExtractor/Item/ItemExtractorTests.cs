@@ -25,7 +25,8 @@ public class ItemExtractorTests
 
         // Assert
         Assert.That(extractor.MaxConsumption, Is.Null);
-        CollectionAssert.AreEquivalent(new[] { "a", "b" }, extractor.Items);
+
+        Assert.That(extractor.Items, Is.EqualTo(new[] { "a", "b" }));
         Assert.That(extractor.Terminator, Is.EqualTo(terminator));
         Assert.That(extractor.IgnoreCase, Is.True);
         Assert.That(extractor.ItemParser, Is.EqualTo(parser));
